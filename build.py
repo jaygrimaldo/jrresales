@@ -465,6 +465,14 @@ def layout(T, page, title, body, lang_switch):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(T['hero_p'])}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="J.R. Grimaldo, REALTOR®">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(T['hero_p'])}">
+<meta property="og:image" content="https://{SITE['domain']}/assets/share.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="https://{SITE['domain']}/{p}{page}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="{up}assets/site.css">
