@@ -693,6 +693,13 @@ def build():
     (OUT / "defaultsite").mkdir(exist_ok=True)
     (OUT / "defaultsite" / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/index.html"><link rel="canonical" href="/index.html"><title>J.R. Grimaldo</title><a href="/index.html">Go to jrresales.com</a><script>location.replace("/index.html")</script>')
     (OUT / "CNAME").write_text(SITE["domain"] + "\n")
+    # Search engines: list of public pages, and where to find it.
+    base = "https://" + SITE["domain"] + "/"
+    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "contact.html",
+            "es/index.html", "es/home-value.html", "es/about.html", "es/contact.html"]
+    (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "".join(f"  <url><loc>{base}{u}</loc></url>\n" for u in urls) + "</urlset>\n")
+    (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /reply.html\nDisallow: /defaultsite/\nSitemap: " + base + "sitemap.xml\n")
     (OUT / ".nojekyll").write_text("")
 
     t = SITE["title_tag"]
