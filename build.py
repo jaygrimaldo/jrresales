@@ -79,7 +79,7 @@ SOLD = [
      "line": "Three bedrooms, one and a half baths in Simpsonville.",
      "photo": "420-cloverdale-ln.jpg"},
     {"address": "140 Belshire Dr, Greer, SC 29650", "price": "Sold for $395,000",
-     "role": "Sold for the seller",
+     "role": "Sold for the seller \u00b7 Repeat client",
      "line": "Three bedrooms, two and a half baths in Greer. I helped these same clients buy it two years earlier.",
      "photo": "140-belshire-dr.jpg"},  # J.R.'s own listing photo 1 (Greenville MLS 1535838), closed 11/2024
     {"address": "304 Talbert Trail, Landrum, SC 29356", "price": "Sold for $290,000",
@@ -102,14 +102,14 @@ SOLD_MORE = [
     ("305 Pebble Springs Dr", "Taylors", "S", "$162,000"),   # 12/2024
     ("302 E. Faris Rd", "Greenville", "B", "$722,500"),      # 12/2024
     ("248 Pebble Springs Dr", "Taylors", "S", "$185,000"),   # 09/2024
-    ("102 Ridge Rd", "Greenville", "S", "$275,000"),         # 08/2024 (bought for the same clients 04/2023)
+    ("102 Ridge Rd", "Greenville", "S", "$275,000", "repeat"),         # 08/2024 (bought for the same clients 04/2023)
     ("648 Cotton Branch Dr", "Boiling Springs", "B", "$219,000"),  # 03/2024
-    ("102 Ridge Rd", "Greenville", "B", "$298,755"),         # 04/2023
+    ("102 Ridge Rd", "Greenville", "B", "$298,755", "repeat"),         # 04/2023
     ("15 Heron Dr", "Fountain Inn", "S", "$268,000"),        # 04/2023
     ("406 Aniken Cir", "Boiling Springs", "B", "$255,100"),  # 09/2022
     ("361 Pewter Cir", "Simpsonville", "B", "$421,980"),     # 08/2022
     ("437 Buchanan Ridge Rd", "Taylors", "B", "$323,967"),   # 07/2022 (zip 29687)
-    ("140 Belshire Dr", "Greer", "B", "$380,000"),           # 06/2022
+    ("140 Belshire Dr", "Greer", "B", "$380,000", "repeat"),           # 06/2022
     ("14 Garfield Ln", "Simpsonville", "S", "$299,999"),     # 06/2022
     ("410 Meadors Ave", "Greenville", "B", "$196,000"),      # 07/2021
     ("100 McCauley Rd Ext", "Travelers Rest", "S", "$245,000"),  # 07/2021
@@ -371,6 +371,7 @@ ul.plain li{margin-bottom:.45em}
 .card .ph img{width:100%;height:100%;object-fit:cover}
 .card .body{padding:16px 18px 20px}
 .more-sold{margin-top:40px}
+.sold-list .rep{display:inline-block;margin-left:6px;font-size:.78rem;font-weight:600;color:#fff;background:var(--ridge);border-radius:999px;padding:1px 8px}
 .more-sold h2{margin-bottom:.3em}
 .sold-list{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:0;max-width:820px}
 .sold-list li{display:grid;grid-template-columns:1fr auto;grid-template-areas:"a pr" "sd sd";gap:2px 16px;padding:12px 0;border-top:1px solid var(--line)}
@@ -380,7 +381,7 @@ ul.plain li{margin-bottom:.45em}
 .sold-list .c{color:var(--ink-2);font-weight:400}
 .sold-list .pr{font-weight:600;color:var(--ridge-deep);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .sold-list .sd{font-size:.9rem;color:var(--gold-ink)}
-@media(min-width:640px){.sold-list li{grid-template-columns:1fr 190px 110px;grid-template-areas:"a sd pr";align-items:baseline}}
+@media(min-width:640px){.sold-list li{grid-template-columns:1fr 300px 110px;grid-template-areas:"a sd pr";align-items:baseline}}
 .card .role{display:inline-block;font-size:.85rem;font-weight:600;color:var(--gold-ink);background:#f6edd9;border-radius:999px;padding:3px 10px;margin:0 0 10px}
 .card{align-self:start}
 .card .price{font-size:1.4rem;font-weight:600;color:var(--ridge-deep);margin:0 0 .15em}
@@ -625,13 +626,17 @@ def page_list(T, h1, items, empty, intro=""):
     return f'<section><div class="wrap"><h1>{esc(h1)}</h1>{lead}{body}</div></section>'
 
 def page_sold():
-    base = page_list(EN, EN["so_h1"], SOLD, EN["so_empty"], "Recently sold, and which side I represented. Ask me about any of them.")
+    base = page_list(EN, EN["so_h1"], SOLD, EN["so_empty"], "Most of my business comes from past clients and the people they send my way. Here are recent sales, and which side I represented.")
     if not SOLD_MORE:
         return base
-    rows = "".join(
-        f'<li><span class="a">{esc(a)}, <span class="c">{esc(c)}</span></span>'
-        f'<span class="sd">{"Sold for the seller" if sd == "S" else "Represented the buyer"}</span>'
-        f'<span class="pr">{esc(pr)}</span></li>' for a, c, sd, pr in SOLD_MORE)
+    def row(r):
+        a, c, sd, pr = r[:4]
+        rep = len(r) > 4 and r[4] == "repeat"
+        tag = ' <span class="rep">Repeat client</span>' if rep else ""
+        side = "Sold for the seller" if sd == "S" else "Represented the buyer"
+        return (f'<li><span class="a">{esc(a)}, <span class="c">{esc(c)}</span></span>'
+                f'<span class="sd">{side}{tag}</span><span class="pr">{esc(pr)}</span></li>')
+    rows = "".join(row(r) for r in SOLD_MORE)
     n = len(SOLD) + len(SOLD_MORE)
     more = (f'<div class="more-sold"><h2>More homes I\'ve helped sell and buy</h2>'
             f'<p>{n} closed sales across the Upstate, from Taylors and Greer to Simpsonville, Fountain Inn, and Boiling Springs.</p>'
