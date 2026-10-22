@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Reply – J.R. Grimaldo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.rp{padding-block:28px 48px}
+.rp h1{font-size:1.6rem;margin-bottom:.2em}
+.rp .who{color:var(--ink-2);margin-bottom:22px}
+.rp .acts{display:grid;gap:12px;max-width:520px;margin-bottom:26px}
+.rp .acts .btn{text-align:center;font-size:1.15rem;padding:18px 20px}
+.rp .acts .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
+.rp h2{font-size:1.05rem;margin:22px 0 8px}
+.rp pre{white-space:pre-wrap;font:inherit;font-size:1rem;background:var(--stone);border-radius:10px;padding:14px 16px;max-width:620px;margin:0}
+.rp .tog{display:flex;gap:8px;margin-bottom:18px}
+.rp .tog button{font:inherit;padding:8px 14px;border-radius:999px;border:1.5px solid var(--ridge);background:#fff;color:var(--ridge);cursor:pointer}
+.rp .tog button[aria-pressed=true]{background:var(--ridge);color:#fff}
+</style></head>
+<body>
+<main class="wrap rp">
+  <h1 id="h">Reply</h1>
+  <p class="who" id="who"></p>
+  <div class="tog" role="group" aria-label="Language">
+    <button type="button" data-l="en">English</button>
+    <button type="button" data-l="es">Español</button>
+  </div>
+  <div class="acts">
+    <a class="btn" id="sms" href="#">Text</a>
+    <a class="btn quiet" id="mail" href="#">Email</a>
+  </div>
+  <h2>Text message</h2><pre id="tx"></pre>
+  <h2>Email</h2><pre id="em"></pre>
+</main>
+<script>
+var NOTES={
+ en:{
+  v:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your home value request for {addr}. I'm pulling the recent sales near you now, and you'll have your valuation by email within one business day. Any questions in the meantime, just text me here.",
+     subj:"Your home value request for {addr}",
+     mail:"Hi {first},\n\nThank you for asking me to value your home at {addr}. I got your request, and I'm on it.\n\nI'm a licensed South Carolina agent, and I prepare every valuation myself. I'll look at the recent sales near you and at your home's details, then send you a written valuation within one business day, with the sales I used so you can see the reasoning.\n\nIf you'd like to talk sooner, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"},
+  c:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your message from my website. What's a good time to talk? You can also reach me right here by text.",
+     subj:"Thanks for reaching out",
+     mail:"Hi {first},\n\nThank you for your message. I got it and wanted you to know right away.\n\nWhat's a good time to talk? You can call or text me at 864-381-2326, or simply reply to this email.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"}},
+ es:{
+  v:{text:"Hola {first}, le saluda J.R. Grimaldo de NorthGroup Real Estate. Recibí su solicitud de valuación para {addr}. Ya estoy revisando las ventas recientes cerca de usted, y tendrá su valuación por correo en un día hábil. Si tiene alguna pregunta, escríbame aquí.",
+     subj:"Su solicitud de valuación para {addr}",
+     mail:"Hola {first}:\n\nGracias por pedirme la valuación de su casa en {addr}. Recibí su solicitud y ya estoy trabajando en ella.\n\nSoy agente con licencia en Carolina del Sur y preparo cada valuación personalmente. Voy a revisar las ventas recientes cerca de usted y los detalles de su casa, y le enviaré una valuación por escrito en un día hábil, con las ventas que usé para que vea el razonamiento.\n\nSi prefiere hablar antes, llámeme o escríbame al 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"},
+  c:{text:"Hola {first}, le saluda J.R. Grimaldo de NorthGroup Real Estate. Recibí su mensaje desde mi página web. ¿A qué hora le queda bien que hablemos? También puede escribirme aquí.",
+     subj:"Gracias por comunicarse",
+     mail:"Hola {first}:\n\nGracias por su mensaje. Lo recibí y quería avisarle de inmediato.\n\n¿A qué hora le queda bien que hablemos? Puede llamarme o escribirme al 864-381-2326, o simplemente responder a este correo.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"}}
+};
+var q=new URLSearchParams(location.hash.slice(1));
+var d={t:q.get('t')==='c'?'c':'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
+var first=(d.n.split(/\s+/)[0]||'').replace(/^./,function(c){return c.toUpperCase();});
+function fill(s){return s.replace(/\{first\}/g,first||(d.l==='es'?'':'there')).replace(/\{addr\}/g,d.a||(d.l==='es'?'su casa':'your home')).replace(/^Hola :/,'Hola:').replace(/^Hola ,/,'Hola,');}
+function show(){
+  var N=NOTES[d.l][d.t],tx=fill(N.text),sj=fill(N.subj),bd=fill(N.mail);
+  document.documentElement.lang=d.l;
+  document.getElementById('h').textContent=(d.l==='es'?'Responder a ':'Reply to ')+(d.n||'?');
+  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
+  document.getElementById('tx').textContent=tx;
+  document.getElementById('em').textContent='Subject: '+sj+'\n\n'+bd;
+  var s=document.getElementById('sms'),m=document.getElementById('mail');
+  s.textContent=(d.l==='es'?'Enviar texto a ':'Text ')+(first||'');
+  m.textContent=(d.l==='es'?'Enviar correo a ':'Email ')+(first||'');
+  if(d.p){var num=d.p.length===10?'+1'+d.p:d.p;s.href='sms:'+num+'?&body='+encodeURIComponent(tx);s.removeAttribute('aria-disabled');}
+  else{s.href='#';s.setAttribute('aria-disabled','true');s.textContent=d.l==='es'?'Sin teléfono':'No phone number given';}
+  if(d.e){m.href='mailto:'+d.e.replace(/[^A-Za-z0-9@._+-]/g,'')+'?subject='+encodeURIComponent(sj)+'&body='+encodeURIComponent(bd);m.removeAttribute('aria-disabled');}
+  else{m.href='#';m.setAttribute('aria-disabled','true');}
+  document.querySelectorAll('.tog button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===d.l?'true':'false');});
+}
+document.querySelectorAll('.tog button').forEach(function(b){b.addEventListener('click',function(){d.l=b.dataset.l;show();});});
+show();
+</script>
+</body></html>
