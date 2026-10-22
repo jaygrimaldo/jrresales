@@ -88,6 +88,34 @@ SOLD = [
 # J.R.'s Google Business Profile 10/22/2026. Others copied from the NorthGroup testimonials page (same four as the HomeSmart
 # "What My Clients Say" page). Slava's uses the HomeSmart wording, which
 # fixes a typo in the NorthGroup copy.
+# More closed sales from J.R.'s dotloop (read 10/22/2026), newest first.
+# The three with photos above are not repeated here. Closing dates kept in the
+# comment only; the site shows no dates. side: "S" = sold for the seller,
+# "B" = represented the buyer.
+SOLD_MORE = [
+    ("1220 Cyndis Ln", "Greer", "B", "$304,990"),            # 04/2025
+    ("241 Pebble Springs Dr", "Taylors", "S", "$193,000"),   # 03/2025
+    ("305 Pebble Springs Dr", "Taylors", "S", "$162,000"),   # 12/2024
+    ("302 E. Faris Rd", "Greenville", "B", "$722,500"),      # 12/2024
+    ("140 Belshire Dr", "Greer", "S", "$395,000"),           # 11/2024 (bought for the same clients 06/2022)
+    ("248 Pebble Springs Dr", "Taylors", "S", "$185,000"),   # 09/2024
+    ("102 Ridge Rd", "Greenville", "S", "$275,000"),         # 08/2024 (bought for the same clients 04/2023)
+    ("648 Cotton Branch Dr", "Boiling Springs", "B", "$219,000"),  # 03/2024
+    ("102 Ridge Rd", "Greenville", "B", "$298,755"),         # 04/2023
+    ("15 Heron Dr", "Fountain Inn", "S", "$268,000"),        # 04/2023
+    ("406 Aniken Cir", "Boiling Springs", "B", "$255,100"),  # 09/2022
+    ("361 Pewter Cir", "Simpsonville", "B", "$421,980"),     # 08/2022
+    ("437 Buchanan Ridge Rd", "Taylors", "B", "$323,967"),   # 07/2022 (zip 29687)
+    ("140 Belshire Dr", "Greer", "B", "$380,000"),           # 06/2022
+    ("14 Garfield Ln", "Simpsonville", "S", "$299,999"),     # 06/2022
+    ("410 Meadors Ave", "Greenville", "B", "$196,000"),      # 07/2021
+    ("100 McCauley Rd Ext", "Travelers Rest", "S", "$245,000"),  # 07/2021
+    ("501 Thorington Ct", "Greer", "S", "$370,000"),         # 06/2021
+    ("121 Bagwell Farm Rd", "Spartanburg", "S", "$334,900"), # 06/2021
+    ("205 Noble St", "Greer", "B", "$273,000"),              # 12/2020
+    ("207 Pebble Springs Dr", "Taylors", "S", "$64,900"),    # 11/2020
+]
+
 REVIEWS = [
     {"quote": "Had a great first home buyers experience with this agent. He worked on my time frame and went over and above to get things going. I just closed on my first house and I couldn't have picked a better realtor! Thanks JR for all of your help! UPDATE: 4 years later I've chosen JR to help me sell my home. It's been an excellent experience. He uses a really neat drone for professional pictures for the listing. He is very prompt with every detail of the process. I'm very pleased and couldn't ask for a better realtor.",
      "name": "Brooke H.", "where": "bought, then sold"},
@@ -339,6 +367,17 @@ ul.plain li{margin-bottom:.45em}
 .card .ph{aspect-ratio:4/3;background:var(--haze) repeating-linear-gradient(45deg,transparent 0 14px,rgba(47,75,95,.06) 14px 28px);display:flex;align-items:center;justify-content:center;color:var(--ink-2);font-size:.95rem}
 .card .ph img{width:100%;height:100%;object-fit:cover}
 .card .body{padding:16px 18px 20px}
+.more-sold{margin-top:40px}
+.more-sold h2{margin-bottom:.3em}
+.sold-list{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:0;max-width:820px}
+.sold-list li{display:grid;grid-template-columns:1fr auto;grid-template-areas:"a pr" "sd sd";gap:2px 16px;padding:12px 0;border-top:1px solid var(--line)}
+.sold-list .a{grid-area:a}.sold-list .pr{grid-area:pr}.sold-list .sd{grid-area:sd}
+.sold-list li:last-child{border-bottom:1px solid var(--line)}
+.sold-list .a{font-weight:600}
+.sold-list .c{color:var(--ink-2);font-weight:400}
+.sold-list .pr{font-weight:600;color:var(--ridge-deep);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sold-list .sd{font-size:.9rem;color:var(--gold-ink)}
+@media(min-width:640px){.sold-list li{grid-template-columns:1fr 190px 110px;grid-template-areas:"a sd pr";align-items:baseline}}
 .card .role{display:inline-block;font-size:.85rem;font-weight:600;color:var(--gold-ink);background:#f6edd9;border-radius:999px;padding:3px 10px;margin:0 0 10px}
 .card{align-self:start}
 .card .price{font-size:1.4rem;font-weight:600;color:var(--ridge-deep);margin:0 0 .15em}
@@ -582,6 +621,21 @@ def page_list(T, h1, items, empty, intro=""):
     lead = f'<p>{esc(intro)}</p>' if (intro and items) else ""
     return f'<section><div class="wrap"><h1>{esc(h1)}</h1>{lead}{body}</div></section>'
 
+def page_sold():
+    base = page_list(EN, EN["so_h1"], SOLD, EN["so_empty"], "Recently sold, and which side I represented. Ask me about any of them.")
+    if not SOLD_MORE:
+        return base
+    rows = "".join(
+        f'<li><span class="a">{esc(a)}, <span class="c">{esc(c)}</span></span>'
+        f'<span class="sd">{"Sold for the seller" if sd == "S" else "Represented the buyer"}</span>'
+        f'<span class="pr">{esc(pr)}</span></li>' for a, c, sd, pr in SOLD_MORE)
+    n = len(SOLD) + len(SOLD_MORE)
+    more = (f'<div class="more-sold"><h2>More homes I\'ve helped sell and buy</h2>'
+            f'<p>{n} closed sales across the Upstate, from Taylors and Greer to Simpsonville, Fountain Inn, and Boiling Springs.</p>'
+            f'<ul class="sold-list">{rows}</ul></div>')
+    i = base.rfind("</div></section>")
+    return base[:i] + more + base[i:]
+
 def page_about(T):
     up = "../" if T["dir_prefix"] else ""
     facts = "".join(f'<div><b>{esc(a)}</b><span>{esc(b)}</span></div>' for a, b in T["ab_facts"])
@@ -731,7 +785,7 @@ def build():
         "index.html": (t, page_home(EN), "es/index.html"),
         "home-value.html": ("What's My Home Worth? – " + SITE["agent"], page_home_value(EN), "es/home-value.html"),
         "listings.html": ("My Listings – " + SITE["agent"], page_list(EN, EN["li_h1"], LISTINGS, EN["li_empty"]), "es/index.html"),
-        "sold.html": ("Sold Homes – " + SITE["agent"], page_list(EN, EN["so_h1"], SOLD, EN["so_empty"], "Recently sold, and which side I represented. Ask me about any of them."), "es/index.html"),
+        "sold.html": ("Sold Homes – " + SITE["agent"], page_sold(), "es/index.html"),
         "about.html": ("About J.R. Grimaldo", page_about(EN), "es/about.html"),
         "reviews.html": ("Reviews – " + SITE["agent"], page_reviews(EN), "es/index.html"),
         "contact.html": ("Contact – " + SITE["agent"], page_contact(EN), "es/contact.html"),
