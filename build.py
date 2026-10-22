@@ -76,18 +76,25 @@ SOLD = [
      "photo": "304-talbert-trail.jpg"},  # owner's own photo, sent to J.R. 10/22/2026
 ]
 
-# Copied from the NorthGroup testimonials page (same four as the HomeSmart
+# Google reviews (Kerri H., "Knight Vision", Jeff D.) copied word for word from
+# J.R.'s Google Business Profile 10/22/2026. Others copied from the NorthGroup testimonials page (same four as the HomeSmart
 # "What My Clients Say" page). Slava's uses the HomeSmart wording, which
 # fixes a typo in the NorthGroup copy.
 REVIEWS = [
     {"quote": "Had a great first home buyers experience with this agent. He worked on my time frame and went over and above to get things going. I just closed on my first house and I couldn't have picked a better realtor! Thanks JR for all of your help! UPDATE: 4 years later I've chosen JR to help me sell my home. It's been an excellent experience. He uses a really neat drone for professional pictures for the listing. He is very prompt with every detail of the process. I'm very pleased and couldn't ask for a better realtor.",
      "name": "Brooke H.", "where": "bought, then sold"},
+    {"quote": "JR did so much for me and my husband. JR was very punctual, able to be reached, willing to go the extra mile and was cheerful all the way through. We bought and sold and bought again from JR and the timing was like none other. It happened on same day where he told us bf closing of our new home that our old sold. So on the same day.. it was an awesome experience. He\u2019s very hard working and will go the extra mile (s)!!! I will not use another realtor as long as JR is around",
+     "name": "Kerri H.", "where": "Google review"},
+    {"quote": "J.R. Grimaldo helped my family more than I ever imagined and could ever repay. He not only got us into our dream home, he sold our home and my mother's home. He took care of all the details to make the selling process a breeze. J.R. was always there whenever we had questions or concerns. We will continue our relationship with J.R. for many years to come. We recommend J.R. to ANYONE looking to buy or sell.",
+     "name": "Google reviewer", "where": "bought and sold"},
     {"quote": "A really great agent, if that is what you are searching for :) JR is a fantastic agent. He is very helpful and positive, as well as fair to everyone involved in the process. I always felt like we were in good hands with JR. As an agent he is always available, getting back to you if you have any questions or concerns in a prompt manner. I highly recommend JR as an agent. In our case he did take on a situation, manufactured homes in a place where residents don't actually own the land -- but do own their home -- despite not being that familiar with the arrangement. He caught on fast, was willing to tackle our situation and we had success. I guess in a nutshell JR takes a lot of the stress of selling or buying a home out of the process.",
      "name": "Peter H.", "where": ""},
     {"quote": "I just wanted to thank you again for helping us so much! I was so against trying to sell our house until Rusty and Sarah sold and then \"poof!!\", they were moving. I truly appreciate you and what you did for us. God makes things happen at the right time and we couldn't be happier that we got everything completed in time for Mom to enjoy it.",
      "name": "Darrell K.", "where": "seller"},
     {"quote": "JR was an excellent realtor to work with. Always on time, informative, professional and easy to communicate with. We had a great experience and would definitely recommend to our family and friends.",
      "name": "Slava S.", "where": ""},
+    {"quote": "My wife and I were very pleased with J.R. Grimaldo's professionalism. He certainly is a credit to himself and his company!",
+     "name": "Jeff D.", "where": "Google review"},
 ]
 
 EN = {
