@@ -687,6 +687,10 @@ def build():
     (OUT / "assets" / "site.js").write_text(JS)
     (OUT / "assets" / "favicon.svg").write_text(FAVICON)
     (OUT / "reply.html").write_text(REPLY_HTML)
+    # IONOS used to forward jrresales.com to /defaultsite. Browsers that saved
+    # that forwarding land here; send them to the home page.
+    (OUT / "defaultsite").mkdir(exist_ok=True)
+    (OUT / "defaultsite" / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/"><link rel="canonical" href="/"><title>J.R. Grimaldo</title><a href="/">Go to jrresales.com</a><script>location.replace("/")</script>')
     (OUT / "CNAME").write_text(SITE["domain"] + "\n")
     (OUT / ".nojekyll").write_text("")
 
