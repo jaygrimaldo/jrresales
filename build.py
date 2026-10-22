@@ -56,6 +56,14 @@ LISTINGS = [
         "link": "https://jrgrimaldo.northgroupre.com/property/63-1605021-300-colony-road-travelers-rest-SC-29690",
         "photo": "300-colony-rd.jpg",
     },
+    {
+        "address": "207 Penrith Ct, Simpsonville, SC 29681",
+        "price": "$352,999",
+        "line": "Investor opportunity: leased through May 31, 2027, so it earns rent from day one. Four bedrooms, two and a half baths, about 1,980 sq ft on a cul-de-sac in Villages at Windsor. New roof in late 2024.",
+        "mls": "Greenville MLS 1567172",
+        "link": "https://jrgrimaldo.northgroupre.com/property/63-1567172-207-penrith-court-simpsonville-SC-29681",
+        "photo": "207-penrith-ct.jpg",
+    },
 ]
 
 # Newest or strongest first. No closing dates shown. "role" says which side
