@@ -58,8 +58,22 @@ LISTINGS = [
     },
 ]
 
+# Newest or strongest first. No closing dates shown. "role" says which side
+# J.R. represented. Only use photos from J.R.'s own listings; a home he sold
+# for a buyer gets no photo unless J.R. took it himself.
 SOLD = [
-    # {"address": "", "price": "", "line": "", "photo": ""},
+    {"address": "248 Page Creek Blvd, Landrum, SC 29356", "price": "Sold for $392,500",
+     "role": "Sold for the seller",
+     "line": "Three bedrooms, two baths in Landrum.",
+     "photo": "248-page-creek-blvd.jpg"},
+    {"address": "420 Cloverdale Ln, Simpsonville, SC 29681", "price": "Sold for $175,000",
+     "role": "Sold for the seller",
+     "line": "Three bedrooms, one and a half baths in Simpsonville.",
+     "photo": "420-cloverdale-ln.jpg"},
+    {"address": "304 Talbert Trail, Landrum, SC 29356", "price": "Sold for $290,000",
+     "role": "Represented the buyer",
+     "line": "Three bedrooms, two baths in Landrum.",
+     "photo": None},
 ]
 
 # Copied from the NorthGroup testimonials page (same four as the HomeSmart
@@ -310,6 +324,8 @@ ul.plain li{margin-bottom:.45em}
 .card .ph{aspect-ratio:4/3;background:var(--haze) repeating-linear-gradient(45deg,transparent 0 14px,rgba(47,75,95,.06) 14px 28px);display:flex;align-items:center;justify-content:center;color:var(--ink-2);font-size:.95rem}
 .card .ph img{width:100%;height:100%;object-fit:cover}
 .card .body{padding:16px 18px 20px}
+.card .role{display:inline-block;font-size:.85rem;font-weight:600;color:var(--gold-ink);background:#f6edd9;border-radius:999px;padding:3px 10px;margin:0 0 10px}
+.card{align-self:start}
 .card .price{font-size:1.4rem;font-weight:600;color:var(--ridge-deep);margin:0 0 .15em}
 .card .addr-l{margin:0 0 .5em;font-weight:600}
 .card p{font-size:1rem;color:var(--ink-2)}
@@ -478,8 +494,13 @@ def layout(T, page, title, body, lang_switch):
 </html>"""
 
 def card(it, T):
-    ph = f'<img src="{"../" if T["dir_prefix"] else ""}assets/{it["photo"]}" alt="{esc(it["address"])}">' if it.get("photo") else "Photo coming"
-    return f"""<article class="card"><div class="ph">{ph}</div><div class="body">
+    if "photo" in it and it["photo"] is None:
+        phdiv = ""
+    else:
+        ph = f'<img src="{"../" if T["dir_prefix"] else ""}assets/{it["photo"]}" alt="{esc(it["address"])}">' if it.get("photo") else "Photo coming"
+        phdiv = f'<div class="ph">{ph}</div>'
+    role = f'<p class="role">{esc(it["role"])}</p>' if it.get("role") else ""
+    return f"""<article class="card">{phdiv}<div class="body">{role}
 <p class="price">{esc(it['price'])}</p><p class="addr-l">{esc(it['address'])}</p>
 <p>{esc(it.get('line',''))}</p>{('<p class="mls">'+esc(it['mls'])+'</p>') if it.get('mls') else ''}
 {('<a class="btn quiet" href="'+it['link']+'">'+esc(T['li_btn'])+'</a>') if it.get('link') else ''}</div></article>"""
@@ -532,10 +553,11 @@ def page_home_value(T):
 <section class="alt"><div class="wrap"><h2>{esc(T['hv_after_h2'])}</h2><ol class="steps">{steps}</ol>
 <div class="note"><p style="margin:0">{esc(T['hv_note'])}</p></div></div></section>"""
 
-def page_list(T, h1, items, empty):
+def page_list(T, h1, items, empty, intro=""):
     cards = "".join(card(x, T) for x in items)
     body = f'<div class="cards">{cards}</div>' if items else f'<div class="empty"><p style="margin:0">{esc(empty)}</p></div>'
-    return f'<section><div class="wrap"><h1>{esc(h1)}</h1>{body}</div></section>'
+    lead = f'<p>{esc(intro)}</p>' if (intro and items) else ""
+    return f'<section><div class="wrap"><h1>{esc(h1)}</h1>{lead}{body}</div></section>'
 
 def page_about(T):
     up = "../" if T["dir_prefix"] else ""
@@ -674,7 +696,7 @@ def build():
         "index.html": (t, page_home(EN), "es/index.html"),
         "home-value.html": ("What's My Home Worth? – " + SITE["agent"], page_home_value(EN), "es/home-value.html"),
         "listings.html": ("My Listings – " + SITE["agent"], page_list(EN, EN["li_h1"], LISTINGS, EN["li_empty"]), "es/index.html"),
-        "sold.html": ("Sold Homes – " + SITE["agent"], page_list(EN, EN["so_h1"], SOLD, EN["so_empty"]), "es/index.html"),
+        "sold.html": ("Sold Homes – " + SITE["agent"], page_list(EN, EN["so_h1"], SOLD, EN["so_empty"], "Recently sold, and which side I represented. Ask me about any of them."), "es/index.html"),
         "about.html": ("About J.R. Grimaldo", page_about(EN), "es/about.html"),
         "reviews.html": ("Reviews – " + SITE["agent"], page_reviews(EN), "es/index.html"),
         "contact.html": ("Contact – " + SITE["agent"], page_contact(EN), "es/contact.html"),
