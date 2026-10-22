@@ -73,7 +73,7 @@ SOLD = [
     {"address": "304 Talbert Trail, Landrum, SC 29356", "price": "Sold for $290,000",
      "role": "Represented the buyer",
      "line": "Three bedrooms, two baths in Landrum.",
-     "photo": None},
+     "photo": "304-talbert-trail.jpg"},  # owner's own photo, sent to J.R. 10/22/2026
 ]
 
 # Copied from the NorthGroup testimonials page (same four as the HomeSmart
