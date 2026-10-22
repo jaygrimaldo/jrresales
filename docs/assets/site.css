@@ -78,6 +78,10 @@ form.sheet textarea{min-height:120px}
 @media(min-width:560px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr 1fr 1fr}}
 .three{display:grid;gap:14px}
 .fine{font-size:.9rem;color:var(--ink-2)}
+.form-msg{padding:16px 18px;border-radius:8px;font-size:1.05rem;max-width:62ch;margin:0}
+.form-msg.ok{background:#e6f1ea;color:#1d4a2e;border-left:4px solid #2f7a4a}
+.form-msg.bad{background:#fbeaea;color:#6b1f1f;border-left:4px solid #b03a3a}
+[hidden]{display:none!important}
 .note{border-left:4px solid var(--gold);padding:12px 18px;background:var(--stone);max-width:62ch;margin:24px 0}
 ol.steps{padding-left:1.2em;max-width:62ch}
 ol.steps li{margin-bottom:.6em}

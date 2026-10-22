@@ -324,6 +324,10 @@ form.sheet textarea{min-height:120px}
 @media(min-width:560px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr 1fr 1fr}}
 .three{display:grid;gap:14px}
 .fine{font-size:.9rem;color:var(--ink-2)}
+.form-msg{padding:16px 18px;border-radius:8px;font-size:1.05rem;max-width:62ch;margin:0}
+.form-msg.ok{background:#e6f1ea;color:#1d4a2e;border-left:4px solid #2f7a4a}
+.form-msg.bad{background:#fbeaea;color:#6b1f1f;border-left:4px solid #b03a3a}
+[hidden]{display:none!important}
 .note{border-left:4px solid var(--gold);padding:12px 18px;background:var(--stone);max-width:62ch;margin:24px 0}
 ol.steps{padding-left:1.2em;max-width:62ch}
 ol.steps li{margin-bottom:.6em}
@@ -356,6 +360,24 @@ document.addEventListener('DOMContentLoaded',function(){
   if(h){h.addEventListener('submit',function(e){e.preventDefault();var a=encodeURIComponent(h.querySelector('input').value||'');location.href=h.getAttribute('data-to')+(a?'?address='+a:'');});}
   var f=document.getElementById('addr-field');
   if(f){var q=new URLSearchParams(location.search).get('address');if(q)f.value=q;}
+  document.querySelectorAll('form.js-fs').forEach(function(form){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=form.querySelector('button[type=submit]'),msg=form.querySelector('.form-msg'),label=btn.textContent;
+      btn.disabled=true;btn.textContent=form.dataset.sending;
+      fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+        .then(function(r){
+          if(!r.ok)throw new Error('send failed');
+          form.querySelectorAll('label,.two,.three,.fine,button').forEach(function(el){el.hidden=true;});
+          msg.className='form-msg ok';msg.textContent=form.dataset.ok;msg.hidden=false;
+          msg.scrollIntoView({block:'center'});
+        })
+        .catch(function(){
+          btn.disabled=false;btn.textContent=label;
+          msg.className='form-msg bad';msg.textContent=form.dataset.bad;msg.hidden=false;
+        });
+    });
+  });
 });
 """
 
@@ -365,8 +387,21 @@ def mail_form(T, lang, subject, fields_html, submit_label, form_id=""):
     """Formspree if an ID is set, otherwise a mailto that opens the visitor's mail app."""
     if SITE["formspree_id"]:
         action = f'https://formspree.io/f/{SITE["formspree_id"]}'
-        hidden = f'<input type="hidden" name="_subject" value="{esc(subject)}"><input type="hidden" name="_language" value="{lang}">'
-        return f'<form class="sheet" id="{form_id}" action="{action}" method="POST">{hidden}{fields_html}<button class="btn" type="submit">{esc(submit_label)}</button></form>'
+        hidden = (f'<input type="hidden" name="_subject" value="{esc(subject)}">'
+                  f'<input type="hidden" name="language" value="{"Spanish" if lang == "es" else "English"}">'
+                  '<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">')
+        if lang == "es":
+            ok = "Gracias. Su solicitud llegó a J.R. Recibirá respuesta en un día hábil."
+            bad = "No se pudo enviar. Por favor llame o envíe un texto a J.R. al " + SITE["phone"] + "."
+            sending = "Enviando…"
+        else:
+            ok = "Thank you. Your request reached J.R. You'll hear back within one business day."
+            bad = "That didn't go through. Please call or text J.R. at " + SITE["phone"] + "."
+            sending = "Sending…"
+        return (f'<form class="sheet js-fs" id="{form_id}" action="{action}" method="POST" '
+                f'data-ok="{esc(ok)}" data-bad="{esc(bad)}" data-sending="{esc(sending)}">{hidden}{fields_html}'
+                f'<button class="btn" type="submit">{esc(submit_label)}</button>'
+                f'<p class="form-msg" role="status" aria-live="polite" hidden></p></form>')
     action = f'mailto:{SITE["email"]}?subject={esc(subject)}'
     return f'<form class="sheet" id="{form_id}" action="{action}" method="POST" enctype="text/plain">{fields_html}<button class="btn" type="submit">{esc(submit_label)}</button></form>'
 
