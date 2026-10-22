@@ -78,6 +78,10 @@ SOLD = [
      "role": "Sold for the seller",
      "line": "Three bedrooms, one and a half baths in Simpsonville.",
      "photo": "420-cloverdale-ln.jpg"},
+    {"address": "140 Belshire Dr, Greer, SC 29650", "price": "Sold for $395,000",
+     "role": "Sold for the seller",
+     "line": "Three bedrooms, two and a half baths in Greer. I helped these same clients buy it two years earlier.",
+     "photo": "140-belshire-dr.jpg"},  # J.R.'s own listing photo 1 (Greenville MLS 1535838), closed 11/2024
     {"address": "304 Talbert Trail, Landrum, SC 29356", "price": "Sold for $290,000",
      "role": "Represented the buyer",
      "line": "Three bedrooms, two baths in Landrum.",
@@ -97,7 +101,6 @@ SOLD_MORE = [
     ("241 Pebble Springs Dr", "Taylors", "S", "$193,000"),   # 03/2025
     ("305 Pebble Springs Dr", "Taylors", "S", "$162,000"),   # 12/2024
     ("302 E. Faris Rd", "Greenville", "B", "$722,500"),      # 12/2024
-    ("140 Belshire Dr", "Greer", "S", "$395,000"),           # 11/2024 (bought for the same clients 06/2022)
     ("248 Pebble Springs Dr", "Taylors", "S", "$185,000"),   # 09/2024
     ("102 Ridge Rd", "Greenville", "S", "$275,000"),         # 08/2024 (bought for the same clients 04/2023)
     ("648 Cotton Branch Dr", "Boiling Springs", "B", "$219,000"),  # 03/2024
