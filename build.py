@@ -40,7 +40,7 @@ SITE = {
               "Travelers Rest"],
     # Leave empty to send the valuation form by the visitor's own email app.
     # Paste a Formspree form ID (e.g. "xabcdefg") to send through Formspree.
-    "formspree_id": "",
+    "formspree_id": "mdeenynr",
     "review_page": "https://jaygrimaldo.github.io/reviews",
     "valuation_domain": "jrrevalues.com",
     "facebook": "",
