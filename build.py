@@ -152,8 +152,8 @@ EN = {
         ("One business day", "You get a written valuation by email. Fast enough to plan with, careful enough to trust."),
         ("Free, no strings", "No fee and no obligation. Use it to plan, to refinance, or just to know."),
     ],
-    "why_h2": "Fewer clients. Full attention.",
-    "why_p": "I keep only a few clients at a time, and most of them are sellers. That's on purpose. When you list with me, you're not one file in a stack. I answer most calls when they come in. When I miss one, I call back soon. I answer texts right away, or very soon after.",
+    "why_h2": "Quality over quantity.",
+    "why_p": "I'd rather do a great job for each client than juggle as many as I can. Most of my clients are sellers. When you list with me, you're not one file in a stack. I answer most calls when they come in. When I miss one, I call back soon. I answer texts right away, or very soon after.",
     "why_bullets": [
         "Honest pricing, even when it isn't what you hoped to hear.",
         "A negotiator on your side from the first offer to the closing table.",
@@ -248,8 +248,8 @@ ES = {
         ("Un día hábil", "Recibe una valuación por escrito en su correo. Rápida para planear, cuidadosa para confiar."),
         ("Gratis, sin compromiso", "Sin costo y sin obligación. Úsela para planear, para refinanciar, o solo para saber."),
     ],
-    "why_h2": "Pocos clientes. Toda mi atención.",
-    "why_p": "Trabajo con pocos clientes a la vez, y la mayoría son vendedores. Lo hago a propósito. Cuando me contrata para vender, usted no es un expediente más en la pila. Contesto la mayoría de las llamadas en el momento. Si pierdo una, le devuelvo la llamada pronto. Respondo los textos de inmediato, o muy poco después.",
+    "why_h2": "Calidad antes que cantidad.",
+    "why_p": "Prefiero hacer un gran trabajo para cada cliente que atender a todos los que pueda. La mayoría de mis clientes son vendedores. Cuando me contrata para vender, usted no es un expediente más en la pila. Contesto la mayoría de las llamadas en el momento. Si pierdo una, le devuelvo la llamada pronto. Respondo los textos de inmediato, o muy poco después.",
     "why_bullets": [
         "Precios honestos, aunque no sea lo que esperaba oír.",
         "Un negociador de su lado desde la primera oferta hasta el cierre.",
