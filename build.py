@@ -571,7 +571,7 @@ def field(name, label, typ="text", req=False, opts=None, textarea=False, fid=Non
         return f'<label>{esc(label)}<select name="{name}">{o}</select></label>'
     return f'<label>{esc(label)}<input type="{typ}" name="{name}"{i}{r}></label>'
 
-def layout(T, page, title, body, lang_switch):
+def layout(T, page, title, body, lang_switch, desc=None):
     p = T["dir_prefix"]
     up = "../" if p else ""
     nav_links = ""
@@ -589,11 +589,11 @@ def layout(T, page, title, body, lang_switch):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title>
-<meta name="description" content="{esc(T['hero_p'])}">
+<meta name="description" content="{esc(desc or T['hero_p'])}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="J.R. Grimaldo, REALTOR®">
 <meta property="og:title" content="{esc(title)}">
-<meta property="og:description" content="{esc(T['hero_p'])}">
+<meta property="og:description" content="{esc(desc or T['hero_p'])}">
 <meta property="og:image" content="https://{SITE['domain']}/assets/share.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="https://{SITE['domain']}/{p}{page}">
@@ -750,6 +750,56 @@ def page_reviews(T):
         body = f'<div class="empty"><p>{esc(T["rv_empty"])}</p><a class="btn quiet" href="{SITE["review_page"]}">{esc(T["rv_btn"])}</a></div>'
     return f'<section><div class="wrap"><h1>{esc(T["rv_h1"])}</h1>{body}</div></section>'
 
+# Town pages for local search ("sell my house Landrum"). Only J.R.'s own sales,
+# no dates. Wording approved by J.R. before publishing.
+TOWNS = {
+    "landrum": {
+        "name": "Landrum",
+        "title": "Selling Your Home in Landrum, SC – J.R. Grimaldo, REALTOR®",
+        "desc": "J.R. Grimaldo lives in Landrum and has helped neighbors here buy and sell homes since 2016. Get a free home valuation, prepared by J.R. himself, within one business day.",
+        "intro": [
+            "I live in Landrum, and I've been helping my neighbors here buy and sell homes since 2016.",
+            "When you sell with me, you get an agent who knows the streets, the neighborhoods, and what buyers here are looking for. I also work in the towns around us, including Campobello, Inman, and Lyman.",
+        ],
+        "sales_h2": "My Landrum sales",
+        "sales": [
+            ("248 Page Creek Blvd", "Sold for the seller", "$392,500", "Repeat client"),
+            ("304 Talbert Trail", "Represented the buyer", "$290,000", "Repeat client"),
+            ("248 Page Creek Blvd", "Represented the buyer", "$234,000", None),
+        ],
+        "sales_note": "The same family on all three. They bought Page Creek with me, then came back years later to sell it and buy Talbert Trail.",
+        "how_h2": "What you get when you sell with me",
+        "how": [
+            "A written valuation within one business day, prepared by me, not a computer.",
+            "Drone photos and a mailing to your neighbors on every listing.",
+            "Honest pricing, even when it isn't what you hoped to hear.",
+            "I answer most calls live, and texts right away or very soon after.",
+        ],
+        "cta_h2": "What's your Landrum home worth?",
+        "cta_p": "Tell me the address. I'll look at your home and the recent sales around it, and send you a written valuation within one business day.",
+    },
+}
+
+def page_town(key):
+    t = TOWNS[key]
+    intro = "".join(f"<p>{esc(x)}</p>" for x in t["intro"])
+    def row(r):
+        a, side, pr, tag = r
+        tg = f' <span class="rep">{esc(tag)}</span>' if tag else ""
+        return (f'<li><span class="a">{esc(a)}, <span class="c">{esc(t["name"])}</span></span>'
+                f'<span class="sd">{esc(side)}{tg}</span><span class="pr">{esc(pr)}</span></li>')
+    rows = "".join(row(r) for r in t["sales"])
+    how = "".join(f"<li>{esc(x)}</li>" for x in t["how"])
+    return f"""
+<section><div class="wrap"><h1>Selling your home in {esc(t['name'])}</h1>{intro}
+<p><a class="btn" href="home-value.html">Get my free valuation</a></p></div></section>
+<section class="alt"><div class="wrap"><h2>{esc(t['sales_h2'])}</h2>
+<ul class="sold-list">{rows}</ul><p class="fine" style="margin-top:12px">{esc(t['sales_note'])}</p>
+<p><a class="btn quiet" href="sold.html">See all my sales</a></p></div></section>
+<section><div class="wrap"><h2>{esc(t['how_h2'])}</h2><ul class="plain">{how}</ul></div></section>
+<section class="alt"><div class="wrap"><h2>{esc(t['cta_h2'])}</h2><p>{esc(t['cta_p'])}</p>
+<a class="btn" href="home-value.html">Get my free valuation</a></div></section>"""
+
 def page_contact(T):
     F = T["ct_fields"]
     fields = ('<div class="two">' + field("name", F["name"], req=True) + field("email", F["email"], "email", req=True) + '</div>'
@@ -867,7 +917,7 @@ def build():
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
     urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "contact.html",
-            "es/index.html", "es/home-value.html", "es/about.html", "es/contact.html"]
+            "es/index.html", "es/home-value.html", "es/about.html", "es/contact.html"] + [k + ".html" for k in TOWNS]
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{base}{u}</loc></url>\n" for u in urls) + "</urlset>\n")
     (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /reply.html\nDisallow: /defaultsite/\nSitemap: " + base + "sitemap.xml\n")
@@ -886,6 +936,8 @@ def build():
     }
     for name, (title, body, sw) in pages.items():
         (OUT / name).write_text(layout(EN, name, title, body, sw))
+    for k, tw in TOWNS.items():
+        (OUT / (k + ".html")).write_text(layout(EN, k + ".html", tw["title"], page_town(k), "es/index.html", tw["desc"]))
     # Spanish
     es_pages = {
         "index.html": ("J.R. Grimaldo, REALTOR® – Upstate SC", page_home(ES), "../index.html"),
@@ -895,7 +947,7 @@ def build():
     }
     for name, (title, body, sw) in es_pages.items():
         (OUT / "es" / name).write_text(layout(ES, name, title, body, sw))
-    print("built", len(pages) + len(es_pages), "pages into", OUT)
+    print("built", len(pages) + len(es_pages) + len(TOWNS), "pages into", OUT)
 
 if __name__ == "__main__":
     build()
