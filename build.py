@@ -127,9 +127,10 @@ SOLD_MORE = [
     ("501 Thorington Ct", "Greer", "S", "$370,000", "repeat"),     # 06/2021
     ("121 Bagwell Farm Rd", "Spartanburg", "S", "$334,900", "repeat"),  # 06/2021
     ("205 Noble St", "Greer", "B", "$273,000"),                    # 12/2020
-    ("207 Pebble Springs Dr", "Taylors", "S", "$64,900"),          # 11/2020
+    ("207 Pebble Springs Dr", "Taylors", "S", "$64,900"),          # 11/2020 seller Rosemary Covella Slate (manufactured home)
     ("2 Horseback Way", "Travelers Rest", "S", "$99,000", "repeat"),  # 11/2020
-    ("307 Winding Willow Trl", "Taylors", "S", "$198,000"),        # 10/2020
+    ("307 Winding Willow Trl", "Taylors", "B", "$198,000"),        # 10/16/2020 buyer Rosemary Covella Slate (same move as her 207 Pebble Springs sale)
+    ("214 Pebble Springs Dr", "Taylors", "S", "$93,000"),          # fall 2020 Peter Hildebrandt and Victoriano Mendez; two offers ($93,000 Posey, $93,500 Hartzig), no closing paper; lower one shown
     ("285 Pebble Springs Dr", "Taylors", "S", "$80,000"),          # 09/2020 manufactured home
     ("330 N Buncombe Rd", "Greer", "SB", "$108,000"),              # 06/2020 J.R. represented one side and handled the other as a transaction broker (customer, not client)
     ("334 N Buncombe Rd", "Greer", "S", "$110,000"),               # 06/2020
