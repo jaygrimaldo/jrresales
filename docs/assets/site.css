@@ -102,6 +102,7 @@ form.sheet textarea{min-height:120px}
 .form-msg.bad{background:#fbeaea;color:#6b1f1f;border-left:4px solid #b03a3a}
 [hidden]{display:none!important}
 .note{border-left:4px solid var(--gold);padding:12px 18px;background:var(--stone);max-width:62ch;margin:24px 0}
+.note.story h2{font-size:1.3rem;margin:0 0 .3em}.note.story p{margin:0}
 ol.steps{padding-left:1.2em;max-width:62ch}
 ol.steps li{margin-bottom:.6em}
 .facts{display:grid;gap:12px;max-width:720px}

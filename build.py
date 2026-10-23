@@ -474,6 +474,7 @@ form.sheet textarea{min-height:120px}
 .form-msg.bad{background:#fbeaea;color:#6b1f1f;border-left:4px solid #b03a3a}
 [hidden]{display:none!important}
 .note{border-left:4px solid var(--gold);padding:12px 18px;background:var(--stone);max-width:62ch;margin:24px 0}
+.note.story h2{font-size:1.3rem;margin:0 0 .3em}.note.story p{margin:0}
 ol.steps{padding-left:1.2em;max-width:62ch}
 ol.steps li{margin-bottom:.6em}
 .facts{display:grid;gap:12px;max-width:720px}
@@ -698,6 +699,13 @@ def page_list(T, h1, items, empty, intro=""):
 
 def page_sold():
     base = page_list(EN, EN["so_h1"], SOLD, EN["so_empty"], "Most of my business comes from past clients and the people they send my way. Here are recent sales, and which side I represented.")
+    story = ('<div class="note story"><h2>Four homes, one agent.</h2>'
+             '<p>C. and K. first bought a home with me in 2018. Since then they\'ve come back three more times, '
+             'in 2019, 2023, and 2024. Each time I sold the home they had and helped them buy the next one. '
+             'Twice, we closed on the sale and the purchase on the same day.</p></div>')
+    # Chris Roberts and Kerri Hogan. J.R., 10/23/2026: husband's initial first; the
+    # 2019 and 2023 moves closed the same day, the 2024 move did not.
+    base = base.replace('<div class="cards">', story + '<div class="cards">', 1)
     if not SOLD_MORE:
         return base
     sides = {"S": "Sold for the seller", "B": "Represented the buyer", "SB": "Represented both sides"}
