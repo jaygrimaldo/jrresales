@@ -44,6 +44,11 @@ SITE = {
     "review_page": "https://jaygrimaldo.github.io/reviews",
     "valuation_domain": "jrrevalues.com",
     "facebook": "",
+    # Profiles that point back to this site (checked 10/22/2026). Used in the
+    # hidden "who is this agent" label Google reads (schema.org RealEstateAgent).
+    "profiles": ["https://www.facebook.com/jrresales",
+                 "https://www.zillow.com/profile/Jose%20Grimaldo3",
+                 "https://www.instagram.com/jrgrimaldorealtor/"],
 }
 
 # ------------------------------------------------------------------ CONTENT
@@ -571,7 +576,25 @@ def field(name, label, typ="text", req=False, opts=None, textarea=False, fid=Non
         return f'<label>{esc(label)}<select name="{name}">{o}</select></label>'
     return f'<label>{esc(label)}<input type="{typ}" name="{name}"{i}{r}></label>'
 
-def layout(T, page, title, body, lang_switch, desc=None):
+import json as _json
+AGENT_LD = _json.dumps({
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "J.R. Grimaldo, REALTOR\u00ae",
+    "url": "https://" + SITE["domain"] + "/",
+    "image": "https://" + SITE["domain"] + "/assets/jr-headshot.jpg",
+    "telephone": SITE["phone_tel"],
+    "email": SITE["email"],
+    "address": {"@type": "PostalAddress", "streetAddress": "148 Milestone Way, Suite D",
+                "addressLocality": "Greenville", "addressRegion": "SC", "postalCode": "29615", "addressCountry": "US"},
+    "areaServed": [{"@type": "City", "name": a + ", SC"} for a in SITE["areas"]],
+    "knowsLanguage": ["en", "es"],
+    "slogan": "Principles Before Profits",
+    "parentOrganization": {"@type": "RealEstateAgent", "name": BRAND["brokerage"]},
+    "sameAs": SITE["profiles"],
+}, ensure_ascii=False).replace("</", "<\\/")
+
+def layout(T, page, title, body, lang_switch, desc=None, alt=None):
     p = T["dir_prefix"]
     up = "../" if p else ""
     nav_links = ""
@@ -583,6 +606,17 @@ def layout(T, page, title, body, lang_switch, desc=None):
     search = f'<a href="{BRAND["brokerage_site"]}" rel="noopener">{esc(T["search_label"])}</a>'
     lang = f'<a class="lang" href="{lang_switch}" lang="{T["other_lang"]}">{T["other_label"]}</a>'
     note = BRAND["brokerage_note"] if T["lang"] == "en" else BRAND["brokerage_note_es"]
+    root = "https://" + SITE["domain"] + "/"
+    canon = root + p + ("" if page == "index.html" else page)
+    hreflang = ""
+    if alt is not None:
+        en_url = canon if T["lang"] == "en" else root + ("" if alt == "index.html" else alt)
+        es_url = canon if T["lang"] == "es" else root + "es/" + ("" if alt == "index.html" else alt)
+        hreflang = (f'\n<link rel="alternate" hreflang="en" href="{en_url}">'
+                    f'\n<link rel="alternate" hreflang="es" href="{es_url}">'
+                    f'\n<link rel="alternate" hreflang="x-default" href="{en_url}">')
+    towns_links = " · ".join(f'<a href="{up}{k}.html">{esc(TOWNS[k]["name"])}</a>' for k in TOWN_ORDER)
+    towns_label = "Selling your home in" if T["lang"] == "en" else "Vender su casa en"
     return f"""<!doctype html>
 <html lang="{T['lang']}">
 <head>
@@ -596,7 +630,9 @@ def layout(T, page, title, body, lang_switch, desc=None):
 <meta property="og:description" content="{esc(desc or T['hero_p'])}">
 <meta property="og:image" content="https://{SITE['domain']}/assets/share.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:url" content="https://{SITE['domain']}/{p}{page}">
+<meta property="og:url" content="{canon}">
+<link rel="canonical" href="{canon}">{hreflang}
+<script type="application/ld+json">{AGENT_LD}</script>
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
@@ -625,6 +661,7 @@ def layout(T, page, title, body, lang_switch, desc=None):
     </div>
     <div>
       <p><a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a> · <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
+      <p>{esc(towns_label)}: {towns_links}</p>
       <p>{esc(T['footer_eho'])} © 2026 {esc(SITE['agent'])}. {esc(T['footer_rights'])}</p>
     </div>
   </div>
@@ -750,55 +787,93 @@ def page_reviews(T):
         body = f'<div class="empty"><p>{esc(T["rv_empty"])}</p><a class="btn quiet" href="{SITE["review_page"]}">{esc(T["rv_btn"])}</a></div>'
     return f'<section><div class="wrap"><h1>{esc(T["rv_h1"])}</h1>{body}</div></section>'
 
-# Town pages for local search ("sell my house Landrum"). Only J.R.'s own sales,
-# no dates. Wording approved by J.R. before publishing.
+# Town pages for local search ("sell my house in Greer"). Sales are pulled
+# automatically from SOLD and SOLD_MORE, so a new sale shows up on its town page.
+# Only J.R.'s real sales; no dates; no claims about other agents.
+# J.R., 10/23/2026: "Go ahead and do anything ... to promote this."
+TOWN_ORDER = ["landrum", "greer", "taylors", "greenville", "simpsonville", "inman", "travelers-rest", "fountain-inn"]
 TOWNS = {
-    "landrum": {
-        "name": "Landrum",
-        "title": "Selling Your Home in Landrum, SC – J.R. Grimaldo, REALTOR®",
-        "desc": "J.R. Grimaldo lives in Landrum and has helped neighbors here buy and sell homes since 2016. Get a free home valuation, prepared by J.R. himself, within one business day.",
-        "intro": [
-            "I live in Landrum, and I've been helping my neighbors here buy and sell homes since 2016.",
-            "When you sell with me, you get an agent who knows the streets, the neighborhoods, and what buyers here are looking for. I also work in the towns around us, including Campobello, Inman, and Lyman.",
-        ],
-        "sales_h2": "My Landrum sales",
-        "sales": [
-            ("248 Page Creek Blvd", "Sold for the seller", "$392,500", "Repeat client"),
-            ("304 Talbert Trail", "Represented the buyer", "$290,000", "Repeat client"),
-            ("248 Page Creek Blvd", "Represented the buyer", "$234,000", None),
-        ],
-        "sales_note": "The same family on all three. They bought Page Creek with me, then came back years later to sell it and buy Talbert Trail.",
-        "how_h2": "What you get when you sell with me",
-        "how": [
-            "A written valuation within one business day, prepared by me, not a computer.",
-            "Drone photos and a mailing to your neighbors on every listing.",
-            "Honest pricing, even when it isn't what you hoped to hear.",
-            "I answer most calls live, and texts right away or very soon after.",
-        ],
-        "cta_h2": "What's your Landrum home worth?",
-        "cta_p": "Tell me the address. I'll look at your home and the recent sales around it, and send you a written valuation within one business day.",
-    },
+    "landrum": {"name": "Landrum",
+        "intro": ["I live in Landrum, and I've been helping my neighbors here buy and sell homes since 2016.",
+                  "When you sell with me, you get an agent who knows the streets, the neighborhoods, and what buyers here are looking for. I also work in the towns around us, including Campobello, Inman, and Lyman."],
+        "note": "The same family on all three. They bought Page Creek with me, then came back years later to sell it and buy Talbert Trail."},
+    "greer": {"name": "Greer"},
+    "taylors": {"name": "Taylors"},
+    "greenville": {"name": "Greenville"},
+    "simpsonville": {"name": "Simpsonville"},
+    "inman": {"name": "Inman"},
+    "travelers-rest": {"name": "Travelers Rest"},
+    "fountain-inn": {"name": "Fountain Inn"},
 }
+TOWN_HOW = [
+    "A written valuation within one business day, prepared by me, not a computer.",
+    "Drone photos and a mailing to your neighbors on every listing.",
+    "Honest pricing, even when it isn't what you hoped to hear.",
+    "I answer most calls live, and texts right away or very soon after.",
+]
+_SIDES = {"S": "Sold for the seller", "B": "Represented the buyer", "SB": "Helped both buyer and seller"}
+_TAGS = {"repeat": "Repeat client", "referral": "Referred by a past client"}
+
+def town_sales(name):
+    rows = []
+    for it in SOLD:
+        parts = [x.strip() for x in it["address"].split(",")]
+        if parts[1] == name:
+            role = it["role"].split(" · ")
+            rows.append((parts[0], role[0], it["price"].replace("Sold for ", ""), role[1] if len(role) > 1 else None))
+    for r in SOLD_MORE:
+        if r[1] == name:
+            rows.append((r[0], _SIDES[r[2]], r[3], _TAGS.get(r[4]) if len(r) > 4 else None))
+    return rows
+
+def town_listings(name):
+    return [x for x in LISTINGS if [p.strip() for p in x["address"].split(",")][1] == name]
+
+def town_meta(key):
+    t = TOWNS[key]; n = len(town_sales(t["name"]))
+    title = f"Selling Your Home in {t['name']}, SC – J.R. Grimaldo, REALTOR®"
+    if key == "landrum":
+        desc = "J.R. Grimaldo lives in Landrum and has helped neighbors here buy and sell homes since 2016. Get a free home valuation, prepared by J.R. himself, within one business day."
+    else:
+        desc = (f"J.R. Grimaldo has helped clients buy and sell {n} homes in {t['name']}, SC. "
+                "Get a free written home valuation, prepared by J.R. himself, within one business day.")
+    return title, desc
 
 def page_town(key):
-    t = TOWNS[key]
-    intro = "".join(f"<p>{esc(x)}</p>" for x in t["intro"])
+    t = TOWNS[key]; name = t["name"]; sales = town_sales(name)
+    if "intro" in t:
+        intro_l = t["intro"]
+    else:
+        first = (f"I've been selling homes across the Upstate since 2016, and {name} is one of the places I've worked the most. I've helped clients buy and sell {len(sales)} homes here."
+                 if len(sales) >= 5 else
+                 f"I've been selling homes across the Upstate since 2016, and I've helped clients buy and sell {len(sales)} homes in {name}.")
+        intro_l = [first,
+                   "I believe in quality over quantity. Every client gets my full attention, and I'm the only one who answers my phone."]
+    intro = "".join(f"<p>{esc(x)}</p>" for x in intro_l)
     def row(r):
         a, side, pr, tag = r
         tg = f' <span class="rep">{esc(tag)}</span>' if tag else ""
-        return (f'<li><span class="a">{esc(a)}, <span class="c">{esc(t["name"])}</span></span>'
+        return (f'<li><span class="a">{esc(a)}, <span class="c">{esc(name)}</span></span>'
                 f'<span class="sd">{esc(side)}{tg}</span><span class="pr">{esc(pr)}</span></li>')
-    rows = "".join(row(r) for r in t["sales"])
-    how = "".join(f"<li>{esc(x)}</li>" for x in t["how"])
+    rows = "".join(row(r) for r in sales)
+    note = f'<p class="fine" style="margin-top:12px">{esc(t["note"])}</p>' if t.get("note") else ""
+    lst = town_listings(name)
+    lst_html = (f'<section><div class="wrap"><h2>For sale now in {esc(name)}</h2><div class="cards">'
+                + "".join(card(x, EN) for x in lst) + '</div></div></section>') if lst else ""
+    how = "".join(f"<li>{esc(x)}</li>" for x in TOWN_HOW)
+    others = " · ".join(f'<a href="{k}.html">{esc(TOWNS[k]["name"])}</a>' for k in TOWN_ORDER if k != key)
     return f"""
-<section><div class="wrap"><h1>Selling your home in {esc(t['name'])}</h1>{intro}
+<section><div class="wrap"><h1>Selling your home in {esc(name)}</h1>{intro}
 <p><a class="btn" href="home-value.html">Get my free valuation</a></p></div></section>
-<section class="alt"><div class="wrap"><h2>{esc(t['sales_h2'])}</h2>
-<ul class="sold-list">{rows}</ul><p class="fine" style="margin-top:12px">{esc(t['sales_note'])}</p>
+{lst_html}
+<section class="alt"><div class="wrap"><h2>My {esc(name)} sales</h2>
+<ul class="sold-list">{rows}</ul>{note}
 <p><a class="btn quiet" href="sold.html">See all my sales</a></p></div></section>
-<section><div class="wrap"><h2>{esc(t['how_h2'])}</h2><ul class="plain">{how}</ul></div></section>
-<section class="alt"><div class="wrap"><h2>{esc(t['cta_h2'])}</h2><p>{esc(t['cta_p'])}</p>
-<a class="btn" href="home-value.html">Get my free valuation</a></div></section>"""
+<section><div class="wrap"><h2>What you get when you sell with me</h2><ul class="plain">{how}</ul></div></section>
+<section class="alt"><div class="wrap"><h2>What's your {esc(name)} home worth?</h2>
+<p>Tell me the address. I'll look at your home and the recent sales around it, and send you a written valuation within one business day.</p>
+<a class="btn" href="home-value.html">Get my free valuation</a>
+<p class="fine" style="margin-top:22px">Other towns I work in: {others}</p></div></section>"""
 
 def page_contact(T):
     F = T["ct_fields"]
@@ -917,37 +992,56 @@ def build():
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
     urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "contact.html",
-            "es/index.html", "es/home-value.html", "es/about.html", "es/contact.html"] + [k + ".html" for k in TOWNS]
+            "es/index.html", "es/home-value.html", "es/about.html", "es/contact.html"] + [k + ".html" for k in TOWN_ORDER]
+    import datetime as _dt
+    today = _dt.date.today().isoformat()
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        + "".join(f"  <url><loc>{base}{u}</loc></url>\n" for u in urls) + "</urlset>\n")
+        + "".join(f"  <url><loc>{base}{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls) + "</urlset>\n")
     (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /reply.html\nDisallow: /defaultsite/\nSitemap: " + base + "sitemap.xml\n")
     (OUT / ".nojekyll").write_text("")
 
-    t = SITE["title_tag"]
-    # English
-    pages = {
-        "index.html": (t, page_home(EN), "es/index.html"),
-        "home-value.html": ("What's My Home Worth? – " + SITE["agent"], page_home_value(EN), "es/home-value.html"),
-        "listings.html": ("My Listings – " + SITE["agent"], page_list(EN, EN["li_h1"], LISTINGS, EN["li_empty"]), "es/index.html"),
-        "sold.html": ("Sold Homes – " + SITE["agent"], page_sold(), "es/index.html"),
-        "about.html": ("About J.R. Grimaldo", page_about(EN), "es/about.html"),
-        "reviews.html": ("Reviews – " + SITE["agent"], page_reviews(EN), "es/index.html"),
-        "contact.html": ("Contact – " + SITE["agent"], page_contact(EN), "es/contact.html"),
+    t = "J.R. Grimaldo, REALTOR® – Sell Your Home in Landrum & the Upstate SC"
+    n_sales = len(SOLD) + len(SOLD_MORE)
+    D = {
+        "index.html": "Thinking of selling in the Upstate? J.R. Grimaldo, a Landrum REALTOR® since 2016, prepares a free written home valuation himself within one business day.",
+        "home-value.html": "Find out what your Upstate SC home is worth. J.R. Grimaldo prepares a free written valuation himself, from the recent sales near you, within one business day.",
+        "listings.html": "Homes for sale now with J.R. Grimaldo, REALTOR®, in the Upstate SC.",
+        "sold.html": f"{n_sales} homes sold and bought since 2016 in Greer, Taylors, Greenville, Simpsonville, Inman, Landrum, and across the Upstate SC. {REPEAT_FAMILIES} families have come back to work with J.R. again.",
+        "about.html": "Meet J.R. Grimaldo, a Landrum-based South Carolina REALTOR® since 2016. Quality over quantity, quick replies, and clients who come back. Hablo español.",
+        "reviews.html": "What clients say about buying and selling with J.R. Grimaldo, REALTOR®, in the Upstate SC.",
+        "contact.html": "Call or text J.R. Grimaldo at 864-381-2326. He answers most calls live and replies to texts right away. Landrum and Upstate SC Real Estate.",
     }
-    for name, (title, body, sw) in pages.items():
-        (OUT / name).write_text(layout(EN, name, title, body, sw))
-    for k, tw in TOWNS.items():
-        (OUT / (k + ".html")).write_text(layout(EN, k + ".html", tw["title"], page_town(k), "es/index.html", tw["desc"]))
+    DE = {
+        "index.html": "¿Piensa vender en el Upstate? J.R. Grimaldo, REALTOR® desde 2016, le prepara una valuación gratis por escrito en un día hábil. Hablo español.",
+        "home-value.html": "¿Cuánto vale su casa en el Upstate de Carolina del Sur? J.R. Grimaldo le prepara una valuación gratis por escrito, con las ventas recientes cerca de usted, en un día hábil.",
+        "about.html": "Conozca a J.R. Grimaldo, REALTOR® de Carolina del Sur desde 2016, con base en Landrum. Calidad antes que cantidad y respuestas rápidas. Hablo español.",
+        "contact.html": "Llame o envíe un texto a J.R. Grimaldo al 864-381-2326. Contesta la mayoría de las llamadas en el momento. Bienes raíces en Landrum y el Upstate.",
+    }
+    # English: (title, body, language switch, Spanish twin or None)
+    pages = {
+        "index.html": (t, page_home(EN), "es/index.html", "index.html"),
+        "home-value.html": ("What's My Home Worth? Free Home Valuation – " + SITE["agent"], page_home_value(EN), "es/home-value.html", "home-value.html"),
+        "listings.html": ("My Listings – " + SITE["agent"] + ", REALTOR®", page_list(EN, EN["li_h1"], LISTINGS, EN["li_empty"]), "es/index.html", None),
+        "sold.html": ("Sold Homes – " + SITE["agent"] + ", REALTOR®", page_sold(), "es/index.html", None),
+        "about.html": ("About J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(EN), "es/about.html", "about.html"),
+        "reviews.html": ("Client Reviews – " + SITE["agent"] + ", REALTOR®", page_reviews(EN), "es/index.html", None),
+        "contact.html": ("Contact J.R. Grimaldo, REALTOR®", page_contact(EN), "es/contact.html", "contact.html"),
+    }
+    for name, (title, body, sw, alt) in pages.items():
+        (OUT / name).write_text(layout(EN, name, title, body, sw, D[name], alt))
+    for k in TOWN_ORDER:
+        title, desc = town_meta(k)
+        (OUT / (k + ".html")).write_text(layout(EN, k + ".html", title, page_town(k), "es/index.html", desc))
     # Spanish
     es_pages = {
-        "index.html": ("J.R. Grimaldo, REALTOR® – Upstate SC", page_home(ES), "../index.html"),
-        "home-value.html": ("¿Cuánto vale mi casa? – " + SITE["agent"], page_home_value(ES), "../home-value.html"),
-        "about.html": ("Sobre J.R. Grimaldo", page_about(ES), "../about.html"),
-        "contact.html": ("Contacto – " + SITE["agent"], page_contact(ES), "../contact.html"),
+        "index.html": ("J.R. Grimaldo, REALTOR® – Venda su casa en el Upstate de Carolina del Sur", page_home(ES), "../index.html"),
+        "home-value.html": ("¿Cuánto vale mi casa? Valuación gratis – " + SITE["agent"], page_home_value(ES), "../home-value.html"),
+        "about.html": ("Sobre J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(ES), "../about.html"),
+        "contact.html": ("Contácteme – " + SITE["agent"] + ", REALTOR®", page_contact(ES), "../contact.html"),
     }
     for name, (title, body, sw) in es_pages.items():
-        (OUT / "es" / name).write_text(layout(ES, name, title, body, sw))
-    print("built", len(pages) + len(es_pages) + len(TOWNS), "pages into", OUT)
+        (OUT / "es" / name).write_text(layout(ES, name, title, body, sw, DE[name], name))
+    print("built", len(pages) + len(es_pages) + len(TOWN_ORDER), "pages into", OUT)
 
 if __name__ == "__main__":
     build()
