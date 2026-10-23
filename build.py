@@ -149,7 +149,7 @@ SOLD_MORE = [
     ("325 Rock Quarry Rd", "Travelers Rest", "B", "$95,000"),      # 2019
     ("117 New Castle Pl", "Simpsonville", "S", "$98,000"),         # 09/2018
     ("1671 Hampton Rd", "Inman", "B", "$112,000"),                 # 2018
-    ("102 Old Grove Rd", "Piedmont", "S", "$133,500"),             # 08/2018
+    ("102 Old Grove Rd", "Piedmont", "B", "$133,500"),             # 08/24/2018 buyer Dineene D. Hicks (J.R. confirmed 10/23)
     ("308 Covington Dr", "Inman", "S", "$192,900"),                # 08/2018 contract price
     ("309 Holly Oaks Ln", "Inman", "B", "$296,600"),               # 07/2018
     ("316 Covington Dr", "Inman", "S", "$200,000"),                # 07/2018
