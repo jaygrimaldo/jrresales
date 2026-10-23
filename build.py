@@ -97,27 +97,77 @@ SOLD = [
 # comment only; the site shows no dates. side: "S" = sold for the seller,
 # "B" = represented the buyer.
 SOLD_MORE = [
-    ("1220 Cyndis Ln", "Greer", "B", "$304,990"),            # 04/2025
-    ("241 Pebble Springs Dr", "Taylors", "S", "$193,000"),   # 03/2025
-    ("305 Pebble Springs Dr", "Taylors", "S", "$162,000"),   # 12/2024
-    ("302 E. Faris Rd", "Greenville", "B", "$722,500"),      # 12/2024
-    ("248 Pebble Springs Dr", "Taylors", "S", "$185,000"),   # 09/2024
-    ("102 Ridge Rd", "Greenville", "S", "$275,000", "repeat"),         # 08/2024 (bought for the same clients 04/2023)
+    # Every closed sale from dotloop and OneDrive (checked with J.R. 10/23/2026),
+    # newest first. The four photo cards above are not repeated here.
+    # side: "S" sold for the seller, "B" represented the buyer, "SB" both sides.
+    # tag: "repeat" = a later deal for a family that already closed one with J.R.
+    # (J.R.'s rule: selling and buying in the same move is one hiring, not a
+    # repeat). "referral" = referred by a past client. Dates in comments only.
+    # Left off on purpose: 150 Buck Branch Rd, Mill Spring NC (J.R. no longer
+    # holds an NC license), "2019 Grimaldo" (his own), 724 Ridge Dr (Cassar).
+    ("1220 Cyndis Ln", "Greer", "B", "$304,990"),                  # 04/2025
+    ("241 Pebble Springs Dr", "Taylors", "S", "$193,000"),         # 03/2025
+    ("305 Pebble Springs Dr", "Taylors", "S", "$162,000"),         # 12/2024
+    ("302 E. Faris Rd", "Greenville", "B", "$722,500", "repeat"),  # 12/2024
+    ("248 Pebble Springs Dr", "Taylors", "S", "$185,000", "repeat"),  # 09/2024
+    ("102 Ridge Rd", "Greenville", "S", "$275,000", "repeat"),     # 08/2024
+    ("161 Dogwood Ave", "Spartanburg", "B", "$150,000"),           # 04/2024
     ("648 Cotton Branch Dr", "Boiling Springs", "B", "$219,000"),  # 03/2024
-    ("102 Ridge Rd", "Greenville", "B", "$298,755", "repeat"),         # 04/2023
-    ("15 Heron Dr", "Fountain Inn", "S", "$268,000"),        # 04/2023
-    ("406 Aniken Cir", "Boiling Springs", "B", "$255,100"),  # 09/2022
-    ("361 Pewter Cir", "Simpsonville", "B", "$421,980"),     # 08/2022
-    ("437 Buchanan Ridge Rd", "Taylors", "B", "$323,967"),   # 07/2022 (zip 29687)
-    ("140 Belshire Dr", "Greer", "B", "$380,000", "repeat"),           # 06/2022
-    ("14 Garfield Ln", "Simpsonville", "S", "$299,999"),     # 06/2022
-    ("410 Meadors Ave", "Greenville", "B", "$196,000"),      # 07/2021
-    ("100 McCauley Rd Ext", "Travelers Rest", "S", "$245,000"),  # 07/2021
-    ("501 Thorington Ct", "Greer", "S", "$370,000"),         # 06/2021
-    ("121 Bagwell Farm Rd", "Spartanburg", "S", "$334,900"), # 06/2021
-    ("205 Noble St", "Greer", "B", "$273,000"),              # 12/2020
-    ("207 Pebble Springs Dr", "Taylors", "S", "$64,900"),    # 11/2020
+    ("1 Octavia Rd", "Taylors", "B", "$412,500", "repeat"),        # 11/2023
+    ("102 Ridge Rd", "Greenville", "B", "$298,755", "repeat"),     # 04/2023
+    ("15 Heron Dr", "Fountain Inn", "S", "$268,000", "repeat"),    # 04/2023
+    ("406 Aniken Cir", "Boiling Springs", "B", "$255,100"),        # 09/2022
+    ("361 Pewter Cir", "Simpsonville", "B", "$421,980", "repeat"), # 08/2022
+    ("437 Buchanan Ridge Rd", "Taylors", "B", "$323,967"),         # 07/2022
+    ("140 Belshire Dr", "Greer", "B", "$380,000"),                 # 06/2022 (their first deal)
+    ("14 Garfield Ln", "Simpsonville", "S", "$299,999", "repeat"), # 06/2022
+    ("410 Meadors Ave", "Greenville", "B", "$196,000"),            # 07/2021
+    ("100 McCauley Rd Ext", "Travelers Rest", "S", "$245,000"),    # 07/2021
+    ("501 Thorington Ct", "Greer", "S", "$370,000", "repeat"),     # 06/2021
+    ("121 Bagwell Farm Rd", "Spartanburg", "S", "$334,900", "repeat"),  # 06/2021
+    ("205 Noble St", "Greer", "B", "$273,000"),                    # 12/2020
+    ("207 Pebble Springs Dr", "Taylors", "S", "$64,900"),          # 11/2020
+    ("2 Horseback Way", "Travelers Rest", "S", "$99,000", "repeat"),  # 11/2020
+    ("307 Winding Willow Trl", "Taylors", "S", "$198,000"),        # 10/2020
+    ("285 Pebble Springs Dr", "Taylors", "S", "$80,000"),          # 09/2020 manufactured home
+    ("330 N Buncombe Rd", "Greer", "SB", "$108,000"),              # 06/2020
+    ("334 N Buncombe Rd", "Greer", "S", "$110,000"),               # 06/2020
+    ("4 Bullard Ct", "Greer", "B", "$287,500"),                    # 06/2020
+    ("3704 Ballenger Rd", "Greer", "S", "$224,000"),               # 06/2020
+    ("3702 Ballenger Rd", "Greer", "S", "$210,000"),               # 06/2020
+    ("304 Clemson Ave", "Greenville", "B", "$87,145"),             # 11/2019
+    ("4 Twin Falls Dr", "Simpsonville", "B", "$162,000"),          # 10/2019
+    ("14 Garfield Ln", "Simpsonville", "B", "$196,000"),           # 08/2019
+    ("12 Uneeda Dr", "Greenville", "S", "$105,000", "repeat"),     # 05/2019
+    ("15 Heron Dr", "Fountain Inn", "B", "$169,500", "repeat"),    # 2019
+    ("101 S. Valley Ln", "Greenville", "B", "$37,000"),            # 05/2019 lot
+    ("213 Brannon Ave", "Greer", "S", "$109,000"),                 # 04/2019
+    ("930 Harmony Rd", "Ware Shoals", "B", "$142,000"),            # 04/2019
+    ("325 Rock Quarry Rd", "Travelers Rest", "B", "$95,000"),      # 2019
+    ("117 New Castle Pl", "Simpsonville", "S", "$98,000"),         # 09/2018
+    ("1671 Hampton Rd", "Inman", "B", "$112,000"),                 # 2018
+    ("102 Old Grove Rd", "Piedmont", "S", "$133,500"),             # 08/2018
+    ("308 Covington Dr", "Inman", "S", "$192,900"),                # 08/2018 contract price
+    ("309 Holly Oaks Ln", "Inman", "B", "$296,600"),               # 07/2018
+    ("316 Covington Dr", "Inman", "S", "$200,000"),                # 07/2018
+    ("128 Bonnie Woods Dr", "Greenville", "B", "$153,000"),        # 05/2018
+    ("110 Birdie Ln", "Fountain Inn", "S", "$69,900"),             # 05/2018
+    ("12 Uneeda Dr", "Greenville", "B", "$104,000"),               # 05/2018
+    ("702 Watermarke Ln", "Anderson", "B", "$300,000"),            # 03/2018
+    ("210 Legacy Dr", "Inman", "S", "$183,800"),                   # 03/2018
+    ("248 Page Creek Blvd", "Landrum", "B", "$234,000"),           # 2018 contract price
+    ("115 James Rd", "Campobello", "B", "$178,400"),               # 12/2017
+    ("215 Ashley Danielle Dr", "Duncan", "B", "$128,000"),         # 12/2017
+    ("501 Thorington Ct", "Greer", "B", "$308,000", "repeat"),     # 09/2017
+    ("407 Jewelwood Dr", "Lyman", "S", "$200,000", "repeat"),      # 2017
+    ("318 Tearose Ln", "Simpsonville", "B", "$188,000", "referral"),  # 03/2017
+    ("705 Cannon Ford Rd", "Inman", "B", "$45,700"),               # 2017
+    ("516 Carey Dr", "Greer", "B", "$198,900"),                    # late 2016 contract price
+    ("407 Jewelwood Dr", "Lyman", "B", "$198,500"),                # 08/2016
+    ("2 Horseback Way", "Travelers Rest", "B", "$66,000"),         # 06/2016
+    ("926 Winterhawk Cir", "Inman", "S", "$95,000"),               # 2016
 ]
+REPEAT_FAMILIES = 9
 
 REVIEWS = [
     {"quote": "Had a great first home buyers experience with this agent. He worked on my time frame and went over and above to get things going. I just closed on my first house and I couldn't have picked a better realtor! Thanks JR for all of your help! UPDATE: 4 years later I've chosen JR to help me sell my home. It's been an excellent experience. He uses a really neat drone for professional pictures for the listing. He is very prompt with every detail of the process. I'm very pleased and couldn't ask for a better realtor.",
@@ -387,6 +437,11 @@ ul.plain li{margin-bottom:.45em}
 .more-sold{margin-top:40px}
 .sold-list .rep{display:inline-block;margin-left:6px;font-size:.78rem;font-weight:600;color:#fff;background:var(--ridge);border-radius:999px;padding:1px 8px}
 .more-sold h2{margin-bottom:.3em}
+.more-sold .stats{font-size:1.1rem;line-height:1.6}
+.more-sold .stats b{font-size:1.35rem;color:var(--ridge-deep)}
+.all-sales summary{cursor:pointer;display:inline-block;font-weight:600;color:var(--ridge);border:1px solid var(--ridge);border-radius:8px;padding:10px 18px;list-style:none}
+.all-sales summary::-webkit-details-marker{display:none}
+.all-sales[open] summary{margin-bottom:8px}
 .sold-list{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:0;max-width:820px}
 .sold-list li{display:grid;grid-template-columns:1fr auto;grid-template-areas:"a pr" "sd sd";gap:2px 16px;padding:12px 0;border-top:1px solid var(--line)}
 .sold-list .a{grid-area:a}.sold-list .pr{grid-area:pr}.sold-list .sd{grid-area:sd}
@@ -643,18 +698,22 @@ def page_sold():
     base = page_list(EN, EN["so_h1"], SOLD, EN["so_empty"], "Most of my business comes from past clients and the people they send my way. Here are recent sales, and which side I represented.")
     if not SOLD_MORE:
         return base
+    sides = {"S": "Sold for the seller", "B": "Represented the buyer", "SB": "Represented both sides"}
+    tags = {"repeat": "Repeat client", "referral": "Referred by a past client"}
     def row(r):
         a, c, sd, pr = r[:4]
-        rep = len(r) > 4 and r[4] == "repeat"
-        tag = ' <span class="rep">Repeat client</span>' if rep else ""
-        side = "Sold for the seller" if sd == "S" else "Represented the buyer"
+        t = tags.get(r[4]) if len(r) > 4 else None
+        tag = f' <span class="rep">{t}</span>' if t else ""
         return (f'<li><span class="a">{esc(a)}, <span class="c">{esc(c)}</span></span>'
-                f'<span class="sd">{side}{tag}</span><span class="pr">{esc(pr)}</span></li>')
+                f'<span class="sd">{sides[sd]}{tag}</span><span class="pr">{esc(pr)}</span></li>')
     rows = "".join(row(r) for r in SOLD_MORE)
     n = len(SOLD) + len(SOLD_MORE)
-    more = (f'<div class="more-sold"><h2>More homes I\'ve helped sell and buy</h2>'
-            f'<p>{n} closed sales across the Upstate, from Taylors and Greer to Simpsonville, Fountain Inn, and Boiling Springs.</p>'
-            f'<ul class="sold-list">{rows}</ul></div>')
+    more = (f'<div class="more-sold"><h2>Every home I\'ve helped sell and buy</h2>'
+            f'<p class="stats"><b>{n}</b> homes sold and bought since 2016.<br>'
+            f'<b>{REPEAT_FAMILIES}</b> families have come back to work with me again.</p>'
+            f'<details class="all-sales"><summary>See all {n} sales</summary>'
+            f'<p class="fine">Newest first. The four homes above are included in the count.</p>'
+            f'<ul class="sold-list">{rows}</ul></details></div>')
     i = base.rfind("</div></section>")
     return base[:i] + more + base[i:]
 
