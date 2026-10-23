@@ -118,8 +118,8 @@ SOLD_MORE = [
     ("15 Heron Dr", "Fountain Inn", "S", "$268,000", "repeat"),    # 04/2023
     ("406 Aniken Cir", "Boiling Springs", "B", "$255,100"),        # 09/2022
     ("361 Pewter Cir", "Simpsonville", "B", "$421,980", "repeat"), # 08/2022
-    ("437 Buchanan Ridge Rd", "Taylors", "B", "$323,967"),         # 07/2022
-    ("140 Belshire Dr", "Greer", "B", "$380,000"),                 # 06/2022 (their first deal)
+    ("437 Buchanan Ridge Rd", "Taylors", "B", "$323,967", "referral"),  # 07/2022 Robinson, referred by Jeff DiStefano
+    ("140 Belshire Dr", "Greer", "B", "$380,000", "referral"),     # 06/2022 Hawkins first deal, referred by Jeff DiStefano
     ("14 Garfield Ln", "Simpsonville", "S", "$299,999", "repeat"), # 06/2022
     ("410 Meadors Ave", "Greenville", "B", "$196,000"),            # 07/2021
     ("100 McCauley Rd Ext", "Travelers Rest", "S", "$245,000"),    # 07/2021
@@ -135,7 +135,9 @@ SOLD_MORE = [
     ("4 Bullard Ct", "Greer", "B", "$287,500"),                    # 06/2020
     ("3704 Ballenger Rd", "Greer", "S", "$224,000"),               # 06/2020
     ("3702 Ballenger Rd", "Greer", "S", "$210,000"),               # 06/2020
+    ("292 Pebble Springs Dr", "Taylors", "S", "Over $110,000", "repeat"),  # spring 2020 mobile home, listed 03/2020 at $110,500; J.R.: "sold for 110,000 something"
     ("304 Clemson Ave", "Greenville", "B", "$87,145"),             # 11/2019
+    ("208 Buchanan Ridge Rd", "Taylors", "B", "$316,523"),         # 11/2019 new build, Lincoln Park lot 123 (DiStefano first deal)
     ("4 Twin Falls Dr", "Simpsonville", "B", "$162,000"),          # 10/2019
     ("14 Garfield Ln", "Simpsonville", "B", "$196,000"),           # 08/2019
     ("12 Uneeda Dr", "Greenville", "S", "$105,000", "repeat"),     # 05/2019
@@ -167,7 +169,7 @@ SOLD_MORE = [
     ("2 Horseback Way", "Travelers Rest", "B", "$66,000"),         # 06/2016
     ("926 Winterhawk Cir", "Inman", "S", "$95,000"),               # 2016
 ]
-REPEAT_FAMILIES = 9
+REPEAT_FAMILIES = 10
 
 REVIEWS = [
     {"quote": "Had a great first home buyers experience with this agent. He worked on my time frame and went over and above to get things going. I just closed on my first house and I couldn't have picked a better realtor! Thanks JR for all of your help! UPDATE: 4 years later I've chosen JR to help me sell my home. It's been an excellent experience. He uses a really neat drone for professional pictures for the listing. He is very prompt with every detail of the process. I'm very pleased and couldn't ask for a better realtor.",
