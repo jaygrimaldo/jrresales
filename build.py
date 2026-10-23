@@ -75,7 +75,7 @@ SOLD = [
      "line": "Three bedrooms, two baths in Landrum. I helped these same clients buy it seven years earlier.",
      "photo": "248-page-creek-blvd.jpg"},
     {"address": "420 Cloverdale Ln, Simpsonville, SC 29681", "price": "Sold for $175,000",
-     "role": "Sold for the seller",
+     "role": "Sold for the seller \u00b7 Referred by a past client",  # Willimon, referred by her son Russell Beaver
      "line": "Three bedrooms, one and a half baths in Simpsonville.",
      "photo": "420-cloverdale-ln.jpg"},
     {"address": "140 Belshire Dr, Greer, SC 29650", "price": "Sold for $395,000",
@@ -83,7 +83,7 @@ SOLD = [
      "line": "Three bedrooms, two and a half baths in Greer. I helped these same clients buy it two years earlier.",
      "photo": "140-belshire-dr.jpg"},  # J.R.'s own listing photo 1 (Greenville MLS 1535838), closed 11/2024
     {"address": "304 Talbert Trail, Landrum, SC 29356", "price": "Sold for $290,000",
-     "role": "Represented the buyer",
+     "role": "Represented the buyer \u00b7 Repeat client",  # Bests, first bought Page Creek with J.R. in 2018
      "line": "Three bedrooms, two baths in Landrum.",
      "photo": "304-talbert-trail.jpg"},  # owner's own photo, sent to J.R. 10/22/2026
 ]
