@@ -71,8 +71,8 @@ LISTINGS = [
 # for a buyer gets no photo unless J.R. took it himself.
 SOLD = [
     {"address": "248 Page Creek Blvd, Landrum, SC 29356", "price": "Sold for $392,500",
-     "role": "Sold for the seller",
-     "line": "Three bedrooms, two baths in Landrum.",
+     "role": "Sold for the seller \u00b7 Repeat client",
+     "line": "Three bedrooms, two baths in Landrum. I helped these same clients buy it seven years earlier.",
      "photo": "248-page-creek-blvd.jpg"},
     {"address": "420 Cloverdale Ln, Simpsonville, SC 29681", "price": "Sold for $175,000",
      "role": "Sold for the seller",
