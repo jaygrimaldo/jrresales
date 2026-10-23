@@ -35,7 +35,7 @@ SITE = {
     "phone_tel": "+18643812326",
     "email": "jr@jrresales.com",
     "home_town": "Landrum, SC",
-    "areas": ["Landrum", "Campobello", "Inman", "Greer", "Taylors",
+    "areas": ["Landrum", "Campobello", "Inman", "Lyman", "Greer", "Taylors",
               "Greenville", "Spartanburg", "Simpsonville", "Fountain Inn",
               "Travelers Rest"],
     # Leave empty to send the valuation form by the visitor's own email app.
