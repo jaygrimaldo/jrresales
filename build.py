@@ -152,8 +152,8 @@ EN = {
         ("One business day", "You get a written valuation by email. Fast enough to plan with, careful enough to trust."),
         ("Free, no strings", "No fee and no obligation. Use it to plan, to refinance, or just to know."),
     ],
-    "why_h2": "Why sellers work with me",
-    "why_p": "I've lived in Landrum for years and I work the whole Upstate, from the foothills down through Greenville and Spartanburg. I prefer working with sellers. That focus means I know what makes a listing move here, what buyers are paying, and where the landmines are between contract and closing.",
+    "why_h2": "Fewer clients. Full attention.",
+    "why_p": "I keep only a few clients at a time, and most of them are sellers. That's on purpose. When you list with me, you're not one file in a stack. I answer most calls when they come in. When I miss one, I call back soon. I answer texts right away, or very soon after.",
     "why_bullets": [
         "Honest pricing, even when it isn't what you hoped to hear.",
         "A negotiator on your side from the first offer to the closing table.",
@@ -185,7 +185,7 @@ EN = {
         "I pull the comparable sales and look at your home's details.",
         "You get a written valuation by email within one business day, with the sales I used so you can see the reasoning.",
     ],
-    "hv_note": "Unlike an automatic estimate, this valuation is prepared by a licensed South Carolina agent. That's why it takes a day instead of a second.",
+    "hv_note": "I take on only a few sellers at a time, so a real person prepares your valuation, not a computer. That person is me, a licensed South Carolina agent. That's why it takes a day instead of a second.",
     # listings
     "li_h1": "My listings",
     "li_empty": "Nothing on the market under my name right now. New listings show up here first, before the postcards go out.",
@@ -200,6 +200,12 @@ EN = {
     "ab_p3": "What separates me from other agents is my approach. I'm genuinely concerned with my client's best interest, and I'm relentless about solving whatever comes up between the signed contract and closing day. My clients tend to stay friends long after the keys change hands.",
     "ab_p4": "If you plan to sell and stay in the area, ask me how I can save you real money on your selling costs.",
     "ab_p5": "I am fluent in English and Spanish.",
+    "ab_why_h2": "Here's why my clients keep coming back",
+    "ab_why": [
+        "I keep only a few clients at a time, and most of them are sellers. That way every client gets my full attention.",
+        "Most of the buyers I work with are past clients, or friends and family they send my way.",
+        "I'm the only one who answers my phone. I answer most calls when they come in. Texts get a reply right away, or very soon after.",
+    ],
     "ab_facts_h2": "The details",
     "ab_facts": [
         ("Licensed", "South Carolina REALTOR®, " + "SC License #95641"),
@@ -215,7 +221,7 @@ EN = {
     "rv_btn": "Leave a review",
     # contact
     "ct_h1": "Get in touch",
-    "ct_p": "Call or text is fastest. Email works too. If I'm driving, I'll get back to you the same day.",
+    "ct_p": "Call or text me directly. I answer most calls live. Texts get a reply right away, or very soon after. You won't be passed to an assistant or a call center.",
     "ct_call": "Call or text",
     "ct_email": "Email",
     "ct_office": "Office",
@@ -242,8 +248,8 @@ ES = {
         ("Un día hábil", "Recibe una valuación por escrito en su correo. Rápida para planear, cuidadosa para confiar."),
         ("Gratis, sin compromiso", "Sin costo y sin obligación. Úsela para planear, para refinanciar, o solo para saber."),
     ],
-    "why_h2": "Por qué los vendedores trabajan conmigo",
-    "why_p": "Vivo en Landrum desde hace años y trabajo todo el Upstate, desde las montañas hasta Greenville y Spartanburg. Prefiero trabajar con vendedores. Por eso sé qué hace que una casa se venda aquí, cuánto están pagando los compradores, y dónde están los problemas entre el contrato y el cierre.",
+    "why_h2": "Pocos clientes. Toda mi atención.",
+    "why_p": "Trabajo con pocos clientes a la vez, y la mayoría son vendedores. Lo hago a propósito. Cuando me contrata para vender, usted no es un expediente más en la pila. Contesto la mayoría de las llamadas en el momento. Si pierdo una, le devuelvo la llamada pronto. Respondo los textos de inmediato, o muy poco después.",
     "why_bullets": [
         "Precios honestos, aunque no sea lo que esperaba oír.",
         "Un negociador de su lado desde la primera oferta hasta el cierre.",
@@ -274,7 +280,7 @@ ES = {
         "Busco las ventas comparables y reviso los detalles de su casa.",
         "Recibe una valuación por escrito en un día hábil, con las ventas que usé para que vea el razonamiento.",
     ],
-    "hv_note": "A diferencia de un estimado automático, esta valuación la prepara un agente con licencia en Carolina del Sur. Por eso toma un día y no un segundo.",
+    "hv_note": "Trabajo con pocos vendedores a la vez, así que su valuación la prepara una persona, no una computadora. Esa persona soy yo, un agente con licencia en Carolina del Sur. Por eso toma un día y no un segundo.",
     "li_h1": "Mis propiedades", "li_empty": "", "li_mls": "MLS", "li_btn": "Detalles y fotos",
     "so_h1": "Casas vendidas", "so_empty": "",
     "ab_h1": "Principios Antes De Ganancias",
@@ -283,6 +289,12 @@ ES = {
     "ab_p3": "Lo que me separa de otros agentes es mi forma de trabajar. Me importa de verdad el interés de mi cliente, y no descanso hasta resolver lo que surja entre la firma del contrato y el día del cierre. Mis clientes suelen seguir siendo amigos mucho después de recibir las llaves.",
     "ab_p4": "Si piensa vender y quedarse en la zona, pregúnteme cómo puedo ahorrarle dinero de verdad en los costos de venta.",
     "ab_p5": "Hablo inglés y español con fluidez.",
+    "ab_why_h2": "Por qué mis clientes regresan",
+    "ab_why": [
+        "Trabajo con pocos clientes a la vez, y la mayoría son vendedores. Así cada cliente recibe toda mi atención.",
+        "La mayoría de los compradores con quienes trabajo son clientes anteriores, o amigos y familiares que ellos me recomiendan.",
+        "Soy el único que contesta mi teléfono. Contesto la mayoría de las llamadas en el momento. Los textos reciben respuesta de inmediato, o muy poco después.",
+    ],
     "ab_facts_h2": "Los datos",
     "ab_facts": [
         ("Licencia", "REALTOR® de Carolina del Sur, SC License #95641"),
@@ -294,7 +306,7 @@ ES = {
     ],
     "rv_h1": "Opiniones", "rv_empty": "", "rv_btn": "",
     "ct_h1": "Contacto",
-    "ct_p": "Llamar o enviar un texto es lo más rápido. El correo también funciona. Si estoy manejando, le respondo el mismo día.",
+    "ct_p": "Llámeme o envíeme un texto directamente. Contesto la mayoría de las llamadas en el momento. Los textos reciben respuesta de inmediato, o muy poco después. No lo pasarán a un asistente ni a un centro de llamadas.",
     "ct_call": "Llamar o texto", "ct_email": "Correo", "ct_office": "Oficina",
     "ct_form_h2": "O envíe un mensaje",
     "ct_fields": {"name": "Su nombre", "email": "Correo electrónico", "phone": "Teléfono (opcional)",
@@ -654,7 +666,8 @@ def page_about(T):
   <p>{esc(T['ab_p1'])}</p><p>{esc(T['ab_p2'])}</p><p>{esc(T['ab_p3'])}</p><p>{esc(T['ab_p4'])}</p><p>{esc(T['ab_p5'])}</p>
   <a class="btn" href="home-value.html">{esc(T['hero_btn'])}</a></div>
 </div></section>
-<section class="alt"><div class="wrap"><h2>{esc(T['ab_facts_h2'])}</h2><div class="facts">{facts}</div></div></section>"""
+<section class="alt"><div class="wrap"><h2>{esc(T['ab_why_h2'])}</h2>{"".join(f"<p>{esc(x)}</p>" for x in T["ab_why"])}</div></section>
+<section><div class="wrap"><h2>{esc(T['ab_facts_h2'])}</h2><div class="facts">{facts}</div></div></section>"""
 
 def page_reviews(T):
     if REVIEWS:
