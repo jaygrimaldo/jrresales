@@ -186,7 +186,7 @@ EN = {
         "I pull the comparable sales and look at your home's details.",
         "You get a written valuation by email within one business day, with the sales I used so you can see the reasoning.",
     ],
-    "hv_note": "I take on only a few sellers at a time, so a real person prepares your valuation, not a computer. That person is me, a licensed South Carolina agent. That's why it takes a day instead of a second.",
+    "hv_note": "A real person prepares your valuation, not a computer. That person is me, a licensed South Carolina agent. That's why it takes a day instead of a second.",
     # listings
     "li_h1": "My listings",
     "li_empty": "Nothing on the market under my name right now. New listings show up here first, before the postcards go out.",
@@ -203,7 +203,7 @@ EN = {
     "ab_p5": "I am fluent in English and Spanish.",
     "ab_why_h2": "Here's why my clients keep coming back",
     "ab_why": [
-        "I keep only a few clients at a time, and most of them are sellers. That way every client gets my full attention.",
+        "I believe in quality over quantity. Every client gets my full attention, from the first call to the closing table. Most of them are sellers.",
         "Most of the buyers I work with are past clients, or friends and family they send my way.",
         "I'm the only one who answers my phone. I answer most calls when they come in. Texts get a reply right away, or very soon after.",
     ],
@@ -282,7 +282,7 @@ ES = {
         "Busco las ventas comparables y reviso los detalles de su casa.",
         "Recibe una valuación por escrito en un día hábil, con las ventas que usé para que vea el razonamiento.",
     ],
-    "hv_note": "Trabajo con pocos vendedores a la vez, así que su valuación la prepara una persona, no una computadora. Esa persona soy yo, un agente con licencia en Carolina del Sur. Por eso toma un día y no un segundo.",
+    "hv_note": "Su valuación la prepara una persona, no una computadora. Esa persona soy yo, un agente con licencia en Carolina del Sur. Por eso toma un día y no un segundo.",
     "li_h1": "Mis propiedades", "li_empty": "", "li_mls": "MLS", "li_btn": "Detalles y fotos",
     "so_h1": "Casas vendidas", "so_empty": "",
     "ab_h1": "Principios Antes De Ganancias",
@@ -293,7 +293,7 @@ ES = {
     "ab_p5": "Hablo inglés y español con fluidez.",
     "ab_why_h2": "Por qué mis clientes regresan",
     "ab_why": [
-        "Trabajo con pocos clientes a la vez, y la mayoría son vendedores. Así cada cliente recibe toda mi atención.",
+        "Creo en la calidad antes que la cantidad. Cada cliente recibe toda mi atención, desde la primera llamada hasta el cierre. La mayoría son vendedores.",
         "La mayoría de los compradores con quienes trabajo son clientes anteriores, o amigos y familiares que ellos me recomiendan.",
         "Soy el único que contesta mi teléfono. Contesto la mayoría de las llamadas en el momento. Los textos reciben respuesta de inmediato, o muy poco después.",
     ],
