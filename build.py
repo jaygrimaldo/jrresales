@@ -135,7 +135,7 @@ SOLD_MORE = [
     ("4 Bullard Ct", "Greer", "B", "$287,500"),                    # 06/2020
     ("3704 Ballenger Rd", "Greer", "S", "$224,000"),               # 06/2020
     ("3702 Ballenger Rd", "Greer", "S", "$210,000"),               # 06/2020
-    ("292 Pebble Springs Dr", "Taylors", "S", "Over $110,000", "repeat"),  # spring 2020 mobile home, listed 03/2020 at $110,500; J.R.: "sold for 110,000 something"
+    ("292 Pebble Springs Dr", "Taylors", "S", "$110,000", "repeat"),  # spring 2020 mobile home, listed 03/2020 at $110,500; J.R.: "sold for 110,000 something"
     ("304 Clemson Ave", "Greenville", "B", "$87,145"),             # 11/2019
     ("208 Buchanan Ridge Rd", "Taylors", "B", "$316,523"),         # 11/2019 new build, Lincoln Park lot 123 (DiStefano first deal)
     ("4 Twin Falls Dr", "Simpsonville", "B", "$162,000"),          # 10/2019
