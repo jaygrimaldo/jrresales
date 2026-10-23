@@ -131,7 +131,7 @@ SOLD_MORE = [
     ("2 Horseback Way", "Travelers Rest", "S", "$99,000", "repeat"),  # 11/2020
     ("307 Winding Willow Trl", "Taylors", "S", "$198,000"),        # 10/2020
     ("285 Pebble Springs Dr", "Taylors", "S", "$80,000"),          # 09/2020 manufactured home
-    ("330 N Buncombe Rd", "Greer", "SB", "$108,000"),              # 06/2020
+    ("330 N Buncombe Rd", "Greer", "SB", "$108,000"),              # 06/2020 J.R. represented one side and handled the other as a transaction broker (customer, not client)
     ("334 N Buncombe Rd", "Greer", "S", "$110,000"),               # 06/2020
     ("4 Bullard Ct", "Greer", "B", "$287,500"),                    # 06/2020
     ("3704 Ballenger Rd", "Greer", "S", "$224,000"),               # 06/2020
@@ -709,7 +709,7 @@ def page_sold():
     base = base.replace('<div class="cards">', story + '<div class="cards">', 1)
     if not SOLD_MORE:
         return base
-    sides = {"S": "Sold for the seller", "B": "Represented the buyer", "SB": "Represented both sides"}
+    sides = {"S": "Sold for the seller", "B": "Represented the buyer", "SB": "Helped both buyer and seller"}
     tags = {"repeat": "Repeat client", "referral": "Referred by a past client"}
     def row(r):
         a, c, sd, pr = r[:4]
