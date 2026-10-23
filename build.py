@@ -263,7 +263,7 @@ EN = {
     ],
     "ab_facts_h2": "The details",
     "ab_facts": [
-        ("Licensed", "South Carolina REALTOR®, " + "SC License #95641"),
+        ("Licensed", "South Carolina REALTOR® since 2016, SC License #95641"),  # licensed Feb 2016 (J.R.)
         ("Brokerage", BRAND["brokerage"]),
         ("Based in", "Landrum, SC"),
         ("Serving", ", ".join(SITE["areas"])),
@@ -353,7 +353,7 @@ ES = {
     ],
     "ab_facts_h2": "Los datos",
     "ab_facts": [
-        ("Licencia", "REALTOR® de Carolina del Sur, SC License #95641"),
+        ("Licencia", "REALTOR® de Carolina del Sur desde 2016, SC License #95641"),
         ("Corredora", BRAND["brokerage"]),
         ("Vivo en", "Landrum, SC"),
         ("Zona de servicio", ", ".join(SITE["areas"])),
