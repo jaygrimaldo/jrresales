@@ -66,7 +66,7 @@ LISTINGS = [
         "address": "207 Penrith Ct, Simpsonville, SC 29681",
         "price": "$352,999",
         "role": "Repeat client",  # Berhane bought 1220 Cyndis Ln with J.R. in 2025, then listed Penrith
-        "role_es": "Cliente que regresa",
+        "role_es": "Cliente previo",
         "line": "Investor opportunity: leased through May 31, 2027, so it earns rent from day one. Four bedrooms, two and a half baths, about 1,980 sq ft on a cul-de-sac in Villages at Windsor. New roof in late 2024.",
         "line_es": "Oportunidad para inversionistas: rentada hasta el 31 de mayo de 2027, así que genera renta desde el primer día. Cuatro recámaras, dos baños y medio, unos 1,980 pies cuadrados en una calle cerrada en Villages at Windsor. Techo nuevo a finales de 2024.",
         "mls": "Greenville MLS 1567172",
@@ -81,25 +81,25 @@ LISTINGS = [
 SOLD = [
     {"address": "248 Page Creek Blvd, Landrum, SC 29356", "price": "Sold for $392,500",
      "role": "Sold for the seller \u00b7 Repeat client",
-     "role_es": "Vendida para el vendedor \u00b7 Cliente que regresa",
+     "role_es": "Representé al vendedor \u00b7 Cliente previo",
      "line": "Three bedrooms, two baths in Landrum. I helped these same clients buy it seven years earlier.",
      "line_es": "Tres recámaras y dos baños en Landrum. Siete años antes, ayudé a estos mismos clientes a comprarla.",
      "photo": "248-page-creek-blvd.jpg"},
     {"address": "420 Cloverdale Ln, Simpsonville, SC 29681", "price": "Sold for $175,000",
      "role": "Sold for the seller \u00b7 Referred by a past client",  # Willimon, referred by her son Russell Beaver
-     "role_es": "Vendida para el vendedor \u00b7 Recomendada por un cliente anterior",
+     "role_es": "Representé al vendedor \u00b7 Recomendado por un cliente previo",
      "line": "Three bedrooms, one and a half baths in Simpsonville.",
      "line_es": "Tres recámaras y un baño y medio en Simpsonville.",
      "photo": "420-cloverdale-ln.jpg"},
     {"address": "140 Belshire Dr, Greer, SC 29650", "price": "Sold for $395,000",
      "role": "Sold for the seller \u00b7 Repeat client",
-     "role_es": "Vendida para el vendedor \u00b7 Cliente que regresa",
+     "role_es": "Representé al vendedor \u00b7 Cliente previo",
      "line": "Three bedrooms, two and a half baths in Greer. I helped these same clients buy it two years earlier.",
      "line_es": "Tres recámaras y dos baños y medio en Greer. Dos años antes, ayudé a estos mismos clientes a comprarla.",
      "photo": "140-belshire-dr.jpg"},  # J.R.'s own listing photo 1 (Greenville MLS 1535838), closed 11/2024
     {"address": "304 Talbert Trail, Landrum, SC 29356", "price": "Sold for $290,000",
      "role": "Represented the buyer \u00b7 Repeat client",  # Bests, first bought Page Creek with J.R. in 2018
-     "role_es": "Representé al comprador \u00b7 Cliente que regresa",
+     "role_es": "Representé al comprador \u00b7 Cliente previo",
      "line": "Three bedrooms, two baths in Landrum.",
      "line_es": "Tres recámaras y dos baños en Landrum.",
      "photo": "304-talbert-trail.jpg"},  # owner's own photo, sent to J.R. 10/22/2026
@@ -191,18 +191,25 @@ REPEAT_FAMILIES = 10
 
 REVIEWS = [
     {"quote": "Had a great first home buyers experience with this agent. He worked on my time frame and went over and above to get things going. I just closed on my first house and I couldn't have picked a better realtor! Thanks JR for all of your help! UPDATE: 4 years later I've chosen JR to help me sell my home. It's been an excellent experience. He uses a really neat drone for professional pictures for the listing. He is very prompt with every detail of the process. I'm very pleased and couldn't ask for a better realtor.",
+     "quote_es": 'Tuve una gran experiencia como compradora de primera vivienda con este agente. Trabajó según mis tiempos y fue más allá para que todo avanzara. Acabo de cerrar la compra de mi primera casa y no pude haber elegido un mejor agente. ¡Gracias JR por toda tu ayuda! ACTUALIZACIÓN: 4 años después, elegí a JR para ayudarme a vender mi casa. Ha sido una experiencia excelente. Usa un dron muy bueno para tomar fotos profesionales de la propiedad. Es muy puntual con cada detalle del proceso. Estoy muy satisfecha y no podría pedir un mejor agente.',
      "name": "Brooke H.", "where": "bought, then sold"},
     {"quote": "JR did so much for me and my husband. JR was very punctual, able to be reached, willing to go the extra mile and was cheerful all the way through. We bought and sold and bought again from JR and the timing was like none other. It happened on same day where he told us bf closing of our new home that our old sold. So on the same day.. it was an awesome experience. He\u2019s very hard working and will go the extra mile (s)!!! I will not use another realtor as long as JR is around",
+     "quote_es": 'JR hizo muchísimo por mí y por mi esposo. JR fue muy puntual, fácil de localizar, dispuesto a hacer un esfuerzo extra y de buen ánimo de principio a fin. Compramos, vendimos y volvimos a comprar con JR, y la coordinación fue como ninguna otra. Pasó el mismo día: antes del cierre de nuestra casa nueva nos avisó que la anterior ya se había vendido. Así que el mismo día... fue una experiencia increíble. Es muy trabajador y hace el esfuerzo extra (¡y más!). No usaré a otro agente mientras JR esté disponible.',
      "name": "Kerri H.", "where": "Google review"},
     {"quote": "J.R. Grimaldo helped my family more than I ever imagined and could ever repay. He not only got us into our dream home, he sold our home and my mother's home. He took care of all the details to make the selling process a breeze. J.R. was always there whenever we had questions or concerns. We will continue our relationship with J.R. for many years to come. We recommend J.R. to ANYONE looking to buy or sell.",
+     "quote_es": 'J.R. Grimaldo ayudó a mi familia más de lo que jamás imaginé y más de lo que podría devolverle. No solo nos consiguió la casa de nuestros sueños, también vendió nuestra casa y la casa de mi madre. Se encargó de todos los detalles para que el proceso de venta fuera muy sencillo. J.R. siempre estuvo ahí cuando tuvimos preguntas o dudas. Seguiremos nuestra relación con J.R. por muchos años. Recomendamos a J.R. a CUALQUIERA que quiera comprar o vender.',
      "name": "Google reviewer", "where": "bought and sold"},
     {"quote": "A really great agent, if that is what you are searching for :) JR is a fantastic agent. He is very helpful and positive, as well as fair to everyone involved in the process. I always felt like we were in good hands with JR. As an agent he is always available, getting back to you if you have any questions or concerns in a prompt manner. I highly recommend JR as an agent. In our case he did take on a situation, manufactured homes in a place where residents don't actually own the land -- but do own their home -- despite not being that familiar with the arrangement. He caught on fast, was willing to tackle our situation and we had success. I guess in a nutshell JR takes a lot of the stress of selling or buying a home out of the process.",
+     "quote_es": 'Un agente realmente excelente, si es eso lo que busca :) JR es un agente fantástico. Es muy servicial y positivo, y además justo con todos los involucrados en el proceso. Siempre sentí que estábamos en buenas manos con JR. Como agente siempre está disponible y responde pronto a cualquier pregunta o inquietud. Recomiendo mucho a JR como agente. En nuestro caso tomó una situación poco común: casas prefabricadas en un lugar donde los residentes no son dueños del terreno, pero sí de su casa, aunque no conocía bien ese tipo de arreglo. Aprendió rápido, estuvo dispuesto a tomar nuestro caso y tuvimos éxito. En resumen, JR le quita mucho del estrés a vender o comprar una casa.',
      "name": "Peter H.", "where": ""},
     {"quote": "I just wanted to thank you again for helping us so much! I was so against trying to sell our house until Rusty and Sarah sold and then \"poof!!\", they were moving. I truly appreciate you and what you did for us. God makes things happen at the right time and we couldn't be happier that we got everything completed in time for Mom to enjoy it.",
+     "quote_es": 'Solo quería agradecerle otra vez por ayudarnos tanto. Yo estaba muy en contra de intentar vender nuestra casa, hasta que Rusty y Sarah vendieron la suya y, de pronto, ya se mudaban. De verdad le agradezco lo que hizo por nosotros. Dios hace que las cosas pasen en el momento correcto, y no podríamos estar más contentos de haber terminado todo a tiempo para que mamá lo disfrutara.',
      "name": "Darrell K.", "where": "seller"},
     {"quote": "JR was an excellent realtor to work with. Always on time, informative, professional and easy to communicate with. We had a great experience and would definitely recommend to our family and friends.",
+     "quote_es": 'JR fue un agente excelente con quien trabajar. Siempre puntual, informativo, profesional y fácil de comunicarse. Tuvimos una gran experiencia y sin duda lo recomendaríamos a nuestra familia y amigos.',
      "name": "Slava S.", "where": ""},
     {"quote": "My wife and I were very pleased with J.R. Grimaldo's professionalism. He certainly is a credit to himself and his company!",
+     "quote_es": 'Mi esposa y yo quedamos muy satisfechos con el profesionalismo de J.R. Grimaldo. Sin duda es un orgullo para él mismo y para su empresa.',
      "name": "Jeff D.", "where": "Google review"},
 ]
 
@@ -378,8 +385,8 @@ ES = {
     "so_stats2": "familias han vuelto a trabajar conmigo.",
     "so_see_all": "Ver las {n} ventas",
     "so_fine": "Las más recientes primero. Las cuatro casas de arriba están incluidas en el total.",
-    "so_sides": {"S": "Vendida para el vendedor", "B": "Representé al comprador", "SB": "Ayudé al comprador y al vendedor"},
-    "so_tags": {"repeat": "Cliente que regresa", "referral": "Recomendado por un cliente anterior"},
+    "so_sides": {"S": "Representé al vendedor", "B": "Representé al comprador", "SB": "Ayudé al comprador y al vendedor"},
+    "so_tags": {"repeat": "Cliente previo", "referral": "Recomendado por un cliente previo"},
     "ab_h1": "Principios Antes De Ganancias",
     "ab_p1": "Honestidad e integridad es lo que puede esperar cuando me contrata. Ayudo a vender y comprar casas en todo el Upstate, y vivo en Landrum.",
     "ab_p2": "Como su asesor de confianza, le doy una lectura clara de su situación, lo guío en el proceso, y quito los obstáculos antes de que sean problemas. Tendrá un negociador hábil trabajando para usted en cada paso.",
@@ -402,7 +409,7 @@ ES = {
         ("Idiomas", "Inglés y español"),
     ],
     "rv_h1": "Opiniones",
-    "rv_note": "Estas opiniones aparecen en inglés, tal como las escribieron mis clientes.",
+    "rv_note": "Traducidas del inglés. Las opiniones originales están en la versión en inglés de esta página.",
     "rv_empty": "Estoy reuniendo opiniones de clientes. Si ha trabajado conmigo, le agradecería unas palabras.",
     "rv_btn": "Dejar una opinión",
     "rv_ask": "¿Trabajó conmigo?",
@@ -831,7 +838,7 @@ def _where(w, T):
 def page_reviews(T):
     if REVIEWS:
         note = f'<p class="fine">{esc(T["rv_note"])}</p>' if T.get("rv_note") else ""
-        body = note + "".join(f'<blockquote lang="en"><p>{esc(r["quote"])}</p><footer>{esc(r["name"])}{(", "+esc(_where(r["where"], T))) if r.get("where") else ""}</footer></blockquote>' for r in REVIEWS)
+        body = note + "".join(f'<blockquote><p>{esc(r["quote_es"] if T["lang"] == "es" and r.get("quote_es") else r["quote"])}</p><footer>{esc(r["name"])}{(", "+esc(_where(r["where"], T))) if r.get("where") else ""}</footer></blockquote>' for r in REVIEWS)
         body += f'<p>{esc(T["rv_ask"])} <a class="btn quiet" href="{SITE["review_page"]}">{esc(T["rv_btn"])}</a></p>'
     else:
         body = f'<div class="empty"><p>{esc(T["rv_empty"])}</p><a class="btn quiet" href="{SITE["review_page"]}">{esc(T["rv_btn"])}</a></div>'
