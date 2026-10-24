@@ -57,6 +57,7 @@ LISTINGS = [
         "address": "300 Colony Rd, Travelers Rest, SC 29690",
         "price": "$309,999",
         "line": "Full brick ranch on a corner lot in Points North, built in 1978. Three bedrooms, two full baths, all on one level. USDA area: qualified buyers may put $0 down.",
+        "line_es": "Casa de ladrillo de un solo nivel en lote de esquina en Points North, construida en 1978. Tres recámaras y dos baños completos. Zona USDA: los compradores que califiquen pueden comprar con $0 de enganche.",
         "mls": "Greenville MLS 1605021",
         "link": "https://jrgrimaldo.northgroupre.com/property/63-1605021-300-colony-road-travelers-rest-SC-29690",
         "photo": "300-colony-rd.jpg",
@@ -65,7 +66,9 @@ LISTINGS = [
         "address": "207 Penrith Ct, Simpsonville, SC 29681",
         "price": "$352,999",
         "role": "Repeat client",  # Berhane bought 1220 Cyndis Ln with J.R. in 2025, then listed Penrith
+        "role_es": "Cliente que regresa",
         "line": "Investor opportunity: leased through May 31, 2027, so it earns rent from day one. Four bedrooms, two and a half baths, about 1,980 sq ft on a cul-de-sac in Villages at Windsor. New roof in late 2024.",
+        "line_es": "Oportunidad para inversionistas: rentada hasta el 31 de mayo de 2027, así que genera renta desde el primer día. Cuatro recámaras, dos baños y medio, unos 1,980 pies cuadrados en una calle cerrada en Villages at Windsor. Techo nuevo a finales de 2024.",
         "mls": "Greenville MLS 1567172",
         "link": "https://jrgrimaldo.northgroupre.com/property/63-1567172-207-penrith-court-simpsonville-SC-29681",
         "photo": "207-penrith-ct.jpg",
@@ -78,19 +81,27 @@ LISTINGS = [
 SOLD = [
     {"address": "248 Page Creek Blvd, Landrum, SC 29356", "price": "Sold for $392,500",
      "role": "Sold for the seller \u00b7 Repeat client",
+     "role_es": "Vendida para el vendedor \u00b7 Cliente que regresa",
      "line": "Three bedrooms, two baths in Landrum. I helped these same clients buy it seven years earlier.",
+     "line_es": "Tres recámaras y dos baños en Landrum. Siete años antes, ayudé a estos mismos clientes a comprarla.",
      "photo": "248-page-creek-blvd.jpg"},
     {"address": "420 Cloverdale Ln, Simpsonville, SC 29681", "price": "Sold for $175,000",
      "role": "Sold for the seller \u00b7 Referred by a past client",  # Willimon, referred by her son Russell Beaver
+     "role_es": "Vendida para el vendedor \u00b7 Recomendada por un cliente anterior",
      "line": "Three bedrooms, one and a half baths in Simpsonville.",
+     "line_es": "Tres recámaras y un baño y medio en Simpsonville.",
      "photo": "420-cloverdale-ln.jpg"},
     {"address": "140 Belshire Dr, Greer, SC 29650", "price": "Sold for $395,000",
      "role": "Sold for the seller \u00b7 Repeat client",
+     "role_es": "Vendida para el vendedor \u00b7 Cliente que regresa",
      "line": "Three bedrooms, two and a half baths in Greer. I helped these same clients buy it two years earlier.",
+     "line_es": "Tres recámaras y dos baños y medio en Greer. Dos años antes, ayudé a estos mismos clientes a comprarla.",
      "photo": "140-belshire-dr.jpg"},  # J.R.'s own listing photo 1 (Greenville MLS 1535838), closed 11/2024
     {"address": "304 Talbert Trail, Landrum, SC 29356", "price": "Sold for $290,000",
      "role": "Represented the buyer \u00b7 Repeat client",  # Bests, first bought Page Creek with J.R. in 2018
+     "role_es": "Representé al comprador \u00b7 Cliente que regresa",
      "line": "Three bedrooms, two baths in Landrum.",
+     "line_es": "Tres recámaras y dos baños en Landrum.",
      "photo": "304-talbert-trail.jpg"},  # owner's own photo, sent to J.R. 10/22/2026
 ]
 
@@ -253,6 +264,16 @@ EN = {
     "li_btn": "Details and photos",
     "so_h1": "Sold homes",
     "so_empty": "Recent sales will be listed here with their final prices. Ask me about any of them.",
+    "so_intro": "Most of my business comes from past clients and the people they send my way. Here are recent sales, and which side I represented.",
+    "so_story_h2": "Four homes, one agent.",
+    "so_story": "C. and K. first bought a home with me in 2018. Since then they've come back three more times, in 2019, 2023, and 2024. Each time I sold the home they had and helped them buy the next one. Twice, we closed on the sale and the purchase on the same day.",
+    "so_more_h2": "Every home I've helped sell and buy",
+    "so_stats1": "homes sold and bought since 2016.",
+    "so_stats2": "families have come back to work with me again.",
+    "so_see_all": "See all {n} sales",
+    "so_fine": "Newest first. The four homes above are included in the count.",
+    "so_sides": {"S": "Sold for the seller", "B": "Represented the buyer", "SB": "Helped both buyer and seller"},
+    "so_tags": {"repeat": "Repeat client", "referral": "Referred by a past client"},
     # about
     "ab_h1": "Principles Before Profits",
     "ab_p1": "Honesty and integrity are what you can expect when you hire me. I help people sell and buy homes across the Upstate, and I'm based in Landrum.",
@@ -279,6 +300,8 @@ EN = {
     "rv_h1": "What clients say",
     "rv_empty": "Client reviews are being gathered now. If you've worked with me, I'd be grateful for a few words.",
     "rv_btn": "Leave a review",
+    "rv_ask": "Worked with me?",
+    "rv_note": "",
     # contact
     "ct_h1": "Get in touch",
     "ct_p": "Call or text me directly. I answer most calls live. Texts get a reply right away, or very soon after. You won't be passed to an assistant or a call center.",
@@ -295,8 +318,8 @@ EN = {
 ES = {
     "lang": "es", "dir_prefix": "es/", "other_lang": "en", "other_label": "English",
     "nav": [("index.html", "Inicio"), ("home-value.html", "¿Cuánto vale mi casa?"),
-            ("../listings.html", "Mis propiedades"), ("../sold.html", "Casas vendidas"),
-            ("about.html", "Sobre J.R."), ("../reviews.html", "Opiniones"),
+            ("listings.html", "Mis propiedades"), ("sold.html", "Casas vendidas"),
+            ("about.html", "Sobre J.R."), ("reviews.html", "Opiniones"),
             ("contact.html", "Contácteme")],
     "search_label": "Buscar casas",
     "hero_h1": "¿Piensa vender su casa en el Upstate? Empiece con un número real.",
@@ -342,8 +365,21 @@ ES = {
         "Recibe una valuación por escrito en un día hábil, con las ventas que usé para que vea el razonamiento.",
     ],
     "hv_note": "Yo mismo preparo cada valuación. Sin computadora, sin asistente. Soy REALTOR® con licencia en Carolina del Sur. Por eso toma un día y no un segundo.",
-    "li_h1": "Mis propiedades", "li_empty": "", "li_mls": "MLS", "li_btn": "Detalles y fotos",
-    "so_h1": "Casas vendidas", "so_empty": "",
+    "li_h1": "Mis propiedades",
+    "li_empty": "Por ahora no tengo propiedades en venta a mi nombre. Las nuevas aparecen aquí primero, antes de que salgan las postales.",
+    "li_mls": "MLS", "li_btn": "Detalles y fotos",
+    "so_h1": "Casas vendidas",
+    "so_empty": "Las ventas recientes aparecerán aquí con su precio final. Pregúnteme por cualquiera de ellas.",
+    "so_intro": "La mayor parte de mi trabajo viene de clientes anteriores y de las personas que ellos me recomiendan. Aquí hay ventas recientes, y a qué lado representé.",
+    "so_story_h2": "Cuatro casas, un solo agente.",
+    "so_story": "C. y K. compraron su primera casa conmigo en 2018. Desde entonces han vuelto tres veces más, en 2019, 2023 y 2024. Cada vez vendí la casa que tenían y los ayudé a comprar la siguiente. Dos veces cerramos la venta y la compra el mismo día.",
+    "so_more_h2": "Todas las casas que he ayudado a vender y comprar",
+    "so_stats1": "casas vendidas y compradas desde 2016.",
+    "so_stats2": "familias han vuelto a trabajar conmigo.",
+    "so_see_all": "Ver las {n} ventas",
+    "so_fine": "Las más recientes primero. Las cuatro casas de arriba están incluidas en el total.",
+    "so_sides": {"S": "Vendida para el vendedor", "B": "Representé al comprador", "SB": "Ayudé al comprador y al vendedor"},
+    "so_tags": {"repeat": "Cliente que regresa", "referral": "Recomendado por un cliente anterior"},
     "ab_h1": "Principios Antes De Ganancias",
     "ab_p1": "Honestidad e integridad es lo que puede esperar cuando me contrata. Ayudo a vender y comprar casas en todo el Upstate, y vivo en Landrum.",
     "ab_p2": "Como su asesor de confianza, le doy una lectura clara de su situación, lo guío en el proceso, y quito los obstáculos antes de que sean problemas. Tendrá un negociador hábil trabajando para usted en cada paso.",
@@ -365,7 +401,11 @@ ES = {
         ("Miembro", "Greater Greenville Association of REALTORS®, South Carolina Association of REALTORS®, National Association of REALTORS®"),
         ("Idiomas", "Inglés y español"),
     ],
-    "rv_h1": "Opiniones", "rv_empty": "", "rv_btn": "",
+    "rv_h1": "Opiniones",
+    "rv_note": "Estas opiniones aparecen en inglés, tal como las escribieron mis clientes.",
+    "rv_empty": "Estoy reuniendo opiniones de clientes. Si ha trabajado conmigo, le agradecería unas palabras.",
+    "rv_btn": "Dejar una opinión",
+    "rv_ask": "¿Trabajó conmigo?",
     "ct_h1": "Contacto",
     "ct_p": "Llámeme o envíeme un texto directamente. Contesto la mayoría de las llamadas en el momento. Los textos reciben respuesta de inmediato, o muy poco después. No lo pasarán a un asistente ni a un centro de llamadas.",
     "ct_call": "Llamar o texto", "ct_email": "Correo", "ct_office": "Oficina",
@@ -676,10 +716,16 @@ def card(it, T):
     else:
         ph = f'<img src="{"../" if T["dir_prefix"] else ""}assets/{it["photo"]}" alt="{esc(it["address"])}">' if it.get("photo") else "Photo coming"
         phdiv = f'<div class="ph">{ph}</div>'
-    role = f'<p class="role">{esc(it["role"])}</p>' if it.get("role") else ""
+    es = T["lang"] == "es"
+    role_t = it.get("role_es") if es and it.get("role_es") else it.get("role")
+    line_t = it.get("line_es") if es and it.get("line_es") else it.get("line", "")
+    price_t = it["price"]
+    if es and price_t.startswith("Sold for "):
+        price_t = "Vendida en " + price_t[len("Sold for "):]
+    role = f'<p class="role">{esc(role_t)}</p>' if role_t else ""
     return f"""<article class="card">{phdiv}<div class="body">{role}
-<p class="price">{esc(it['price'])}</p><p class="addr-l">{esc(it['address'])}</p>
-<p>{esc(it.get('line',''))}</p>{('<p class="mls">'+esc(it['mls'])+'</p>') if it.get('mls') else ''}
+<p class="price">{esc(price_t)}</p><p class="addr-l">{esc(it['address'])}</p>
+<p>{esc(line_t)}</p>{('<p class="mls">'+esc(it['mls'])+'</p>') if it.get('mls') else ''}
 {('<a class="btn quiet" href="'+it['link']+'">'+esc(T['li_btn'])+'</a>') if it.get('link') else ''}</div></article>"""
 
 def page_home(T):
@@ -736,32 +782,30 @@ def page_list(T, h1, items, empty, intro=""):
     lead = f'<p>{esc(intro)}</p>' if (intro and items) else ""
     return f'<section><div class="wrap"><h1>{esc(h1)}</h1>{lead}{body}</div></section>'
 
-def page_sold():
-    base = page_list(EN, EN["so_h1"], SOLD, EN["so_empty"], "Most of my business comes from past clients and the people they send my way. Here are recent sales, and which side I represented.")
-    story = ('<div class="note story"><h2>Four homes, one agent.</h2>'
-             '<p>C. and K. first bought a home with me in 2018. Since then they\'ve come back three more times, '
-             'in 2019, 2023, and 2024. Each time I sold the home they had and helped them buy the next one. '
-             'Twice, we closed on the sale and the purchase on the same day.</p></div>')
+def page_sold(T=EN):
+    base = page_list(T, T["so_h1"], SOLD, T["so_empty"], T["so_intro"])
+    story = (f'<div class="note story"><h2>{esc(T["so_story_h2"])}</h2>'
+             f'<p>{esc(T["so_story"])}</p></div>')
     # Chris Roberts and Kerri Hogan. J.R., 10/23/2026: husband's initial first; the
     # 2019 and 2023 moves closed the same day, the 2024 move did not.
     base = base.replace('<div class="cards">', story + '<div class="cards">', 1)
     if not SOLD_MORE:
         return base
-    sides = {"S": "Sold for the seller", "B": "Represented the buyer", "SB": "Helped both buyer and seller"}
-    tags = {"repeat": "Repeat client", "referral": "Referred by a past client"}
+    sides = T["so_sides"]
+    tags = T["so_tags"]
     def row(r):
         a, c, sd, pr = r[:4]
         t = tags.get(r[4]) if len(r) > 4 else None
-        tag = f' <span class="rep">{t}</span>' if t else ""
+        tag = f' <span class="rep">{esc(t)}</span>' if t else ""
         return (f'<li><span class="a">{esc(a)}, <span class="c">{esc(c)}</span></span>'
-                f'<span class="sd">{sides[sd]}{tag}</span><span class="pr">{esc(pr)}</span></li>')
+                f'<span class="sd">{esc(sides[sd])}{tag}</span><span class="pr">{esc(pr)}</span></li>')
     rows = "".join(row(r) for r in SOLD_MORE)
     n = len(SOLD) + len(SOLD_MORE)
-    more = (f'<div class="more-sold"><h2>Every home I\'ve helped sell and buy</h2>'
-            f'<p class="stats"><b>{n}</b> homes sold and bought since 2016.<br>'
-            f'<b>{REPEAT_FAMILIES}</b> families have come back to work with me again.</p>'
-            f'<details class="all-sales"><summary>See all {n} sales</summary>'
-            f'<p class="fine">Newest first. The four homes above are included in the count.</p>'
+    more = (f'<div class="more-sold"><h2>{esc(T["so_more_h2"])}</h2>'
+            f'<p class="stats"><b>{n}</b> {esc(T["so_stats1"])}<br>'
+            f'<b>{REPEAT_FAMILIES}</b> {esc(T["so_stats2"])}</p>'
+            f'<details class="all-sales"><summary>{esc(T["so_see_all"].format(n=n))}</summary>'
+            f'<p class="fine">{esc(T["so_fine"])}</p>'
             f'<ul class="sold-list">{rows}</ul></details></div>')
     i = base.rfind("</div></section>")
     return base[:i] + more + base[i:]
@@ -779,10 +823,16 @@ def page_about(T):
 <section class="alt"><div class="wrap"><h2>{esc(T['ab_why_h2'])}</h2>{"".join(f"<p>{esc(x)}</p>" for x in T["ab_why"])}</div></section>
 <section><div class="wrap"><h2>{esc(T['ab_facts_h2'])}</h2><div class="facts">{facts}</div></div></section>"""
 
+_WHERE_ES = {"bought, then sold": "compró, luego vendió", "Google review": "opinión en Google",
+             "bought and sold": "compró y vendió", "seller": "vendedor"}
+def _where(w, T):
+    return _WHERE_ES.get(w, w) if T["lang"] == "es" else w
+
 def page_reviews(T):
     if REVIEWS:
-        body = "".join(f'<blockquote><p>{esc(r["quote"])}</p><footer>{esc(r["name"])}{(", "+esc(r["where"])) if r.get("where") else ""}</footer></blockquote>' for r in REVIEWS)
-        body += f'<p>Worked with me? <a class="btn quiet" href="{SITE["review_page"]}">Leave a review</a></p>'
+        note = f'<p class="fine">{esc(T["rv_note"])}</p>' if T.get("rv_note") else ""
+        body = note + "".join(f'<blockquote lang="en"><p>{esc(r["quote"])}</p><footer>{esc(r["name"])}{(", "+esc(_where(r["where"], T))) if r.get("where") else ""}</footer></blockquote>' for r in REVIEWS)
+        body += f'<p>{esc(T["rv_ask"])} <a class="btn quiet" href="{SITE["review_page"]}">{esc(T["rv_btn"])}</a></p>'
     else:
         body = f'<div class="empty"><p>{esc(T["rv_empty"])}</p><a class="btn quiet" href="{SITE["review_page"]}">{esc(T["rv_btn"])}</a></div>'
     return f'<section><div class="wrap"><h1>{esc(T["rv_h1"])}</h1>{body}</div></section>'
@@ -992,7 +1042,7 @@ def build():
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
     urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "contact.html",
-            "es/index.html", "es/home-value.html", "es/about.html", "es/contact.html"] + [k + ".html" for k in TOWN_ORDER]
+            "es/index.html", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/contact.html"] + [k + ".html" for k in TOWN_ORDER]
     import datetime as _dt
     today = _dt.date.today().isoformat()
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -1014,17 +1064,20 @@ def build():
     DE = {
         "index.html": "¿Piensa vender en el Upstate? J.R. Grimaldo, REALTOR® desde 2016, le prepara una valuación gratis por escrito en un día hábil. Hablo español.",
         "home-value.html": "¿Cuánto vale su casa en el Upstate de Carolina del Sur? J.R. Grimaldo le prepara una valuación gratis por escrito, con las ventas recientes cerca de usted, en un día hábil.",
+        "listings.html": "Casas en venta ahora con J.R. Grimaldo, REALTOR®, en el Upstate de Carolina del Sur. Hablo español.",
+        "sold.html": f"{n_sales} casas vendidas y compradas desde 2016 en Greer, Taylors, Greenville, Simpsonville, Inman, Landrum y todo el Upstate de Carolina del Sur. {REPEAT_FAMILIES} familias han vuelto a trabajar con J.R.",
         "about.html": "Conozca a J.R. Grimaldo, REALTOR® de Carolina del Sur desde 2016, con base en Landrum. Calidad antes que cantidad y respuestas rápidas. Hablo español.",
+        "reviews.html": "Lo que dicen los clientes de comprar y vender con J.R. Grimaldo, REALTOR®, en el Upstate de Carolina del Sur.",
         "contact.html": "Llame o envíe un texto a J.R. Grimaldo al 864-381-2326. Contesta la mayoría de las llamadas en el momento. Bienes raíces en Landrum y el Upstate.",
     }
     # English: (title, body, language switch, Spanish twin or None)
     pages = {
         "index.html": (t, page_home(EN), "es/index.html", "index.html"),
         "home-value.html": ("What's My Home Worth? Free Home Valuation – " + SITE["agent"], page_home_value(EN), "es/home-value.html", "home-value.html"),
-        "listings.html": ("My Listings – " + SITE["agent"] + ", REALTOR®", page_list(EN, EN["li_h1"], LISTINGS, EN["li_empty"]), "es/index.html", None),
-        "sold.html": ("Sold Homes – " + SITE["agent"] + ", REALTOR®", page_sold(), "es/index.html", None),
+        "listings.html": ("My Listings – " + SITE["agent"] + ", REALTOR®", page_list(EN, EN["li_h1"], LISTINGS, EN["li_empty"]), "es/listings.html", "listings.html"),
+        "sold.html": ("Sold Homes – " + SITE["agent"] + ", REALTOR®", page_sold(EN), "es/sold.html", "sold.html"),
         "about.html": ("About J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(EN), "es/about.html", "about.html"),
-        "reviews.html": ("Client Reviews – " + SITE["agent"] + ", REALTOR®", page_reviews(EN), "es/index.html", None),
+        "reviews.html": ("Client Reviews – " + SITE["agent"] + ", REALTOR®", page_reviews(EN), "es/reviews.html", "reviews.html"),
         "contact.html": ("Contact J.R. Grimaldo, REALTOR®", page_contact(EN), "es/contact.html", "contact.html"),
     }
     for name, (title, body, sw, alt) in pages.items():
@@ -1036,7 +1089,10 @@ def build():
     es_pages = {
         "index.html": ("J.R. Grimaldo, REALTOR® – Venda su casa en el Upstate de Carolina del Sur", page_home(ES), "../index.html"),
         "home-value.html": ("¿Cuánto vale mi casa? Valuación gratis – " + SITE["agent"], page_home_value(ES), "../home-value.html"),
+        "listings.html": ("Mis propiedades – " + SITE["agent"] + ", REALTOR®", page_list(ES, ES["li_h1"], LISTINGS, ES["li_empty"]), "../listings.html"),
+        "sold.html": ("Casas vendidas – " + SITE["agent"] + ", REALTOR®", page_sold(ES), "../sold.html"),
         "about.html": ("Sobre J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(ES), "../about.html"),
+        "reviews.html": ("Opiniones de clientes – " + SITE["agent"] + ", REALTOR®", page_reviews(ES), "../reviews.html"),
         "contact.html": ("Contácteme – " + SITE["agent"] + ", REALTOR®", page_contact(ES), "../contact.html"),
     }
     for name, (title, body, sw) in es_pages.items():
