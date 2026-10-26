@@ -218,7 +218,7 @@ EN = {
     "nav": [("index.html", "Home"), ("home-value.html", "What's My Home Worth"),
             ("listings.html", "My Listings"), ("sold.html", "Sold Homes"),
             ("about.html", "About J.R."), ("reviews.html", "Reviews"),
-            ("contact.html", "Contact Me")],
+            ("free-books.html", "Free Books"), ("contact.html", "Contact Me")],
     "search_label": "Search Homes",
     "hero_h1": "Thinking about selling your Upstate home? Start with a real number.",
     "hero_p": "Tell me the address. Within one business day, I'll prepare your valuation myself. I look at your home and the recent sales around it. Not a computer guess.",
@@ -318,6 +318,22 @@ EN = {
     "ct_form_h2": "Or send a note",
     "ct_fields": {"name": "Your name", "email": "Email", "phone": "Phone (optional)",
                   "message": "How can I help?", "submit": "Send"},
+    # free books
+    "bk_h1": "Free books on selling and buying a home",
+    "bk_p": "These are my books. Pick the ones you want and I'll mail them to you. Free. No cost, no obligation, and no sales call.",
+    "bk_pick": "Which books would you like? Check one or more.",
+    "bk_fields": {"name": "Your name", "email": "Email", "phone": "Phone (optional)",
+                  "street": "Street address", "city": "City", "state": "State", "zip": "ZIP",
+                  "submit": "Mail me my books",
+                  "fine": "Your information goes only to J.R. It is never sold or shared.",
+                  "ok": "Thank you. Your books are on the way. Watch your mailbox over the next week or two.",
+                  "need": "Please check at least one book."},
+    "bk_after_h2": "What happens next",
+    "bk_after": [
+        "Your request lands in my inbox.",
+        "I put your books in the mail, usually within a few days.",
+        "That's it. If you ever want to talk about your home, call or text me. If not, enjoy the books.",
+    ],
     "footer_rights": "All rights reserved.",
     "footer_eho": "Equal Housing Opportunity.",
 }
@@ -327,7 +343,7 @@ ES = {
     "nav": [("index.html", "Inicio"), ("home-value.html", "¿Cuánto vale mi casa?"),
             ("listings.html", "Mis propiedades"), ("sold.html", "Casas vendidas"),
             ("about.html", "Sobre J.R."), ("reviews.html", "Opiniones"),
-            ("contact.html", "Contácteme")],
+            ("free-books.html", "Libros gratis"), ("contact.html", "Contácteme")],
     "search_label": "Buscar casas",
     "hero_h1": "¿Piensa vender su casa en el Upstate? Empiece con un número real.",
     "hero_p": "Déme la dirección. En un día hábil, yo mismo le preparo su valuación. Reviso su casa y las ventas recientes a su alrededor. No es un cálculo de computadora.",
@@ -419,9 +435,41 @@ ES = {
     "ct_form_h2": "O envíe un mensaje",
     "ct_fields": {"name": "Su nombre", "email": "Correo electrónico", "phone": "Teléfono (opcional)",
                   "message": "¿En qué puedo ayudarle?", "submit": "Enviar"},
+    "bk_h1": "Libros gratis sobre vender y comprar una casa",
+    "bk_p": "Estos son mis libros. Elija los que quiera y se los envío por correo. Gratis. Sin costo, sin compromiso y sin llamada de ventas. Los libros están escritos en inglés.",
+    "bk_pick": "¿Qué libros quiere? Marque uno o más.",
+    "bk_fields": {"name": "Su nombre", "email": "Correo electrónico", "phone": "Teléfono (opcional)",
+                  "street": "Dirección", "city": "Ciudad", "state": "Estado", "zip": "Código postal",
+                  "submit": "Envíenme mis libros",
+                  "fine": "Su información llega solo a J.R. Nunca se vende ni se comparte.",
+                  "ok": "Gracias. Sus libros van en camino. Revise su buzón en la próxima semana o dos.",
+                  "need": "Por favor marque al menos un libro."},
+    "bk_after_h2": "Qué pasa después",
+    "bk_after": [
+        "Su solicitud llega a mi correo.",
+        "Pongo sus libros en el correo, normalmente en unos días.",
+        "Eso es todo. Si algún día quiere hablar de su casa, llámeme o envíeme un texto. Si no, disfrute los libros.",
+    ],
     "footer_rights": "Todos los derechos reservados.",
     "footer_eho": "Igualdad de oportunidades de vivienda.",
 }
+
+# The printed books J.R. has on hand (photographed 10/26/2026). All three are
+# in English. Remove a book here when he runs out of copies.
+BOOKS = [
+    {"key": "How to Sell Homes Fast for Top Dollar", "photo": "book-sellers.png",
+     "title": "How to Sell Homes Fast for Top Dollar",
+     "line": "For homeowners thinking about selling. How to price, prepare, and market a home so it sells quickly and for the most money.",
+     "line_es": "Para dueños que piensan vender. Cómo poner el precio, preparar y promover una casa para que se venda rápido y por el mejor precio."},
+    {"key": "Complete Guide to Buying a Home", "photo": "book-buyers.png",
+     "title": "Complete Guide to Buying a Home",
+     "line": "For anyone buying a home, first or next. What happens at each step, from getting pre-approved to closing day.",
+     "line_es": "Para quien va a comprar una casa, la primera o la siguiente. Qué pasa en cada paso, desde la preaprobación hasta el día del cierre."},
+    {"key": "Expired!? A Guide for Selling Homes Others Couldn't Sell", "photo": "book-expired.png",
+     "title": "Expired!? A Guide for Selling Homes Others Couldn't Sell",
+     "line": "For owners whose home was listed and didn't sell. Why homes don't sell, and what to change the second time.",
+     "line_es": "Para dueños cuya casa estuvo en venta y no se vendió. Por qué las casas no se venden, y qué cambiar la segunda vez."},
+]
 
 # ------------------------------------------------------------------- HTML
 CSS = r"""
@@ -446,12 +494,12 @@ p{margin:0 0 1em;max-width:62ch}
 /* header */
 .top{background:var(--ridge-deep);color:#fff}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
-.brand{color:#fff;text-decoration:none;font-weight:600;font-size:1.2rem;letter-spacing:.01em}
+.brand{color:#fff;text-decoration:none;font-weight:600;font-size:1.2rem;letter-spacing:.01em;white-space:nowrap}
 .brand small{display:block;font-weight:400;font-size:.8rem;opacity:.8}
 nav.menu{display:none}
-nav.menu a{color:#fff;text-decoration:none;margin-left:16px;font-size:.92rem;white-space:nowrap;border-bottom:2px solid transparent;padding:4px 0}
+nav.menu a{color:#fff;text-decoration:none;margin-left:12px;font-size:.86rem;white-space:nowrap;border-bottom:2px solid transparent;padding:4px 0}
 nav.menu a[aria-current]{border-color:var(--gold)}
-nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:3px 10px;margin-left:22px}
+nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:3px 10px;margin-left:16px}
 .burger{background:none;border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:6px;padding:8px 10px;font:inherit;font-size:.95rem;cursor:pointer}
 .topright{display:flex;align-items:center;gap:8px}
 .lang-m{color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:6px 12px;font-size:.92rem;white-space:nowrap}
@@ -459,7 +507,7 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .drawer.open{display:block}
 .drawer a{display:block;color:#fff;text-decoration:none;padding:12px var(--gutter);border-top:1px solid rgba(255,255,255,.12);font-size:1.05rem}
 .drawer a[aria-current]{color:#f3d58a}
-@media(min-width:1040px){nav.menu{display:flex;align-items:center}.burger,.drawer,.topright{display:none!important}}
+@media(min-width:1240px){nav.menu{display:flex;align-items:center}.burger,.drawer,.topright{display:none!important}}
 /* hero */
 .hero{background:linear-gradient(180deg,var(--ridge-deep) 0,var(--ridge) 100%);color:#fff;padding:48px 0 56px}
 .hero h1{max-width:18ch}
@@ -523,6 +571,18 @@ form.sheet textarea{min-height:120px}
 @media(min-width:560px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr 1fr 1fr}}
 .three{display:grid;gap:14px}
 .fine{font-size:.9rem;color:var(--ink-2)}
+.books{display:grid;gap:18px;margin:0 0 6px}
+@media(min-width:720px){.books{grid-template-columns:repeat(3,1fr)}}
+.book{position:relative;display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start;padding:14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;cursor:pointer}
+@media(min-width:720px){.book{grid-template-columns:1fr;text-align:center}.book img{margin:0 auto}}
+.book img{width:96px;height:auto}
+@media(min-width:720px){.book img{width:150px}}
+.book:has(input:checked){border-color:var(--gold);background:#fbf6ea;box-shadow:0 0 0 2px var(--gold)}
+form.sheet .book input[type=checkbox]{position:absolute;top:12px;right:12px;width:24px;height:24px;padding:0;accent-color:var(--gold-ink);margin:0}
+@media(min-width:720px){form.sheet .book input[type=checkbox]{left:12px;right:auto}}
+.book b{display:block;font-size:1.02rem;margin-bottom:4px}
+.book span{display:block;font-size:.95rem;color:var(--ink-2)}
+form.sheet .books label{display:grid}
 .form-msg{padding:16px 18px;border-radius:8px;font-size:1.05rem;max-width:62ch;margin:0}
 .form-msg.ok{background:#e6f1ea;color:#1d4a2e;border-left:4px solid #2f7a4a}
 .form-msg.bad{background:#fbeaea;color:#6b1f1f;border-left:4px solid #b03a3a}
@@ -564,12 +624,16 @@ document.addEventListener('DOMContentLoaded',function(){
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var btn=form.querySelector('button[type=submit]'),msg=form.querySelector('.form-msg'),label=btn.textContent;
+      if(form.dataset.need&&!form.querySelector('input[name=books]:checked')){
+        msg.className='form-msg bad';msg.textContent=form.dataset.need;msg.hidden=false;
+        form.querySelector('.books').scrollIntoView({block:'center'});return;
+      }
       btn.disabled=true;btn.textContent=form.dataset.sending;
       var src=new FormData(form),fd=new FormData();
       try{
         var g=function(k){return (src.get(k)||'').toString().trim();};
-        var r={t:form.id==='hv-form'?'v':'c',l:document.documentElement.lang==='es'?'es':'en',
-               n:g('name'),p:g('phone'),e:g('email'),a:[g('address'),g('city')].filter(Boolean).join(', ')};
+        var r={t:form.id==='hv-form'?'v':(form.id==='bk-form'?'b':'c'),l:document.documentElement.lang==='es'?'es':'en',
+               n:g('name'),p:g('phone'),e:g('email'),a:[g('address')||g('street'),g('city')].filter(Boolean).join(', ')};
         fd.append('tap_to_reply',location.origin+'/reply.html#'+new URLSearchParams(r).toString());
       }catch(err){}
       src.forEach(function(v,k){fd.append(k,v);});
@@ -591,9 +655,10 @@ document.addEventListener('DOMContentLoaded',function(){
 
 def esc(s): return html.escape(s, quote=True)
 
-def mail_form(T, lang, subject, fields_html, submit_label, form_id=""):
+def mail_form(T, lang, subject, fields_html, submit_label, form_id="", ok=None):
     """Formspree if an ID is set, otherwise a mailto that opens the visitor's mail app."""
     if SITE["formspree_id"]:
+        ok_custom = ok
         action = f'https://formspree.io/f/{SITE["formspree_id"]}'
         hidden = (f'<input type="hidden" name="_subject" value="{esc(subject)}">'
                   f'<input type="hidden" name="language" value="{"Spanish" if lang == "es" else "English"}">'
@@ -606,6 +671,8 @@ def mail_form(T, lang, subject, fields_html, submit_label, form_id=""):
             ok = "Thank you. Your request reached J.R. You'll hear back within one business day."
             bad = "That didn't go through. Please call or text J.R. at " + SITE["phone"] + "."
             sending = "Sending…"
+        if ok_custom:
+            ok = ok_custom
         return (f'<form class="sheet js-fs" id="{form_id}" action="{action}" method="POST" '
                 f'data-ok="{esc(ok)}" data-bad="{esc(bad)}" data-sending="{esc(sending)}">{hidden}{fields_html}'
                 f'<button class="btn" type="submit">{esc(submit_label)}</button>'
@@ -782,6 +849,33 @@ def page_home_value(T):
 <section><div class="wrap"><h1>{esc(T['hv_h1'])}</h1><p>{esc(T['hv_p'])}</p>{form}</div></section>
 <section class="alt"><div class="wrap"><h2>{esc(T['hv_after_h2'])}</h2><ol class="steps">{steps}</ol>
 <div class="note"><p style="margin:0">{esc(T['hv_note'])}</p></div></div></section>"""
+
+def page_books(T):
+    F = T["bk_fields"]
+    up = "../" if T["dir_prefix"] else ""
+    es = T["lang"] == "es"
+    picks = "".join(
+        f'<label class="book"><img src="{up}assets/{b["photo"]}" alt="{esc(b["title"])}" width="396" height="601">'
+        f'<div><b><input type="checkbox" name="books" value="{esc(b["key"])}">{esc(b["title"])}</b>'
+        f'<span>{esc(b["line_es"] if es else b["line"])}</span></div></label>' for b in BOOKS)
+    fields = (
+        f'<p class="fine" style="font-size:1.02rem;color:var(--ink)">{esc(T["bk_pick"])}</p>'
+        f'<div class="books">{picks}</div>'
+        + '<div class="two">' + field("name", F["name"], req=True) + field("email", F["email"], "email", req=True) + '</div>'
+        + field("phone", F["phone"], "tel")
+        + field("street", F["street"], req=True)
+        + '<div class="three">' + field("city", F["city"], req=True)
+        + f'<label>{esc(F["state"])}<input type="text" name="state" value="SC" required></label>'
+        + field("zip", F["zip"], req=True) + '</div>'
+        + f'<p class="fine">{esc(F["fine"])}</p>'
+    )
+    subj = "Free book request from " + SITE["domain"] if not es else "Solicitud de libro gratis desde " + SITE["domain"]
+    form = mail_form(T, T["lang"], subj, fields, F["submit"], "bk-form", ok=F["ok"])
+    form = form.replace('<form ', f'<form data-need="{esc(F["need"])}" ', 1)
+    steps = "".join(f'<li>{esc(x)}</li>' for x in T["bk_after"])
+    return f"""
+<section><div class="wrap"><h1>{esc(T['bk_h1'])}</h1><p>{esc(T['bk_p'])}</p>{form}</div></section>
+<section class="alt"><div class="wrap"><h2>{esc(T['bk_after_h2'])}</h2><ol class="steps">{steps}</ol></div></section>"""
 
 def page_list(T, h1, items, empty, intro=""):
     cards = "".join(card(x, T) for x in items)
@@ -993,6 +1087,9 @@ var NOTES={
   v:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your home value request for {addr}. I'm pulling the recent sales near you now, and you'll have your valuation by email within one business day. Any questions in the meantime, just text me here.",
      subj:"Your home value request for {addr}",
      mail:"Hi {first},\n\nThank you for asking me to value your home at {addr}. I got your request, and I'm on it.\n\nI'm a licensed South Carolina agent, and I prepare every valuation myself. I'll look at the recent sales near you and at your home's details, then send you a written valuation within one business day, with the sales I used so you can see the reasoning.\n\nIf you'd like to talk sooner, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"},
+  b:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your book request from my website. Your books go in the mail in the next few days. If you ever want to talk about your home, just text me here.",
+     subj:"Your free books are on the way",
+     mail:"Hi {first},\n\nThank you for asking for my books. I got your request, and they'll go in the mail to {addr} in the next few days.\n\nNo strings attached. If you ever want to talk about selling or buying a home, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"},
   c:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your message from my website. What's a good time to talk? You can also reach me right here by text.",
      subj:"Thanks for reaching out",
      mail:"Hi {first},\n\nThank you for your message. I got it and wanted you to know right away.\n\nWhat's a good time to talk? You can call or text me at 864-381-2326, or simply reply to this email.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"}},
@@ -1000,19 +1097,22 @@ var NOTES={
   v:{text:"Hola {first}, le saluda J.R. Grimaldo de NorthGroup Real Estate. Recibí su solicitud de valuación para {addr}. Ya estoy revisando las ventas recientes cerca de usted, y tendrá su valuación por correo en un día hábil. Si tiene alguna pregunta, escríbame aquí.",
      subj:"Su solicitud de valuación para {addr}",
      mail:"Hola {first}:\n\nGracias por pedirme la valuación de su casa en {addr}. Recibí su solicitud y ya estoy trabajando en ella.\n\nSoy agente con licencia en Carolina del Sur y preparo cada valuación personalmente. Voy a revisar las ventas recientes cerca de usted y los detalles de su casa, y le enviaré una valuación por escrito en un día hábil, con las ventas que usé para que vea el razonamiento.\n\nSi prefiere hablar antes, llámeme o escríbame al 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"},
+  b:{text:"Hola {first}, le saluda J.R. Grimaldo de NorthGroup Real Estate. Recibí su solicitud de libros desde mi página web. Sus libros salen por correo en los próximos días. Si algún día quiere hablar de su casa, escríbame aquí.",
+     subj:"Sus libros gratis van en camino",
+     mail:"Hola {first}:\n\nGracias por pedir mis libros. Recibí su solicitud, y salen por correo a {addr} en los próximos días.\n\nSin compromiso. Si algún día quiere hablar de vender o comprar una casa, llámeme o escríbame al 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"},
   c:{text:"Hola {first}, le saluda J.R. Grimaldo de NorthGroup Real Estate. Recibí su mensaje desde mi página web. ¿A qué hora le queda bien que hablemos? También puede escribirme aquí.",
      subj:"Gracias por comunicarse",
      mail:"Hola {first}:\n\nGracias por su mensaje. Lo recibí y quería avisarle de inmediato.\n\n¿A qué hora le queda bien que hablemos? Puede llamarme o escribirme al 864-381-2326, o simplemente responder a este correo.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"}}
 };
 var q=new URLSearchParams(location.hash.slice(1));
-var d={t:q.get('t')==='c'?'c':'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
+var d={t:q.get('t')==='c'?'c':(q.get('t')==='b'?'b':'v'),l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
 var first=(d.n.split(/\s+/)[0]||'').replace(/^./,function(c){return c.toUpperCase();});
 function fill(s){return s.replace(/\{first\}/g,first||(d.l==='es'?'':'there')).replace(/\{addr\}/g,d.a||(d.l==='es'?'su casa':'your home')).replace(/^Hola :/,'Hola:').replace(/^Hola ,/,'Hola,');}
 function show(){
   var N=NOTES[d.l][d.t],tx=fill(N.text),sj=fill(N.subj),bd=fill(N.mail);
   document.documentElement.lang=d.l;
   document.getElementById('h').textContent=(d.l==='es'?'Responder a ':'Reply to ')+(d.n||'?');
-  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
+  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
   document.getElementById('tx').textContent=tx;
   document.getElementById('em').textContent='Subject: '+sj+'\n\n'+bd;
   var s=document.getElementById('sms'),m=document.getElementById('mail');
@@ -1048,8 +1148,8 @@ def build():
     (OUT / "CNAME").write_text(SITE["domain"] + "\n")
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
-    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "contact.html",
-            "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/contact.html"] + [k + ".html" for k in TOWN_ORDER]
+    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "contact.html",
+            "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/contact.html"] + [k + ".html" for k in TOWN_ORDER]
     import datetime as _dt
     today = _dt.date.today().isoformat()
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -1066,6 +1166,7 @@ def build():
         "sold.html": f"{n_sales} homes sold and bought since 2016 in Greer, Taylors, Greenville, Simpsonville, Inman, Landrum, and across the Upstate SC. {REPEAT_FAMILIES} families have come back to work with J.R. again.",
         "about.html": "Meet J.R. Grimaldo, a Landrum-based South Carolina REALTOR® since 2016. Quality over quantity, quick replies, and clients who come back. Hablo español.",
         "reviews.html": "What clients say about buying and selling with J.R. Grimaldo, REALTOR®, in the Upstate SC.",
+        "free-books.html": "Free books on selling and buying a home, mailed to you by J.R. Grimaldo, REALTOR® in Landrum, SC. No cost, no obligation, no sales call.",
         "contact.html": "Call or text J.R. Grimaldo at 864-381-2326. He answers most calls live and replies to texts right away. Landrum and Upstate SC Real Estate.",
     }
     DE = {
@@ -1075,6 +1176,7 @@ def build():
         "sold.html": f"{n_sales} casas vendidas y compradas desde 2016 en Greer, Taylors, Greenville, Simpsonville, Inman, Landrum y todo el Upstate de Carolina del Sur. {REPEAT_FAMILIES} familias han vuelto a trabajar con J.R.",
         "about.html": "Conozca a J.R. Grimaldo, REALTOR® de Carolina del Sur desde 2016, con base en Landrum. Calidad antes que cantidad y respuestas rápidas. Hablo español.",
         "reviews.html": "Lo que dicen los clientes de comprar y vender con J.R. Grimaldo, REALTOR®, en el Upstate de Carolina del Sur.",
+        "free-books.html": "Libros gratis sobre vender y comprar una casa, enviados por correo por J.R. Grimaldo, REALTOR® en Landrum, SC. Sin costo ni compromiso.",
         "contact.html": "Llame o envíe un texto a J.R. Grimaldo al 864-381-2326. Contesta la mayoría de las llamadas en el momento. Bienes raíces en Landrum y el Upstate.",
     }
     # English: (title, body, language switch, Spanish twin or None)
@@ -1085,6 +1187,7 @@ def build():
         "sold.html": ("Sold Homes – " + SITE["agent"] + ", REALTOR®", page_sold(EN), "es/sold.html", "sold.html"),
         "about.html": ("About J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(EN), "es/about.html", "about.html"),
         "reviews.html": ("Client Reviews – " + SITE["agent"] + ", REALTOR®", page_reviews(EN), "es/reviews.html", "reviews.html"),
+        "free-books.html": ("Free Books on Selling and Buying a Home – " + SITE["agent"], page_books(EN), "es/free-books.html", "free-books.html"),
         "contact.html": ("Contact J.R. Grimaldo, REALTOR®", page_contact(EN), "es/contact.html", "contact.html"),
     }
     for name, (title, body, sw, alt) in pages.items():
@@ -1100,6 +1203,7 @@ def build():
         "sold.html": ("Casas vendidas – " + SITE["agent"] + ", REALTOR®", page_sold(ES), "../sold.html"),
         "about.html": ("Sobre J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(ES), "../about.html"),
         "reviews.html": ("Opiniones de clientes – " + SITE["agent"] + ", REALTOR®", page_reviews(ES), "../reviews.html"),
+        "free-books.html": ("Libros gratis sobre vender y comprar una casa – " + SITE["agent"], page_books(ES), "../free-books.html"),
         "contact.html": ("Contácteme – " + SITE["agent"] + ", REALTOR®", page_contact(ES), "../contact.html"),
     }
     for name, (title, body, sw) in es_pages.items():
