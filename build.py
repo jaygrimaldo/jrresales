@@ -487,34 +487,37 @@ ES = {
 # was taken off 10/26/2026: J.R. wants the site to draw sellers, not buyers.
 # Its cover image (book-buyers.png) is kept in assets in case he wants it back.
 BOOKS = [
+    # Descriptions rewritten 10/26/2026 from the books' real tables of contents
+    # (J.R. sent photos) and approved by J.R. Publisher claims in chapter titles
+    # ("15% more money," "20% rule," "without dropping the price") are left out
+    # on purpose: on J.R.'s site they would read as his promises.
     {"key": "How to Sell Homes Fast for Top Dollar", "slug": "free-book-sell-fast", "photo": "book-sellers.png",
      "title": "How to Sell Homes Fast for Top Dollar",
-     "line": "For homeowners thinking about selling. How to price, prepare, and market a home so it sells quickly and for the most money.",
-     "line_es": "Para dueños que piensan vender. Cómo poner el precio, preparar y promover una casa para que se venda rápido y por el mejor precio.",
-     # CHECK AGAINST THE BOOK: general description, written before J.R. sent the table of contents.
+     "line": "For homeowners thinking about selling. How to get your home ready, find buyers, and negotiate the best price.",
+     "line_es": "Para dueños que piensan vender. Cómo preparar su casa, encontrar compradores y negociar el mejor precio.",
      "about": [
-         "Most homes that sell fast and for a strong price have three things in common. They were priced right from the first day. They were ready to show. And buyers heard about them.",
-         "This book walks through each of those, in plain language. How to set a price buyers will act on. What to fix, clean, and clear out before the photos are taken, and what not to bother with. How a home gets in front of buyers today. And what to expect once the offers start, from the first negotiation to closing day.",
-         "It's written for a homeowner who hasn't sold in a while, or has never sold at all. No jargon. Read it in an evening.",
+         "This book walks you through selling your home in the order it happens. It starts with the first steps. Then it covers getting the house ready, getting it in front of buyers, and getting the best deal.",
+         "Getting ready: how to make the outside look inviting from the street, how to set up rooms so buyers can picture living there, and which upgrades pay back what they cost. One chapter covers the 80/20 rule: a few jobs make most of the difference, so do those first.",
+         "Selling: how to market your home and find buyers, the mistakes sellers make most often, and lessons from sellers who learned the hard way. The last two chapters are about negotiating: how to stand firm, and what to do and not do when offers come in.",
      ],
      "about_es": [
-         "La mayoría de las casas que se venden rápido y a buen precio tienen tres cosas en común. Tuvieron el precio correcto desde el primer día. Estaban listas para mostrarse. Y los compradores se enteraron de ellas.",
-         "Este libro explica cada una de esas cosas, en lenguaje sencillo. Cómo poner un precio que haga actuar a los compradores. Qué arreglar, limpiar y sacar antes de las fotos, y en qué no vale la pena gastar. Cómo llega una casa a los compradores hoy. Y qué esperar cuando empiezan las ofertas, desde la primera negociación hasta el día del cierre.",
-         "Está escrito para un dueño que no ha vendido en mucho tiempo, o que nunca ha vendido. Sin términos técnicos. Se lee en una tarde. El libro está en inglés.",
+         "Este libro lo guía para vender su casa en el orden en que pasan las cosas. Empieza con los primeros pasos. Luego explica cómo preparar la casa, cómo hacer que los compradores la vean, y cómo lograr el mejor trato.",
+         "La preparación: cómo hacer que la casa se vea atractiva desde la calle, cómo arreglar los cuartos para que los compradores se imaginen viviendo ahí, y qué mejoras recuperan lo que cuestan. Un capítulo explica la regla del 80/20: unos pocos trabajos hacen la mayor diferencia, así que hágalos primero.",
+         "La venta: cómo promover su casa y encontrar compradores, los errores más comunes de los vendedores, y lecciones de quienes aprendieron por las malas. Los dos últimos capítulos tratan de la negociación: cómo mantenerse firme, y qué hacer y qué no hacer cuando llegan las ofertas. El libro está en inglés.",
      ]},
     {"key": "Expired!? A Guide for Selling Homes Others Couldn't Sell", "slug": "free-book-expired", "photo": "book-expired.png",
      "title": "Expired!? A Guide for Selling Homes Others Couldn't Sell",
-     "line": "For owners whose home was listed and didn't sell. Why homes don't sell, and what to change the second time.",
-     "line_es": "Para dueños cuya casa estuvo en venta y no se vendió. Por qué las casas no se venden, y qué cambiar la segunda vez.",
+     "line": "For owners whose home was listed and didn't sell. Why it happens, and what to change before you try again.",
+     "line_es": "Para dueños cuya casa estuvo en venta y no se vendió. Por qué pasa, y qué cambiar antes de intentarlo otra vez.",
      "about": [
-         "Your home was on the market. Buyers came through, or maybe they didn't. The listing ran out, and the home didn't sell. That's frustrating, and it's more common than people think.",
-         "This book is about what went wrong, and what to do differently. It covers the usual reasons a home doesn't sell: the price, the condition, the photos, the marketing, and sometimes just timing. Then it walks through how to relist the right way, so the second try isn't a repeat of the first.",
-         "It's a short, honest read. If your home didn't sell, read this before you sign with anyone again, including me.",
+         "Your home was on the market, and the listing ran out without a sale. That's frustrating, and it happens to good homes too. This short book explains why.",
+         "It covers whether the listing price really matters, what to avoid, how easy it is to sell a home for less than it's worth, and what stops even well-kept homes from selling.",
+         "Then it turns to the second try: what you can change besides the price, how to catch buyers' attention, and why staging (setting up the rooms for showings) really matters. If your home didn't sell, read this before you sign with anyone again, including me.",
      ],
      "about_es": [
-         "Su casa estuvo en venta. Vinieron compradores, o tal vez no. El contrato de venta terminó y la casa no se vendió. Es frustrante, y pasa más seguido de lo que la gente cree.",
-         "Este libro trata de qué salió mal y qué hacer diferente. Cubre las razones comunes por las que una casa no se vende: el precio, la condición, las fotos, la promoción, y a veces simplemente el momento. Luego explica cómo volver a ponerla en venta de la forma correcta, para que el segundo intento no repita el primero.",
-         "Es una lectura corta y honesta. Si su casa no se vendió, léalo antes de firmar con alguien otra vez, incluso conmigo. El libro está en inglés.",
+         "Su casa estuvo en venta y el contrato terminó sin una venta. Es frustrante, y también les pasa a casas buenas. Este libro corto explica por qué.",
+         "Trata de si el precio de venta de verdad importa, qué evitar, lo fácil que es vender una casa por menos de lo que vale, y qué impide que se vendan aun las casas bien cuidadas.",
+         "Luego habla del segundo intento: qué puede cambiar además del precio, cómo captar la atención de los compradores, y por qué de verdad importa preparar la casa para las visitas. Si su casa no se vendió, léalo antes de firmar con alguien otra vez, incluso conmigo. El libro está en inglés.",
      ]},
 ]
 
