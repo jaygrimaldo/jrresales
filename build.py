@@ -1044,12 +1044,12 @@ def build():
     # that forwarding land here; send them to /index.html (not /, which those
     # browsers would bounce back here).
     (OUT / "defaultsite").mkdir(exist_ok=True)
-    (OUT / "defaultsite" / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/index.html"><link rel="canonical" href="/index.html"><title>J.R. Grimaldo</title><a href="/index.html">Go to jrresales.com</a><script>location.replace("/index.html")</script>')
+    (OUT / "defaultsite" / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/index.html"><link rel="canonical" href="https://jrresales.com/"><title>J.R. Grimaldo</title><a href="/index.html">Go to jrresales.com</a><script>location.replace("/index.html")</script>')
     (OUT / "CNAME").write_text(SITE["domain"] + "\n")
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
     urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "contact.html",
-            "es/index.html", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/contact.html"] + [k + ".html" for k in TOWN_ORDER]
+            "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/contact.html"] + [k + ".html" for k in TOWN_ORDER]
     import datetime as _dt
     today = _dt.date.today().isoformat()
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
