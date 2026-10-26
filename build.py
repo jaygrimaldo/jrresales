@@ -763,6 +763,11 @@ document.addEventListener('DOMContentLoaded',function(){
 
 def esc(s): return html.escape(s, quote=True)
 
+import hashlib as _hl
+# Added to the style and script links (site.css?v=...). It changes whenever the
+# CSS or JS changes, so browsers never mix a new page with an old saved style file.
+ASSET_V = _hl.sha1((CSS + JS).encode()).hexdigest()[:8]
+
 def mail_form(T, lang, subject, fields_html, submit_label, form_id="", ok=None):
     """Formspree if an ID is set, otherwise a mailto that opens the visitor's mail app."""
     if SITE["formspree_id"]:
@@ -858,7 +863,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
-<link rel="stylesheet" href="{up}assets/site.css">
+<link rel="stylesheet" href="{up}assets/site.css?v={ASSET_V}">
 <link rel="icon" href="{up}assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -888,7 +893,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
     </div>
   </div>
 </footer>
-<script src="{up}assets/site.js"></script>
+<script src="{up}assets/site.js?v={ASSET_V}"></script>
 </body>
 </html>"""
 
@@ -965,7 +970,7 @@ def page_home(T):
     qt = q["quote_es"] if es else q["quote"]
     return f"""
 <section class="hero"><div class="wrap"><div class="hero-grid"><div>
-  <div class="hero-me-m"><img src="{up}assets/jr-headshot.jpg" alt=""><div><b>{esc(T['hero_who'])}</b>{esc(T['hero_where'])}</div></div>
+  <div class="hero-me-m"><img src="{up}assets/jr-headshot.jpg" alt="" width="64" height="64"><div><b>{esc(T['hero_who'])}</b>{esc(T['hero_where'])}</div></div>
   <h1>{esc(T['hero_h1'])}</h1>
   <p>{esc(T['hero_p'])}</p>
   <form class="addr" id="hero-addr" data-to="home-value.html">
@@ -973,7 +978,7 @@ def page_home(T):
     <input id="hero-input" type="text" placeholder="{esc(T['hero_addr'])}" autocomplete="street-address">
     <button class="btn" type="submit">{esc(T['hero_btn'])}</button>
   </form></div>
-  <div class="hero-me"><img src="{up}assets/jr-headshot.jpg" alt="{esc(SITE['agent'])}"><b>{esc(T['hero_who'])}</b><span>{esc(T['hero_where'])}</span></div>
+  <div class="hero-me"><img src="{up}assets/jr-headshot.jpg" alt="{esc(SITE['agent'])}" width="280" height="280"><b>{esc(T['hero_who'])}</b><span>{esc(T['hero_where'])}</span></div>
 </div>
 <div class="truths hero-truths">{truths}</div></div></section>
 <section class="alt"><div class="wrap"><h2>{esc(T['hm_sold_h2'])}</h2><p>{esc(T['hm_sold_p'])}</p>
@@ -1325,7 +1330,7 @@ def build():
     (OUT / "assets" / "site.css").write_text(CSS)
     (OUT / "assets" / "site.js").write_text(JS)
     (OUT / "assets" / "favicon.svg").write_text(FAVICON)
-    (OUT / "reply.html").write_text(REPLY_HTML)
+    (OUT / "reply.html").write_text(REPLY_HTML.replace('assets/site.css"', 'assets/site.css?v=' + ASSET_V + '"'))
     # IONOS used to forward jrresales.com to /defaultsite. Browsers that saved
     # that forwarding land here; send them to /index.html (not /, which those
     # browsers would bounce back here).
