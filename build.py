@@ -534,7 +534,7 @@ BOOKS = [
 CSS = r"""
 :root{
   --ink:#1b2730; --ink-2:#4a5a66; --ridge:#2f4b5f; --ridge-deep:#213746;
-  --haze:#e9eef1; --paper:#ffffff; --stone:#f3f2ee; --gold:#b98a2c; --gold-ink:#7a5a17;
+  --haze:#e9eef1; --paper:#ffffff; --stone:#eef3f6; --gold:#b98a2c; --gold-ink:#7a5a17;
   --line:#d8dde1; --focus:#b98a2c;
   --maxw:1080px; --gutter:20px;
 }
@@ -579,7 +579,10 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .btn.quiet{background:transparent;color:var(--ridge);border:1.5px solid var(--ridge)}
 .btn.quiet:hover{background:var(--haze)}
 /* home redesign */
-.hero{position:relative;overflow:hidden;padding:56px 0 150px}
+.hero{position:relative;overflow:hidden;padding:56px 0 250px;
+  background:radial-gradient(ellipse 55% 40% at 68% 76%,rgba(246,205,130,.75) 0,rgba(246,205,130,.25) 45%,rgba(246,205,130,0) 75%),
+             linear-gradient(180deg,#14273a 0%,#1f374d 32%,#3a5874 54%,#8f8a8a 70%,#dcae72 82%,#eec488 100%)}
+@media(min-width:900px){.hero{padding-bottom:300px}}
 .hero .wrap{position:relative;z-index:1}
 .hero-grid{display:grid;gap:32px;align-items:center}
 @media(min-width:900px){.hero-grid{grid-template-columns:1fr 330px;gap:56px}}
@@ -592,7 +595,9 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .hero-me-m img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
 .hero-me-m b{display:block;color:#fff}
 @media(min-width:900px){.hero-me-m{display:none}}
-.ridges{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:140px;display:block;z-index:0}
+.ridges{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:280px;display:block;z-index:0}
+@media(min-width:900px){.ridges{height:360px}}
+.hero h1,.hero p{text-shadow:0 1px 12px rgba(10,22,32,.45)}
 .truths > div{border-top:3px solid var(--gold);padding-top:14px}
 .sold-strip{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
 @media(min-width:900px){.sold-strip{grid-template-columns:repeat(4,1fr)}}
@@ -910,10 +915,36 @@ def card(it, T):
 <p>{esc(line_t)}</p>{('<p class="mls">'+esc(it['mls'])+'</p>') if it.get('mls') else ''}
 {('<a class="btn quiet" href="'+it['link']+'">'+esc(T['li_btn'])+'</a>') if it.get('link') else ''}</div></article>"""
 
-RIDGES_SVG = ('<svg class="ridges" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">'
-    '<path d="M0 70 L120 40 L230 62 L340 22 L470 58 L590 30 L720 64 L850 18 L990 56 L1110 34 L1240 60 L1350 28 L1440 48 L1440 140 L0 140Z" fill="#3b5a70" opacity=".55"/>'
-    '<path d="M0 98 L150 70 L280 92 L420 60 L560 94 L700 66 L860 100 L1010 72 L1160 96 L1300 68 L1440 90 L1440 140 L0 140Z" fill="#2f4b5f" opacity=".9"/>'
-    '<path d="M0 124 C240 104 480 132 720 116 C960 100 1200 130 1440 112 L1440 140 L0 140Z" fill="#ffffff"/></svg>')
+def _ridge_art():
+    """Layered Blue Ridge silhouettes, back (hazy, light) to front (dark).
+    Drawn from a fixed seed so every build looks the same."""
+    import random, math
+    rnd = random.Random(29356)  # Landrum ZIP
+    W, H = 1440, 420
+    layers = [  # (base height from top, roughness, color, opacity)
+        (205, 95, "#c7d3dc", 1), (238, 90, "#a3b6c5", 1), (272, 80, "#7d97ab", 1),
+        (306, 66, "#57748d", 1), (340, 50, "#395770", 1), (378, 28, "#243f54", 1)]
+    def line(base, rough):
+        # midpoint displacement for a natural ridge line
+        pts = [base + rnd.uniform(-rough, rough * .3), base + rnd.uniform(-rough, rough * .3)]
+        r = rough
+        for _ in range(7):
+            new = []
+            for i in range(len(pts) - 1):
+                new += [pts[i], (pts[i] + pts[i + 1]) / 2 + rnd.uniform(-r, r)]
+            new.append(pts[-1]); pts = new; r *= .52
+        n = len(pts) - 1
+        return [(W * i / n, max(40, min(H, y))) for i, y in enumerate(pts)]
+    out = []
+    for base, rough, col, op in layers:
+        pts = line(base, rough)
+        d = "M0 %d " % H + " ".join("L%.0f %.0f" % (x, y) for x, y in pts) + " L%d %d Z" % (W, H)
+        out.append(f'<path d="{d}" fill="{col}"/>')
+    # soft foothill that hands off to the white page below
+    out.append(f'<path d="M0 {H} L0 398 C360 380 720 410 1080 392 C1260 384 1380 396 {W} 390 L{W} {H} Z" fill="#ffffff"/>')
+    return ('<svg class="ridges" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">'
+            + "".join(out) + "</svg>")
+RIDGES_SVG = _ridge_art()
 
 # Photo strip on the home page: J.R.'s own sold listings, from SOLD.
 HOME_SOLD = ["248 Page Creek Blvd", "140 Belshire Dr", "420 Cloverdale Ln", "304 Talbert Trail"]
