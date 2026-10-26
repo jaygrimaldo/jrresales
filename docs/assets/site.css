@@ -49,8 +49,8 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 /* Hero photo: Blue Ridge Mountains at sunset, by Sara Parlier on Unsplash
    (unsplash.com/photos/mmVBTYA45ok). Unsplash License: free for business use, no credit required. */
 .hero{position:relative;overflow:hidden;padding:64px 0 48px;
-  background:linear-gradient(180deg,rgba(12,24,36,.62) 0%,rgba(12,24,36,.40) 30%,rgba(12,24,36,.12) 60%,rgba(12,24,36,.30) 100%),
-             url(hero-mountains-1200.jpg) 42% 100%/cover no-repeat #21384c}
+  background:linear-gradient(180deg,rgba(12,24,36,.55) 0%,rgba(12,24,36,.42) 35%,rgba(12,24,36,.30) 65%,rgba(12,24,36,.35) 100%),
+             url(hero-mountains.jpg) 40% 100%/auto 150% no-repeat #21384c}
 @media(min-width:900px){.hero{padding:96px 0 72px;
   background:linear-gradient(90deg,rgba(12,24,36,.86) 0%,rgba(12,24,36,.62) 42%,rgba(12,24,36,.18) 78%,rgba(12,24,36,.10) 100%),
              url(hero-mountains.jpg) center 65%/cover no-repeat #21384c}}
