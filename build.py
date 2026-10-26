@@ -540,7 +540,7 @@ p{margin:0 0 1em;max-width:62ch}
 .brand{color:#fff;text-decoration:none;font-weight:600;font-size:1.2rem;letter-spacing:.01em;white-space:nowrap}
 .brand small{display:block;font-weight:400;font-size:.8rem;opacity:.8}
 nav.menu{display:none}
-nav.menu a{color:#fff;text-decoration:none;margin-left:12px;font-size:.86rem;white-space:nowrap;border-bottom:2px solid transparent;padding:4px 0}
+nav.menu a{color:#fff;text-decoration:none;margin-left:14px;font-size:.9rem;white-space:nowrap;border-bottom:2px solid transparent;padding:4px 0}
 nav.menu a[aria-current]{border-color:var(--gold)}
 nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:3px 10px;margin-left:16px}
 .burger{background:none;border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:6px;padding:8px 10px;font:inherit;font-size:.95rem;cursor:pointer}
@@ -550,7 +550,7 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .drawer.open{display:block}
 .drawer a{display:block;color:#fff;text-decoration:none;padding:12px var(--gutter);border-top:1px solid rgba(255,255,255,.12);font-size:1.05rem}
 .drawer a[aria-current]{color:#f3d58a}
-@media(min-width:1240px){nav.menu{display:flex;align-items:center}.burger,.drawer,.topright{display:none!important}}
+@media(min-width:1024px){.top .wrap{flex-wrap:wrap;row-gap:0;padding-top:12px}nav.menu{display:flex;align-items:center;flex-wrap:wrap;width:100%;border-top:1px solid rgba(255,255,255,.14);margin-top:10px;padding-block:8px 10px;row-gap:4px}nav.menu a{margin-left:0;margin-right:18px}@media(max-width:1120px){nav.menu a{font-size:.85rem;margin-right:13px}}nav.menu a.srch{margin-left:auto}nav.menu a.lang{margin-left:4px;margin-right:0}.burger,.drawer,.topright{display:none!important}}
 /* hero */
 .hero{background:linear-gradient(180deg,var(--ridge-deep) 0,var(--ridge) 100%);color:#fff;padding:48px 0 56px}
 .hero h1{max-width:18ch}
@@ -771,7 +771,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
         cur = ' aria-current="page"' if href.endswith(page) and not href.startswith("..") else ""
         nav_links += f'<a href="{href}"{cur}>{esc(label)}</a>'
         drawer += f'<a href="{href}"{cur}>{esc(label)}</a>'
-    search = f'<a href="{BRAND["brokerage_site"]}" rel="noopener">{esc(T["search_label"])}</a>'
+    search = f'<a class="srch" href="{BRAND["brokerage_site"]}" rel="noopener">{esc(T["search_label"])}</a>'
     lang = f'<a class="lang" href="{lang_switch}" lang="{T["other_lang"]}">{T["other_label"]}</a>'
     note = BRAND["brokerage_note"] if T["lang"] == "en" else BRAND["brokerage_note_es"]
     root = "https://" + SITE["domain"] + "/"
