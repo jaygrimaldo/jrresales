@@ -244,6 +244,14 @@ EN = {
     "cta_h2": "Ready to talk it through?",
     "cta_p": "Call, text, or send a note. No pressure, no script.",
     "cta_btn": "Contact J.R.",
+    "hero_who": "J.R. Grimaldo, REALTOR®",
+    "hero_where": "Landrum, SC · Hablo español",
+    "hm_sold_h2": "Recently sold",
+    "hm_sold_p": "A few of the homes I've sold for my clients.",
+    "hm_sold_btn": "See all my sales",
+    "hm_books_h2": "Free books, mailed to you",
+    "hm_books_p": "Three short books on selling and buying a home. Pick the ones you want and I'll mail them. No cost, no sales call.",
+    "hm_books_btn": "See the books",
     # home value page
     "hv_h1": "What's my home worth?",
     "hv_p": "Fill in what you can. I'll pull the recent sales around you, look at your home's details, and send you a written valuation within one business day.",
@@ -375,6 +383,14 @@ ES = {
     "cta_h2": "¿Listo para conversar?",
     "cta_p": "Llame, envíe un texto o un mensaje. Sin presión.",
     "cta_btn": "Contactar a J.R.",
+    "hero_who": "J.R. Grimaldo, REALTOR®",
+    "hero_where": "Landrum, SC · Hablo español",
+    "hm_sold_h2": "Vendidas recientemente",
+    "hm_sold_p": "Algunas de las casas que he vendido para mis clientes.",
+    "hm_sold_btn": "Ver todas mis ventas",
+    "hm_books_h2": "Libros gratis, por correo",
+    "hm_books_p": "Tres libros cortos sobre vender y comprar una casa. Elija los que quiera y se los envío. Sin costo, sin llamada de ventas. Los libros están en inglés.",
+    "hm_books_btn": "Ver los libros",
     "hv_h1": "¿Cuánto vale mi casa?",
     "hv_p": "Llene lo que pueda. Yo busco las ventas recientes a su alrededor, reviso los detalles de su casa, y le envío una valuación por escrito en un día hábil.",
     "hv_fields": {
@@ -562,6 +578,44 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .btn:hover{background:#cf9b34}
 .btn.quiet{background:transparent;color:var(--ridge);border:1.5px solid var(--ridge)}
 .btn.quiet:hover{background:var(--haze)}
+/* home redesign */
+.hero{position:relative;overflow:hidden;padding:56px 0 150px}
+.hero .wrap{position:relative;z-index:1}
+.hero-grid{display:grid;gap:32px;align-items:center}
+@media(min-width:900px){.hero-grid{grid-template-columns:1fr 330px;gap:56px}}
+.hero-me{display:none;text-align:center;color:#dfe7ec}
+@media(min-width:900px){.hero-me{display:block}}
+.hero-me img{width:280px;height:280px;border-radius:50%;object-fit:cover;margin:0 auto 14px;border:4px solid var(--gold);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.hero-me b{display:block;color:#fff;font-size:1.1rem}
+.hero-me span{font-size:.95rem}
+.hero-me-m{display:flex;align-items:center;gap:12px;margin-bottom:18px;color:#dfe7ec;font-size:.95rem}
+.hero-me-m img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.hero-me-m b{display:block;color:#fff}
+@media(min-width:900px){.hero-me-m{display:none}}
+.ridges{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:140px;display:block;z-index:0}
+.truths > div{border-top:3px solid var(--gold);padding-top:14px}
+.sold-strip{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:900px){.sold-strip{grid-template-columns:repeat(4,1fr)}}
+.sold-strip figure{margin:0;border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.sold-strip .im{position:relative;aspect-ratio:4/3}
+.sold-strip img{width:100%;height:100%;object-fit:cover}
+.sold-strip .tag{position:absolute;left:10px;top:10px;background:var(--ridge-deep);color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:4px}
+.sold-strip figcaption{padding:10px 12px 12px;font-size:.92rem;color:var(--ink-2)}
+.sold-strip figcaption b{display:block;color:var(--ridge-deep);font-size:1.05rem}
+.books-band{background:var(--ridge-deep);color:#fff}
+.books-band .wrap{display:grid;gap:28px;align-items:center}
+@media(min-width:900px){.books-band .wrap{grid-template-columns:1fr 1fr;gap:48px}}
+.books-band p{color:#dfe7ec}
+.books-row{display:flex;justify-content:center;align-items:flex-end;gap:6px}
+.books-row a{flex:1;max-width:190px}
+.books-row img{width:100%;height:auto;transition:transform .2s}
+.books-row a:hover img,.books-row img:hover{transform:translateY(-6px)}
+.why-one ul.plain{max-width:820px}
+.why-one ul.plain{columns:1}
+@media(min-width:760px){.why-one ul.plain{columns:2;column-gap:40px}.why-one ul.plain li{break-inside:avoid}}
+.quote-band blockquote{background:none;margin:0 auto;padding:0;max-width:46rem;text-align:center}
+.quote-band blockquote p{font-size:clamp(1.25rem,2.6vw,1.6rem);font-style:italic;line-height:1.45;margin:0 auto .6em;max-width:none}
+.quote-band .mark{font-size:4rem;line-height:.5;color:var(--gold);display:block;margin-bottom:10px}
 /* sections */
 section{padding:48px 0}
 section.alt{background:var(--stone)}
@@ -856,31 +910,61 @@ def card(it, T):
 <p>{esc(line_t)}</p>{('<p class="mls">'+esc(it['mls'])+'</p>') if it.get('mls') else ''}
 {('<a class="btn quiet" href="'+it['link']+'">'+esc(T['li_btn'])+'</a>') if it.get('link') else ''}</div></article>"""
 
+RIDGES_SVG = ('<svg class="ridges" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">'
+    '<path d="M0 70 L120 40 L230 62 L340 22 L470 58 L590 30 L720 64 L850 18 L990 56 L1110 34 L1240 60 L1350 28 L1440 48 L1440 140 L0 140Z" fill="#3b5a70" opacity=".55"/>'
+    '<path d="M0 98 L150 70 L280 92 L420 60 L560 94 L700 66 L860 100 L1010 72 L1160 96 L1300 68 L1440 90 L1440 140 L0 140Z" fill="#2f4b5f" opacity=".9"/>'
+    '<path d="M0 124 C240 104 480 132 720 116 C960 100 1200 130 1440 112 L1440 140 L0 140Z" fill="#ffffff"/></svg>')
+
+# Photo strip on the home page: J.R.'s own sold listings, from SOLD.
+HOME_SOLD = ["248 Page Creek Blvd", "140 Belshire Dr", "420 Cloverdale Ln", "304 Talbert Trail"]
+
 def page_home(T):
     up = "../" if T["dir_prefix"] else ""
+    es = T["lang"] == "es"
     truths = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in T["truths"])
     bullets = "".join(f'<li>{esc(x)}</li>' for x in T["why_bullets"])
     cards = "".join(card(x, T) for x in LISTINGS[:2]) if LISTINGS else f'<div class="empty"><p>{esc(EN["li_empty"] if T["lang"]=="en" else "Por ahora no tengo propiedades en venta. Las nuevas aparecen aquí primero.")}</p></div>'
-    listings_href = "listings.html" if not T["dir_prefix"] else "../listings.html"
+    listings_href = "listings.html"
+    figs = ""
+    for it in SOLD:
+        street = it["address"].split(",")[0]
+        if street not in HOME_SOLD or not it.get("photo"): continue
+        town = it["address"].split(",")[1].strip()
+        price = it["price"].replace("Sold for ", "")
+        figs += (f'<figure><div class="im"><img src="{up}assets/{it["photo"]}" alt="{esc(it["address"])}" loading="lazy">'
+                 f'<span class="tag">{"Vendida" if es else "Sold"}</span></div>'
+                 f'<figcaption><b>{esc(price)}</b>{esc(street)}, {esc(town)}</figcaption></figure>')
+    covers = "".join(f'<a href="{b["slug"]}.html"><img src="{up}assets/{b["photo"]}" alt="{esc(b["title"])}" loading="lazy"></a>' for b in BOOKS)
+    q = next(r for r in REVIEWS if r["name"] == "Jeff D.")
+    qt = q["quote_es"] if es else q["quote"]
     return f"""
-<section class="hero"><div class="wrap">
+<section class="hero"><div class="wrap"><div class="hero-grid"><div>
+  <div class="hero-me-m"><img src="{up}assets/jr-headshot.jpg" alt=""><div><b>{esc(T['hero_who'])}</b>{esc(T['hero_where'])}</div></div>
   <h1>{esc(T['hero_h1'])}</h1>
   <p>{esc(T['hero_p'])}</p>
   <form class="addr" id="hero-addr" data-to="home-value.html">
     <label class="visually-hidden" style="position:absolute;left:-9999px" for="hero-input">{esc(T['hero_addr'])}</label>
     <input id="hero-input" type="text" placeholder="{esc(T['hero_addr'])}" autocomplete="street-address">
     <button class="btn" type="submit">{esc(T['hero_btn'])}</button>
-  </form>
-</div></section>
+  </form></div>
+  <div class="hero-me"><img src="{up}assets/jr-headshot.jpg" alt="{esc(SITE['agent'])}"><b>{esc(T['hero_who'])}</b><span>{esc(T['hero_where'])}</span></div>
+</div></div>{RIDGES_SVG}</section>
 <section><div class="wrap"><div class="truths">{truths}</div></div></section>
-<section class="alt"><div class="wrap split">
-  <img class="portrait" src="{up}assets/jr-headshot.jpg" alt="{esc(SITE['agent'])}">
-  <div><h2>{esc(T['why_h2'])}</h2><p>{esc(T['why_p'])}</p><ul class="plain">{bullets}</ul>
-  <a class="btn quiet" href="about.html">{esc(T['why_btn'])}</a></div>
+<section class="alt"><div class="wrap"><h2>{esc(T['hm_sold_h2'])}</h2><p>{esc(T['hm_sold_p'])}</p>
+<div class="sold-strip">{figs}</div>
+<p style="margin-top:22px"><a class="btn quiet" href="sold.html">{esc(T['hm_sold_btn'])}</a></p></div></section>
+<section><div class="wrap why-one">
+  <h2>{esc(T['why_h2'])}</h2><p>{esc(T['why_p'])}</p><ul class="plain">{bullets}</ul>
+  <a class="btn quiet" href="about.html">{esc(T['why_btn'])}</a>
+</div></section>
+<section class="books-band"><div class="wrap">
+  <div><h2>{esc(T['hm_books_h2'])}</h2><p>{esc(T['hm_books_p'])}</p><a class="btn" href="free-books.html">{esc(T['hm_books_btn'])}</a></div>
+  <div class="books-row">{covers}</div>
 </div></section>
 <section><div class="wrap"><h2>{esc(T['listings_h2'])}</h2><div class="cards">{cards}</div>
 <p style="margin-top:22px"><a class="btn quiet" href="{listings_href}">{esc(T['listings_btn'])}</a></p></div></section>
-<section class="alt"><div class="wrap"><h2>{esc(T['cta_h2'])}</h2><p>{esc(T['cta_p'])}</p>
+<section class="alt quote-band"><div class="wrap"><blockquote><span class="mark">“</span><p>{esc(qt)}</p><footer>{esc(q['name'])}{", " + ("opinión en Google" if es else "Google review")}</footer></blockquote></div></section>
+<section><div class="wrap"><h2>{esc(T['cta_h2'])}</h2><p>{esc(T['cta_p'])}</p>
 <a class="btn" href="contact.html">{esc(T['cta_btn'])}</a></div></section>"""
 
 def page_home_value(T):
