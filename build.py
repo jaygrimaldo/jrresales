@@ -567,10 +567,14 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .btn.quiet{background:transparent;color:var(--ridge);border:1.5px solid var(--ridge)}
 .btn.quiet:hover{background:var(--haze)}
 /* home redesign */
-.hero{position:relative;overflow:hidden;padding:56px 0 250px;
-  background:radial-gradient(ellipse 55% 40% at 68% 76%,rgba(246,205,130,.75) 0,rgba(246,205,130,.25) 45%,rgba(246,205,130,0) 75%),
-             linear-gradient(180deg,#14273a 0%,#1f374d 32%,#3a5874 54%,#8f8a8a 70%,#dcae72 82%,#eec488 100%)}
-@media(min-width:900px){.hero{padding-bottom:300px}}
+/* Hero photo: Blue Ridge Mountains at sunset, by Sara Parlier on Unsplash
+   (unsplash.com/photos/mmVBTYA45ok). Unsplash License: free for business use, no credit required. */
+.hero{position:relative;overflow:hidden;padding:72px 0 88px;
+  background:linear-gradient(180deg,rgba(12,24,36,.78) 0%,rgba(12,24,36,.55) 55%,rgba(12,24,36,.35) 100%),
+             url(hero-mountains-1200.jpg) center 70%/cover no-repeat #21384c}
+@media(min-width:900px){.hero{padding:110px 0 130px;
+  background:linear-gradient(90deg,rgba(12,24,36,.86) 0%,rgba(12,24,36,.62) 42%,rgba(12,24,36,.18) 78%,rgba(12,24,36,.10) 100%),
+             url(hero-mountains.jpg) center 65%/cover no-repeat #21384c}}
 .hero .wrap{position:relative;z-index:1}
 .hero-grid{display:grid;gap:32px;align-items:center}
 @media(min-width:900px){.hero-grid{grid-template-columns:1fr 330px;gap:56px}}
@@ -583,8 +587,7 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .hero-me-m img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
 .hero-me-m b{display:block;color:#fff}
 @media(min-width:900px){.hero-me-m{display:none}}
-.ridges{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:280px;display:block;z-index:0}
-@media(min-width:900px){.ridges{height:360px}}
+
 .hero h1,.hero p{text-shadow:0 1px 12px rgba(10,22,32,.45)}
 .truths > div{border-top:3px solid var(--gold);padding-top:14px}
 .sold-strip{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
@@ -967,7 +970,7 @@ def page_home(T):
     <button class="btn" type="submit">{esc(T['hero_btn'])}</button>
   </form></div>
   <div class="hero-me"><img src="{up}assets/jr-headshot.jpg" alt="{esc(SITE['agent'])}"><b>{esc(T['hero_who'])}</b><span>{esc(T['hero_where'])}</span></div>
-</div></div>{RIDGES_SVG}</section>
+</div></div></section>
 <section><div class="wrap"><div class="truths">{truths}</div></div></section>
 <section class="alt"><div class="wrap"><h2>{esc(T['hm_sold_h2'])}</h2><p>{esc(T['hm_sold_p'])}</p>
 <div class="sold-strip">{figs}</div>
