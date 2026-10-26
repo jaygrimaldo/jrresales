@@ -693,7 +693,9 @@ form.sheet .books label{display:grid}
 .shelf .go{color:var(--ridge);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .bookhero{display:grid;gap:24px;align-items:start}
 @media(min-width:800px){.bookhero{grid-template-columns:300px 1fr;gap:48px}}
-.bookhero img{width:100%;max-width:320px;margin:0 auto}
+.bookhero img{width:130px;height:auto;margin:0}
+@media(min-width:800px){.bookhero img{width:100%;max-width:320px;margin:0 auto}}
+@media(max-width:799px){.bookhero{gap:14px}.bookhero h1{font-size:1.65rem}}
 .form-msg{padding:16px 18px;border-radius:8px;font-size:1.05rem;max-width:62ch;margin:0}
 .form-msg.ok{background:#e6f1ea;color:#1d4a2e;border-left:4px solid #2f7a4a}
 .form-msg.bad{background:#fbeaea;color:#6b1f1f;border-left:4px solid #b03a3a}
