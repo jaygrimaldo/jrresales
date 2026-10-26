@@ -109,6 +109,17 @@ form.sheet .book input[type=checkbox]{position:absolute;top:12px;right:12px;widt
 .book b{display:block;font-size:1.02rem;margin-bottom:4px}
 .book span{display:block;font-size:.95rem;color:var(--ink-2)}
 form.sheet .books label{display:grid}
+.shelf{display:grid;gap:18px}
+@media(min-width:720px){.shelf{grid-template-columns:repeat(3,1fr)}}
+.shelf a{display:grid;gap:10px;padding:18px;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);text-align:center;background:#fff}
+.shelf a:hover{border-color:var(--gold);background:#fbf6ea}
+.shelf img{width:170px;height:auto;margin:0 auto}
+.shelf b{font-size:1.05rem}
+.shelf span{font-size:.95rem;color:var(--ink-2)}
+.shelf .go{color:var(--ridge);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.bookhero{display:grid;gap:24px;align-items:start}
+@media(min-width:800px){.bookhero{grid-template-columns:300px 1fr;gap:48px}}
+.bookhero img{width:100%;max-width:320px;margin:0 auto}
 .form-msg{padding:16px 18px;border-radius:8px;font-size:1.05rem;max-width:62ch;margin:0}
 .form-msg.ok{background:#e6f1ea;color:#1d4a2e;border-left:4px solid #2f7a4a}
 .form-msg.bad{background:#fbeaea;color:#6b1f1f;border-left:4px solid #b03a3a}
