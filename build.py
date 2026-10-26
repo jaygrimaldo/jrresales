@@ -569,10 +569,10 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 /* home redesign */
 /* Hero photo: Blue Ridge Mountains at sunset, by Sara Parlier on Unsplash
    (unsplash.com/photos/mmVBTYA45ok). Unsplash License: free for business use, no credit required. */
-.hero{position:relative;overflow:hidden;padding:72px 0 88px;
+.hero{position:relative;overflow:hidden;padding:64px 0 48px;
   background:linear-gradient(180deg,rgba(12,24,36,.78) 0%,rgba(12,24,36,.55) 55%,rgba(12,24,36,.35) 100%),
              url(hero-mountains-1200.jpg) center 70%/cover no-repeat #21384c}
-@media(min-width:900px){.hero{padding:110px 0 130px;
+@media(min-width:900px){.hero{padding:96px 0 72px;
   background:linear-gradient(90deg,rgba(12,24,36,.86) 0%,rgba(12,24,36,.62) 42%,rgba(12,24,36,.18) 78%,rgba(12,24,36,.10) 100%),
              url(hero-mountains.jpg) center 65%/cover no-repeat #21384c}}
 .hero .wrap{position:relative;z-index:1}
@@ -590,6 +590,10 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 
 .hero h1,.hero p{text-shadow:0 1px 12px rgba(10,22,32,.45)}
 .truths > div{border-top:3px solid var(--gold);padding-top:14px}
+.hero-truths{margin-top:44px;padding:20px 22px 22px;background:rgba(12,24,36,.58);border-radius:12px;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.hero .hero-truths h3{color:#fff}
+.hero .hero-truths p{color:#e6edf2;text-shadow:none}
+@media(min-width:900px){.hero-truths{margin-top:56px}}
 .sold-strip{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
 @media(min-width:900px){.sold-strip{grid-template-columns:repeat(4,1fr)}}
 .sold-strip figure{margin:0;border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--line)}
@@ -970,8 +974,8 @@ def page_home(T):
     <button class="btn" type="submit">{esc(T['hero_btn'])}</button>
   </form></div>
   <div class="hero-me"><img src="{up}assets/jr-headshot.jpg" alt="{esc(SITE['agent'])}"><b>{esc(T['hero_who'])}</b><span>{esc(T['hero_where'])}</span></div>
-</div></div></section>
-<section><div class="wrap"><div class="truths">{truths}</div></div></section>
+</div>
+<div class="truths hero-truths">{truths}</div></div></section>
 <section class="alt"><div class="wrap"><h2>{esc(T['hm_sold_h2'])}</h2><p>{esc(T['hm_sold_p'])}</p>
 <div class="sold-strip">{figs}</div>
 <p style="margin-top:22px"><a class="btn quiet" href="sold.html">{esc(T['hm_sold_btn'])}</a></p></div></section>
