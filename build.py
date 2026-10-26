@@ -319,14 +319,14 @@ EN = {
     "ct_fields": {"name": "Your name", "email": "Email", "phone": "Phone (optional)",
                   "message": "How can I help?", "submit": "Send"},
     # free books
-    "bk_h1": "Free books on selling and buying a home",
+    "bk_h1": "Free books for home sellers",
     "bk_p": "These are my books. Pick the ones you want and I'll mail them to you. Free. No cost, no obligation, and no sales call.",
     "bk_pick": "Which books would you like? Check one or more.",
     "bk_more": "About this book",
     "bk_h1_one": "Free book: {title}",
     "bk_req_h2": "Get your free copy",
     "bk_req_p": "I'll mail it to you. Want the others too? Check them as well.",
-    "bk_back": "All three books",
+    "bk_back": "All the books",
     "bk_p_over": "These are my books. Pick the one you want to know more about. Each page tells you what's in the book and lets you ask for a copy. I'll mail it to you. Free. No cost, no obligation, and no sales call.",
     "bk_fields": {"name": "Your name", "email": "Email", "phone": "Phone (optional)",
                   "street": "Street address", "city": "City", "state": "State", "zip": "ZIP",
@@ -441,14 +441,14 @@ ES = {
     "ct_form_h2": "O envíe un mensaje",
     "ct_fields": {"name": "Su nombre", "email": "Correo electrónico", "phone": "Teléfono (opcional)",
                   "message": "¿En qué puedo ayudarle?", "submit": "Enviar"},
-    "bk_h1": "Libros gratis sobre vender y comprar una casa",
+    "bk_h1": "Libros gratis para quienes venden su casa",
     "bk_p": "Estos son mis libros. Elija los que quiera y se los envío por correo. Gratis. Sin costo, sin compromiso y sin llamada de ventas. Los libros están escritos en inglés.",
     "bk_pick": "¿Qué libros quiere? Marque uno o más.",
     "bk_more": "Sobre este libro",
     "bk_h1_one": "Libro gratis: {title}",
     "bk_req_h2": "Pida su copia gratis",
     "bk_req_p": "Se la envío por correo. ¿Quiere los otros también? Márquelos.",
-    "bk_back": "Los tres libros",
+    "bk_back": "Todos los libros",
     "bk_p_over": "Estos son mis libros. Elija el que quiera conocer. Cada página explica qué trae el libro y le permite pedir una copia. Se la envío por correo. Gratis. Sin costo, sin compromiso y sin llamada de ventas. Los libros están escritos en inglés.",
     "bk_fields": {"name": "Su nombre", "email": "Correo electrónico", "phone": "Teléfono (opcional)",
                   "street": "Dirección", "city": "Ciudad", "state": "Estado", "zip": "Código postal",
@@ -466,8 +466,10 @@ ES = {
     "footer_eho": "Igualdad de oportunidades de vivienda.",
 }
 
-# The printed books J.R. has on hand (photographed 10/26/2026). All three are
-# in English. Remove a book here when he runs out of copies.
+# The printed books J.R. offers (photographed 10/26/2026). All are in English.
+# Remove a book here when he runs out of copies. "Complete Guide to Buying a Home"
+# was taken off 10/26/2026: J.R. wants the site to draw sellers, not buyers.
+# Its cover image (book-buyers.png) is kept in assets in case he wants it back.
 BOOKS = [
     {"key": "How to Sell Homes Fast for Top Dollar", "slug": "free-book-sell-fast", "photo": "book-sellers.png",
      "title": "How to Sell Homes Fast for Top Dollar",
@@ -483,20 +485,6 @@ BOOKS = [
          "La mayoría de las casas que se venden rápido y a buen precio tienen tres cosas en común. Tuvieron el precio correcto desde el primer día. Estaban listas para mostrarse. Y los compradores se enteraron de ellas.",
          "Este libro explica cada una de esas cosas, en lenguaje sencillo. Cómo poner un precio que haga actuar a los compradores. Qué arreglar, limpiar y sacar antes de las fotos, y en qué no vale la pena gastar. Cómo llega una casa a los compradores hoy. Y qué esperar cuando empiezan las ofertas, desde la primera negociación hasta el día del cierre.",
          "Está escrito para un dueño que no ha vendido en mucho tiempo, o que nunca ha vendido. Sin términos técnicos. Se lee en una tarde. El libro está en inglés.",
-     ]},
-    {"key": "Complete Guide to Buying a Home", "slug": "free-book-buying", "photo": "book-buyers.png",
-     "title": "Complete Guide to Buying a Home",
-     "line": "For anyone buying a home, first or next. What happens at each step, from getting pre-approved to closing day.",
-     "line_es": "Para quien va a comprar una casa, la primera o la siguiente. Qué pasa en cada paso, desde la preaprobación hasta el día del cierre.",
-     "about": [
-         "Buying a home is a long list of steps, and most people only do it a few times in their life. This book puts the steps in order.",
-         "It starts before the house hunt: what lenders look at, what a pre-approval is, and how much home you can really afford. Then the search itself, how to look at a house with a clear head, and what to do when you find the one. Then the part most people find confusing: the offer, the inspection, the appraisal, and all the paperwork between a signed contract and the keys.",
-         "If you're buying your first home, this is the guide I wish every first-time buyer had read before we started. If you've bought before, it's a good refresher, because the process has changed.",
-     ],
-     "about_es": [
-         "Comprar una casa es una lista larga de pasos, y la mayoría de la gente lo hace solo unas pocas veces en la vida. Este libro pone los pasos en orden.",
-         "Empieza antes de buscar casa: qué revisan los prestamistas, qué es una preaprobación, y cuánta casa puede pagar en realidad. Luego la búsqueda, cómo ver una casa con la cabeza fría, y qué hacer cuando encuentra la suya. Después la parte que más confunde: la oferta, la inspección, el avalúo, y todo el papeleo entre el contrato firmado y las llaves.",
-         "Si va a comprar su primera casa, esta es la guía que me gustaría que todo comprador leyera antes de empezar. Si ya ha comprado antes, es un buen repaso, porque el proceso ha cambiado. El libro está en inglés.",
      ]},
     {"key": "Expired!? A Guide for Selling Homes Others Couldn't Sell", "slug": "free-book-expired", "photo": "book-expired.png",
      "title": "Expired!? A Guide for Selling Homes Others Couldn't Sell",
@@ -615,7 +603,7 @@ form.sheet textarea{min-height:120px}
 .three{display:grid;gap:14px}
 .fine{font-size:.9rem;color:var(--ink-2)}
 .books{display:grid;gap:18px;margin:0 0 6px}
-@media(min-width:720px){.books{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:720px){.books{grid-template-columns:repeat(2,1fr);max-width:640px}}
 .book{position:relative;display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start;padding:14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;cursor:pointer}
 @media(min-width:720px){.book{grid-template-columns:1fr;text-align:center}.book img{margin:0 auto}}
 .book img{width:96px;height:auto}
@@ -627,7 +615,7 @@ form.sheet .book input[type=checkbox]{position:absolute;top:12px;right:12px;widt
 .book span{display:block;font-size:.95rem;color:var(--ink-2)}
 form.sheet .books label{display:grid}
 .shelf{display:grid;gap:18px}
-@media(min-width:720px){.shelf{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:720px){.shelf{grid-template-columns:repeat(2,1fr);max-width:760px}}
 .shelf a{display:grid;gap:10px;padding:18px;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);text-align:center;background:#fff}
 .shelf a:hover{border-color:var(--gold);background:#fbf6ea}
 .shelf img{width:170px;height:auto;margin:0 auto}
@@ -1243,7 +1231,7 @@ def build():
         "sold.html": f"{n_sales} homes sold and bought since 2016 in Greer, Taylors, Greenville, Simpsonville, Inman, Landrum, and across the Upstate SC. {REPEAT_FAMILIES} families have come back to work with J.R. again.",
         "about.html": "Meet J.R. Grimaldo, a Landrum-based South Carolina REALTOR® since 2016. Quality over quantity, quick replies, and clients who come back. Hablo español.",
         "reviews.html": "What clients say about buying and selling with J.R. Grimaldo, REALTOR®, in the Upstate SC.",
-        "free-books.html": "Free books on selling and buying a home, mailed to you by J.R. Grimaldo, REALTOR® in Landrum, SC. No cost, no obligation, no sales call.",
+        "free-books.html": "Free books on selling your home, mailed to you by J.R. Grimaldo, REALTOR® in Landrum, SC. No cost, no obligation, no sales call.",
         "contact.html": "Call or text J.R. Grimaldo at 864-381-2326. He answers most calls live and replies to texts right away. Landrum and Upstate SC Real Estate.",
     }
     DE = {
@@ -1253,7 +1241,7 @@ def build():
         "sold.html": f"{n_sales} casas vendidas y compradas desde 2016 en Greer, Taylors, Greenville, Simpsonville, Inman, Landrum y todo el Upstate de Carolina del Sur. {REPEAT_FAMILIES} familias han vuelto a trabajar con J.R.",
         "about.html": "Conozca a J.R. Grimaldo, REALTOR® de Carolina del Sur desde 2016, con base en Landrum. Calidad antes que cantidad y respuestas rápidas. Hablo español.",
         "reviews.html": "Lo que dicen los clientes de comprar y vender con J.R. Grimaldo, REALTOR®, en el Upstate de Carolina del Sur.",
-        "free-books.html": "Libros gratis sobre vender y comprar una casa, enviados por correo por J.R. Grimaldo, REALTOR® en Landrum, SC. Sin costo ni compromiso.",
+        "free-books.html": "Libros gratis sobre vender su casa, enviados por correo por J.R. Grimaldo, REALTOR® en Landrum, SC. Sin costo ni compromiso.",
         "contact.html": "Llame o envíe un texto a J.R. Grimaldo al 864-381-2326. Contesta la mayoría de las llamadas en el momento. Bienes raíces en Landrum y el Upstate.",
     }
     # English: (title, body, language switch, Spanish twin or None)
@@ -1264,7 +1252,7 @@ def build():
         "sold.html": ("Sold Homes – " + SITE["agent"] + ", REALTOR®", page_sold(EN), "es/sold.html", "sold.html"),
         "about.html": ("About J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(EN), "es/about.html", "about.html"),
         "reviews.html": ("Client Reviews – " + SITE["agent"] + ", REALTOR®", page_reviews(EN), "es/reviews.html", "reviews.html"),
-        "free-books.html": ("Free Books on Selling and Buying a Home – " + SITE["agent"], page_books(EN), "es/free-books.html", "free-books.html"),
+        "free-books.html": ("Free Books on Selling Your Home – " + SITE["agent"], page_books(EN), "es/free-books.html", "free-books.html"),
         "contact.html": ("Contact J.R. Grimaldo, REALTOR®", page_contact(EN), "es/contact.html", "contact.html"),
     }
     for b in BOOKS:
@@ -1284,7 +1272,7 @@ def build():
         "sold.html": ("Casas vendidas – " + SITE["agent"] + ", REALTOR®", page_sold(ES), "../sold.html"),
         "about.html": ("Sobre J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(ES), "../about.html"),
         "reviews.html": ("Opiniones de clientes – " + SITE["agent"] + ", REALTOR®", page_reviews(ES), "../reviews.html"),
-        "free-books.html": ("Libros gratis sobre vender y comprar una casa – " + SITE["agent"], page_books(ES), "../free-books.html"),
+        "free-books.html": ("Libros gratis sobre vender su casa – " + SITE["agent"], page_books(ES), "../free-books.html"),
         "contact.html": ("Contácteme – " + SITE["agent"] + ", REALTOR®", page_contact(ES), "../contact.html"),
     }
     for b in BOOKS:
