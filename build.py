@@ -1226,7 +1226,7 @@ def page_town(key):
         # "clients," so it is true where J.R. represented only the buyer.
         n = len(sales)
         if n >= 5:
-            first = f"I've been selling homes across the Upstate since 2016, and {name} is one of the places I've worked the most. I've helped folks buy and sell homes here."
+            first = f"I've been selling homes across the Upstate since 2016, and {name} is one of the places I've worked the most, helping folks buy and sell homes."
         elif n >= 3:
             first = f"I've been selling homes across the Upstate since 2016, and I've helped folks buy and sell homes in {name}."
         elif n >= 1:
