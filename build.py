@@ -1209,8 +1209,8 @@ def town_meta(key):
     title = f"Selling Your Home in {t['name']}, SC – J.R. Grimaldo, REALTOR®"
     if key == "landrum":
         desc = "J.R. Grimaldo lives in Landrum and has helped neighbors here buy and sell homes since 2016. Get a free home valuation, prepared by J.R. himself, within one business day."
-    elif n >= 3:
-        desc = (f"J.R. Grimaldo has helped clients buy and sell {n} homes in {t['name']}, SC. "
+    elif n >= 1:
+        desc = (f"J.R. Grimaldo has helped people buy and sell homes in {t['name']}, SC. "
                 "Get a free written home valuation, prepared by J.R. himself, within one business day.")
     else:
         desc = (f"Selling your home in {t['name']}, SC? J.R. Grimaldo lives close by in Landrum. "
@@ -1222,13 +1222,15 @@ def page_town(key):
     if "intro" in t:
         intro_l = t["intro"]
     else:
+        # No numbers (J.R., 10/27/2026): counts change all the time. "People," not
+        # "clients," so it is true where J.R. represented only the buyer.
         n = len(sales)
         if n >= 5:
-            first = f"I've been selling homes across the Upstate since 2016, and {name} is one of the places I've worked the most. I've helped clients buy and sell {n} homes here."
+            first = f"I've been selling homes across the Upstate since 2016, and {name} is one of the places I've worked the most. I've helped people buy and sell homes here."
         elif n >= 3:
-            first = f"I've been selling homes across the Upstate since 2016, and I've helped clients buy and sell {n} homes in {name}."
+            first = f"I've been selling homes across the Upstate since 2016, and I've helped people buy and sell homes in {name}."
         elif n >= 1:
-            first = f"I live close by in Landrum, and {name} is part of the area I focus on. I've helped clients here before, and I'd be glad to help you sell."
+            first = f"I live close by in Landrum, and {name} is part of the area I focus on. I've helped people buy and sell homes here, and I'd be glad to help you sell."
         else:
             first = f"I live close by in Landrum, and {name} is part of the area I focus on. I'd be glad to help you sell your home here."
         intro_l = [first,
