@@ -356,7 +356,7 @@ EN = {
                   "need": "Please check at least one book."},
     # newsletter
     "nl_h1": "My monthly newsletter",
-    "nl_p": "Once a month, I send a short email about homes in our part of the Upstate. It's free, and you can stop it anytime.",
+    "nl_p": "Once a month, I send a short email about homes in our part of the Upstate: what homes are selling for in our towns, whether sales are up or down, where mortgage rates stand, and a tip or two for homeowners. It's free, and you can stop it anytime.",
     "nl_sign_h2": "Get it by email",
     "nl_fields": {"name": "Your name", "email": "Email", "submit": "Sign me up",
                   "fine": "Your email goes only to J.R. It is never sold or shared.",
@@ -496,7 +496,7 @@ ES = {
                   "ok": "Gracias. Sus libros van en camino. Revise su buzón en la próxima semana o dos.",
                   "need": "Por favor marque al menos un libro."},
     "nl_h1": "Mi boletín mensual",
-    "nl_p": "Una vez al mes, envío un correo corto sobre las casas en nuestra parte del Upstate. Es gratis, y puede cancelarlo cuando quiera. El boletín está en inglés.",
+    "nl_p": "Una vez al mes, envío un correo corto sobre las casas en nuestra parte del Upstate: en cuánto se venden las casas en nuestros pueblos, si las ventas suben o bajan, cómo están las tasas de hipoteca, y un consejo o dos para los dueños de casa. Es gratis, y puede cancelarlo cuando quiera. El boletín está en inglés.",
     "nl_sign_h2": "Recíbalo por correo",
     "nl_fields": {"name": "Su nombre", "email": "Correo electrónico", "submit": "Inscribirme",
                   "fine": "Su correo llega solo a J.R. Nunca se vende ni se comparte.",
@@ -1472,7 +1472,7 @@ def build():
         "sold.html": f"{n_sales} homes sold and bought since 2016 in Greer, Taylors, Greenville, Simpsonville, Inman, Landrum, and across the Upstate SC. {REPEAT_FAMILIES} families have come back to work with J.R. again.",
         "about.html": "Meet J.R. Grimaldo, a Landrum-based South Carolina REALTOR® since 2016. Quality over quantity, quick replies, and clients who come back. Hablo español.",
         "reviews.html": "What clients say about buying and selling with J.R. Grimaldo, REALTOR®, in the Upstate SC.",
-        "newsletter.html": "J.R. Grimaldo's free monthly newsletter about homes in Landrum and the Upstate SC. Read past issues or sign up by email.",
+        "newsletter.html": "J.R. Grimaldo's free monthly newsletter: what homes are selling for in Landrum and nearby Upstate SC towns, whether sales are up or down, and where mortgage rates stand. Sign up by email.",
         "free-books.html": "Free books on selling your home, mailed to you by J.R. Grimaldo, REALTOR® in Landrum, SC. No cost, no obligation, no sales call.",
         "contact.html": "Call or text J.R. Grimaldo at 864-381-2326. He answers most calls live and replies to texts right away. Landrum and Upstate SC Real Estate.",
     }
