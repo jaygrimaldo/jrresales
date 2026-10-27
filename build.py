@@ -63,7 +63,8 @@ LISTINGS = [
         "photo": "300-colony-rd.jpg",
         # Temporarily off the market (J.R., 10/27/2026) until the tenants leave
         # 11/30/2026. He may not advertise it while it is off the market, so it
-        # is hidden everywhere on the site. Delete this line to show it again.
+        # was hidden 10/27; J.R. then chose to show it with a banner instead.
+        # Delete this line when it is back on the market.
         "off_market": True,
     },
     {
@@ -79,9 +80,11 @@ LISTINGS = [
     },
 ]
 
-# Only listings that are on the market show anywhere on the site.
+# Listings marked off_market still show (J.R.'s decision, 10/27/2026) but
+# carry a "Temporarily off the market" banner across the photo, and come
+# after the on-market listings.
 ALL_LISTINGS = LISTINGS
-LISTINGS = [x for x in ALL_LISTINGS if not x.get("off_market")]
+LISTINGS = sorted(ALL_LISTINGS, key=lambda x: bool(x.get("off_market")))
 
 # Newest or strongest first. No closing dates shown. "role" says which side
 # J.R. represented. Only use photos from J.R.'s own listings; a home he sold
@@ -645,6 +648,8 @@ ul.plain li{margin-bottom:.45em}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .card .ph{aspect-ratio:4/3;background:var(--haze) repeating-linear-gradient(45deg,transparent 0 14px,rgba(47,75,95,.06) 14px 28px);display:flex;align-items:center;justify-content:center;color:var(--ink-2);font-size:.95rem}
 .card .ph img{width:100%;height:100%;object-fit:cover}
+.card .ph{position:relative}
+.card .offmk{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);background:rgba(155,28,28,.88);color:#fff;font-weight:600;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;text-align:center;padding:12px 10px}
 .card .body{padding:16px 18px 20px}
 .more-sold{margin-top:40px}
 .sold-list .rep{display:inline-block;margin-left:6px;font-size:.78rem;font-weight:600;color:#fff;background:var(--ridge);border-radius:999px;padding:1px 8px}
@@ -915,7 +920,10 @@ def card(it, T):
         phdiv = ""
     else:
         ph = f'<img src="{"../" if T["dir_prefix"] else ""}assets/{it["photo"]}" alt="{esc(it["address"])}">' if it.get("photo") else "Photo coming"
-        phdiv = f'<div class="ph">{ph}</div>'
+        ban = ""
+        if it.get("off_market"):
+            ban = ('<span class="offmk">' + ("Temporalmente fuera del mercado" if T["lang"] == "es" else "Temporarily off the market") + '</span>')
+        phdiv = f'<div class="ph">{ph}{ban}</div>'
     es = T["lang"] == "es"
     role_t = it.get("role_es") if es and it.get("role_es") else it.get("role")
     line_t = it.get("line_es") if es and it.get("line_es") else it.get("line", "")
