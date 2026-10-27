@@ -61,6 +61,10 @@ LISTINGS = [
         "mls": "Greenville MLS 1605021",
         "link": "https://jrgrimaldo.northgroupre.com/property/63-1605021-300-colony-road-travelers-rest-SC-29690",
         "photo": "300-colony-rd.jpg",
+        # Temporarily off the market (J.R., 10/27/2026) until the tenants leave
+        # 11/30/2026. He may not advertise it while it is off the market, so it
+        # is hidden everywhere on the site. Delete this line to show it again.
+        "off_market": True,
     },
     {
         "address": "207 Penrith Ct, Simpsonville, SC 29681",
@@ -74,6 +78,10 @@ LISTINGS = [
         "photo": "207-penrith-ct.jpg",
     },
 ]
+
+# Only listings that are on the market show anywhere on the site.
+ALL_LISTINGS = LISTINGS
+LISTINGS = [x for x in ALL_LISTINGS if not x.get("off_market")]
 
 # Newest or strongest first. No closing dates shown. "role" says which side
 # J.R. represented. Only use photos from J.R.'s own listings; a home he sold
