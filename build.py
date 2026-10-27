@@ -35,9 +35,9 @@ SITE = {
     "phone_tel": "+18643812326",
     "email": "jr@jrresales.com",
     "home_town": "Landrum, SC",
-    "areas": ["Landrum", "Campobello", "Inman", "Lyman", "Greer", "Taylors",
-              "Greenville", "Spartanburg", "Simpsonville", "Fountain Inn",
-              "Travelers Rest"],
+    # J.R.'s focus area (10/27/2026). He still takes listings elsewhere.
+    "areas": ["Landrum", "Campobello", "Inman", "Boiling Springs", "Greer", "Lyman",
+              "Duncan", "Wellford", "Travelers Rest", "Taylors"],
     # Leave empty to send the valuation form by the visitor's own email app.
     # Paste a Formspree form ID (e.g. "xabcdefg") to send through Formspree.
     "formspree_id": "mdeenynr",
@@ -1154,12 +1154,24 @@ def page_reviews(T):
 # automatically from SOLD and SOLD_MORE, so a new sale shows up on its town page.
 # Only J.R.'s real sales; no dates; no claims about other agents.
 # J.R., 10/23/2026: "Go ahead and do anything ... to promote this."
-TOWN_ORDER = ["landrum", "greer", "taylors", "greenville", "simpsonville", "inman", "travelers-rest", "fountain-inn"]
+# Focus towns, in J.R.'s order (10/27/2026): footer links and "Other towns I work in".
+TOWN_ORDER = ["landrum", "campobello", "inman", "boiling-springs", "greer", "lyman",
+              "duncan", "wellford", "travelers-rest", "taylors"]
+# Built and kept online (Google already knows them), but not linked in the footer
+# or town lists. J.R.: he would not turn down a listing there; he just doesn't
+# concentrate there.
+TOWN_EXTRA = ["greenville", "simpsonville", "fountain-inn"]
+TOWN_PAGES = TOWN_ORDER + TOWN_EXTRA
 TOWNS = {
     "landrum": {"name": "Landrum",
         "intro": ["I live in Landrum, and I've been helping my neighbors here buy and sell homes since 2016.",
                   "When you sell with me, you get an agent who knows the streets, the neighborhoods, and what buyers here are looking for. I also work in the towns around us, including Campobello, Inman, and Lyman."],
         "note": "The same family on all three. They bought Page Creek with me, then came back years later to sell it and buy Talbert Trail."},
+    "campobello": {"name": "Campobello"},
+    "boiling-springs": {"name": "Boiling Springs"},
+    "lyman": {"name": "Lyman"},
+    "duncan": {"name": "Duncan"},
+    "wellford": {"name": "Wellford"},
     "greer": {"name": "Greer"},
     "taylors": {"name": "Taylors"},
     "greenville": {"name": "Greenville"},
@@ -1197,8 +1209,11 @@ def town_meta(key):
     title = f"Selling Your Home in {t['name']}, SC – J.R. Grimaldo, REALTOR®"
     if key == "landrum":
         desc = "J.R. Grimaldo lives in Landrum and has helped neighbors here buy and sell homes since 2016. Get a free home valuation, prepared by J.R. himself, within one business day."
-    else:
+    elif n >= 3:
         desc = (f"J.R. Grimaldo has helped clients buy and sell {n} homes in {t['name']}, SC. "
+                "Get a free written home valuation, prepared by J.R. himself, within one business day.")
+    else:
+        desc = (f"Selling your home in {t['name']}, SC? J.R. Grimaldo lives close by in Landrum. "
                 "Get a free written home valuation, prepared by J.R. himself, within one business day.")
     return title, desc
 
@@ -1207,9 +1222,15 @@ def page_town(key):
     if "intro" in t:
         intro_l = t["intro"]
     else:
-        first = (f"I've been selling homes across the Upstate since 2016, and {name} is one of the places I've worked the most. I've helped clients buy and sell {len(sales)} homes here."
-                 if len(sales) >= 5 else
-                 f"I've been selling homes across the Upstate since 2016, and I've helped clients buy and sell {len(sales)} homes in {name}.")
+        n = len(sales)
+        if n >= 5:
+            first = f"I've been selling homes across the Upstate since 2016, and {name} is one of the places I've worked the most. I've helped clients buy and sell {n} homes here."
+        elif n >= 3:
+            first = f"I've been selling homes across the Upstate since 2016, and I've helped clients buy and sell {n} homes in {name}."
+        elif n >= 1:
+            first = f"I live close by in Landrum, and {name} is part of the area I focus on. I've helped clients here before, and I'd be glad to help you sell."
+        else:
+            first = f"I live close by in Landrum, and {name} is part of the area I focus on. I'd be glad to help you sell your home here."
         intro_l = [first,
                    "I believe in quality over quantity. Every client gets my full attention, and I'm the only one who answers my phone."]
     intro = "".join(f"<p>{esc(x)}</p>" for x in intro_l)
@@ -1223,15 +1244,16 @@ def page_town(key):
     lst = town_listings(name)
     lst_html = (f'<section><div class="wrap"><h2>For sale now in {esc(name)}</h2><div class="cards">'
                 + "".join(card(x, EN) for x in lst) + '</div></div></section>') if lst else ""
+    sales_html = (f'''<section class="alt"><div class="wrap"><h2>My {esc(name)} sales</h2>
+<ul class="sold-list">{rows}</ul>{note}
+<p><a class="btn quiet" href="sold.html">See all my sales</a></p></div></section>''') if sales else ""
     how = "".join(f"<li>{esc(x)}</li>" for x in TOWN_HOW)
     others = " · ".join(f'<a href="{k}.html">{esc(TOWNS[k]["name"])}</a>' for k in TOWN_ORDER if k != key)
     return f"""
 <section><div class="wrap"><h1>Selling your home in {esc(name)}</h1>{intro}
 <p><a class="btn" href="home-value.html">Get my free valuation</a></p></div></section>
 {lst_html}
-<section class="alt"><div class="wrap"><h2>My {esc(name)} sales</h2>
-<ul class="sold-list">{rows}</ul>{note}
-<p><a class="btn quiet" href="sold.html">See all my sales</a></p></div></section>
+{sales_html}
 <section><div class="wrap"><h2>What you get when you sell with me</h2><ul class="plain">{how}</ul></div></section>
 <section class="alt"><div class="wrap"><h2>What's your {esc(name)} home worth?</h2>
 <p>Tell me the address. I'll look at your home and the recent sales around it, and send you a written valuation within one business day.</p>
@@ -1362,7 +1384,7 @@ def build():
     base = "https://" + SITE["domain"] + "/"
     urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "contact.html",
             "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/contact.html"]
-    urls += [b["slug"] + ".html" for b in BOOKS] + ["es/" + b["slug"] + ".html" for b in BOOKS] + [k + ".html" for k in TOWN_ORDER]
+    urls += [b["slug"] + ".html" for b in BOOKS] + ["es/" + b["slug"] + ".html" for b in BOOKS] + [k + ".html" for k in TOWN_PAGES]
     import datetime as _dt
     today = _dt.date.today().isoformat()
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -1409,7 +1431,7 @@ def build():
         D[n] = b["line"] + " Free, mailed to you by J.R. Grimaldo, REALTOR® in Landrum, SC."
     for name, (title, body, sw, alt) in pages.items():
         (OUT / name).write_text(layout(EN, name, title, body, sw, D[name], alt))
-    for k in TOWN_ORDER:
+    for k in TOWN_PAGES:
         title, desc = town_meta(k)
         (OUT / (k + ".html")).write_text(layout(EN, k + ".html", title, page_town(k), "es/index.html", desc))
     # Spanish
@@ -1429,7 +1451,7 @@ def build():
         DE[n] = b["line_es"] + " Gratis, enviado por correo por J.R. Grimaldo, REALTOR® en Landrum, SC."
     for name, (title, body, sw) in es_pages.items():
         (OUT / "es" / name).write_text(layout(ES, name, title, body, sw, DE[name], name))
-    print("built", len(pages) + len(es_pages) + len(TOWN_ORDER), "pages into", OUT)
+    print("built", len(pages) + len(es_pages) + len(TOWN_PAGES), "pages into", OUT)
 
 if __name__ == "__main__":
     build()
