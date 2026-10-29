@@ -1066,14 +1066,14 @@ def page_home(T):
   <div class="hero-me"><img src="{up}assets/jr-headshot.jpg" alt="{esc(SITE['agent'])}" width="280" height="280"><b>{esc(T['hero_who'])}</b><span>{esc(T['hero_where'])}</span></div>
 </div>
 <div class="truths hero-truths">{truths}</div></div></section>
-<section class="alt"><div class="wrap"><h2>{esc(T['hm_sold_h2'])}</h2><p>{esc(T['hm_sold_p'])}</p>
-<div class="sold-strip">{figs}</div>
-<p style="margin-top:22px"><a class="btn quiet" href="sold.html">{esc(T['hm_sold_btn'])}</a></p></div></section>
 {towns_band}
 <section><div class="wrap why-one">
   <h2>{esc(T['why_h2'])}</h2><p>{esc(T['why_p'])}</p><ul class="plain">{bullets}</ul>
   <a class="btn quiet" href="about.html">{esc(T['why_btn'])}</a>
 </div></section>
+<section class="alt"><div class="wrap"><h2>{esc(T['hm_sold_h2'])}</h2><p>{esc(T['hm_sold_p'])}</p>
+<div class="sold-strip">{figs}</div>
+<p style="margin-top:22px"><a class="btn quiet" href="sold.html">{esc(T['hm_sold_btn'])}</a></p></div></section>
 <section class="books-band"><div class="wrap">
   <div><h2>{esc(T['hm_books_h2'])}</h2><p>{esc(T['hm_books_p'])}</p><a class="btn" href="free-books.html">{esc(T['hm_books_btn'])}</a></div>
   <div class="books-row">{covers}</div>
