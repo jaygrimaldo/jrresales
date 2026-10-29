@@ -710,7 +710,27 @@ form.sheet textarea{min-height:120px}
 .nl-list li:last-child{border-bottom:1px solid var(--line)}
 .nl-list a{text-decoration:none}
 .nl-body{max-width:65ch}
-.nl-body h2{font-size:1.3rem;margin-top:1.4em}
+.nl-body h2{font-size:clamp(1.5rem,3.6vw,2.1rem);margin-top:0}
+.nl-body h3{font-size:1.25rem;margin:0 0 .6em;color:var(--ridge-deep)}
+.nl-kicker{font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink);margin:0 0 .4em}
+.nl-head h1{margin-bottom:.35em}
+section[id]{scroll-margin-top:12px}
+.tbl-wrap{overflow-x:auto;margin:6px 0 18px;border:1px solid var(--line);border-radius:10px;-webkit-overflow-scrolling:touch}
+.nl-table{border-collapse:collapse;width:100%;min-width:640px;font-size:.97rem;font-variant-numeric:tabular-nums}
+.nl-table caption{text-align:left;font-weight:600;padding:12px 14px 6px;color:var(--ink-2);font-size:.92rem}
+.nl-table th,.nl-table td{padding:10px 14px;text-align:right;border-top:1px solid var(--line);white-space:nowrap}
+.nl-table thead th{font-size:.85rem;color:var(--ink-2);font-weight:600;background:var(--stone)}
+.nl-table th[scope=row],.nl-table thead th:first-child{text-align:left;position:sticky;left:0;background:var(--paper)}
+.nl-table thead th:first-child{background:var(--stone)}
+.nl-table tr.tot th,.nl-table tr.tot td{font-weight:700;background:#f6edd9}
+.nl-table tr.tot th[scope=row]{background:#f6edd9}
+.nl-sign{font-size:.92rem;color:var(--ink-2);margin-top:22px}
+.nl-boxes{display:none;list-style:none;padding:0;margin:6px 0 18px}
+.nl-boxes li{display:grid;gap:2px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.nl-boxes li span{color:var(--ink-2);font-size:.97rem}
+.nl-boxes li.tot{background:#f6edd9;border-color:#e3d3ad}
+.nl-boxes li.cap{border:0;padding:0 2px 4px;color:var(--ink-2);font-size:.9rem;font-weight:600}
+@media(max-width:700px){.tbl-wrap{display:none}.nl-boxes{display:block}}
 .books{display:grid;gap:18px;margin:0 0 6px}
 @media(min-width:720px){.books{grid-template-columns:repeat(2,1fr);max-width:640px}}
 .book{position:relative;display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start;padding:14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;cursor:pointer}
@@ -1116,12 +1136,110 @@ def page_book(T, b):
 <section class="alt" id="request"><div class="wrap"><h2>{esc(T['bk_req_h2'])}</h2><p>{esc(T['bk_req_p'])}</p>{_book_form(T, b["key"])}</div></section>
 <section><div class="wrap"><h2>{esc(T['bk_after_h2'])}</h2><ol class="steps">{steps}</ol></div></section>"""
 
-# Monthly newsletter issues, newest first. Each becomes its own page
-# (newsletter-<slug>.html). Issues are in English; the Spanish archive links to them.
-# Fields: slug (e.g. "2026-11"), date ("November 2026"), title, summary (one line),
-# body (list of paragraphs, plain text; a line starting "## " becomes a subheading).
-# Leave out unsubscribe links and other email-only parts.
-NEWSLETTERS = []
+# Monthly newsletter, "Front Porch Notes with J.R." Each issue has its own page
+# under /newsletter/ (issue-1.html, issue-2.html, ...), newest first in this list.
+# The email shows short teasers; its "Read more" links jump to #towns, #story
+# and #tip on the issue page. Issues are in English; the Spanish archive links to them.
+# Texts come from the project docs (Newsletter_Issue1_Towns.md, Newsletter_Issue1_Story.md,
+# Newsletter_Seller_Tips.md), approved by J.R. Never publish the "Real facts" notes.
+
+# Issue 1 town table: Greenville MLS (Paragon), pulled 10/28-10/29/2026. Same search both
+# years: single-family, sold, $150,000-$800,000, closing date Aug 1 - Oct 28.
+# (town, sold 2025, sold 2026, typical price 2025, typical price 2026)
+ISSUE1_TOWNS = [
+    ("Landrum & Campobello", 31, 48, 345000, 373349),
+    ("Inman", 93, 109, 298900, 329777),
+    ("Boiling Springs", 103, 85, 301000, 308000),
+    ("Greer", 228, 216, 395000, 400000),
+    ("Lyman", 64, 46, 310000, 298728),
+    ("Duncan", 27, 42, 390000, 329950),
+    ("Wellford", 66, 40, 291000, 291375),
+    ("Travelers Rest", 80, 80, 461250, 495950),
+    ("Taylors", 139, 101, 325000, 338000),
+]
+ISSUE1_ALL = ("All 10 towns", 831, 767, 339000, 350000)
+
+def _pct(a, b):
+    v = round((b - a) / a * 100)
+    return ("+" if v > 0 else "") + str(v) + "%" if v else "0%"
+
+def page_issue1():
+    def row(r, cls=""):
+        t, s25, s26, p25, p26 = r
+        return (f'<tr{cls}><th scope="row">{esc(t)}</th><td>{s25}</td><td>{s26}</td><td>{_pct(s25, s26)}</td>'
+                f'<td>${p25:,}</td><td>${p26:,}</td><td>{_pct(p25, p26)}</td></tr>')
+    rows = "".join(row(r) for r in ISSUE1_TOWNS) + row(ISSUE1_ALL, ' class="tot"')
+    def box(r, cls=""):
+        t, s25, s26, p25, p26 = r
+        return (f'<li{cls}><b>{esc(t)}</b><span>Homes sold: {s25} → {s26} ({_pct(s25, s26)})</span>'
+                f'<span>Typical price: ${p25:,} → ${p26:,} ({_pct(p25, p26)})</span></li>')
+    boxes = "".join(box(r) for r in ISSUE1_TOWNS) + box(ISSUE1_ALL, ' class="tot"')
+    return f"""
+<section class="nl-head"><div class="wrap">
+<p class="fine"><a href="../newsletter.html">&larr; All newsletters</a></p>
+<p class="nl-kicker">Front Porch Notes with J.R. · Issue 1 · November 2026</p>
+<h1>Front Porch Notes with J.R.</h1>
+<p>News about homes in our part of the Upstate, once a month. Jump to: <a href="#towns">This month in our towns</a> · <a href="#story">One home, one story</a> · <a href="#tip">Seller tip</a></p>
+</div></section>
+
+<section id="towns"><div class="wrap nl-body">
+<h2>This month in our towns</h2>
+<h3>Are home sales up or down around here?</h3>
+<p>767 homes sold across our towns from August 1 through October 28. That's about 8% fewer than the same months last year.</p>
+<p>But the typical price rose about 3%, to $350,000. And most homes still sold in about a month.</p>
+<p>Here's how your town compares.</p>
+</div><div class="wrap"><div class="tbl-wrap"><table class="nl-table">
+<caption>Homes sold August 1 to October 28, 2025 compared with 2026</caption>
+<thead><tr><th scope="col">Town</th><th scope="col">Sold 2025</th><th scope="col">Sold 2026</th><th scope="col">Change</th>
+<th scope="col">Typical price 2025</th><th scope="col">Typical price 2026</th><th scope="col">Change</th></tr></thead>
+<tbody>{rows}</tbody></table></div>
+<ul class="nl-boxes"><li class="cap">2025 → 2026, August 1 to October 28</li>{boxes}</ul></div>
+<div class="wrap nl-body">
+<p class="fine">In smaller towns (Landrum &amp; Campobello, Duncan, Wellford, Lyman), a few sales can swing these numbers a lot.</p>
+<p class="fine">Where the numbers come from: Greenville MLS, single-family homes sold from August 1 to October 28 of each year, priced from $150,000 to $800,000. "Typical price" is the middle price: half the homes sold for more, half for less.</p>
+</div></section>
+
+<section class="alt" id="story"><div class="wrap nl-body">
+<h2>One home, one story</h2>
+<h3>The house with the wrong kind of deed</h3>
+<p>A seller in Travelers Rest called me about selling his home. I'll call him Joe. That's not his real name.</p>
+<p>Joe had bought the house at a tax sale. That's when the county sells a property because the taxes weren't paid. It can be a good deal. But the deed you get from a tax sale isn't the kind most buyers can close on.</p>
+<p>Before Joe could sell, an attorney had to make sure nobody else had any claim to the property. That's a legal process of its own, and it takes time.</p>
+<p>We talked about this before we ever listed. So we got the attorney started right away.</p>
+<p>The title work took longer than anyone expected. Our first buyer couldn't wait. The closing date moved again and again, and in the end that contract ended. We kept going.</p>
+<p>Our second buyer had a deadline of his own. He was doing a 1031 exchange. That's a tax rule for people selling an investment property: they must buy the next one by a set date. By then, the title work was almost finished. The buyer agreed to close on time, and the attorney finished the work shortly after. Today the new owner has the right kind of deed.</p>
+<p>That same month, I helped Joe buy his next home.</p>
+<p>Joe and I still work together. At the end of 2025, I helped him buy a few more tax sale properties. Some are homes, and some are lots. A few will be going on the market soon.</p>
+<p><b>The lesson for sellers:</b> if anything about how you got your home is unusual, talk to an agent before you list. Problems with the deed can be fixed, but they take time. It's much easier to start early than to explain a delay to a buyer who's waiting.</p>
+<p>Have a question like that about your own home? Call or text me at <a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a>.</p>
+</div></section>
+
+<section id="tip"><div class="wrap nl-body">
+<h2>Seller tip</h2>
+<h3>Fix it, or leave it?</h3>
+<p>Sellers ask me this all the time. My answer has three parts.</p>
+<p><b>Fix what's broken.</b> Roof leaks, plumbing problems, anything structural, anything clearly wrong. A buyer's inspection will find these, and you'll likely have to fix them before closing anyway. Fixing them first means fewer surprises, and buyers feel better about the home.</p>
+<p><b>Clean everything.</b> A deep clean, carpet cleaning where it's needed, and clearing clutter. It costs little, and the home looks its best in photos and showings.</p>
+<p><b>Hold off on updates that are a matter of taste.</b> Paint colors, new carpet, new flooring. You might paint the rooms when your buyer would rather have new carpet. You might pick yellow when your buyer loves blue. Wait and see what your buyer actually wants.</p>
+<p>If a buyer asks for one of those updates, we can handle it in the deal. Usually that's a credit toward the buyer's closing costs, or a lower price, so the buyer can make the change their own way. If the buyer has a mortgage, the lender sets limits on credits, and I'll walk you through them.</p>
+<p>That way, you spend money only where it matters.</p>
+<p>Not sure which list something in your home belongs on? Call or text me at <a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a>.</p>
+</div></section>
+
+<section class="alt"><div class="wrap">
+<h2>What's your home worth today?</h2>
+<p>Tell me the address. I'll look at your home and the recent sales around it, and send you a written valuation within one business day. Free, no obligation.</p>
+<p><a class="btn" href="../home-value.html">What's your home worth today?</a></p>
+<p class="nl-sign">Principles Before Profits · J.R. Grimaldo, REALTOR®, SC License #95641 · NorthGroup Real Estate, 148 Milestone Way, Suite D, Greenville, SC 29615 · Call or text <a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a> · Hablo español</p>
+<p class="fine">Got this from a friend? <a href="../newsletter.html">Sign up to get Front Porch Notes by email.</a></p>
+</div></section>"""
+
+NEWSLETTERS = [
+    {"path": "newsletter/issue-1.html", "date": "November 2026",
+     "title": "Front Porch Notes, Issue 1",
+     "summary": "Are home sales up or down in our towns? Plus the house with the wrong kind of deed, and when to fix it or leave it before you sell.",
+     "builder": page_issue1},
+]
 
 def page_newsletter(T):
     F = T["nl_fields"]
@@ -1132,7 +1250,7 @@ def page_newsletter(T):
     subj = "Newsletter sign-up from " + SITE["domain"] if not es else "Inscripción al boletín desde " + SITE["domain"]
     form = mail_form(T, T["lang"], subj, fields, F["submit"], "nl-form", ok=F["ok"])
     if NEWSLETTERS:
-        items = "".join(f'<li><a href="{up}newsletter-{n["slug"]}.html"><b>{esc(n["title"])}</b></a>'
+        items = "".join(f'<li><a href="{up}{n["path"]}"><b>{esc(n["title"])}</b></a>'
                         f'<span class="c"> · {esc(n["date"])}</span><br><span class="fine">{esc(n.get("summary", ""))}</span></li>' for n in NEWSLETTERS)
         past = f'<ul class="nl-list">{items}</ul>'
     else:
@@ -1141,15 +1259,6 @@ def page_newsletter(T):
 <section><div class="wrap"><h1>{esc(T['nl_h1'])}</h1><p>{esc(T['nl_p'])}</p></div></section>
 <section class="alt"><div class="wrap"><h2>{esc(T['nl_sign_h2'])}</h2>{form}</div></section>
 <section><div class="wrap"><h2>{esc(T['nl_past_h2'])}</h2>{past}</div></section>"""
-
-def page_newsletter_issue(n):
-    body = ""
-    for para in n["body"]:
-        body += (f"<h2>{esc(para[3:])}</h2>" if para.startswith("## ") else f"<p>{esc(para)}</p>")
-    return f"""
-<section><div class="wrap"><p class="fine"><a href="newsletter.html">&larr; {esc(EN['nl_back'])}</a></p>
-<p class="fine">{esc(n['date'])}</p><h1>{esc(n['title'])}</h1><div class="nl-body">{body}</div>
-<div class="note"><p style="margin:0">Want this in your inbox each month? <a href="newsletter.html">Sign up here.</a></p></div></div></section>"""
 
 def page_list(T, h1, items, empty, intro=""):
     cards = "".join(card(x, T) for x in items)
@@ -1454,7 +1563,7 @@ def build():
     base = "https://" + SITE["domain"] + "/"
     urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html",
             "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/newsletter.html", "es/contact.html"]
-    urls += ["newsletter-" + n["slug"] + ".html" for n in NEWSLETTERS]
+    urls += [n["path"] for n in NEWSLETTERS]
     urls += [b["slug"] + ".html" for b in BOOKS] + ["es/" + b["slug"] + ".html" for b in BOOKS] + [k + ".html" for k in TOWN_PAGES]
     import datetime as _dt
     today = _dt.date.today().isoformat()
@@ -1503,10 +1612,13 @@ def build():
         n = b["slug"] + ".html"
         pages[n] = ("Free Book: " + b["title"] + " – " + SITE["agent"], page_book(EN, b), "es/" + n, n)
         D[n] = b["line"] + " Free, mailed to you by J.R. Grimaldo, REALTOR® in Landrum, SC."
-    for n in NEWSLETTERS:
-        k = "newsletter-" + n["slug"] + ".html"
-        pages[k] = (n["title"] + " – " + SITE["agent"] + "'s Newsletter", page_newsletter_issue(n), "es/newsletter.html", None)
-        D[k] = n.get("summary") or EN["nl_p"]
+    if NEWSLETTERS:
+        (OUT / "newsletter").mkdir(exist_ok=True)
+        NLT = dict(EN, dir_prefix="newsletter/", nav=[("../" + h, l) for h, l in EN["nav"]])
+        for n in NEWSLETTERS:
+            fname = n["path"].split("/", 1)[1]
+            (OUT / n["path"]).write_text(layout(NLT, fname, n["title"] + " – Front Porch Notes with J.R.",
+                                                n["builder"](), "../es/newsletter.html", n["summary"]))
     for name, (title, body, sw, alt) in pages.items():
         (OUT / name).write_text(layout(EN, name, title, body, sw, D[name], alt))
     for k in TOWN_PAGES:
