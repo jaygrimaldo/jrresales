@@ -81,6 +81,13 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .sold-strip .tag{position:absolute;left:10px;top:10px;background:var(--ridge-deep);color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:4px}
 .sold-strip figcaption{padding:10px 12px 12px;font-size:.92rem;color:var(--ink-2)}
 .sold-strip figcaption b{display:block;color:var(--ridge-deep);font-size:1.05rem}
+.towns-band{border-bottom:1px solid #dde5ea}
+.towns-band .town-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+@media(min-width:640px){.towns-band .town-btns{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.towns-band .town-btns{grid-template-columns:repeat(5,1fr)}}
+.town-btns a{display:block;text-align:center;padding:13px 10px;border:1.5px solid var(--ridge);border-radius:8px;color:var(--ridge);text-decoration:none;font-weight:600;font-size:1rem;background:#fff}
+.town-btns a:hover,.town-btns a:focus-visible{background:var(--ridge);color:#fff}
+.towns-band .note{font-size:.92rem;color:var(--ink-2);margin-top:14px}
 .books-band{background:var(--ridge-deep);color:#fff}
 .books-band .wrap{display:grid;gap:28px;align-items:center}
 @media(min-width:900px){.books-band .wrap{grid-template-columns:1fr 1fr;gap:48px}}

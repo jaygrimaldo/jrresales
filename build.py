@@ -637,6 +637,13 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .sold-strip .tag{position:absolute;left:10px;top:10px;background:var(--ridge-deep);color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:4px}
 .sold-strip figcaption{padding:10px 12px 12px;font-size:.92rem;color:var(--ink-2)}
 .sold-strip figcaption b{display:block;color:var(--ridge-deep);font-size:1.05rem}
+.towns-band{border-bottom:1px solid #dde5ea}
+.towns-band .town-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+@media(min-width:640px){.towns-band .town-btns{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.towns-band .town-btns{grid-template-columns:repeat(5,1fr)}}
+.town-btns a{display:block;text-align:center;padding:13px 10px;border:1.5px solid var(--ridge);border-radius:8px;color:var(--ridge);text-decoration:none;font-weight:600;font-size:1rem;background:#fff}
+.town-btns a:hover,.town-btns a:focus-visible{background:var(--ridge);color:#fff}
+.towns-band .note{font-size:.92rem;color:var(--ink-2);margin-top:14px}
 .books-band{background:var(--ridge-deep);color:#fff}
 .books-band .wrap{display:grid;gap:28px;align-items:center}
 @media(min-width:900px){.books-band .wrap{grid-template-columns:1fr 1fr;gap:48px}}
@@ -1034,6 +1041,16 @@ def page_home(T):
                  f'<span class="tag">{"Vendida" if es else "Sold"}</span></div>'
                  f'<figcaption><b>{esc(price)}</b>{esc(street)}, {esc(town)}</figcaption></figure>')
     covers = "".join(f'<a href="{b["slug"]}.html"><img src="{up}assets/{b["photo"]}" alt="{esc(b["title"])}" loading="lazy"></a>' for b in BOOKS)
+    town_btns = "".join(f'<a href="{up}{k}.html">{esc(TOWNS[k]["name"])}</a>' for k in TOWN_ORDER)
+    if es:
+        towns_band = (f'<section class="towns-band"><div class="wrap"><h2>Pueblos donde trabajo</h2>'
+                      f'<p>Toque su pueblo para saber más sobre cómo vender su casa allí.</p>'
+                      f'<div class="town-btns">{town_btns}</div>'
+                      f'<p class="note">Las páginas de los pueblos están en inglés.</p></div></section>')
+    else:
+        towns_band = (f'<section class="towns-band"><div class="wrap"><h2>Towns I serve</h2>'
+                      f'<p>Tap your town to learn more about selling your home there.</p>'
+                      f'<div class="town-btns">{town_btns}</div></div></section>')
     q = next(r for r in REVIEWS if r["name"] == "Jeff D.")
     qt = q["quote_es"] if es else q["quote"]
     return f"""
@@ -1052,6 +1069,7 @@ def page_home(T):
 <section class="alt"><div class="wrap"><h2>{esc(T['hm_sold_h2'])}</h2><p>{esc(T['hm_sold_p'])}</p>
 <div class="sold-strip">{figs}</div>
 <p style="margin-top:22px"><a class="btn quiet" href="sold.html">{esc(T['hm_sold_btn'])}</a></p></div></section>
+{towns_band}
 <section><div class="wrap why-one">
   <h2>{esc(T['why_h2'])}</h2><p>{esc(T['why_p'])}</p><ul class="plain">{bullets}</ul>
   <a class="btn quiet" href="about.html">{esc(T['why_btn'])}</a>
