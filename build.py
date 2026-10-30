@@ -179,13 +179,13 @@ SOLD_MORE = [
     ("1671 Hampton Rd", "Inman", "B", "$112,000"),                 # 2018
     ("102 Old Grove Rd", "Piedmont", "B", "$133,500"),             # 08/24/2018 buyer Dineene D. Hicks (J.R. confirmed 10/23)
     ("308 Covington Dr", "Inman", "S", "$192,900"),                # 08/2018 contract price
-    ("309 Holly Oaks Ln", "Inman", "B", "$296,600", "repeat"),     # 07/2018 Disch, after selling 210 Legacy Dr (J.R., 10/29: a repeat)
+    ("309 Holly Oaks Ln", "Inman", "B", "$296,600"),               # 07/2018
     ("316 Covington Dr", "Inman", "S", "$200,000"),                # 07/2018
     ("128 Bonnie Woods Dr", "Greenville", "B", "$153,000"),        # 05/2018
     ("110 Birdie Ln", "Fountain Inn", "S", "$69,900"),             # 05/2018
     ("12 Uneeda Dr", "Greenville", "B", "$104,000"),               # 05/2018
     ("702 Watermarke Ln", "Anderson", "B", "$300,000"),            # 03/2018
-    ("210 Legacy Dr", "Inman", "S", "$183,800", "repeat"),         # 03/2018 Disch
+    ("210 Legacy Dr", "Inman", "S", "$183,800"),                   # 03/2018
     ("248 Page Creek Blvd", "Landrum", "B", "$234,000"),           # 2018 contract price
     ("115 James Rd", "Campobello", "B", "$178,400"),               # 12/2017
     ("215 Ashley Danielle Dr", "Duncan", "B", "$128,000"),         # 12/2017
@@ -198,7 +198,7 @@ SOLD_MORE = [
     ("2 Horseback Way", "Travelers Rest", "B", "$66,000"),         # 06/2016
     ("926 Winterhawk Cir", "Inman", "S", "$95,000"),               # 2016
 ]
-REPEAT_FAMILIES = 11
+REPEAT_FAMILIES = 10
 
 REVIEWS = [
     {"quote": "Had a great first home buyers experience with this agent. He worked on my time frame and went over and above to get things going. I just closed on my first house and I couldn't have picked a better realtor! Thanks JR for all of your help! UPDATE: 4 years later I've chosen JR to help me sell my home. It's been an excellent experience. He uses a really neat drone for professional pictures for the listing. He is very prompt with every detail of the process. I'm very pleased and couldn't ask for a better realtor.",
