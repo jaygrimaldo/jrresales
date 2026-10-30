@@ -1161,21 +1161,24 @@ def page_book(T, b):
 # Texts come from the project docs (Newsletter_Issue1_Towns.md, Newsletter_Issue1_Story.md,
 # Newsletter_Seller_Tips.md), approved by J.R. Never publish the "Real facts" notes.
 
-# Issue 1 town table: Greenville MLS (Paragon), pulled 10/28-10/29/2026. Same search both
-# years: single-family, sold, $150,000-$800,000, closing date Aug 1 - Oct 28.
+# Issue 1 town table: Greenville MLS and Spartanburg MLS combined (Paragon), pulled 10/29/2026.
+# Same search both years: single-family, sold, $150,000-$800,000, closing date Aug 1 - Oct 28.
+# A home listed in both systems is counted once. Details: project doc Newsletter_Issue1_Towns.md.
+# J.R. 10/29: show last year's home count in words, not a percent change (a "-30%" next to a
+# town reads like a loss in value). Price change stays.
 # (town, sold 2025, sold 2026, typical price 2025, typical price 2026)
 ISSUE1_TOWNS = [
-    ("Landrum & Campobello", 31, 48, 345000, 373349),
-    ("Inman", 93, 109, 298900, 329777),
-    ("Boiling Springs", 103, 85, 301000, 308000),
-    ("Greer", 228, 216, 395000, 400000),
-    ("Lyman", 64, 46, 310000, 298728),
-    ("Duncan", 27, 42, 390000, 329950),
-    ("Wellford", 66, 40, 291000, 291375),
-    ("Travelers Rest", 80, 80, 461250, 495950),
-    ("Taylors", 139, 101, 325000, 338000),
+    ("Landrum & Campobello", 50, 66, 333300, 364900),
+    ("Inman", 150, 160, 312505, 299000),
+    ("Boiling Springs", 141, 121, 297500, 306000),
+    ("Greer", 233, 220, 395000, 400000),
+    ("Lyman", 74, 72, 310945, 335000),
+    ("Duncan", 32, 48, 377500, 334500),
+    ("Wellford", 71, 50, 290000, 289450),
+    ("Travelers Rest", 83, 83, 462500, 519000),
+    ("Taylors", 142, 102, 326000, 339000),
 ]
-ISSUE1_ALL = ("All 10 towns", 831, 767, 339000, 350000)
+ISSUE1_ALL = ("All 10 towns", 976, 922, 334175, 344350)
 
 def _pct(a, b):
     v = round((b - a) / a * 100)
@@ -1184,12 +1187,12 @@ def _pct(a, b):
 def page_issue1():
     def row(r, cls=""):
         t, s25, s26, p25, p26 = r
-        return (f'<tr{cls}><th scope="row">{esc(t)}</th><td>{s25}</td><td>{s26}</td><td>{_pct(s25, s26)}</td>'
+        return (f'<tr{cls}><th scope="row">{esc(t)}</th><td>{s26}</td><td>{s25}</td>'
                 f'<td>${p25:,}</td><td>${p26:,}</td><td>{_pct(p25, p26)}</td></tr>')
     rows = "".join(row(r) for r in ISSUE1_TOWNS) + row(ISSUE1_ALL, ' class="tot"')
     def box(r, cls=""):
         t, s25, s26, p25, p26 = r
-        return (f'<li{cls}><b>{esc(t)}</b><span>Homes sold: {s25} → {s26} ({_pct(s25, s26)})</span>'
+        return (f'<li{cls}><b>{esc(t)}</b><span>Homes sold: {s26} ({s25} the same time last year)</span>'
                 f'<span>Typical price: ${p25:,} → ${p26:,} ({_pct(p25, p26)})</span></li>')
     boxes = "".join(box(r) for r in ISSUE1_TOWNS) + box(ISSUE1_ALL, ' class="tot"')
     return f"""
@@ -1203,18 +1206,18 @@ def page_issue1():
 <section id="towns"><div class="wrap nl-body">
 <h2>This month in our towns</h2>
 <h3>Are home sales up or down around here?</h3>
-<p>767 homes sold across our towns from August 1 through October 28. That's about 8% fewer than the same months last year.</p>
-<p>But the typical price rose about 3%, to $350,000. And most homes still sold in about a month.</p>
+<p>922 homes sold across our towns from August 1 through October 28. Last year at the same time, 976 sold.</p>
+<p>The typical price rose about 3%, to $344,350. And most homes still sold in about a month.</p>
 <p>Here's how your town compares.</p>
 </div><div class="wrap"><div class="tbl-wrap"><table class="nl-table">
-<caption>Homes sold August 1 to October 28, 2025 compared with 2026</caption>
-<thead><tr><th scope="col">Town</th><th scope="col">Sold 2025</th><th scope="col">Sold 2026</th><th scope="col">Change</th>
-<th scope="col">Typical price 2025</th><th scope="col">Typical price 2026</th><th scope="col">Change</th></tr></thead>
+<caption>Homes sold August 1 to October 28, 2026, compared with the same time in 2025</caption>
+<thead><tr><th scope="col">Town</th><th scope="col">Homes sold 2026</th><th scope="col">Same time 2025</th>
+<th scope="col">Typical price 2025</th><th scope="col">Typical price 2026</th><th scope="col">Price change</th></tr></thead>
 <tbody>{rows}</tbody></table></div>
-<ul class="nl-boxes"><li class="cap">2025 → 2026, August 1 to October 28</li>{boxes}</ul></div>
+<ul class="nl-boxes"><li class="cap">August 1 to October 28, 2026 compared with 2025</li>{boxes}</ul></div>
 <div class="wrap nl-body">
-<p class="fine">In smaller towns (Landrum &amp; Campobello, Duncan, Wellford, Lyman), a few sales can swing these numbers a lot.</p>
-<p class="fine">Where the numbers come from: Greenville MLS, single-family homes sold from August 1 to October 28 of each year, priced from $150,000 to $800,000. "Typical price" is the middle price: half the homes sold for more, half for less.</p>
+<p class="fine">In smaller towns (Landrum &amp; Campobello, Duncan, Wellford, Lyman), a few sales can swing the typical price a lot from one year to the next. It depends on which homes happened to sell.</p>
+<p class="fine">Where the numbers come from: the Greenville MLS and the Spartanburg MLS together, with each home counted once. Single-family homes sold from August 1 to October 28 of each year, priced from $150,000 to $800,000. "Typical price" is the middle price: half the homes sold for more, half for less.</p>
 </div></section>
 
 <section class="alt" id="story"><div class="wrap nl-body">
