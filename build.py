@@ -1488,10 +1488,10 @@ def page_guide(T=None):
     if (SRC / GUIDE["cover"]).exists():
         cover = f'<img src="{GUIDE["cover"]}" alt="Cover of the Seller\'s Guide, Selling Your Home, Step by Step" width="400" height="518">'
     fields = ('<div class="two">' + field("name", "Your name", req=True) + field("email", "Email", "email", req=True) + '</div>'
-              + '<p class="fine">I\'ll email the guide to you. You\'ll also get my monthly newsletter, Front Porch Notes. '
+              + '<p class="fine">You\'ll also get my monthly newsletter, Front Porch Notes. '
                 'You can stop it anytime, and I never share your email.</p>')
     form = mail_form(EN, "en", "Seller's Guide request from jrREsales.com", fields, "Email me the guide", "sg-form",
-                     ok="Thank you. Your guide is on its way. I'll email it to you within one business day.")
+                     ok="Thank you. I got your request. I'll email the guide to you myself, usually within a few hours.")
     parts = [
         ("Part 1: Getting ready to list", "What to fix, what to clean, and what can wait. The papers to gather. How to get ready for photo day. How we set your price. And how to buy your next home at the same time."),
         ("Part 2: While your home is for sale", "How buyers find your home. How showings get booked, how the lockbox works, and what to do before buyers arrive. And what to make of buyer feedback."),
@@ -1503,7 +1503,7 @@ def page_guide(T=None):
 <div><p class="fine" style="margin:0 0 6px">Free Seller's Guide</p>
 <h1>Selling Your Home, Step by Step</h1>
 <p>Thinking about selling? This short guide walks you through the whole sale, from getting ready to list to the day you hand over the keys. It's 8 pages, in plain English, and written by me from my own sales here in the Upstate.</p>
-<p>Tell me where to send it, and I'll email you a copy. It's free.</p>
+<p>Tell me where to send it. I'll email it to you myself, usually within a few hours. It's free.</p>
 <p><a class="btn" href="#request">Email me the guide</a></p></div></div></div></section>
 <section class="alt"><div class="wrap"><h2>What's inside</h2><div class="truths">{p_html}</div></div></section>
 <section id="request"><div class="wrap"><h2>Get your free copy</h2>{form}</div></section>"""
