@@ -229,7 +229,7 @@ EN = {
     "nav": [("index.html", "Home"), ("home-value.html", "What's My Home Worth"),
             ("listings.html", "My Listings"), ("sold.html", "Sold Homes"),
             ("about.html", "About J.R."), ("reviews.html", "Reviews"),
-            ("free-books.html", "Free Books"), ("newsletter.html", "Newsletter"),
+            ("free-books.html", "Free Guides & Books"), ("newsletter.html", "Newsletter"),
             ("contact.html", "Contact Me")],
     "search_label": "Search Homes",
     "hero_h1": "Thinking about selling your Upstate home? Start with a real number.",
@@ -261,9 +261,9 @@ EN = {
     "hm_sold_h2": "Recently sold",
     "hm_sold_p": "A few of the homes I've sold for my clients.",
     "hm_sold_btn": "See all my sales",
-    "hm_books_h2": "Free books, mailed to you",
-    "hm_books_p": "Two short books for homeowners. One on selling, one for homes that didn't sell the first time. Pick one or both and I'll mail them. No cost, no sales call.",
-    "hm_books_btn": "See the books",
+    "hm_books_h2": "Free Guides & Books",
+    "hm_books_p": "My Seller's Guide walks you through a home sale, step by step. I'll email it to you. I also have two short printed books, one on selling and one for homes that didn't sell the first time. I'll mail those. No cost, no obligation.",
+    "hm_books_btn": "See the guides and books",
     # home value page
     "hv_h1": "What's my home worth?",
     "hv_p": "Fill in what you can. I'll pull the recent sales around you, look at your home's details, and send you a written valuation within one business day.",
@@ -339,15 +339,15 @@ EN = {
     "ct_fields": {"name": "Your name", "email": "Email", "phone": "Phone (optional)",
                   "message": "How can I help?", "submit": "Send"},
     # free books
-    "bk_h1": "Free books for home sellers",
+    "bk_h1": "Free Guides & Books",
     "bk_p": "These are my books. Pick the ones you want and I'll mail them to you. Free. No cost, no obligation, and no sales call.",
     "bk_pick": "Which books would you like? Check one or more.",
     "bk_more": "About this book",
     "bk_h1_one": "Free book: {title}",
     "bk_req_h2": "Get your free copy",
     "bk_req_p": "I'll mail it to you. Want the others too? Check them as well.",
-    "bk_back": "All the books",
-    "bk_p_over": "These are my books. Pick the one you want to know more about. Each page tells you what's in the book and lets you ask for a copy. I'll mail it to you. Free. No cost, no obligation, and no sales call.",
+    "bk_back": "All guides and books",
+    "bk_p_over": "Pick the one you want to know more about. Each page tells you what's inside and lets you ask for a copy. My Seller's Guide comes by email. The two books are printed and mailed to you. All free, with no cost and no obligation.",
     "bk_fields": {"name": "Your name", "email": "Email", "phone": "Phone (optional)",
                   "street": "Street address", "city": "City", "state": "State", "zip": "ZIP",
                   "submit": "Mail me my books",
@@ -379,7 +379,7 @@ ES = {
     "nav": [("index.html", "Inicio"), ("home-value.html", "¿Cuánto vale mi casa?"),
             ("listings.html", "Mis propiedades"), ("sold.html", "Casas vendidas"),
             ("about.html", "Sobre J.R."), ("reviews.html", "Opiniones"),
-            ("free-books.html", "Libros gratis"), ("newsletter.html", "Boletín"),
+            ("free-books.html", "Guías y libros gratis"), ("newsletter.html", "Boletín"),
             ("contact.html", "Contácteme")],
     "search_label": "Buscar casas",
     "hero_h1": "¿Piensa vender su casa en el Upstate? Empiece con un número real.",
@@ -411,9 +411,9 @@ ES = {
     "hm_sold_h2": "Vendidas recientemente",
     "hm_sold_p": "Algunas de las casas que he vendido para mis clientes.",
     "hm_sold_btn": "Ver todas mis ventas",
-    "hm_books_h2": "Libros gratis, por correo",
-    "hm_books_p": "Dos libros cortos para dueños de casa. Uno sobre vender, y otro para casas que no se vendieron la primera vez. Elija uno o los dos y se los envío. Sin costo, sin llamada de ventas. Los libros están en inglés.",
-    "hm_books_btn": "Ver los libros",
+    "hm_books_h2": "Guías y libros gratis",
+    "hm_books_p": "Mi guía para vendedores le explica la venta de una casa, paso a paso, y está en español. Se la envío por correo electrónico. También tengo dos libros cortos impresos, en inglés: uno sobre vender y otro para casas que no se vendieron la primera vez. Esos se los envío por correo. Sin costo ni compromiso.",
+    "hm_books_btn": "Ver las guías y libros",
     "hv_h1": "¿Cuánto vale mi casa?",
     "hv_p": "Llene lo que pueda. Yo busco las ventas recientes a su alrededor, reviso los detalles de su casa, y le envío una valuación por escrito en un día hábil.",
     "hv_fields": {
@@ -480,15 +480,15 @@ ES = {
     "ct_form_h2": "O envíe un mensaje",
     "ct_fields": {"name": "Su nombre", "email": "Correo electrónico", "phone": "Teléfono (opcional)",
                   "message": "¿En qué puedo ayudarle?", "submit": "Enviar"},
-    "bk_h1": "Libros gratis para quienes venden su casa",
+    "bk_h1": "Guías y libros gratis",
     "bk_p": "Estos son mis libros. Elija los que quiera y se los envío por correo. Gratis. Sin costo, sin compromiso y sin llamada de ventas. Los libros están escritos en inglés.",
     "bk_pick": "¿Qué libros quiere? Marque uno o más.",
     "bk_more": "Sobre este libro",
     "bk_h1_one": "Libro gratis: {title}",
     "bk_req_h2": "Pida su copia gratis",
     "bk_req_p": "Se la envío por correo. ¿Quiere los otros también? Márquelos.",
-    "bk_back": "Todos los libros",
-    "bk_p_over": "Estos son mis libros. Elija el que quiera conocer. Cada página explica qué trae el libro y le permite pedir una copia. Se la envío por correo. Gratis. Sin costo, sin compromiso y sin llamada de ventas. Los libros están escritos en inglés.",
+    "bk_back": "Todas las guías y libros",
+    "bk_p_over": "Elija el que quiera conocer. Cada página explica qué trae y le permite pedir una copia. Mi guía para vendedores está en español, y se la envío por correo electrónico. Los dos libros están en inglés, y se los envío impresos por correo. Todo es gratis, sin costo y sin compromiso.",
     "bk_fields": {"name": "Su nombre", "email": "Correo electrónico", "phone": "Teléfono (opcional)",
                   "street": "Dirección", "city": "Ciudad", "state": "Estado", "zip": "Código postal",
                   "submit": "Envíenme mis libros",
@@ -655,6 +655,8 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .books-row{display:flex;justify-content:center;align-items:flex-end;gap:6px}
 .books-row a{flex:1;max-width:190px}
 .books-row img{width:100%;height:auto;transition:transform .2s}
+.books-row a.guide{padding:0 8px 4.5%}
+.books-row a.guide img{border-radius:3px;box-shadow:0 6px 16px rgba(0,0,0,.35)}
 .books-row a:hover img,.books-row img:hover{transform:translateY(-6px)}
 .why-one ul.plain{max-width:820px}
 .why-one ul.plain{columns:1}
@@ -1044,7 +1046,9 @@ def page_home(T):
         figs += (f'<figure><div class="im"><img src="{up}assets/{it["photo"]}" alt="{esc(it["address"])}" loading="lazy">'
                  f'<span class="tag">{"Vendida" if es else "Sold"}</span></div>'
                  f'<figcaption><b>{esc(price)}</b>{esc(street)}, {esc(town)}</figcaption></figure>')
-    covers = "".join(f'<a href="{b["slug"]}.html"><img src="{up}assets/{b["photo"]}" alt="{esc(b["title"])}" loading="lazy"></a>' for b in BOOKS)
+    g_alt = GUIDE_ES["title"] if es else "Selling Your Home, Step by Step"
+    covers = (f'<a class="guide" href="sellers-guide.html"><img src="{up}{GUIDE_ES["cover"] if es else GUIDE["cover"]}" alt="{esc(g_alt)}" loading="lazy"></a>'
+              + "".join(f'<a href="{b["slug"]}.html"><img src="{up}assets/{b["photo"]}" alt="{esc(b["title"])}" loading="lazy"></a>' for b in BOOKS))
     town_btns = "".join(f'<a href="{up}{k}.html">{esc(TOWNS[k]["name"])}</a>' for k in TOWN_ORDER)
     if es:
         towns_band = (f'<section class="towns-band"><div class="wrap"><h2>Pueblos donde trabajo</h2>'
@@ -1136,7 +1140,11 @@ def page_books(T):
     """Overview: the three books, each linking to its own page."""
     up = "../" if T["dir_prefix"] else ""
     es = T["lang"] == "es"
-    shelf = "".join(
+    guide = (f'<a href="sellers-guide.html"><img src="{up}{GUIDE_ES["cover"] if es else GUIDE["cover"]}" alt="" width="400" height="518">'
+             f'<b>{esc(GUIDE_ES["title"] if es else "Selling Your Home, Step by Step")}</b>'
+             f'<span>{esc("Una guía de 8 páginas para vender su casa, desde prepararla hasta el día del cierre. En español. Se la envío por correo electrónico." if es else "My 8-page guide to selling your home, from getting ready to closing day. Emailed to you.")}</span>'
+             f'<span class="go">{esc("Sobre esta guía" if es else "About this guide")}</span></a>')
+    shelf = guide + "".join(
         f'<a href="{b["slug"]}.html"><img src="{up}assets/{b["photo"]}" alt="" width="396" height="601">'
         f'<b>{esc(b["title"])}</b><span>{esc(b["line_es"] if es else b["line"])}</span>'
         f'<span class="go">{esc(T["bk_more"])}</span></a>' for b in BOOKS)
@@ -1684,7 +1692,7 @@ def build():
         "about.html": "Meet J.R. Grimaldo, a Landrum-based South Carolina REALTOR® since 2016. Quality over quantity, quick replies, and clients who come back. Hablo español.",
         "reviews.html": "What clients say about buying and selling with J.R. Grimaldo, REALTOR®, in the Upstate SC.",
         "newsletter.html": "J.R. Grimaldo's free monthly newsletter: what homes are selling for in Landrum and nearby Upstate SC towns, whether sales are up or down, and where mortgage rates stand. Sign up by email.",
-        "free-books.html": "Free books on selling your home, mailed to you by J.R. Grimaldo, REALTOR® in Landrum, SC. No cost, no obligation, no sales call.",
+        "free-books.html": "Free guides and books on selling your home from J.R. Grimaldo, REALTOR® in Landrum, SC: an 8-page Seller's Guide by email, and two printed books by mail. No cost, no obligation.",
         "contact.html": "Call or text J.R. Grimaldo at 864-381-2326. He answers most calls live and replies to texts right away. Landrum and Upstate SC Real Estate.",
         "sellers-guide.html": "Free 8-page Seller's Guide from J.R. Grimaldo, REALTOR® in Landrum, SC: getting ready to list, showings, and the road from offer to closing. Emailed to you.",
     }
@@ -1696,7 +1704,7 @@ def build():
         "about.html": "Conozca a J.R. Grimaldo, REALTOR® de Carolina del Sur desde 2016, con base en Landrum. Calidad antes que cantidad y respuestas rápidas. Hablo español.",
         "reviews.html": "Lo que dicen los clientes de comprar y vender con J.R. Grimaldo, REALTOR®, en el Upstate de Carolina del Sur.",
         "newsletter.html": "El boletín mensual gratis de J.R. Grimaldo sobre las casas en Landrum y el Upstate de Carolina del Sur. Inscríbase por correo.",
-        "free-books.html": "Libros gratis sobre vender su casa, enviados por correo por J.R. Grimaldo, REALTOR® en Landrum, SC. Sin costo ni compromiso.",
+        "free-books.html": "Guías y libros gratis sobre vender su casa de J.R. Grimaldo, REALTOR® en Landrum, SC: una guía de 8 páginas en español por correo electrónico, y dos libros impresos por correo. Sin costo ni compromiso.",
         "contact.html": "Llame o envíe un texto a J.R. Grimaldo al 864-381-2326. Contesta la mayoría de las llamadas en el momento. Bienes raíces en Landrum y el Upstate.",
         "sellers-guide.html": "Guía gratis de 8 páginas de J.R. Grimaldo, REALTOR® en Landrum, SC: cómo preparar su casa, las visitas y el camino de la oferta al cierre. Se la envía por correo electrónico.",
     }
@@ -1708,7 +1716,7 @@ def build():
         "sold.html": ("Sold Homes – " + SITE["agent"] + ", REALTOR®", page_sold(EN), "es/sold.html", "sold.html"),
         "about.html": ("About J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(EN), "es/about.html", "about.html"),
         "reviews.html": ("Client Reviews – " + SITE["agent"] + ", REALTOR®", page_reviews(EN), "es/reviews.html", "reviews.html"),
-        "free-books.html": ("Free Books on Selling Your Home – " + SITE["agent"], page_books(EN), "es/free-books.html", "free-books.html"),
+        "free-books.html": ("Free Guides & Books on Selling Your Home – " + SITE["agent"], page_books(EN), "es/free-books.html", "free-books.html"),
         "newsletter.html": ("Monthly Newsletter – " + SITE["agent"] + ", REALTOR®", page_newsletter(EN), "es/newsletter.html", "newsletter.html"),
         "contact.html": ("Contact J.R. Grimaldo, REALTOR®", page_contact(EN), "es/contact.html", "contact.html"),
         "sellers-guide.html": ("Free Seller's Guide: Selling Your Home, Step by Step – " + SITE["agent"], page_guide(EN), "es/sellers-guide.html", "sellers-guide.html"),
@@ -1737,7 +1745,7 @@ def build():
         "sold.html": ("Casas vendidas – " + SITE["agent"] + ", REALTOR®", page_sold(ES), "../sold.html"),
         "about.html": ("Sobre J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(ES), "../about.html"),
         "reviews.html": ("Opiniones de clientes – " + SITE["agent"] + ", REALTOR®", page_reviews(ES), "../reviews.html"),
-        "free-books.html": ("Libros gratis sobre vender su casa – " + SITE["agent"], page_books(ES), "../free-books.html"),
+        "free-books.html": ("Guías y libros gratis sobre vender su casa – " + SITE["agent"], page_books(ES), "../free-books.html"),
         "newsletter.html": ("Boletín mensual – " + SITE["agent"] + ", REALTOR®", page_newsletter(ES), "../newsletter.html"),
         "contact.html": ("Contácteme – " + SITE["agent"] + ", REALTOR®", page_contact(ES), "../contact.html"),
         "sellers-guide.html": ("Guía gratis para vendedores: Cómo vender su casa, paso a paso – " + SITE["agent"], page_guide(ES), "../sellers-guide.html"),

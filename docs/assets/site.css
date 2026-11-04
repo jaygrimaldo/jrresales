@@ -99,6 +99,8 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .books-row{display:flex;justify-content:center;align-items:flex-end;gap:6px}
 .books-row a{flex:1;max-width:190px}
 .books-row img{width:100%;height:auto;transition:transform .2s}
+.books-row a.guide{padding:0 8px 4.5%}
+.books-row a.guide img{border-radius:3px;box-shadow:0 6px 16px rgba(0,0,0,.35)}
 .books-row a:hover img,.books-row img:hover{transform:translateY(-6px)}
 .why-one ul.plain{max-width:820px}
 .why-one ul.plain{columns:1}
