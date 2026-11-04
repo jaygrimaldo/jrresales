@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /reply.html
 Disallow: /defaultsite/
+Disallow: /assets/*.pdf
 Sitemap: https://jrresales.com/sitemap.xml

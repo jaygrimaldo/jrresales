@@ -4,7 +4,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Reply – J.R. Grimaldo</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=c0db5cc6">
+<link rel="stylesheet" href="assets/site.css?v=518b81a3">
 <style>
 .rp{padding-block:28px 48px}
 .rp h1{font-size:1.6rem;margin-bottom:.2em}
@@ -13,7 +13,7 @@
 .rp .acts .btn{text-align:center;font-size:1.15rem;padding:18px 20px}
 .rp .acts .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
 .rp h2{font-size:1.05rem;margin:22px 0 8px}
-.rp pre{white-space:pre-wrap;font:inherit;font-size:1rem;background:var(--stone);border-radius:10px;padding:14px 16px;max-width:620px;margin:0}
+.rp pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:1rem;background:var(--stone);border-radius:10px;padding:14px 16px;max-width:620px;margin:0}
 .rp .tog{display:flex;gap:8px;margin-bottom:18px}
 .rp .tog button{font:inherit;padding:8px 14px;border-radius:999px;border:1.5px solid var(--ridge);background:#fff;color:var(--ridge);cursor:pointer}
 .rp .tog button[aria-pressed=true]{background:var(--ridge);color:#fff}
@@ -45,6 +45,9 @@ var NOTES={
   b:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your book request from my website. Your books go in the mail in the next few days. If you ever want to talk about your home, just text me here.",
      subj:"Your free books are on the way",
      mail:"Hi {first},\n\nThank you for asking for my books. I got your request, and they'll go in the mail to {addr} in the next few days.\n\nNo strings attached. If you ever want to talk about selling or buying a home, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"},
+  g:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. Thanks for asking for my Seller's Guide. Here it is: https://jrREsales.com/assets/sellers-guide.pdf",
+     subj:"Your Seller's Guide: Selling Your Home, Step by Step",
+     mail:"Hi {first},\n\nThank you for asking for my Seller's Guide, \"Selling Your Home, Step by Step.\" You can open or save it here:\n\nhttps://jrREsales.com/assets/sellers-guide.pdf\n\nIt walks through a home sale from getting ready to list all the way to closing day.\n\nYou'll also get my monthly newsletter, Front Porch Notes. If you'd rather not, just reply and let me know.\n\nIf you have a question about your own home, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"},
   c:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your message from my website. What's a good time to talk? You can also reach me right here by text.",
      subj:"Thanks for reaching out",
      mail:"Hi {first},\n\nThank you for your message. I got it and wanted you to know right away.\n\nWhat's a good time to talk? You can call or text me at 864-381-2326, or simply reply to this email.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"}},
@@ -63,14 +66,14 @@ var NOTES={
      mail:"Hola {first}:\n\nGracias por su mensaje. Lo recibí y quería avisarle de inmediato.\n\n¿A qué hora le queda bien que hablemos? Puede llamarme o escribirme al 864-381-2326, o simplemente responder a este correo.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"}}
 };
 var q=new URLSearchParams(location.hash.slice(1));
-var d={t:['c','b','n'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
+var d={t:['c','b','n','g'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
 var first=(d.n.split(/\s+/)[0]||'').replace(/^./,function(c){return c.toUpperCase();});
 function fill(s){return s.replace(/\{first\}/g,first||(d.l==='es'?'':'there')).replace(/\{addr\}/g,d.a||(d.l==='es'?'su casa':'your home')).replace(/^Hola :/,'Hola:').replace(/^Hola ,/,'Hola,');}
 function show(){
-  var N=NOTES[d.l][d.t],tx=fill(N.text),sj=fill(N.subj),bd=fill(N.mail);
+  var N=NOTES[d.l][d.t]||NOTES.en[d.t],tx=fill(N.text),sj=fill(N.subj),bd=fill(N.mail);
   document.documentElement.lang=d.l;
   document.getElementById('h').textContent=(d.l==='es'?'Responder a ':'Reply to ')+(d.n||'?');
-  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
+  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):d.t==='g'?(d.l==='es'?'Guía del vendedor':"Seller's Guide request"):(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
   document.getElementById('tx').textContent=tx;
   document.getElementById('em').textContent='Subject: '+sj+'\n\n'+bd;
   var s=document.getElementById('sms'),m=document.getElementById('mail');

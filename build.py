@@ -644,6 +644,10 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .town-btns a{display:block;text-align:center;padding:13px 10px;border:1.5px solid var(--ridge);border-radius:8px;color:var(--ridge);text-decoration:none;font-weight:600;font-size:1rem;background:#fff}
 .town-btns a:hover,.town-btns a:focus-visible{background:var(--ridge);color:#fff}
 .towns-band .note{font-size:.92rem;color:var(--ink-2);margin-top:14px}
+.guidehero{display:grid;gap:26px;align-items:center}
+.guidehero img{width:100%;max-width:260px;height:auto;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+@media(min-width:800px){.guidehero.has-cover{grid-template-columns:260px 1fr;gap:44px}}
+.guidehero > div{max-width:720px}
 .books-band{background:var(--ridge-deep);color:#fff}
 .books-band .wrap{display:grid;gap:28px;align-items:center}
 @media(min-width:900px){.books-band .wrap{grid-template-columns:1fr 1fr;gap:48px}}
@@ -812,7 +816,7 @@ document.addEventListener('DOMContentLoaded',function(){
       var src=new FormData(form),fd=new FormData();
       try{
         var g=function(k){return (src.get(k)||'').toString().trim();};
-        var r={t:form.id==='hv-form'?'v':(form.id==='bk-form'?'b':(form.id==='nl-form'?'n':'c')),l:document.documentElement.lang==='es'?'es':'en',
+        var r={t:form.id==='hv-form'?'v':(form.id==='bk-form'?'b':(form.id==='nl-form'?'n':(form.id==='sg-form'?'g':'c'))),l:document.documentElement.lang==='es'?'es':'en',
                n:g('name'),p:g('phone'),e:g('email'),a:[g('address')||g('street'),g('city')].filter(Boolean).join(', ')};
         fd.append('tap_to_reply',location.origin+'/reply.html#'+new URLSearchParams(r).toString());
       }catch(err){}
@@ -1469,6 +1473,41 @@ def page_contact(T):
 </div></div></section>
 <section class="alt"><div class="wrap"><h2>{esc(T['ct_form_h2'])}</h2>{form}</div></section>"""
 
+
+# ------------------------------------------------------------- SELLER'S GUIDE
+# Request page for J.R.'s 8-page guide. Emailed, not a plain download (J.R., 11/4/2026).
+# The site address is written jrREsales.com on this page (J.R., 11/4/2026).
+GUIDE = {
+    "title": "Selling Your Home, Step by Step",
+    "pdf": "assets/sellers-guide.pdf",
+    "cover": "assets/sellers-guide-cover.jpg",
+}
+
+def page_guide(T=None):
+    cover = ""
+    if (SRC / GUIDE["cover"]).exists():
+        cover = f'<img src="{GUIDE["cover"]}" alt="Cover of the Seller\'s Guide, Selling Your Home, Step by Step" width="400" height="518">'
+    fields = ('<div class="two">' + field("name", "Your name", req=True) + field("email", "Email", "email", req=True) + '</div>'
+              + '<p class="fine">I\'ll email the guide to you. You\'ll also get my monthly newsletter, Front Porch Notes. '
+                'You can stop it anytime, and I never share your email.</p>')
+    form = mail_form(EN, "en", "Seller's Guide request from jrREsales.com", fields, "Email me the guide", "sg-form",
+                     ok="Thank you. Your guide is on its way. I'll email it to you within one business day.")
+    parts = [
+        ("Part 1: Getting ready to list", "What to fix, what to clean, and what can wait. The papers to gather. How to get ready for photo day. How we set your price. And how to buy your next home at the same time."),
+        ("Part 2: While your home is for sale", "How buyers find your home. How showings get booked, how the lockbox works, and what to do before buyers arrive. And what to make of buyer feedback."),
+        ("Part 3: From offer to closing", "What happens when an offer comes in. The due diligence period, repair requests, the termite inspection, and the appraisal. A week-by-week look at the road to closing, and what to expect on closing day."),
+    ]
+    p_html = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in parts)
+    return f"""
+<section><div class="wrap"><div class="guidehero{" has-cover" if cover else ""}">{cover}
+<div><p class="fine" style="margin:0 0 6px">Free Seller's Guide</p>
+<h1>Selling Your Home, Step by Step</h1>
+<p>Thinking about selling? This short guide walks you through the whole sale, from getting ready to list to the day you hand over the keys. It's 8 pages, in plain English, and written by me from my own sales here in the Upstate.</p>
+<p>Tell me where to send it, and I'll email you a copy. It's free.</p>
+<p><a class="btn" href="#request">Email me the guide</a></p></div></div></div></section>
+<section class="alt"><div class="wrap"><h2>What's inside</h2><div class="truths">{p_html}</div></div></section>
+<section id="request"><div class="wrap"><h2>Get your free copy</h2>{form}</div></section>"""
+
 # ------------------------------------------------------------- REPLY PAGE
 # Opened from the "tap_to_reply" link in each Formspree email. Everything
 # about the visitor rides after the # in the link, so it never reaches a
@@ -1489,7 +1528,7 @@ REPLY_HTML = r"""<!doctype html>
 .rp .acts .btn{text-align:center;font-size:1.15rem;padding:18px 20px}
 .rp .acts .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
 .rp h2{font-size:1.05rem;margin:22px 0 8px}
-.rp pre{white-space:pre-wrap;font:inherit;font-size:1rem;background:var(--stone);border-radius:10px;padding:14px 16px;max-width:620px;margin:0}
+.rp pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:1rem;background:var(--stone);border-radius:10px;padding:14px 16px;max-width:620px;margin:0}
 .rp .tog{display:flex;gap:8px;margin-bottom:18px}
 .rp .tog button{font:inherit;padding:8px 14px;border-radius:999px;border:1.5px solid var(--ridge);background:#fff;color:var(--ridge);cursor:pointer}
 .rp .tog button[aria-pressed=true]{background:var(--ridge);color:#fff}
@@ -1521,6 +1560,9 @@ var NOTES={
   b:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your book request from my website. Your books go in the mail in the next few days. If you ever want to talk about your home, just text me here.",
      subj:"Your free books are on the way",
      mail:"Hi {first},\n\nThank you for asking for my books. I got your request, and they'll go in the mail to {addr} in the next few days.\n\nNo strings attached. If you ever want to talk about selling or buying a home, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"},
+  g:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. Thanks for asking for my Seller's Guide. Here it is: https://jrREsales.com/assets/sellers-guide.pdf",
+     subj:"Your Seller's Guide: Selling Your Home, Step by Step",
+     mail:"Hi {first},\n\nThank you for asking for my Seller's Guide, \"Selling Your Home, Step by Step.\" You can open or save it here:\n\nhttps://jrREsales.com/assets/sellers-guide.pdf\n\nIt walks through a home sale from getting ready to list all the way to closing day.\n\nYou'll also get my monthly newsletter, Front Porch Notes. If you'd rather not, just reply and let me know.\n\nIf you have a question about your own home, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"},
   c:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your message from my website. What's a good time to talk? You can also reach me right here by text.",
      subj:"Thanks for reaching out",
      mail:"Hi {first},\n\nThank you for your message. I got it and wanted you to know right away.\n\nWhat's a good time to talk? You can call or text me at 864-381-2326, or simply reply to this email.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"}},
@@ -1539,14 +1581,14 @@ var NOTES={
      mail:"Hola {first}:\n\nGracias por su mensaje. Lo recibí y quería avisarle de inmediato.\n\n¿A qué hora le queda bien que hablemos? Puede llamarme o escribirme al 864-381-2326, o simplemente responder a este correo.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"}}
 };
 var q=new URLSearchParams(location.hash.slice(1));
-var d={t:['c','b','n'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
+var d={t:['c','b','n','g'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
 var first=(d.n.split(/\s+/)[0]||'').replace(/^./,function(c){return c.toUpperCase();});
 function fill(s){return s.replace(/\{first\}/g,first||(d.l==='es'?'':'there')).replace(/\{addr\}/g,d.a||(d.l==='es'?'su casa':'your home')).replace(/^Hola :/,'Hola:').replace(/^Hola ,/,'Hola,');}
 function show(){
-  var N=NOTES[d.l][d.t],tx=fill(N.text),sj=fill(N.subj),bd=fill(N.mail);
+  var N=NOTES[d.l][d.t]||NOTES.en[d.t],tx=fill(N.text),sj=fill(N.subj),bd=fill(N.mail);
   document.documentElement.lang=d.l;
   document.getElementById('h').textContent=(d.l==='es'?'Responder a ':'Reply to ')+(d.n||'?');
-  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
+  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):d.t==='g'?(d.l==='es'?'Guía del vendedor':"Seller's Guide request"):(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
   document.getElementById('tx').textContent=tx;
   document.getElementById('em').textContent='Subject: '+sj+'\n\n'+bd;
   var s=document.getElementById('sms'),m=document.getElementById('mail');
@@ -1582,7 +1624,7 @@ def build():
     (OUT / "CNAME").write_text(SITE["domain"] + "\n")
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
-    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html",
+    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html", "sellers-guide.html",
             "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/newsletter.html", "es/contact.html"]
     urls += [n["path"] for n in NEWSLETTERS]
     urls += [b["slug"] + ".html" for b in BOOKS] + ["es/" + b["slug"] + ".html" for b in BOOKS] + [k + ".html" for k in TOWN_PAGES]
@@ -1590,7 +1632,7 @@ def build():
     today = _dt.date.today().isoformat()
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{base}{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls) + "</urlset>\n")
-    (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /reply.html\nDisallow: /defaultsite/\nSitemap: " + base + "sitemap.xml\n")
+    (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /reply.html\nDisallow: /defaultsite/\nDisallow: /assets/*.pdf\nSitemap: " + base + "sitemap.xml\n")
     (OUT / ".nojekyll").write_text("")
 
     t = "J.R. Grimaldo, REALTOR® – Sell Your Home in Landrum & the Upstate SC"
@@ -1605,6 +1647,7 @@ def build():
         "newsletter.html": "J.R. Grimaldo's free monthly newsletter: what homes are selling for in Landrum and nearby Upstate SC towns, whether sales are up or down, and where mortgage rates stand. Sign up by email.",
         "free-books.html": "Free books on selling your home, mailed to you by J.R. Grimaldo, REALTOR® in Landrum, SC. No cost, no obligation, no sales call.",
         "contact.html": "Call or text J.R. Grimaldo at 864-381-2326. He answers most calls live and replies to texts right away. Landrum and Upstate SC Real Estate.",
+        "sellers-guide.html": "Free 8-page Seller's Guide from J.R. Grimaldo, REALTOR® in Landrum, SC: getting ready to list, showings, and the road from offer to closing. Emailed to you.",
     }
     DE = {
         "index.html": "¿Piensa vender en el Upstate? J.R. Grimaldo, REALTOR® desde 2016, le prepara una valuación gratis por escrito en un día hábil. Hablo español.",
@@ -1628,6 +1671,7 @@ def build():
         "free-books.html": ("Free Books on Selling Your Home – " + SITE["agent"], page_books(EN), "es/free-books.html", "free-books.html"),
         "newsletter.html": ("Monthly Newsletter – " + SITE["agent"] + ", REALTOR®", page_newsletter(EN), "es/newsletter.html", "newsletter.html"),
         "contact.html": ("Contact J.R. Grimaldo, REALTOR®", page_contact(EN), "es/contact.html", "contact.html"),
+        "sellers-guide.html": ("Free Seller's Guide: Selling Your Home, Step by Step – " + SITE["agent"], page_guide(), "es/index.html", None),
     }
     for b in BOOKS:
         n = b["slug"] + ".html"
