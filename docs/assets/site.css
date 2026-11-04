@@ -89,8 +89,8 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .town-btns a:hover,.town-btns a:focus-visible{background:var(--ridge);color:#fff}
 .towns-band .note{font-size:.92rem;color:var(--ink-2);margin-top:14px}
 .guidehero{display:grid;gap:26px;align-items:center}
-.guidehero img{width:100%;max-width:260px;height:auto;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
-@media(min-width:800px){.guidehero.has-cover{grid-template-columns:260px 1fr;gap:44px}}
+.guidehero img{width:100%;max-width:180px;height:auto;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+@media(min-width:800px){.guidehero img{max-width:260px}.guidehero.has-cover{grid-template-columns:260px 1fr;gap:44px}}
 .guidehero > div{max-width:720px}
 .books-band{background:var(--ridge-deep);color:#fff}
 .books-band .wrap{display:grid;gap:28px;align-items:center}
