@@ -33,7 +33,7 @@ SITE = {
     "license": "SC License #95641",
     "phone": "864-381-2326",
     "phone_tel": "+18643812326",
-    "email": "jr@jrresales.com",
+    "email": "jr@jrREsales.com",
     "home_town": "Landrum, SC",
     # J.R.'s focus area (10/27/2026). He still takes listings elsewhere.
     "areas": ["Landrum", "Campobello", "Inman", "Boiling Springs", "Greer", "Lyman",
@@ -1483,30 +1483,63 @@ GUIDE = {
     "cover": "assets/sellers-guide-cover.jpg",
 }
 
+GUIDE_ES = {
+    "title": "Cómo vender su casa, paso a paso",
+    "cover": "assets/guia-vendedores-cover.jpg",
+}
+
 def page_guide(T=None):
+    es = bool(T) and T["lang"] == "es"
+    up = "../" if es else ""
+    cov = GUIDE_ES["cover"] if es else GUIDE["cover"]
     cover = ""
-    if (SRC / GUIDE["cover"]).exists():
-        cover = f'<img src="{GUIDE["cover"]}" alt="Cover of the Seller\'s Guide, Selling Your Home, Step by Step" width="400" height="518">'
-    fields = ('<div class="two">' + field("name", "Your name", req=True) + field("email", "Email", "email", req=True) + '</div>'
-              + '<p class="fine">You\'ll also get my monthly newsletter, Front Porch Notes. '
-                'You can stop it anytime, and I never share your email.</p>')
-    form = mail_form(EN, "en", "Seller's Guide request from jrREsales.com", fields, "Email me the guide", "sg-form",
-                     ok="Thank you. I got your request. I'll email the guide to you myself, usually within a few hours.")
-    parts = [
-        ("Part 1: Getting ready to list", "What to fix, what to clean, and what can wait. The papers to gather. How to get ready for photo day. How we set your price. And how to buy your next home at the same time."),
-        ("Part 2: While your home is for sale", "How buyers find your home. How showings get booked, how the lockbox works, and what to do before buyers arrive. And what to make of buyer feedback."),
-        ("Part 3: From offer to closing", "What happens when an offer comes in. The due diligence period, repair requests, the termite inspection, and the appraisal. A week-by-week look at the road to closing, and what to expect on closing day."),
-    ]
+    if (SRC / cov).exists():
+        alt = ("Portada de la guía para vendedores, Cómo vender su casa, paso a paso" if es
+               else "Cover of the Seller's Guide, Selling Your Home, Step by Step")
+        cover = f'<img src="{up}{cov}" alt="{esc(alt)}" width="400" height="518">'
+    if es:
+        fields = ('<input type="hidden" name="idioma" value="es">'
+                  + '<div class="two">' + field("name", "Su nombre", req=True) + field("email", "Correo electrónico", "email", req=True) + '</div>'
+                  + '<p class="fine">También recibirá mi boletín mensual, Front Porch Notes, que está en inglés. '
+                    'Puede cancelarlo cuando quiera, y nunca comparto su correo.</p>')
+        form = mail_form(T, "es", "Solicitud: Guía para vendedores (español)", fields, "Envíeme la guía", "sg-form",
+                         ok="Gracias. Recibí su solicitud. Le enviaré la guía yo mismo por correo electrónico, por lo general en unas pocas horas.")
+        parts = [
+            ("Parte 1: Antes de poner su casa a la venta", "Qué arreglar, qué limpiar y qué puede esperar. Los papeles que conviene reunir. Cómo prepararse para el día de las fotos. Cómo fijamos el precio. Y cómo comprar su próxima casa al mismo tiempo."),
+            ("Parte 2: Mientras su casa está a la venta", "Cómo los compradores encuentran su casa. Cómo se programan las visitas, cómo funciona la caja de seguridad para la llave y qué hacer antes de que lleguen los compradores. Y qué pensar de los comentarios de los compradores."),
+            ("Parte 3: De la oferta al cierre", "Qué pasa cuando llega una oferta. El período de revisión, las reparaciones, la inspección de termitas y la tasación. Las semanas hasta el cierre, una por una, y qué esperar el día del cierre."),
+        ]
+        kicker, h1 = "Guía gratis para vendedores", GUIDE_ES["title"]
+        p1 = ("¿Está pensando en vender? Esta guía corta le explica toda la venta, desde que prepara su casa para ponerla a la venta "
+              "hasta el día en que entrega las llaves. Son 8 páginas, en palabras sencillas, y la escribí yo a partir de mis propias ventas aquí en el Upstate.")
+        p2 = "Dígame a dónde se la envío. Se la mando yo mismo por correo electrónico, por lo general en unas pocas horas. Es gratis."
+        btn, inside, req_h2 = "Envíeme la guía", "Qué contiene", "Pida su copia gratis"
+    else:
+        fields = ('<div class="two">' + field("name", "Your name", req=True) + field("email", "Email", "email", req=True) + '</div>'
+                  + '<p class="fine">You\'ll also get my monthly newsletter, Front Porch Notes. '
+                    'You can stop it anytime, and I never share your email.</p>')
+        form = mail_form(EN, "en", "Seller's Guide request from jrREsales.com", fields, "Email me the guide", "sg-form",
+                         ok="Thank you. I got your request. I'll email the guide to you myself, usually within a few hours.")
+        parts = [
+            ("Part 1: Getting ready to list", "What to fix, what to clean, and what can wait. The papers to gather. How to get ready for photo day. How we set your price. And how to buy your next home at the same time."),
+            ("Part 2: While your home is for sale", "How buyers find your home. How showings get booked, how the lockbox works, and what to do before buyers arrive. And what to make of buyer feedback."),
+            ("Part 3: From offer to closing", "What happens when an offer comes in. The due diligence period, repair requests, the termite inspection, and the appraisal. A week-by-week look at the road to closing, and what to expect on closing day."),
+        ]
+        kicker, h1 = "Free Seller's Guide", "Selling Your Home, Step by Step"
+        p1 = ("Thinking about selling? This short guide walks you through the whole sale, from getting ready to list to the day you hand over the keys. "
+              "It's 8 pages, in plain English, and written by me from my own sales here in the Upstate.")
+        p2 = "Tell me where to send it. I'll email it to you myself, usually within a few hours. It's free."
+        btn, inside, req_h2 = "Email me the guide", "What's inside", "Get your free copy"
     p_html = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in parts)
     return f"""
 <section><div class="wrap"><div class="guidehero{" has-cover" if cover else ""}">{cover}
-<div><p class="fine" style="margin:0 0 6px">Free Seller's Guide</p>
-<h1>Selling Your Home, Step by Step</h1>
-<p>Thinking about selling? This short guide walks you through the whole sale, from getting ready to list to the day you hand over the keys. It's 8 pages, in plain English, and written by me from my own sales here in the Upstate.</p>
-<p>Tell me where to send it. I'll email it to you myself, usually within a few hours. It's free.</p>
-<p><a class="btn" href="#request">Email me the guide</a></p></div></div></div></section>
-<section class="alt"><div class="wrap"><h2>What's inside</h2><div class="truths">{p_html}</div></div></section>
-<section id="request"><div class="wrap"><h2>Get your free copy</h2>{form}</div></section>"""
+<div><p class="fine" style="margin:0 0 6px">{esc(kicker)}</p>
+<h1>{esc(h1)}</h1>
+<p>{esc(p1)}</p>
+<p>{esc(p2)}</p>
+<p><a class="btn" href="#request">{esc(btn)}</a></p></div></div></div></section>
+<section class="alt"><div class="wrap"><h2>{esc(inside)}</h2><div class="truths">{p_html}</div></div></section>
+<section id="request"><div class="wrap"><h2>{esc(req_h2)}</h2>{form}</div></section>"""
 
 # ------------------------------------------------------------- REPLY PAGE
 # Opened from the "tap_to_reply" link in each Formspree email. Everything
@@ -1545,6 +1578,7 @@ REPLY_HTML = r"""<!doctype html>
     <a class="btn" id="sms" href="#">Text</a>
     <a class="btn quiet" id="mail" href="#">Email</a>
   </div>
+  <p id="tip" style="font-weight:600;color:#8a5a00" hidden></p>
   <h2>Text message</h2><pre id="tx"></pre>
   <h2>Email</h2><pre id="em"></pre>
 </main>
@@ -1553,32 +1587,36 @@ var NOTES={
  en:{
   v:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your home value request for {addr}. I'm pulling the recent sales near you now, and you'll have your valuation by email within one business day. Any questions in the meantime, just text me here.",
      subj:"Your home value request for {addr}",
-     mail:"Hi {first},\n\nThank you for asking me to value your home at {addr}. I got your request, and I'm on it.\n\nI'm a licensed South Carolina agent, and I prepare every valuation myself. I'll look at the recent sales near you and at your home's details, then send you a written valuation within one business day, with the sales I used so you can see the reasoning.\n\nIf you'd like to talk sooner, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"},
+     mail:"Hi {first},\n\nThank you for asking me to value your home at {addr}. I got your request, and I'm on it.\n\nI'm a licensed South Carolina agent, and I prepare every valuation myself. I'll look at the recent sales near you and at your home's details, then send you a written valuation within one business day, with the sales I used so you can see the reasoning.\n\nIf you'd like to talk sooner, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"},
   n:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. Thanks for signing up for my newsletter. It comes once a month. If you ever have a question about your home, just text me here.",
      subj:"Thanks for signing up for my newsletter",
-     mail:"Hi {first},\n\nThank you for signing up for my monthly newsletter. You're on the list, and the next issue will come to this email address.\n\nIf you ever have a question about your home or the market, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"},
+     mail:"Hi {first},\n\nThank you for signing up for my monthly newsletter. You're on the list, and the next issue will come to this email address.\n\nIf you ever have a question about your home or the market, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"},
   b:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your book request from my website. Your books go in the mail in the next few days. If you ever want to talk about your home, just text me here.",
      subj:"Your free books are on the way",
-     mail:"Hi {first},\n\nThank you for asking for my books. I got your request, and they'll go in the mail to {addr} in the next few days.\n\nNo strings attached. If you ever want to talk about selling or buying a home, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"},
+     mail:"Hi {first},\n\nThank you for asking for my books. I got your request, and they'll go in the mail to {addr} in the next few days.\n\nNo strings attached. If you ever want to talk about selling or buying a home, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"},
   g:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. Thanks for asking for my Seller's Guide. Here it is: https://jrREsales.com/assets/sellers-guide.pdf",
      subj:"Your Seller's Guide: Selling Your Home, Step by Step",
      mail:"Hi {first},\n\nThank you for asking for my Seller's Guide, \"Selling Your Home, Step by Step.\" You can open or save it here:\n\nhttps://jrREsales.com/assets/sellers-guide.pdf\n\nIt walks through a home sale from getting ready to list all the way to closing day.\n\nYou'll also get my monthly newsletter, Front Porch Notes. If you'd rather not, just reply and let me know.\n\nIf you have a question about your own home, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"},
   c:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your message from my website. What's a good time to talk? You can also reach me right here by text.",
      subj:"Thanks for reaching out",
-     mail:"Hi {first},\n\nThank you for your message. I got it and wanted you to know right away.\n\nWhat's a good time to talk? You can call or text me at 864-381-2326, or simply reply to this email.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrinciples Before Profits"}},
+     mail:"Hi {first},\n\nThank you for your message. I got it and wanted you to know right away.\n\nWhat's a good time to talk? You can call or text me at 864-381-2326, or simply reply to this email.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"}},
  es:{
   v:{text:"Hola {first}, le saluda J.R. Grimaldo de NorthGroup Real Estate. Recibí su solicitud de valuación para {addr}. Ya estoy revisando las ventas recientes cerca de usted, y tendrá su valuación por correo en un día hábil. Si tiene alguna pregunta, escríbame aquí.",
      subj:"Su solicitud de valuación para {addr}",
-     mail:"Hola {first}:\n\nGracias por pedirme la valuación de su casa en {addr}. Recibí su solicitud y ya estoy trabajando en ella.\n\nSoy agente con licencia en Carolina del Sur y preparo cada valuación personalmente. Voy a revisar las ventas recientes cerca de usted y los detalles de su casa, y le enviaré una valuación por escrito en un día hábil, con las ventas que usé para que vea el razonamiento.\n\nSi prefiere hablar antes, llámeme o escríbame al 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"},
+     mail:"Hola {first}:\n\nGracias por pedirme la valuación de su casa en {addr}. Recibí su solicitud y ya estoy trabajando en ella.\n\nSoy agente con licencia en Carolina del Sur y preparo cada valuación personalmente. Voy a revisar las ventas recientes cerca de usted y los detalles de su casa, y le enviaré una valuación por escrito en un día hábil, con las ventas que usé para que vea el razonamiento.\n\nSi prefiere hablar antes, llámeme o escríbame al 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrincipios Antes De Ganancias"},
   n:{text:"Hola {first}, le saluda J.R. Grimaldo de NorthGroup Real Estate. Gracias por inscribirse a mi boletín. Sale una vez al mes. Si algún día tiene una pregunta sobre su casa, escríbame aquí.",
      subj:"Gracias por inscribirse a mi boletín",
-     mail:"Hola {first}:\n\nGracias por inscribirse a mi boletín mensual. Ya está en la lista, y el próximo boletín le llegará a este correo.\n\nSi algún día tiene una pregunta sobre su casa o el mercado, llámeme o escríbame al 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"},
+     mail:"Hola {first}:\n\nGracias por inscribirse a mi boletín mensual. Ya está en la lista, y el próximo boletín le llegará a este correo.\n\nSi algún día tiene una pregunta sobre su casa o el mercado, llámeme o escríbame al 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrincipios Antes De Ganancias"},
   b:{text:"Hola {first}, le saluda J.R. Grimaldo de NorthGroup Real Estate. Recibí su solicitud de libros desde mi página web. Sus libros salen por correo en los próximos días. Si algún día quiere hablar de su casa, escríbame aquí.",
      subj:"Sus libros gratis van en camino",
-     mail:"Hola {first}:\n\nGracias por pedir mis libros. Recibí su solicitud, y salen por correo a {addr} en los próximos días.\n\nSin compromiso. Si algún día quiere hablar de vender o comprar una casa, llámeme o escríbame al 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"},
+     mail:"Hola {first}:\n\nGracias por pedir mis libros. Recibí su solicitud, y salen por correo a {addr} en los próximos días.\n\nSin compromiso. Si algún día quiere hablar de vender o comprar una casa, llámeme o escríbame al 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrincipios Antes De Ganancias"},
+  g:{text:"Hola {first}, le saluda J.R. Grimaldo de NorthGroup Real Estate. Gracias por pedir mi guía para vendedores. Se la acabo de enviar por correo electrónico.",
+     subj:"Su guía para vendedores: Cómo vender su casa, paso a paso",
+     tip:"Before you send: attach the Spanish guide PDF to this email.",
+     mail:"Hola {first}:\n\nGracias por pedir mi guía para vendedores, \"Cómo vender su casa, paso a paso\". Se la envío adjunta a este correo.\n\nLe explica toda la venta, desde que prepara su casa hasta el día del cierre.\n\nTambién recibirá mi boletín mensual, Front Porch Notes, que está en inglés. Si prefiere no recibirlo, solo responda a este correo y dígamelo.\n\nSi tiene alguna pregunta sobre su casa, llámeme o escríbame al 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrincipios Antes De Ganancias"},
   c:{text:"Hola {first}, le saluda J.R. Grimaldo de NorthGroup Real Estate. Recibí su mensaje desde mi página web. ¿A qué hora le queda bien que hablemos? También puede escribirme aquí.",
      subj:"Gracias por comunicarse",
-     mail:"Hola {first}:\n\nGracias por su mensaje. Lo recibí y quería avisarle de inmediato.\n\n¿A qué hora le queda bien que hablemos? Puede llamarme o escribirme al 864-381-2326, o simplemente responder a este correo.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrresales.com\nPrincipios Antes De Ganancias"}}
+     mail:"Hola {first}:\n\nGracias por su mensaje. Lo recibí y quería avisarle de inmediato.\n\n¿A qué hora le queda bien que hablemos? Puede llamarme o escribirme al 864-381-2326, o simplemente responder a este correo.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrincipios Antes De Ganancias"}}
 };
 var q=new URLSearchParams(location.hash.slice(1));
 var d={t:['c','b','n','g'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
@@ -1589,6 +1627,7 @@ function show(){
   document.documentElement.lang=d.l;
   document.getElementById('h').textContent=(d.l==='es'?'Responder a ':'Reply to ')+(d.n||'?');
   document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):d.t==='g'?(d.l==='es'?'Guía del vendedor':"Seller's Guide request"):(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
+  var tp=document.getElementById('tip');if(N.tip){tp.textContent=N.tip;tp.hidden=false;}else{tp.hidden=true;}
   document.getElementById('tx').textContent=tx;
   document.getElementById('em').textContent='Subject: '+sj+'\n\n'+bd;
   var s=document.getElementById('sms'),m=document.getElementById('mail');
@@ -1620,12 +1659,12 @@ def build():
     # that forwarding land here; send them to /index.html (not /, which those
     # browsers would bounce back here).
     (OUT / "defaultsite").mkdir(exist_ok=True)
-    (OUT / "defaultsite" / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/index.html"><link rel="canonical" href="https://jrresales.com/"><title>J.R. Grimaldo</title><a href="/index.html">Go to jrresales.com</a><script>location.replace("/index.html")</script>')
+    (OUT / "defaultsite" / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/index.html"><link rel="canonical" href="https://jrresales.com/"><title>J.R. Grimaldo</title><a href="/index.html">Go to jrREsales.com</a><script>location.replace("/index.html")</script>')
     (OUT / "CNAME").write_text(SITE["domain"] + "\n")
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
     urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html", "sellers-guide.html",
-            "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/newsletter.html", "es/contact.html"]
+            "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/newsletter.html", "es/contact.html", "es/sellers-guide.html"]
     urls += [n["path"] for n in NEWSLETTERS]
     urls += [b["slug"] + ".html" for b in BOOKS] + ["es/" + b["slug"] + ".html" for b in BOOKS] + [k + ".html" for k in TOWN_PAGES]
     import datetime as _dt
@@ -1659,6 +1698,7 @@ def build():
         "newsletter.html": "El boletín mensual gratis de J.R. Grimaldo sobre las casas en Landrum y el Upstate de Carolina del Sur. Inscríbase por correo.",
         "free-books.html": "Libros gratis sobre vender su casa, enviados por correo por J.R. Grimaldo, REALTOR® en Landrum, SC. Sin costo ni compromiso.",
         "contact.html": "Llame o envíe un texto a J.R. Grimaldo al 864-381-2326. Contesta la mayoría de las llamadas en el momento. Bienes raíces en Landrum y el Upstate.",
+        "sellers-guide.html": "Guía gratis de 8 páginas de J.R. Grimaldo, REALTOR® en Landrum, SC: cómo preparar su casa, las visitas y el camino de la oferta al cierre. Se la envía por correo electrónico.",
     }
     # English: (title, body, language switch, Spanish twin or None)
     pages = {
@@ -1671,7 +1711,7 @@ def build():
         "free-books.html": ("Free Books on Selling Your Home – " + SITE["agent"], page_books(EN), "es/free-books.html", "free-books.html"),
         "newsletter.html": ("Monthly Newsletter – " + SITE["agent"] + ", REALTOR®", page_newsletter(EN), "es/newsletter.html", "newsletter.html"),
         "contact.html": ("Contact J.R. Grimaldo, REALTOR®", page_contact(EN), "es/contact.html", "contact.html"),
-        "sellers-guide.html": ("Free Seller's Guide: Selling Your Home, Step by Step – " + SITE["agent"], page_guide(), "es/index.html", None),
+        "sellers-guide.html": ("Free Seller's Guide: Selling Your Home, Step by Step – " + SITE["agent"], page_guide(EN), "es/sellers-guide.html", "sellers-guide.html"),
     }
     for b in BOOKS:
         n = b["slug"] + ".html"
@@ -1700,6 +1740,7 @@ def build():
         "free-books.html": ("Libros gratis sobre vender su casa – " + SITE["agent"], page_books(ES), "../free-books.html"),
         "newsletter.html": ("Boletín mensual – " + SITE["agent"] + ", REALTOR®", page_newsletter(ES), "../newsletter.html"),
         "contact.html": ("Contácteme – " + SITE["agent"] + ", REALTOR®", page_contact(ES), "../contact.html"),
+        "sellers-guide.html": ("Guía gratis para vendedores: Cómo vender su casa, paso a paso – " + SITE["agent"], page_guide(ES), "../sellers-guide.html"),
     }
     for b in BOOKS:
         n = b["slug"] + ".html"
