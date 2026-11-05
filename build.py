@@ -1589,7 +1589,7 @@ def page_sales_list():
     fields = ('<input type="hidden" name="request" value="saleslist">'
               + '<div class="two">' + field("name", "Your name", req=True) + field("email", "Email", "email", req=True) + '</div>'
               + '<div class="two">' + field("street", "Home address (street)", req=True) + field("city", "Town", req=True) + '</div>'
-              + '<p class="fine">I never share your email.</p>')
+              + '<p class="fine">You\'ll also get my monthly newsletter, Front Porch Notes. You can stop it any time, and I never share your email.</p>')
     form = mail_form(EN, "en", "Sales list request from jrREsales.com", fields, "Send me the list", "sl-form",
                      ok="Thank you. I got your request. I'll email it to you myself, usually within a day.")
     return f"""
