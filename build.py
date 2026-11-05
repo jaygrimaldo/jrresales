@@ -1588,7 +1588,7 @@ def page_fsbo_guide():
     ]
     p_html = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in parts)
     top = guide_top(cover, "Free guide for owners selling on their own", FSBO_GUIDE["title"],
-                    "Free, 8 pages. I'll email it to you myself, usually within a few hours.", form)
+                    "Free, 8 pages, plus the South Carolina disclosure form. I'll email it to you myself, usually within a few hours.", form)
     return top + f"""
 <section class="alt"><div class="wrap"><h2>What's inside</h2>
 <p class="glong">Selling your home yourself? That's your call, and I respect it. This 8-page guide walks you through it in order: pricing, showings, and closing in South Carolina. It's honest about the parts that usually trip owners up.</p>
