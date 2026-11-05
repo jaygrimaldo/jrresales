@@ -644,6 +644,18 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .town-btns a{display:block;text-align:center;padding:13px 10px;border:1.5px solid var(--ridge);border-radius:8px;color:var(--ridge);text-decoration:none;font-weight:600;font-size:1rem;background:#fff}
 .town-btns a:hover,.town-btns a:focus-visible{background:var(--ridge);color:#fff}
 .towns-band .note{font-size:.92rem;color:var(--ink-2);margin-top:14px}
+.gtop{padding-top:18px;padding-bottom:26px}
+.ghead{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.ghead img{width:74px;height:auto;border-radius:3px;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.ghead .kick{font-size:.82rem;color:var(--ink-2);margin:0 0 2px}
+.ghead h1{font-size:1.45rem;margin:0;line-height:1.15}
+.gtop .gline{margin:12px 0 14px;font-size:1rem}
+.gtop form.sheet{gap:10px}
+.gtop form.sheet .fine{margin:0;font-size:.85rem}
+.gtop form.sheet input{padding:10px 12px}
+.glong{max-width:70ch}
+.pair{display:grid;grid-template-columns:1.7fr 1fr;gap:10px}
+@media(min-width:800px){.gtop{padding-top:40px}.ghead img{width:150px}.ghead{gap:28px}.ghead h1{font-size:2.4rem}.gtop .gline{font-size:1.1rem;margin:18px 0}}
 .guidehero{display:grid;gap:26px;align-items:center}
 .guidehero img{width:100%;max-width:180px;height:auto;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
 @media(min-width:800px){.guidehero img{max-width:260px}.guidehero.has-cover{grid-template-columns:260px 1fr;gap:44px}}
@@ -1491,10 +1503,20 @@ GUIDE = {
     "cover": "assets/sellers-guide-cover.jpg",
 }
 
+GUIDE_LINE_EN = "Free, 8 pages. I'll email it to you myself, usually within a few hours."
+GUIDE_LINE_ES = "Gratis, 8 páginas. Se la mando yo mismo por correo electrónico, por lo general en unas pocas horas."
 GUIDE_ES = {
     "title": "Cómo vender su casa, paso a paso",
     "cover": "assets/guia-vendedores-cover.jpg",
 }
+
+
+def guide_top(cover, kicker, h1, line, form):
+    """Phone-first top of a request page: small cover beside the title, one short line,
+    then the form, all on the first phone screen (J.R., 11/5/2026)."""
+    return (f'<section class="gtop"><div class="wrap"><div class="ghead">{cover}'
+            f'<div><p class="kick">{esc(kicker)}</p><h1>{esc(h1)}</h1></div></div>'
+            f'<p class="gline">{esc(line)}</p>{form}</div></section>')
 
 def page_guide(T=None):
     es = bool(T) and T["lang"] == "es"
@@ -1539,15 +1561,9 @@ def page_guide(T=None):
         p2 = "Tell me where to send it. I'll email it to you myself, usually within a few hours. It's free."
         btn, inside, req_h2 = "Email me the guide", "What's inside", "Get your free copy"
     p_html = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in parts)
-    return f"""
-<section><div class="wrap"><div class="guidehero{" has-cover" if cover else ""}">{cover}
-<div><p class="fine" style="margin:0 0 6px">{esc(kicker)}</p>
-<h1>{esc(h1)}</h1>
-<p>{esc(p1)}</p>
-<p>{esc(p2)}</p>
-<p><a class="btn" href="#request">{esc(btn)}</a></p></div></div></div></section>
-<section class="alt"><div class="wrap"><h2>{esc(inside)}</h2><div class="truths">{p_html}</div></div></section>
-<section id="request"><div class="wrap"><h2>{esc(req_h2)}</h2>{form}</div></section>"""
+    line = (GUIDE_LINE_ES if es else GUIDE_LINE_EN)
+    return guide_top(cover, kicker, h1, line, form) + f"""
+<section class="alt"><div class="wrap"><h2>{esc(inside)}</h2><p class="glong">{esc(p1)}</p><div class="truths">{p_html}</div></div></section>"""
 
 
 # ------------------------------------------------------------- FSBO GUIDE
@@ -1571,15 +1587,13 @@ def page_fsbo_guide():
         ("Part 3: Offers, Paperwork, and Closing in South Carolina", "What you must tell buyers by law, the contract, the due diligence period, repair requests, the appraisal, the closing attorney, and a checklist from offer to closing."),
     ]
     p_html = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in parts)
-    return f"""
-<section><div class="wrap"><div class="guidehero{" has-cover" if cover else ""}">{cover}
-<div><p class="fine" style="margin:0 0 6px">Free guide for owners selling on their own</p>
-<h1>{esc(FSBO_GUIDE["title"])}</h1>
-<p>Selling your home yourself? That's your call, and I respect it. This 8-page guide walks you through it in order: pricing, showings, and closing in South Carolina. It's honest about the parts that usually trip owners up.</p>
-<p>Tell me where to send it. I'll email it to you myself, usually within a few hours. It comes with the South Carolina disclosure form and a one-page showing checklist. It's free.</p>
-<p><a class="btn" href="#request">Email me the guide</a></p></div></div></div></section>
-<section class="alt"><div class="wrap"><h2>What's inside</h2><div class="truths">{p_html}</div></div></section>
-<section id="request"><div class="wrap"><h2>Get your free copy</h2>{form}</div></section>"""
+    top = guide_top(cover, "Free guide for owners selling on their own", FSBO_GUIDE["title"],
+                    "Free, 8 pages. I'll email it to you myself, usually within a few hours.", form)
+    return top + f"""
+<section class="alt"><div class="wrap"><h2>What's inside</h2>
+<p class="glong">Selling your home yourself? That's your call, and I respect it. This 8-page guide walks you through it in order: pricing, showings, and closing in South Carolina. It's honest about the parts that usually trip owners up.</p>
+<p class="glong">It comes with the South Carolina disclosure form and a one-page showing checklist.</p>
+<div class="truths">{p_html}</div></div></section>"""
 
 
 # ------------------------------------------------------------- SALES LIST
@@ -1588,18 +1602,13 @@ def page_fsbo_guide():
 def page_sales_list():
     fields = ('<input type="hidden" name="request" value="saleslist">'
               + '<div class="two">' + field("name", "Your name", req=True) + field("email", "Email", "email", req=True) + '</div>'
-              + '<div class="two">' + field("street", "Home address (street)", req=True) + field("city", "Town", req=True) + '</div>'
+              + '<div class="pair">' + field("street", "Home address (street)", req=True) + field("city", "Town", req=True) + '</div>'
               + '<p class="fine">You\'ll also get my monthly newsletter, Front Porch Notes. You can stop it any time, and I never share your email.</p>')
     form = mail_form(EN, "en", "Sales list request from jrREsales.com", fields, "Send me the list", "sl-form",
                      ok="Thank you. I got your request. I'll email it to you myself, usually within a day.")
-    return f"""
-<section><div class="wrap"><div class="guidehero"><div>
-<p class="fine" style="margin:0 0 6px">Free, from J.R. Grimaldo</p>
-<h1>A list of recent sales near you</h1>
-<p>I'll send you a one-page list of similar homes that sold near you, with the real sold prices. No estimate, no pressure, no cost.</p>
-<p>Tell me your home's address and where to send it. I'll email it to you myself, usually within a day.</p>
-</div></div></div></section>
-<section class="alt" id="request"><div class="wrap"><h2>Ask for your list</h2>{form}</div></section>"""
+    return guide_top("", "Free, from J.R. Grimaldo", "A list of recent sales near you",
+                     "Similar homes that sold near you, with the real sold prices. I'll email it to you myself, usually within a day.", form) + """
+<section class="alt"><div class="wrap"><p class="glong">I'll send you a one-page list of similar homes that sold near you, with the real sold prices. No estimate, no pressure, no cost.</p></div></section>"""
 
 # ------------------------------------------------------------- REPLY PAGE
 # Opened from the "tap_to_reply" link in each Formspree email. Everything
