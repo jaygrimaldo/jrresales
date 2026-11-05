@@ -818,7 +818,7 @@ document.addEventListener('DOMContentLoaded',function(){
       var src=new FormData(form),fd=new FormData();
       try{
         var g=function(k){return (src.get(k)||'').toString().trim();};
-        var r={t:form.id==='hv-form'?'v':(form.id==='bk-form'?'b':(form.id==='nl-form'?'n':(form.id==='sg-form'?'g':'c'))),l:document.documentElement.lang==='es'?'es':'en',
+        var r={t:form.id==='hv-form'?'v':(form.id==='bk-form'?'b':(form.id==='nl-form'?'n':(form.id==='sg-form'?'g':(form.id==='fg-form'?'f':'c')))),l:document.documentElement.lang==='es'?'es':'en',
                n:g('name'),p:g('phone'),e:g('email'),a:[g('address')||g('street'),g('city')].filter(Boolean).join(', ')};
         fd.append('tap_to_reply',location.origin+'/reply.html#'+new URLSearchParams(r).toString());
       }catch(err){}
@@ -1549,6 +1549,38 @@ def page_guide(T=None):
 <section class="alt"><div class="wrap"><h2>{esc(inside)}</h2><div class="truths">{p_html}</div></div></section>
 <section id="request"><div class="wrap"><h2>{esc(req_h2)}</h2>{form}</div></section>"""
 
+
+# ------------------------------------------------------------- FSBO GUIDE
+# Request page for J.R.'s 8-page guide for owners selling on their own (J.R., 11/5/2026).
+# Emailed by J.R. with three attachments (claude/FSBO_Guide_Reply_Email.md). The QR code on
+# the FSBO letter points to this page, so keep the address fsbo-guide.html.
+FSBO_GUIDE = {"title": "Selling Your Home on Your Own, Step by Step", "cover": "assets/fsbo-guide-cover.jpg"}
+
+def page_fsbo_guide():
+    cover = ""
+    if (SRC / FSBO_GUIDE["cover"]).exists():
+        cover = f'<img src="{FSBO_GUIDE["cover"]}" alt="Cover of the guide Selling Your Home on Your Own, Step by Step" width="400" height="518">'
+    fields = ('<div class="two">' + field("name", "Your name", req=True) + field("email", "Email", "email", req=True) + '</div>'
+              + '<p class="fine">You\'ll also get my monthly newsletter, Front Porch Notes. '
+                'You can stop it anytime, and I never share your email.</p>')
+    form = mail_form(EN, "en", "FSBO Guide request from jrREsales.com", fields, "Email me the guide", "fg-form",
+                     ok="Thank you. I got your request. I'll email the guide to you myself, usually within a few hours.")
+    parts = [
+        ("Part 1: Pricing It Right on Your Own", "Where to find real sold prices, why online estimates miss, why starting high costs you, and what selling on your own still costs."),
+        ("Part 2: Getting Buyers in the Door", "Where buyers actually look, tips for better photos, showings and safety, the yard sign, and what to do when agents call."),
+        ("Part 3: Offers, Paperwork, and Closing in South Carolina", "What you must tell buyers by law, the contract, the due diligence period, repair requests, the appraisal, the closing attorney, and a checklist from offer to closing."),
+    ]
+    p_html = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in parts)
+    return f"""
+<section><div class="wrap"><div class="guidehero{" has-cover" if cover else ""}">{cover}
+<div><p class="fine" style="margin:0 0 6px">Free guide for owners selling on their own</p>
+<h1>{esc(FSBO_GUIDE["title"])}</h1>
+<p>Selling your home yourself? That's your call, and I respect it. This 8-page guide walks you through it in order: pricing, showings, and closing in South Carolina. It's honest about the parts that usually trip owners up.</p>
+<p>Tell me where to send it. I'll email it to you myself, usually within a few hours. It comes with the South Carolina disclosure form and a one-page showing checklist. It's free.</p>
+<p><a class="btn" href="#request">Email me the guide</a></p></div></div></div></section>
+<section class="alt"><div class="wrap"><h2>What's inside</h2><div class="truths">{p_html}</div></div></section>
+<section id="request"><div class="wrap"><h2>Get your free copy</h2>{form}</div></section>"""
+
 # ------------------------------------------------------------- REPLY PAGE
 # Opened from the "tap_to_reply" link in each Formspree email. Everything
 # about the visitor rides after the # in the link, so it never reaches a
@@ -1586,7 +1618,7 @@ REPLY_HTML = r"""<!doctype html>
     <a class="btn" id="sms" href="#">Text</a>
     <a class="btn quiet" id="mail" href="#">Email</a>
   </div>
-  <p id="tip" style="font-weight:600;color:#8a5a00" hidden></p>
+  <p id="tip" style="font-weight:600;color:#8a5a00;white-space:pre-line" hidden></p>
   <h2>Text message</h2><pre id="tx"></pre>
   <h2>Email</h2><pre id="em"></pre>
 </main>
@@ -1605,6 +1637,10 @@ var NOTES={
   g:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. Thanks for asking for my Seller's Guide. Here it is: https://jrREsales.com/assets/sellers-guide.pdf",
      subj:"Your Seller's Guide: Selling Your Home, Step by Step",
      mail:"Hi {first},\n\nThank you for asking for my Seller's Guide, \"Selling Your Home, Step by Step.\" You can open or save it here:\n\nhttps://jrREsales.com/assets/sellers-guide.pdf\n\nIt walks through a home sale from getting ready to list all the way to closing day.\n\nYou'll also get my monthly newsletter, Front Porch Notes. If you'd rather not, just reply and let me know.\n\nIf you have a question about your own home, call or text me at 864-381-2326.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"},
+  f:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I just emailed you the guide you asked for.",
+     subj:"The guide you asked for",
+     tip:"Before you send, attach these 3 files from OneDrive > NorthGroup > Expired and FSBO prospecting:\n1. 261105 FSBO Guide.pdf\n2. SC Property Condition Disclosure Statement 06.2025.pdf\n3. 261105 Showing Checklist - FSBO.pdf",
+     mail:"Hi {first},\n\nHere's the guide you asked for, plus two things that go with it:\n\n1. Selling Your Home on Your Own, Step by Step.\n2. The South Carolina disclosure form. You must give this to the buyer before you both sign a contract.\n3. A one-page showing checklist for your fridge.\n\nIf you have a question, or you'd like a list of recent sales near you, call or text me at 864-381-2326. No cost, no strings.\n\nBest of luck with your sale."},
   c:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your message from my website. What's a good time to talk? You can also reach me right here by text.",
      subj:"Thanks for reaching out",
      mail:"Hi {first},\n\nThank you for your message. I got it and wanted you to know right away.\n\nWhat's a good time to talk? You can call or text me at 864-381-2326, or simply reply to this email.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"}},
@@ -1627,14 +1663,14 @@ var NOTES={
      mail:"Hola {first}:\n\nGracias por su mensaje. Lo recibí y quería avisarle de inmediato.\n\n¿A qué hora le queda bien que hablemos? Puede llamarme o escribirme al 864-381-2326, o simplemente responder a este correo.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrincipios Antes De Ganancias"}}
 };
 var q=new URLSearchParams(location.hash.slice(1));
-var d={t:['c','b','n','g'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
+var d={t:['c','b','n','g','f'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
 var first=(d.n.split(/\s+/)[0]||'').replace(/^./,function(c){return c.toUpperCase();});
 function fill(s){return s.replace(/\{first\}/g,first||(d.l==='es'?'':'there')).replace(/\{addr\}/g,d.a||(d.l==='es'?'su casa':'your home')).replace(/^Hola :/,'Hola:').replace(/^Hola ,/,'Hola,');}
 function show(){
   var N=NOTES[d.l][d.t]||NOTES.en[d.t],tx=fill(N.text),sj=fill(N.subj),bd=fill(N.mail);
   document.documentElement.lang=d.l;
   document.getElementById('h').textContent=(d.l==='es'?'Responder a ':'Reply to ')+(d.n||'?');
-  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):d.t==='g'?(d.l==='es'?'Guía del vendedor':"Seller's Guide request"):(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
+  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):d.t==='g'?(d.l==='es'?'Guía del vendedor':"Seller's Guide request"):d.t==='f'?'FSBO Guide request':(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
   var tp=document.getElementById('tip');if(N.tip){tp.textContent=N.tip;tp.hidden=false;}else{tp.hidden=true;}
   document.getElementById('tx').textContent=tx;
   document.getElementById('em').textContent='Subject: '+sj+'\n\n'+bd;
@@ -1671,7 +1707,7 @@ def build():
     (OUT / "CNAME").write_text(SITE["domain"] + "\n")
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
-    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html", "sellers-guide.html",
+    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html", "sellers-guide.html", "fsbo-guide.html",
             "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/newsletter.html", "es/contact.html", "es/sellers-guide.html"]
     urls += [n["path"] for n in NEWSLETTERS]
     urls += [b["slug"] + ".html" for b in BOOKS] + ["es/" + b["slug"] + ".html" for b in BOOKS] + [k + ".html" for k in TOWN_PAGES]
@@ -1694,6 +1730,7 @@ def build():
         "newsletter.html": "J.R. Grimaldo's free monthly newsletter: what homes are selling for in Landrum and nearby Upstate SC towns, whether sales are up or down, and where mortgage rates stand. Sign up by email.",
         "free-books.html": "Free guides and books on selling your home from J.R. Grimaldo, REALTOR® in Landrum, SC: an 8-page Seller's Guide by email, and two printed books by mail. No cost, no obligation.",
         "contact.html": "Call or text J.R. Grimaldo at 864-381-2326. He answers most calls live and replies to texts right away. Landrum and Upstate SC Real Estate.",
+        "fsbo-guide.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you.",
         "sellers-guide.html": "Free 8-page Seller's Guide from J.R. Grimaldo, REALTOR® in Landrum, SC: getting ready to list, showings, and the road from offer to closing. Emailed to you.",
     }
     DE = {
@@ -1720,6 +1757,7 @@ def build():
         "newsletter.html": ("Monthly Newsletter – " + SITE["agent"] + ", REALTOR®", page_newsletter(EN), "es/newsletter.html", "newsletter.html"),
         "contact.html": ("Contact J.R. Grimaldo, REALTOR®", page_contact(EN), "es/contact.html", "contact.html"),
         "sellers-guide.html": ("Free Seller's Guide: Selling Your Home, Step by Step – " + SITE["agent"], page_guide(EN), "es/sellers-guide.html", "sellers-guide.html"),
+        "fsbo-guide.html": ("Free Guide: Selling Your Home on Your Own, Step by Step – " + SITE["agent"], page_fsbo_guide(), "es/index.html", None),
     }
     for b in BOOKS:
         n = b["slug"] + ".html"
