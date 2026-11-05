@@ -4,7 +4,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Reply – J.R. Grimaldo</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=06f36d9d">
+<link rel="stylesheet" href="assets/site.css?v=e0176bf3">
 <style>
 .rp{padding-block:28px 48px}
 .rp h1{font-size:1.6rem;margin-bottom:.2em}
@@ -53,6 +53,10 @@ var NOTES={
      subj:"The guide you asked for",
      tip:"Before you send, attach these 3 files from OneDrive > NorthGroup > Expired and FSBO prospecting:\n1. 261105 FSBO Guide.pdf\n2. SC Property Condition Disclosure Statement 06.2025.pdf\n3. 261105 Showing Checklist - FSBO.pdf",
      mail:"Hi {first},\n\nHere's the guide you asked for, plus two things that go with it:\n\n1. Selling Your Home on Your Own, Step by Step.\n2. The South Carolina disclosure form. You must give this to the buyer before you both sign a contract.\n3. A one-page showing checklist for your fridge.\n\nIf you have a question, or you'd like a list of recent sales near you, call or text me at 864-381-2326. No cost, no strings.\n\nBest of luck with your sale."},
+  s:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I just emailed you the list of recent sales near {addr}.",
+     subj:"Recent sales near {addr}",
+     tip:"Before you send: attach the one-page sales list for this address.",
+     mail:"Hi {first},\n\nHere's the list of recent sales near {addr} that you asked for. It's attached. These are similar homes that sold nearby, with the real sold prices.\n\nIf you have a question about any of them, call or text me at 864-381-2326. No cost, no pressure.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"},
   c:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your message from my website. What's a good time to talk? You can also reach me right here by text.",
      subj:"Thanks for reaching out",
      mail:"Hi {first},\n\nThank you for your message. I got it and wanted you to know right away.\n\nWhat's a good time to talk? You can call or text me at 864-381-2326, or simply reply to this email.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrinciples Before Profits"}},
@@ -75,14 +79,14 @@ var NOTES={
      mail:"Hola {first}:\n\nGracias por su mensaje. Lo recibí y quería avisarle de inmediato.\n\n¿A qué hora le queda bien que hablemos? Puede llamarme o escribirme al 864-381-2326, o simplemente responder a este correo.\n\nJ.R. Grimaldo, REALTOR®\nNorthGroup Real Estate\n864-381-2326 | jr@jrREsales.com\nPrincipios Antes De Ganancias"}}
 };
 var q=new URLSearchParams(location.hash.slice(1));
-var d={t:['c','b','n','g','f'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
+var d={t:['c','b','n','g','f','s'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
 var first=(d.n.split(/\s+/)[0]||'').replace(/^./,function(c){return c.toUpperCase();});
 function fill(s){return s.replace(/\{first\}/g,first||(d.l==='es'?'':'there')).replace(/\{addr\}/g,d.a||(d.l==='es'?'su casa':'your home')).replace(/^Hola :/,'Hola:').replace(/^Hola ,/,'Hola,');}
 function show(){
   var N=NOTES[d.l][d.t]||NOTES.en[d.t],tx=fill(N.text),sj=fill(N.subj),bd=fill(N.mail);
   document.documentElement.lang=d.l;
   document.getElementById('h').textContent=(d.l==='es'?'Responder a ':'Reply to ')+(d.n||'?');
-  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):d.t==='g'?(d.l==='es'?'Guía del vendedor':"Seller's Guide request"):d.t==='f'?'FSBO Guide request':(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
+  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):d.t==='g'?(d.l==='es'?'Guía del vendedor':"Seller's Guide request"):d.t==='f'?'FSBO Guide request':d.t==='s'?'Sales list request':(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
   var tp=document.getElementById('tip');if(N.tip){tp.textContent=N.tip;tp.hidden=false;}else{tp.hidden=true;}
   document.getElementById('tx').textContent=tx;
   document.getElementById('em').textContent='Subject: '+sj+'\n\n'+bd;
