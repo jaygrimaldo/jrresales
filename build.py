@@ -347,7 +347,7 @@ EN = {
     "bk_req_h2": "Get your free copy",
     "bk_req_p": "I'll mail it to you. Want the others too? Check them as well.",
     "bk_back": "All guides and books",
-    "bk_p_over": "Pick the one you want to know more about. Each page tells you what's inside and lets you ask for a copy. My Seller's Guide comes by email. The two books are printed and mailed to you. All free, with no cost and no obligation.",
+    "bk_p_over": "Pick the one you want to know more about. Each page tells you what's inside and lets you ask for a copy. My two guides come by email. The two books are printed and mailed to you. All free, with no cost and no obligation.",
     "bk_fields": {"name": "Your name", "email": "Email", "phone": "Phone (optional)",
                   "street": "Street address", "city": "City", "state": "State", "zip": "ZIP",
                   "submit": "Mail me my books",
@@ -488,7 +488,7 @@ ES = {
     "bk_req_h2": "Pida su copia gratis",
     "bk_req_p": "Se la envío por correo. ¿Quiere los otros también? Márquelos.",
     "bk_back": "Todas las guías y libros",
-    "bk_p_over": "Elija el que quiera conocer. Cada página explica qué trae y le permite pedir una copia. Mi guía para vendedores está en español, y se la envío por correo electrónico. Los dos libros están en inglés, y se los envío impresos por correo. Todo es gratis, sin costo y sin compromiso.",
+    "bk_p_over": "Elija el que quiera conocer. Cada página explica qué trae y le permite pedir una copia. Mis dos guías se las envío por correo electrónico: la guía para vendedores está en español, y la guía para dueños que venden por su cuenta está en inglés. Los dos libros están en inglés, y se los envío impresos por correo. Todo es gratis, sin costo y sin compromiso.",
     "bk_fields": {"name": "Su nombre", "email": "Correo electrónico", "phone": "Teléfono (opcional)",
                   "street": "Dirección", "city": "Ciudad", "state": "Estado", "zip": "Código postal",
                   "submit": "Envíenme mis libros",
@@ -949,6 +949,9 @@ AGENT_LD = _json.dumps({
     "sameAs": SITE["profiles"],
 }, ensure_ascii=False).replace("</", "<\\/")
 
+# Pages kept out of search: the letter-only FSBO page (the info page is the one for Google).
+NOINDEX_PAGES = {"fsbo-guide.html"}
+
 def layout(T, page, title, body, lang_switch, desc=None, alt=None):
     p = T["dir_prefix"]
     up = "../" if p else ""
@@ -978,7 +981,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title>
-<meta name="description" content="{esc(desc or T['hero_p'])}">
+<meta name="description" content="{esc(desc or T['hero_p'])}">{'<meta name="robots" content="noindex,nofollow">' if page in NOINDEX_PAGES else ''}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="J.R. Grimaldo, REALTOR®">
 <meta property="og:title" content="{esc(title)}">
@@ -1194,7 +1197,11 @@ def page_books(T):
              f'<b>{esc(GUIDE_ES["title"] if es else "Selling Your Home, Step by Step")}</b>'
              f'<span>{esc("Una guía de 8 páginas para vender su casa, desde prepararla hasta el día del cierre. En español. Se la envío por correo electrónico." if es else "My 8-page guide to selling your home, from getting ready to closing day. Emailed to you.")}</span>'
              f'<span class="go">{esc("Sobre esta guía" if es else "About this guide")}</span></a>')
-    shelf = guide + "".join(
+    fsbo = (f'<a href="{up}fsbo-guide-info.html"><img src="{up}{FSBO_GUIDE["cover"]}" alt="" width="400" height="518">'
+            f'<b>Selling Your Home on Your Own, Step by Step</b>'
+            f'<span>{esc("Para dueños que venden su casa por su cuenta. Una guía gratis de 8 páginas, con el formulario de divulgación de Carolina del Sur, por correo electrónico. La guía está en inglés." if es else "For owners selling their home on their own. A free 8-page guide, plus the South Carolina disclosure form, emailed to you.")}</span>'
+            f'<span class="go">{esc("Sobre esta guía" if es else "About this guide")}</span></a>')
+    shelf = guide + fsbo + "".join(
         f'<a href="{b["slug"]}.html"><img src="{up}assets/{b["photo"]}" alt="" width="396" height="601">'
         f'<b>{esc(b["title"])}</b><span>{esc(b["line_es"] if es else b["line"])}</span>'
         f'<span class="go">{esc(T["bk_more"])}</span></a>' for b in BOOKS)
@@ -1624,11 +1631,14 @@ def page_guide(T=None):
 # the FSBO letter points to this page, so keep the address fsbo-guide.html.
 FSBO_GUIDE = {"title": "Selling Your Home on Your Own, Step by Step", "cover": "assets/fsbo-guide-cover.jpg"}
 
-def page_fsbo_guide():
+def page_fsbo_guide(info=False):
+    """info=False: fsbo-guide.html, form first (QR code on letters, source=letter).
+    info=True: fsbo-guide-info.html for website visitors (source=website), short bullets before the form (J.R., 11/6/2026)."""
     cover = ""
     if (SRC / FSBO_GUIDE["cover"]).exists():
         cover = f'<img src="{FSBO_GUIDE["cover"]}" alt="Cover of the guide Selling Your Home on Your Own, Step by Step" width="400" height="518">'
-    fields = ('<div class="two">' + field("name", "Your name", req=True) + field("email", "Email", "email", req=True) + '</div>'
+    fields = (f'<input type="hidden" name="source" value="{"website" if info else "letter"}">'
+              + '<div class="two">' + field("name", "Your name", req=True) + field("email", "Email", "email", req=True) + '</div>'
               + '<p class="fine">You\'ll also get my monthly newsletter, Front Porch Notes. '
                 'You can stop it anytime, and I never share your email.</p>')
     form = mail_form(EN, "en", "FSBO Guide request from jrREsales.com", fields, "Email me the guide", "fg-form",
@@ -1639,8 +1649,13 @@ def page_fsbo_guide():
         ("Part 3: Offers, Paperwork, and Closing in South Carolina", "What you must tell buyers by law, the contract, the due diligence period, repair requests, the appraisal, the closing attorney, and a checklist from offer to closing."),
     ]
     p_html = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in parts)
+    short = ["Pricing it right, and what it still costs",
+             "Where buyers look, photos, safe showings",
+             "The disclosure form you must give buyers",
+             "Offers, inspections, and closing day"] if info else None
     top = guide_top(cover, "Free guide for owners selling on their own", FSBO_GUIDE["title"],
-                    "Free, 8 pages, plus the South Carolina disclosure form. I'll email it to you myself, usually within a few hours.", form)
+                    "Free, 8 pages, plus the South Carolina disclosure form. I'll email it to you myself, usually within a few hours.", form,
+                    short, "What's inside")
     return top + f"""
 <section class="alt"><div class="wrap"><h2>What's inside</h2>
 <p class="glong">Selling your home yourself? That's your call, and I respect it. This 8-page guide walks you through it in order: pricing, showings, and closing in South Carolina. It's honest about the parts that usually trip owners up.</p>
@@ -1787,7 +1802,7 @@ def build():
     (OUT / "CNAME").write_text(SITE["domain"] + "\n")
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
-    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html", "sellers-guide.html", "fsbo-guide.html", "sales-list.html",
+    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html", "sellers-guide.html", "fsbo-guide-info.html", "sales-list.html",
             "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/newsletter.html", "es/contact.html", "es/sellers-guide.html"]
     urls += [n["path"] for n in NEWSLETTERS]
     urls += [b["slug"] + ".html" for b in BOOKS] + ["es/" + b["slug"] + ".html" for b in BOOKS] + [k + ".html" for k in TOWN_PAGES]
@@ -1811,6 +1826,7 @@ def build():
         "free-books.html": "Free guides and books on selling your home from J.R. Grimaldo, REALTOR® in Landrum, SC: an 8-page Seller's Guide by email, and two printed books by mail. No cost, no obligation.",
         "contact.html": "Call or text J.R. Grimaldo at 864-381-2326. He answers most calls live and replies to texts right away. Landrum and Upstate SC Real Estate.",
         "sales-list.html": "Get a free one-page list of similar homes that sold near you, with the real sold prices, from J.R. Grimaldo, REALTOR®. No estimate, no pressure, no cost.",
+        "fsbo-guide-info.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you with the state disclosure form.",
         "fsbo-guide.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you.",
         "sellers-guide.html": "Free 8-page Seller's Guide from J.R. Grimaldo, REALTOR® in Landrum, SC: getting ready to list, showings, and the road from offer to closing. Emailed to you.",
     }
@@ -1839,6 +1855,7 @@ def build():
         "contact.html": ("Contact J.R. Grimaldo, REALTOR®", page_contact(EN), "es/contact.html", "contact.html"),
         "sellers-guide.html": ("Free Seller's Guide: Selling Your Home, Step by Step – " + SITE["agent"], page_guide(EN), "es/sellers-guide.html", "sellers-guide.html"),
         "fsbo-guide.html": ("Free Guide: Selling Your Home on Your Own, Step by Step – " + SITE["agent"], page_fsbo_guide(), "es/index.html", None),
+        "fsbo-guide-info.html": ("Free Guide: Selling Your Home on Your Own, Step by Step – " + SITE["agent"], page_fsbo_guide(info=True), "es/free-books.html", None),
         "sales-list.html": ("A List of Recent Sales Near You – " + SITE["agent"] + ", REALTOR®", page_sales_list(), "es/index.html", None),
     }
     for b in BOOKS:
