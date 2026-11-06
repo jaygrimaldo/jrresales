@@ -1609,7 +1609,7 @@ def page_guide(T=None):
     p_html = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in parts)
     line = (GUIDE_LINE_ES if es else GUIDE_LINE_EN)
     short = ([ "Antes de vender: arreglos, papeles, fotos, precio",
-               "A la venta: visitas, caja de llave, comentarios",
+               "A la venta: visitas, caja de llaves, comentarios",
                "Oferta y cierre: inspecciones, tasación, cierre"] if es else
              [ "Getting ready to list: repairs, papers, photos, and price",
                "While it's for sale: showings, the lockbox, and feedback",
