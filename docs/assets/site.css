@@ -98,6 +98,14 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .gtop form.sheet .fine{margin:0;font-size:.85rem}
 .gtop form.sheet input{padding:10px 12px}
 .glong{max-width:70ch}
+.gshort-h{margin:12px 0 2px;font-size:.82rem;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em}
+.gshort{margin:0;padding-left:1.1em;font-size:.95rem;line-height:1.35}
+.gshort li{margin:2px 0}
+.gagain{margin-top:24px}
+/* Seller's Guide pages carry the short bullets; tighten so the button stays near the first phone screen */
+@media(max-width:799px){.gtop.has-short{padding-top:10px}.gtop.has-short .ghead img{width:60px}.gtop.has-short .ghead h1{font-size:1.3rem}
+.gtop.has-short .gshort-h{margin-top:8px}.gtop.has-short .gline{margin:8px 0 10px;font-size:.95rem}
+.gtop.has-short form.sheet{gap:8px}.gtop.has-short form.sheet label{gap:3px;font-size:.92rem}.gtop.has-short form.sheet input{padding:8px 12px}}
 .pair{display:grid;grid-template-columns:1.7fr 1fr;gap:10px}
 @media(min-width:800px){.gtop{padding-top:40px}.ghead img{width:150px}.ghead{gap:28px}.ghead h1{font-size:2.4rem}.gtop .gline{font-size:1.1rem;margin:18px 0}}
 .guidehero{display:grid;gap:26px;align-items:center}

@@ -654,6 +654,14 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .gtop form.sheet .fine{margin:0;font-size:.85rem}
 .gtop form.sheet input{padding:10px 12px}
 .glong{max-width:70ch}
+.gshort-h{margin:12px 0 2px;font-size:.82rem;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em}
+.gshort{margin:0;padding-left:1.1em;font-size:.95rem;line-height:1.35}
+.gshort li{margin:2px 0}
+.gagain{margin-top:24px}
+/* Seller's Guide pages carry the short bullets; tighten so the button stays near the first phone screen */
+@media(max-width:799px){.gtop.has-short{padding-top:10px}.gtop.has-short .ghead img{width:60px}.gtop.has-short .ghead h1{font-size:1.3rem}
+.gtop.has-short .gshort-h{margin-top:8px}.gtop.has-short .gline{margin:8px 0 10px;font-size:.95rem}
+.gtop.has-short form.sheet{gap:8px}.gtop.has-short form.sheet label{gap:3px;font-size:.92rem}.gtop.has-short form.sheet input{padding:8px 12px}}
 .pair{display:grid;grid-template-columns:1.7fr 1fr;gap:10px}
 @media(min-width:800px){.gtop{padding-top:40px}.ghead img{width:150px}.ghead{gap:28px}.ghead h1{font-size:2.4rem}.gtop .gline{font-size:1.1rem;margin:18px 0}}
 .guidehero{display:grid;gap:26px;align-items:center}
@@ -1541,12 +1549,20 @@ GUIDE_ES = {
 }
 
 
-def guide_top(cover, kicker, h1, line, form):
+def guide_top(cover, kicker, h1, line, form, bullets=None, bullets_label=""):
     """Phone-first top of a request page: small cover beside the title, one short line,
     then the form, all on the first phone screen (J.R., 11/5/2026)."""
-    return (f'<section class="gtop"><div class="wrap"><div class="ghead">{cover}'
+    short = ""
+    if bullets:
+        short = (f'<p class="gshort-h">{esc(bullets_label)}</p><ul class="gshort">'
+                 + "".join(f'<li>{esc(b)}</li>' for b in bullets) + '</ul>')
+    return (f'<section class="gtop{" has-short" if bullets else ""}" id="request"><div class="wrap"><div class="ghead">{cover}'
             f'<div><p class="kick">{esc(kicker)}</p><h1>{esc(h1)}</h1></div></div>'
-            f'<p class="gline">{esc(line)}</p>{form}</div></section>')
+            f'{short}<p class="gline">{esc(line)}</p>{form}</div></section>')
+
+def again_btn(label):
+    """Second button at the end of a request page; jumps back up to the form (J.R., 11/6/2026)."""
+    return f'<p class="gagain"><a class="btn" href="#request">{esc(label)}</a></p>'
 
 def page_guide(T=None):
     es = bool(T) and T["lang"] == "es"
@@ -1592,8 +1608,14 @@ def page_guide(T=None):
         btn, inside, req_h2 = "Email me the guide", "What's inside", "Get your free copy"
     p_html = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in parts)
     line = (GUIDE_LINE_ES if es else GUIDE_LINE_EN)
-    return guide_top(cover, kicker, h1, line, form) + f"""
-<section class="alt"><div class="wrap"><h2>{esc(inside)}</h2><p class="glong">{esc(p1)}</p><div class="truths">{p_html}</div></div></section>"""
+    short = ([ "Antes de vender: arreglos, papeles, fotos, precio",
+               "A la venta: visitas, caja de llave, comentarios",
+               "Oferta y cierre: inspecciones, tasación, cierre"] if es else
+             [ "Getting ready to list: repairs, papers, photos, and price",
+               "While it's for sale: showings, the lockbox, and feedback",
+               "Offer to closing: inspections, the appraisal, and closing day"])
+    return guide_top(cover, kicker, h1, line, form, short, inside) + f"""
+<section class="alt"><div class="wrap"><h2>{esc(inside)}</h2><p class="glong">{esc(p1)}</p><div class="truths">{p_html}</div>{again_btn(btn)}</div></section>"""
 
 
 # ------------------------------------------------------------- FSBO GUIDE
@@ -1623,7 +1645,7 @@ def page_fsbo_guide():
 <section class="alt"><div class="wrap"><h2>What's inside</h2>
 <p class="glong">Selling your home yourself? That's your call, and I respect it. This 8-page guide walks you through it in order: pricing, showings, and closing in South Carolina. It's honest about the parts that usually trip owners up.</p>
 <p class="glong">It comes with the South Carolina disclosure form and a one-page showing checklist.</p>
-<div class="truths">{p_html}</div></div></section>"""
+<div class="truths">{p_html}</div>{again_btn("Email me the guide")}</div></section>"""
 
 
 # ------------------------------------------------------------- SALES LIST
@@ -1638,7 +1660,7 @@ def page_sales_list():
                      ok="Thank you. I got your request. I'll email it to you myself, usually within a day.")
     return guide_top("", "Free, from J.R. Grimaldo", "A list of recent sales near you",
                      "Similar homes that sold near you, with the real sold prices. I'll email it to you myself, usually within a day.", form) + """
-<section class="alt"><div class="wrap"><p class="glong">I'll send you a one-page list of similar homes that sold near you, with the real sold prices. No estimate, no pressure, no cost.</p></div></section>"""
+<section class="alt"><div class="wrap"><p class="glong">I'll send you a one-page list of similar homes that sold near you, with the real sold prices. No estimate, no pressure, no cost.</p>""" + again_btn("Send me the list") + """</div></section>"""
 
 # ------------------------------------------------------------- REPLY PAGE
 # Opened from the "tap_to_reply" link in each Formspree email. Everything
