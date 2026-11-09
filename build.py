@@ -21,7 +21,7 @@ BRAND = {
     "brokerage": "NorthGroup Real Estate",
     "brokerage_note": "NorthGroup Real Estate is now part of HomeSmart.",
     "brokerage_note_es": "NorthGroup Real Estate ahora es parte de HomeSmart.",
-    "office": "148 Milestone Way, Suite D, Greenville, SC 29615",
+    "office": "P.O. Box 106, Landrum, SC 29356",
     "broker_in_charge": "Rick Markowski, Broker-in-Charge",
     "brokerage_site": "https://jrgrimaldo.northgroupre.com",
 }
@@ -334,7 +334,7 @@ EN = {
     "ct_p": "Call or text me directly. I answer most calls live. Texts get a reply right away, or very soon after. You won't be passed to an assistant or a call center.",
     "ct_call": "Call or text",
     "ct_email": "Email",
-    "ct_office": "Office",
+    "ct_office": "Mailing address",
     "ct_form_h2": "Or send a note",
     "ct_fields": {"name": "Your name", "email": "Email", "phone": "Phone (optional)",
                   "message": "How can I help?", "submit": "Send"},
@@ -476,7 +476,7 @@ ES = {
     "rv_ask": "¿Trabajó conmigo?",
     "ct_h1": "Contacto",
     "ct_p": "Llámeme o envíeme un texto directamente. Contesto la mayoría de las llamadas en el momento. Los textos reciben respuesta de inmediato, o muy poco después. No lo pasarán a un asistente ni a un centro de llamadas.",
-    "ct_call": "Llamar o texto", "ct_email": "Correo", "ct_office": "Oficina",
+    "ct_call": "Llamar o texto", "ct_email": "Correo", "ct_office": "Dirección postal",
     "ct_form_h2": "O envíe un mensaje",
     "ct_fields": {"name": "Su nombre", "email": "Correo electrónico", "phone": "Teléfono (opcional)",
                   "message": "¿En qué puedo ayudarle?", "submit": "Enviar"},
@@ -940,8 +940,8 @@ AGENT_LD = _json.dumps({
     "image": "https://" + SITE["domain"] + "/assets/jr-headshot.jpg",
     "telephone": SITE["phone_tel"],
     "email": SITE["email"],
-    "address": {"@type": "PostalAddress", "streetAddress": "148 Milestone Way, Suite D",
-                "addressLocality": "Greenville", "addressRegion": "SC", "postalCode": "29615", "addressCountry": "US"},
+    "address": {"@type": "PostalAddress", "streetAddress": "P.O. Box 106",
+                "addressLocality": "Landrum", "addressRegion": "SC", "postalCode": "29356", "addressCountry": "US"},
     "areaServed": [{"@type": "City", "name": a + ", SC"} for a in SITE["areas"]],
     "knowsLanguage": ["en", "es"],
     "slogan": "Principles Before Profits",
@@ -1321,7 +1321,7 @@ def page_issue1():
 <h2>What's your home worth today?</h2>
 <p>Tell me the address. I'll look at your home and the recent sales around it, and send you a written valuation within one business day. Free, no obligation.</p>
 <p><a class="btn" href="../home-value.html">What's your home worth today?</a></p>
-<p class="nl-sign">Principles Before Profits · J.R. Grimaldo, REALTOR®, SC License #95641 · NorthGroup Real Estate, 148 Milestone Way, Suite D, Greenville, SC 29615 · Call or text <a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a> · Hablo español</p>
+<p class="nl-sign">Principles Before Profits · J.R. Grimaldo, REALTOR®, SC License #95641 · NorthGroup Real Estate, P.O. Box 106, Landrum, SC 29356 · Call or text <a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a> · Hablo español</p>
 <p class="fine">Got this from a friend? <a href="../newsletter.html">Sign up to get Front Porch Notes by email.</a></p>
 </div></section>"""
 
