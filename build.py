@@ -964,6 +964,13 @@ AGENT_LD = _json.dumps({
 # FSBO page (fsbo-guide-info.html is the FSBO page for Google).
 NOINDEX_PAGES = {"buyers-guide.html", "fsbo-guide.html"}
 
+# Share pictures (og:image) that differ from the default share.jpg: the guide pages show
+# their own cover when shared on Facebook (J.R., 11/10/2026). Key: (language, page).
+OG_IMAGES = {("en", "sellers-guide.html"): "share-sellers-guide.jpg",
+             ("es", "sellers-guide.html"): "share-guia-vendedores.jpg",
+             ("en", "fsbo-guide.html"): "share-fsbo-guide.jpg",
+             ("en", "fsbo-guide-info.html"): "share-fsbo-guide.jpg"}
+
 def footer_signup(T):
     """Small newsletter sign-up in every footer. Same Formspree form and subject as the newsletter page; source=footer."""
     es = T["lang"] == "es"
@@ -1027,7 +1034,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
 <meta property="og:site_name" content="J.R. Grimaldo, REALTOR®">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc or T['hero_p'])}">
-<meta property="og:image" content="https://{SITE['domain']}/assets/share.jpg">
+<meta property="og:image" content="https://{SITE['domain']}/assets/{OG_IMAGES.get((T['lang'], page), 'share.jpg')}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="{canon}">
 <link rel="canonical" href="{canon}">{hreflang}
