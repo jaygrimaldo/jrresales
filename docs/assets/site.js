@@ -6,7 +6,20 @@ document.addEventListener('DOMContentLoaded',function(){
   if(h){h.addEventListener('submit',function(e){e.preventDefault();var a=encodeURIComponent(h.querySelector('input').value||'');location.href=h.getAttribute('data-to')+(a?'?address='+a:'');});}
   var f=document.getElementById('addr-field');
   if(f){var q=new URLSearchParams(location.search).get('address');if(q)f.value=q;}
+  // Source tag (J.R., 11/10/2026): a link like ?src=fbad marks where the visitor came from.
+  // The tag is kept for the visit (sessionStorage), so it survives clicks to other pages,
+  // and is written into each form's "source" field when it sends. No tag: the page's own source.
+  var tag='';
+  try{
+    var qs=new URLSearchParams(location.search).get('src');
+    if(qs!==null){qs=qs.trim().slice(0,60);if(qs){try{sessionStorage.setItem('jr_src',qs);}catch(e){}tag=qs;}}
+    if(!tag){try{tag=sessionStorage.getItem('jr_src')||'';}catch(e){}}
+  }catch(e){}
   document.querySelectorAll('form.js-fs').forEach(function(form){
+    var sf=form.querySelector('input[name=source]');
+    if(!sf){sf=document.createElement('input');sf.type='hidden';sf.name='source';sf.value='website';form.appendChild(sf);}
+    sf.dataset.base=sf.value;
+    if(tag)sf.value=tag;
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var btn=form.querySelector('button[type=submit]'),msg=form.querySelector('.form-msg'),label=btn.textContent;
@@ -27,6 +40,7 @@ document.addEventListener('DOMContentLoaded',function(){
         base.push(['tap_to_reply',location.origin+'/reply.html#'+new URLSearchParams(r).toString()]);
       }catch(err){}
       src.forEach(function(v,k){base.push([k,v]);});
+      if(tag&&sf.dataset.base!==tag)base.push(['source_without_tag',sf.dataset.base]);
       base.push(['request_id',form.dataset.rid]);
       function done(){
         form.querySelectorAll('label,.two,.three,.pair,.fine,button').forEach(function(el){el.hidden=true;});
