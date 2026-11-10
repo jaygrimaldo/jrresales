@@ -259,6 +259,7 @@ footer.site .wrap{display:grid;gap:18px}
 footer.site a{color:#fff}
 footer.site .merge{color:#f3d58a;font-weight:600;font-size:1rem}
 footer.site p{margin:0;max-width:none}
+.privacy{max-width:680px}.privacy h2{font-size:1.25rem;margin:26px 0 6px}.privacy p{margin:0 0 10px}
 @media(min-width:800px){footer.site .wrap{grid-template-columns:1fr 1fr}}
 /* Footer newsletter sign-up: small and quiet, under the footer text (J.R., 11/10/2026). */
 footer.site .nl-foot{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:2px;font-size:.86rem}

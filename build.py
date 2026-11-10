@@ -815,6 +815,7 @@ footer.site .wrap{display:grid;gap:18px}
 footer.site a{color:#fff}
 footer.site .merge{color:#f3d58a;font-weight:600;font-size:1rem}
 footer.site p{margin:0;max-width:none}
+.privacy{max-width:680px}.privacy h2{font-size:1.25rem;margin:26px 0 6px}.privacy p{margin:0 0 10px}
 @media(min-width:800px){footer.site .wrap{grid-template-columns:1fr 1fr}}
 /* Footer newsletter sign-up: small and quiet, under the footer text (J.R., 11/10/2026). */
 footer.site .nl-foot{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:2px;font-size:.86rem}
@@ -986,7 +987,8 @@ AGENT_LD = _json.dumps({
     "sameAs": SITE["profiles"],
 }, ensure_ascii=False).replace("</", "<\\/")
 
-# Meta Pixel (J.R., 11/10/2026), exactly as J.R. gave it. Goes in the <head> of every layout() page.
+# Meta Pixel (J.R., 11/10/2026), exactly as J.R. gave it, plus his autoConfig line (a second lock
+# against Facebook reading form fields on its own; added 11/10 at his request). Goes in the <head> of every layout() page.
 META_PIXEL = """<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -997,6 +999,7 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+fbq('set','autoConfig',false,'1432161975184837');
 fbq('init', '1432161975184837');
 fbq('track', 'PageView');
 </script>
@@ -1123,7 +1126,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
     <div>
       <p><a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a> · <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
       <p>{esc(towns_label)}: {towns_links}</p>
-      <p>{esc(T['footer_eho'])} © 2026 {esc(SITE['agent'])}. {esc(T['footer_rights'])}</p>
+      <p>{esc(T['footer_eho'])} © 2026 {esc(SITE['agent'])}. {esc(T['footer_rights'])} · <a href="{'privacy.html' if p in ('', 'es/') else '../privacy.html'}">{'Privacidad' if T['lang'] == 'es' else 'Privacy'}</a></p>
     </div>
     {footer_signup(T)}
   </div>
@@ -1487,6 +1490,62 @@ def page_sold(T=EN):
             f'<ul class="sold-list">{rows}</ul></details></div>')
     i = base.rfind("</div></section>")
     return base[:i] + more + base[i:]
+
+PRIVACY = {
+    "en": {
+        "h1": "Privacy",
+        "intro": "This page says what this site collects and what I do with it.",
+        "sections": [
+            ("What I collect", [
+                "I collect only what you type into a form on this site: your name, email, and phone number. If you use the home valuation form, I also get your home address.",
+                "I get it only when you send a form. If you don't send a form, I don't get any of it."]),
+            ("Why", [
+                "I use it to send you the guide or book you asked for, to send you my monthly newsletter, and to answer you.",
+                "I don't sell or rent anyone's information."]),
+            ("Unsubscribe", [
+                "Every newsletter has an unsubscribe link. You can also email me at jr@jrREsales.com, and I'll take you off the list."]),
+            ("Facebook", [
+                "This site uses the Meta Pixel, a tool from Facebook, to count visits and to measure how well our Facebook ads work. It does not send your name, email or phone number to Facebook."]),
+            ("Forms", [
+                "The forms on this site are handled by Formspree. Formspree is the service that delivers what you send to my email."]),
+        ],
+        "contact_h": "Contact",
+    },
+    "es": {
+        "h1": "Privacidad",
+        "intro": "Esta página explica qué recoge este sitio y qué hago con eso.",
+        "sections": [
+            ("Lo que recojo", [
+                "Recojo solo lo que usted escribe en un formulario de este sitio: su nombre, correo electrónico y teléfono. Si usa el formulario de valuación de su casa, también recibo la dirección de su casa.",
+                "Lo recibo solo cuando usted envía un formulario. Si no envía un formulario, no recibo nada de eso."]),
+            ("Para qué", [
+                "Lo uso para enviarle la guía o el libro que pidió, para enviarle mi boletín mensual y para contestarle.",
+                "No vendo ni alquilo la información de nadie."]),
+            ("Cancelar la suscripción", [
+                "Cada boletín trae un enlace para cancelar la suscripción. También puede escribirme a jr@jrREsales.com y lo quito de la lista."]),
+            ("Facebook", [
+                "Este sitio usa el Meta Pixel, una herramienta de Facebook, para contar las visitas y medir qué tan bien funcionan nuestros anuncios en Facebook. No envía su nombre, correo electrónico ni número de teléfono a Facebook."]),
+            ("Formularios", [
+                "Los formularios de este sitio los maneja Formspree. Formspree es el servicio que me entrega por correo electrónico lo que usted envía."]),
+        ],
+        "contact_h": "Contacto",
+    },
+}
+
+def page_privacy(T):
+    P = PRIVACY[T["lang"]]
+    secs = "".join(f'<h2>{esc(h)}</h2>' + "".join(f'<p>{esc(x)}</p>' for x in ps) for h, ps in P["sections"])
+    contact = (f'<p>J.R. Grimaldo<br>{esc(BRAND["brokerage"])}<br>{esc(BRAND["office"])}<br>'
+               f'<a href="mailto:{SITE["email"]}">jr@jrREsales.com</a><br>'
+               f'<a href="tel:{SITE["phone_tel"]}">{SITE["phone"]}</a></p>')
+    return f"""
+<section><div class="wrap privacy">
+  <h1>{esc(P['h1'])}</h1>
+  <p>{esc(P['intro'])}</p>
+  {secs}
+  <h2>{esc(P['contact_h'])}</h2>
+  {contact}
+</div></section>"""
 
 def page_about(T):
     up = "../" if T["dir_prefix"] else ""
@@ -1947,7 +2006,7 @@ def build():
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
     urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html", "sellers-guide.html", "fsbo-guide-info.html", "sales-list.html",
-            "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/newsletter.html", "es/contact.html", "es/sellers-guide.html"]
+            "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/newsletter.html", "es/contact.html", "es/sellers-guide.html", "privacy.html", "es/privacy.html"]
     urls += [n["path"] for n in NEWSLETTERS]
     urls += [b["slug"] + ".html" for b in BOOKS] + ["es/" + b["slug"] + ".html" for b in BOOKS] + [k + ".html" for k in TOWN_PAGES]
     import datetime as _dt
@@ -1974,6 +2033,7 @@ def build():
         "fsbo-guide-info.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you with the state disclosure form.",
         "fsbo-guide.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you.",
         "sellers-guide.html": "Free 8-page Seller's Guide from J.R. Grimaldo, REALTOR® in Landrum, SC: getting ready to list, showings, and the road from offer to closing. Emailed to you.",
+        "privacy.html": "What jrREsales.com collects, why, and how to unsubscribe. J.R. Grimaldo, REALTOR®, NorthGroup Real Estate, Landrum, SC.",
     }
     DE = {
         "index.html": "¿Piensa vender en el Upstate? J.R. Grimaldo, REALTOR® desde 2016, le prepara una valuación gratis por escrito en un día hábil. Hablo español.",
@@ -1986,6 +2046,7 @@ def build():
         "free-books.html": "Guías y libros gratis sobre vender su casa de J.R. Grimaldo, REALTOR® en Landrum, SC: una guía de 8 páginas en español por correo electrónico, y dos libros impresos por correo. Sin costo ni compromiso.",
         "contact.html": "Llame o envíe un texto a J.R. Grimaldo al 864-381-2326. Contesta la mayoría de las llamadas en el momento. Bienes raíces en Landrum y el Upstate.",
         "sellers-guide.html": "Guía gratis de 8 páginas de J.R. Grimaldo, REALTOR® en Landrum, SC: cómo preparar su casa, las visitas y el camino de la oferta al cierre. Se la envía por correo electrónico.",
+        "privacy.html": "Qué recoge jrREsales.com, para qué y cómo cancelar la suscripción. J.R. Grimaldo, REALTOR®, NorthGroup Real Estate, Landrum, SC.",
     }
     # English: (title, body, language switch, Spanish twin or None)
     pages = {
@@ -2003,6 +2064,7 @@ def build():
         "fsbo-guide-info.html": ("Free Guide: Selling Your Home on Your Own, Step by Step – " + SITE["agent"], page_fsbo_guide(info=True), "es/free-books.html", None),
         "sales-list.html": ("A List of Recent Sales Near You – " + SITE["agent"] + ", REALTOR®", page_sales_list(), "es/index.html", None),
         "buyers-guide.html": ("Free Buyer's Guide: Buying Your Home, Step by Step – " + SITE["agent"], page_buyers_guide(), "es/index.html", None),
+        "privacy.html": ("Privacy – " + SITE["agent"] + ", REALTOR®", page_privacy(EN), "es/privacy.html", "privacy.html"),
     }
     for b in BOOKS:
         n = b["slug"] + ".html"
@@ -2032,6 +2094,7 @@ def build():
         "newsletter.html": ("Boletín mensual – " + SITE["agent"] + ", REALTOR®", page_newsletter(ES), "../newsletter.html"),
         "contact.html": ("Contácteme – " + SITE["agent"] + ", REALTOR®", page_contact(ES), "../contact.html"),
         "sellers-guide.html": ("Guía gratis para vendedores: Cómo vender su casa, paso a paso – " + SITE["agent"], page_guide(ES), "../sellers-guide.html"),
+        "privacy.html": ("Privacidad – " + SITE["agent"] + ", REALTOR®", page_privacy(ES), "../privacy.html"),
     }
     for b in BOOKS:
         n = b["slug"] + ".html"
