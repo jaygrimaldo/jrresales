@@ -816,6 +816,17 @@ footer.site a{color:#fff}
 footer.site .merge{color:#f3d58a;font-weight:600;font-size:1rem}
 footer.site p{margin:0;max-width:none}
 @media(min-width:800px){footer.site .wrap{grid-template-columns:1fr 1fr}}
+/* Footer newsletter sign-up: small and quiet, under the footer text (J.R., 11/10/2026). */
+footer.site .nl-foot{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:2px;font-size:.86rem}
+footer.site .nl-foot p.t{margin:0 0 8px;color:#cfd9e0}footer.site .nl-foot b{color:#fff;font-weight:600}
+footer.site .nl-foot .row{display:flex;gap:8px;flex-wrap:wrap;max-width:460px}
+footer.site .nl-foot label{flex:1 1 200px;display:block}
+footer.site .nl-foot input[type=email]{width:100%;font:inherit;font-size:16px;padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff}
+footer.site .nl-foot input[type=email]::placeholder{color:#9fb0bc}
+footer.site .nl-foot button{font:inherit;font-size:.88rem;font-weight:600;padding:8px 14px;border-radius:6px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;cursor:pointer;white-space:nowrap}
+footer.site .nl-foot .form-msg{font-size:.88rem;padding:8px 10px;margin-top:8px;max-width:460px}
+footer.site .nl-foot .form-err{color:#cfd9e0}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 """
 
@@ -843,7 +854,7 @@ document.addEventListener('DOMContentLoaded',function(){
       var src=new FormData(form),base=[],errs=[];
       try{
         var g=function(k){return (src.get(k)||'').toString().trim();};
-        var r={t:form.id==='hv-form'?'v':(form.id==='bk-form'?'b':(form.id==='nl-form'?'n':(form.id==='sg-form'?'g':(form.id==='fg-form'?'f':(form.id==='sl-form'?'s':(form.id==='bg-form'?'y':'c')))))),l:document.documentElement.lang==='es'?'es':'en',
+        var r={t:form.id==='hv-form'?'v':(form.id==='bk-form'?'b':(form.id.indexOf('nl-')===0?'n':(form.id==='sg-form'?'g':(form.id==='fg-form'?'f':(form.id==='sl-form'?'s':(form.id==='bg-form'?'y':'c')))))),l:document.documentElement.lang==='es'?'es':'en',
                n:g('name'),p:g('phone'),e:g('email'),a:[g('address')||g('street'),g('city')].filter(Boolean).join(', ')};
         base.push(['tap_to_reply',location.origin+'/reply.html#'+new URLSearchParams(r).toString()]);
       }catch(err){}
@@ -953,6 +964,35 @@ AGENT_LD = _json.dumps({
 # FSBO page (fsbo-guide-info.html is the FSBO page for Google).
 NOINDEX_PAGES = {"buyers-guide.html", "fsbo-guide.html"}
 
+def footer_signup(T):
+    """Small newsletter sign-up in every footer. Same Formspree form and subject as the newsletter page; source=footer."""
+    es = T["lang"] == "es"
+    if not SITE["formspree_id"]:
+        return ""
+    subj = "Newsletter sign-up from " + SITE["domain"] if not es else "Inscripción al boletín desde " + SITE["domain"]
+    if es:
+        line = ("Front Porch Notes", ": una nota mensual breve sobre lo que se vendieron las casas en nuestros pueblos. Solo su correo.")
+        btn, lab, ph = "Suscribirme", "Su correo electrónico", "Su correo"
+        ok = T["nl_fields"]["ok"]
+        bad = "No se pudo enviar. Por favor llame o envíe un texto a J.R. al " + SITE["phone"] + "."
+        sending = "Enviando…"
+    else:
+        line = ("Front Porch Notes", ": a short monthly note on what homes in our towns sold for. Your email, nothing else.")
+        btn, lab, ph = "Sign me up", "Your email", "Your email"
+        ok = T["nl_fields"]["ok"]
+        bad = "That didn't go through. Please call or text J.R. at " + SITE["phone"] + "."
+        sending = "Sending…"
+    return (f'<form class="nl-foot js-fs" id="nl-foot" action="https://formspree.io/f/{SITE["formspree_id"]}" method="POST" '
+            f'data-ok="{esc(ok)}" data-bad="{esc(bad)}" data-sending="{esc(sending)}">'
+            f'<input type="hidden" name="_subject" value="{esc(subj)}">'
+            f'<input type="hidden" name="language" value="{"Spanish" if es else "English"}">'
+            '<input type="hidden" name="source" value="footer">'
+            '<div style="display:none" aria-hidden="true"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" value=""></div>'
+            f'<p class="t"><b>{esc(line[0])}</b>{esc(line[1])}</p>'
+            f'<div class="row"><label><span class="vh">{esc(lab)}</span><input type="email" name="email" required placeholder="{esc(ph)}" autocomplete="email"></label>'
+            f'<button type="submit">{esc(btn)}</button></div>'
+            '<p class="form-msg" role="status" aria-live="polite" hidden></p></form>')
+
 def layout(T, page, title, body, lang_switch, desc=None, alt=None):
     p = T["dir_prefix"]
     up = "../" if p else ""
@@ -1023,6 +1063,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
       <p>{esc(towns_label)}: {towns_links}</p>
       <p>{esc(T['footer_eho'])} © 2026 {esc(SITE['agent'])}. {esc(T['footer_rights'])}</p>
     </div>
+    {footer_signup(T)}
   </div>
 </footer>
 <script src="{up}assets/site.js?v={ASSET_V}"></script>

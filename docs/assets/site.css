@@ -260,4 +260,15 @@ footer.site a{color:#fff}
 footer.site .merge{color:#f3d58a;font-weight:600;font-size:1rem}
 footer.site p{margin:0;max-width:none}
 @media(min-width:800px){footer.site .wrap{grid-template-columns:1fr 1fr}}
+/* Footer newsletter sign-up: small and quiet, under the footer text (J.R., 11/10/2026). */
+footer.site .nl-foot{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:2px;font-size:.86rem}
+footer.site .nl-foot p.t{margin:0 0 8px;color:#cfd9e0}footer.site .nl-foot b{color:#fff;font-weight:600}
+footer.site .nl-foot .row{display:flex;gap:8px;flex-wrap:wrap;max-width:460px}
+footer.site .nl-foot label{flex:1 1 200px;display:block}
+footer.site .nl-foot input[type=email]{width:100%;font:inherit;font-size:16px;padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff}
+footer.site .nl-foot input[type=email]::placeholder{color:#9fb0bc}
+footer.site .nl-foot button{font:inherit;font-size:.88rem;font-weight:600;padding:8px 14px;border-radius:6px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;cursor:pointer;white-space:nowrap}
+footer.site .nl-foot .form-msg{font-size:.88rem;padding:8px 10px;margin-top:8px;max-width:460px}
+footer.site .nl-foot .form-err{color:#cfd9e0}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
