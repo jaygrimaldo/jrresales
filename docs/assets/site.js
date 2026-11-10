@@ -3,9 +3,12 @@ document.addEventListener('DOMContentLoaded',function(){
   var b=document.querySelector('.burger'),d=document.querySelector('.drawer');
   if(b&&d){b.addEventListener('click',function(){var o=d.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false');});}
   var h=document.getElementById('hero-addr');
-  if(h){h.addEventListener('submit',function(e){e.preventDefault();var a=encodeURIComponent(h.querySelector('input').value||'');location.href=h.getAttribute('data-to')+(a?'?address='+a:'');});}
+  if(h){h.addEventListener('submit',function(e){e.preventDefault();var v=(h.querySelector('input').value||'').trim(),ok=false;
+    // The address goes to the next page through this visit's storage, not the page address (kept out of the Meta Pixel).
+    try{sessionStorage.setItem('jr_addr',v);ok=true;}catch(err){}
+    location.href=h.getAttribute('data-to')+(!ok&&v?'?address='+encodeURIComponent(v):'');});}
   var f=document.getElementById('addr-field');
-  if(f){var q=new URLSearchParams(location.search).get('address');if(q)f.value=q;}
+  if(f){var q=new URLSearchParams(location.search).get('address');if(!q){try{q=sessionStorage.getItem('jr_addr');sessionStorage.removeItem('jr_addr');}catch(err){}}if(q)f.value=q;}
   // Source tag (J.R., 11/10/2026): a link like ?src=fbad marks where the visitor came from.
   // The tag is kept for the visit (sessionStorage), so it survives clicks to other pages,
   // and is written into each form's "source" field when it sends. No tag: the page's own source.
@@ -43,6 +46,15 @@ document.addEventListener('DOMContentLoaded',function(){
       if(tag&&sf.dataset.base!==tag)base.push(['source_without_tag',sf.dataset.base]);
       base.push(['request_id',form.dataset.rid]);
       function done(){
+        // Meta Pixel 'Lead' for sign-up forms (not the contact form). Only the form's name goes to Facebook.
+        try{
+          if(window.fbq&&form.id!=='ct-form'){
+            var pg=(location.pathname.split('/').pop()||'index.html').replace(/\.html$/,'');
+            var nm=form.id==='nl-foot'?'footer':(pg==='index'?'home':pg);
+            if(document.documentElement.lang==='es')nm+='-es';
+            fbq('track','Lead',{content_name:nm});
+          }
+        }catch(err){}
         form.querySelectorAll('label,.two,.three,.pair,.fine,button').forEach(function(el){el.hidden=true;});
         msg.className='form-msg ok';msg.textContent=form.dataset.ok;msg.hidden=false;
         msg.scrollIntoView({block:'center'});

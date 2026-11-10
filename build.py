@@ -835,9 +835,12 @@ document.addEventListener('DOMContentLoaded',function(){
   var b=document.querySelector('.burger'),d=document.querySelector('.drawer');
   if(b&&d){b.addEventListener('click',function(){var o=d.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false');});}
   var h=document.getElementById('hero-addr');
-  if(h){h.addEventListener('submit',function(e){e.preventDefault();var a=encodeURIComponent(h.querySelector('input').value||'');location.href=h.getAttribute('data-to')+(a?'?address='+a:'');});}
+  if(h){h.addEventListener('submit',function(e){e.preventDefault();var v=(h.querySelector('input').value||'').trim(),ok=false;
+    // The address goes to the next page through this visit's storage, not the page address (kept out of the Meta Pixel).
+    try{sessionStorage.setItem('jr_addr',v);ok=true;}catch(err){}
+    location.href=h.getAttribute('data-to')+(!ok&&v?'?address='+encodeURIComponent(v):'');});}
   var f=document.getElementById('addr-field');
-  if(f){var q=new URLSearchParams(location.search).get('address');if(q)f.value=q;}
+  if(f){var q=new URLSearchParams(location.search).get('address');if(!q){try{q=sessionStorage.getItem('jr_addr');sessionStorage.removeItem('jr_addr');}catch(err){}}if(q)f.value=q;}
   // Source tag (J.R., 11/10/2026): a link like ?src=fbad marks where the visitor came from.
   // The tag is kept for the visit (sessionStorage), so it survives clicks to other pages,
   // and is written into each form's "source" field when it sends. No tag: the page's own source.
@@ -875,6 +878,15 @@ document.addEventListener('DOMContentLoaded',function(){
       if(tag&&sf.dataset.base!==tag)base.push(['source_without_tag',sf.dataset.base]);
       base.push(['request_id',form.dataset.rid]);
       function done(){
+        // Meta Pixel 'Lead' for sign-up forms (not the contact form). Only the form's name goes to Facebook.
+        try{
+          if(window.fbq&&form.id!=='ct-form'){
+            var pg=(location.pathname.split('/').pop()||'index.html').replace(/\.html$/,'');
+            var nm=form.id==='nl-foot'?'footer':(pg==='index'?'home':pg);
+            if(document.documentElement.lang==='es')nm+='-es';
+            fbq('track','Lead',{content_name:nm});
+          }
+        }catch(err){}
         form.querySelectorAll('label,.two,.three,.pair,.fine,button').forEach(function(el){el.hidden=true;});
         msg.className='form-msg ok';msg.textContent=form.dataset.ok;msg.hidden=false;
         msg.scrollIntoView({block:'center'});
@@ -974,6 +986,32 @@ AGENT_LD = _json.dumps({
     "sameAs": SITE["profiles"],
 }, ensure_ascii=False).replace("</", "<\\/")
 
+# Meta Pixel (J.R., 11/10/2026), exactly as J.R. gave it. Goes in the <head> of every layout() page.
+META_PIXEL = """<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1432161975184837');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1432161975184837&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->"""
+
+# Runs before the Pixel: if a street address arrived in the page address (?address=..., from an
+# old link), move it into this visit's storage and take it out of the address bar, so the Pixel
+# never sends a street address to Facebook as part of the page address.
+ADDR_SCRUB = ("<script>(function(){try{var u=new URL(location.href),a=u.searchParams.get('address');"
+              "if(a!==null){try{sessionStorage.setItem('jr_addr',a);}catch(e){}u.searchParams.delete('address');"
+              "history.replaceState(null,'',u.pathname+u.search+u.hash);}}catch(e){}})();</script>")
+
 # Pages kept out of search and the sitemap: the unlisted Buyer's Guide page, and the letter-only
 # FSBO page (fsbo-guide-info.html is the FSBO page for Google).
 NOINDEX_PAGES = {"buyers-guide.html", "fsbo-guide.html"}
@@ -983,7 +1021,8 @@ NOINDEX_PAGES = {"buyers-guide.html", "fsbo-guide.html"}
 OG_IMAGES = {("en", "sellers-guide.html"): "share-sellers-guide.jpg",
              ("es", "sellers-guide.html"): "share-guia-vendedores.jpg",
              ("en", "fsbo-guide.html"): "share-fsbo-guide.jpg",
-             ("en", "fsbo-guide-info.html"): "share-fsbo-guide.jpg"}
+             ("en", "fsbo-guide-info.html"): "share-fsbo-guide.jpg",
+             ("en", "buyers-guide.html"): "share-buyers-guide.jpg"}
 
 def footer_signup(T):
     """Small newsletter sign-up in every footer. Same Formspree form and subject as the newsletter page; source=footer."""
@@ -1048,7 +1087,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
 <meta property="og:site_name" content="J.R. Grimaldo, REALTOR®">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc or T['hero_p'])}">
-<meta property="og:image" content="https://{SITE['domain']}/assets/{OG_IMAGES.get((T['lang'], page), 'share.jpg')}">
+<meta property="og:image" content="{('https://jrREsales.com/assets/' + OG_IMAGES[(T['lang'], page)]) if (T['lang'], page) in OG_IMAGES else ('https://' + SITE['domain'] + '/assets/share.jpg')}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="{canon}">
 <link rel="canonical" href="{canon}">{hreflang}
@@ -1058,6 +1097,8 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="{up}assets/site.css?v={ASSET_V}">
 <link rel="icon" href="{up}assets/favicon.svg" type="image/svg+xml">
+{ADDR_SCRUB}
+{META_PIXEL}
 </head>
 <body>
 <header class="top">
