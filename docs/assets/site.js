@@ -23,9 +23,33 @@ document.addEventListener('DOMContentLoaded',function(){
     if(!sf){sf=document.createElement('input');sf.type='hidden';sf.name='source';sf.value='website';form.appendChild(sf);}
     sf.dataset.base=sf.value;
     if(tag)sf.value=tag;
+    // Which form this is (same name the Pixel 'Lead' uses), sent as "form" so every entry says where it came from.
+    var pg=(location.pathname.split('/').pop()||'index.html').replace(/\.html$/,'');
+    var fname=(form.id==='nl-foot'?'footer':(pg==='index'?'home':pg))+(document.documentElement.lang==='es'?'-es':'');
+    // Robot protection (J.R., 11/10/2026), nothing a person sees or has to do:
+    // 1) a second hidden "honeypot" box that people never see; robots that fill every box fill it;
+    // 2) the form only sends after a real person typed, tapped or clicked in it (robots' fake events don't count);
+    // 3) a send less than 2 seconds after the page opened is treated as a robot.
+    var hp=document.createElement('div');hp.className='hp';hp.setAttribute('aria-hidden','true');
+    hp.innerHTML='<label>Leave this empty<input type="text" name="company_website" tabindex="-1" autocomplete="off" value=""></label>';
+    form.appendChild(hp);
+    var touched=false,opened=Date.now();
+    ['input','keydown','pointerdown','touchstart','change'].forEach(function(ev){form.addEventListener(ev,function(x){if(x.isTrusted)touched=true;},true);});
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var btn=form.querySelector('button[type=submit]'),msg=form.querySelector('.form-msg'),label=btn.textContent;
+      // No send without a real email, whatever started the send (a robot can skip the browser's own check).
+      var em=form.querySelector('input[name=email]'),ev=em?(em.value||'').trim():'';
+      if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(ev)||!form.checkValidity()){
+        if(e.isTrusted&&form.reportValidity)form.reportValidity();
+        return;
+      }
+      var bot=!touched||(Date.now()-opened<2000)||((form.querySelector('input[name=_gotcha]')||{}).value)||((form.querySelector('input[name=company_website]')||{}).value);
+      if(bot){
+        // Looks like a robot: show the normal thank-you, send nothing, count nothing.
+        form.querySelectorAll('label,.two,.three,.pair,.fine,.row,button').forEach(function(el){el.hidden=true;});
+        msg.className='form-msg ok';msg.textContent=form.dataset.ok;msg.hidden=false;return;
+      }
       if(form.dataset.need&&!form.querySelector('input[name=books]:checked')){
         msg.className='form-msg bad';msg.textContent=form.dataset.need;msg.hidden=false;
         form.querySelector('.books').scrollIntoView({block:'center'});return;
@@ -42,6 +66,9 @@ document.addEventListener('DOMContentLoaded',function(){
                n:g('name'),p:g('phone'),e:g('email'),a:[g('address')||g('street'),g('city')].filter(Boolean).join(', ')};
         base.push(['tap_to_reply',location.origin+'/reply.html#'+new URLSearchParams(r).toString()]);
       }catch(err){}
+      if(!src.get('_subject'))src.set('_subject','Website form ('+fname+') from jrREsales.com');
+      src.set('form',fname);
+      src.delete('company_website');
       src.forEach(function(v,k){base.push([k,v]);});
       if(tag&&sf.dataset.base!==tag)base.push(['source_without_tag',sf.dataset.base]);
       base.push(['request_id',form.dataset.rid]);
@@ -49,10 +76,7 @@ document.addEventListener('DOMContentLoaded',function(){
         // Meta Pixel 'Lead' for sign-up forms (not the contact form). Only the form's name goes to Facebook.
         try{
           if(window.fbq&&form.id!=='ct-form'){
-            var pg=(location.pathname.split('/').pop()||'index.html').replace(/\.html$/,'');
-            var nm=form.id==='nl-foot'?'footer':(pg==='index'?'home':pg);
-            if(document.documentElement.lang==='es')nm+='-es';
-            fbq('track','Lead',{content_name:nm});
+            fbq('track','Lead',{content_name:fname});
           }
         }catch(err){}
         form.querySelectorAll('label,.two,.three,.pair,.fine,button').forEach(function(el){el.hidden=true;});
@@ -69,7 +93,7 @@ document.addEventListener('DOMContentLoaded',function(){
         fd.append('attempt',String(n));
         if(errs.length)fd.append('earlier_try_error',errs.join(' | '));
         var ctl=('AbortController' in window)?new AbortController():null,tm=ctl?setTimeout(function(){ctl.abort();},15000):null;
-        fetch(form.action,{method:'POST',body:fd,headers:{'Accept':'application/json'},signal:ctl?ctl.signal:undefined})
+        fetch(form.dataset.fs,{method:'POST',body:fd,headers:{'Accept':'application/json'},signal:ctl?ctl.signal:undefined})
           .then(function(res){
             if(tm)clearTimeout(tm);
             if(res.ok){done();return;}

@@ -271,5 +271,6 @@ footer.site .nl-foot input[type=email]::placeholder{color:#9fb0bc}
 footer.site .nl-foot button{font:inherit;font-size:.88rem;font-weight:600;padding:8px 14px;border-radius:6px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;cursor:pointer;white-space:nowrap}
 footer.site .nl-foot .form-msg{font-size:.88rem;padding:8px 10px;margin-top:8px;max-width:460px}
 footer.site .nl-foot .form-err{color:#cfd9e0}
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
