@@ -654,6 +654,7 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .gtop form.sheet .fine{margin:0;font-size:.85rem}
 .gtop form.sheet input{padding:10px 12px}
 .glong{max-width:70ch}
+.gwho{margin:12px 0 0;font-size:.95rem}
 .gshort-h{margin:12px 0 2px;font-size:.82rem;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em}
 .gshort{margin:0;padding-left:1.1em;font-size:.95rem;line-height:1.35}
 .gshort li{margin:2px 0}
@@ -1744,12 +1745,12 @@ GUIDE_ES = {
 }
 
 
-def guide_top(cover, kicker, h1, line, form, bullets=None, bullets_label=""):
+def guide_top(cover, kicker, h1, line, form, bullets=None, bullets_label="", who=""):
     """Phone-first top of a request page: small cover beside the title, one short line,
     then the form, all on the first phone screen (J.R., 11/5/2026)."""
-    short = ""
+    short = f'<p class="gwho">{esc(who)}</p>' if who else ""
     if bullets:
-        short = (f'<p class="gshort-h">{esc(bullets_label)}</p><ul class="gshort">'
+        short += (f'<p class="gshort-h">{esc(bullets_label)}</p><ul class="gshort">'
                  + "".join(f'<li>{esc(b)}</li>' for b in bullets) + '</ul>')
     return (f'<section class="gtop{" has-short" if bullets else ""}" id="request"><div class="wrap"><div class="ghead">{cover}'
             f'<div><p class="kick">{esc(kicker)}</p><h1>{esc(h1)}</h1></div></div>'
@@ -1896,6 +1897,88 @@ def page_buyers_guide():
 <section class="alt"><div class="wrap"><h2>What's inside</h2>
 <p class="glong">{esc(BUYERS_GUIDE_INTRO)}</p>
 <div class="truths">{p_html}</div>{again_btn("Email me the guide")}</div></section>"""
+
+
+# ------------------------------------------------------------- TAX SALE GUIDE
+# Request pages for J.R.'s 8-page tax sale guide, English and Spanish (J.R., 11/11/2026).
+# The guide itself prints these exact addresses ("Newest edition of this guide"), so they never move:
+# tax-sale-guide.html and es/tax-sale-guide.html. Text of the guide: claude/Tax_Sale_Guide_Draft*.md
+# (owned by "Creating guides and books"). PDFs, when delivered: assets/tax-sale-guide.pdf and
+# assets/guia-subastas-impuestos.pdf (same names forever; each edition replaces them).
+TAX_GUIDE = {
+    "en": {"title": "Tax Sales in Greenville and Spartanburg, Start to Finish",
+           "sub": "From your first bid to selling the property once it's yours.",
+           "cover": "assets/tax-sale-guide-cover.jpg",
+           "kicker": "Free Tax Sale Guide · 2026 Edition",
+           "who": "For anyone who bought, or is thinking of buying, at a Greenville or Spartanburg County tax sale.",
+           "label": "What's inside",
+           "short": ["Finding properties, and what to check before you bid",
+                     "Sale day, county by county",
+                     "The 12 months, the tax deed, and clearing the title",
+                     "Pricing the property to sell"],
+           "line": "Free, 8 pages. I'll email it to you myself, usually within a few hours.",
+           "name": "Your name", "email": "Email",
+           "fine": "You'll also get my monthly newsletter, Front Porch Notes. You can stop it anytime, and I never share your email.",
+           "subject": "Tax Sale Guide request from jrREsales.com",
+           "btn": "Email me the guide",
+           "ok": "Thank you. I got your request. I'll email the guide to you myself, usually within a few hours.",
+           "intro": "Bought at a tax sale, or thinking about it? This guide walks you through it in order, from your first bid to selling the property once it's yours. It's 8 pages, in plain English, and covers both Greenville and Spartanburg counties.",
+           "parts": [
+               ("Part 1: Before the sale", "What a tax sale is. Where the counties list the properties. What to check before you bid: road access, leftover strips, mobile homes, and debts that stay with the land."),
+               ("Part 2: Sale day", "How to sign up, bid, and pay. Greenville and Spartanburg side by side: dates, places, payment, and who to call."),
+               ("Part 3: The 12 months", "When the owner pays back. The interest you earn and the limit on it, the money above the taxes, and mobile homes."),
+               ("Part 4: The tax deed", "When the owner doesn't pay back. The last notice, getting your tax deed, and what a tax deed is and isn't."),
+               ("Part 5: Once you have the deed", "Your first steps, and clearing the title with a quiet title case."),
+               ("Part 6: Pricing it to sell", "What sets the price of tax-sale land, and the papers buyers will ask to see."),
+           ],
+           "small": "The guide explains the process in plain words. It isn't legal advice.",
+           "alt": "Cover of the guide Tax Sales in Greenville and Spartanburg, Start to Finish"},
+    "es": {"title": "Subastas por impuestos en Greenville y Spartanburg, de principio a fin",
+           "sub": "Desde su primera oferta hasta vender la propiedad cuando ya es suya.",
+           "cover": "assets/guia-subastas-impuestos-cover.jpg",
+           "kicker": "Guía gratis de subastas por impuestos · Edición 2026",
+           "who": "Para cualquier persona que compró, o piensa comprar, en una subasta por impuestos del condado de Greenville o de Spartanburg.",
+           "label": "Qué contiene",
+           "short": ["Cómo encontrar propiedades y qué revisar antes de ofrecer",
+                     "El día de la subasta, condado por condado",
+                     "Los 12 meses, la escritura fiscal y cómo limpiar el título",
+                     "Cómo ponerle precio para vender"],
+           "line": "Gratis, 8 páginas. Se la mando yo mismo por correo electrónico, por lo general en unas pocas horas. Hablo español.",
+           "name": "Su nombre", "email": "Correo electrónico",
+           "fine": "También recibirá mi boletín mensual, Front Porch Notes, que está en inglés. Puede cancelarlo cuando quiera, y nunca comparto su correo.",
+           "subject": "Solicitud: Guía de subastas por impuestos (español)",
+           "btn": "Envíeme la guía",
+           "ok": "Gracias. Recibí su solicitud. Le enviaré la guía yo mismo por correo electrónico, por lo general en unas pocas horas.",
+           "intro": "¿Compró en una subasta por impuestos, o lo está pensando? Esta guía le explica todo en orden, desde su primera oferta hasta vender la propiedad cuando ya es suya. Son 8 páginas, en palabras sencillas, para los condados de Greenville y Spartanburg.",
+           "parts": [
+               ("Parte 1: Antes de la subasta", "Qué es una subasta por impuestos. Dónde publican los condados las propiedades. Qué revisar antes de ofrecer: el acceso por carretera, los pedazos sobrantes, las casas móviles y las deudas que se quedan con el terreno."),
+               ("Parte 2: El día de la subasta", "Cómo inscribirse, ofrecer y pagar. Greenville y Spartanburg lado a lado: fechas, lugares, pagos y a quién llamar."),
+               ("Parte 3: Los 12 meses", "Cuando el dueño paga. Los intereses que usted gana y su límite, el dinero por encima de los impuestos y las casas móviles."),
+               ("Parte 4: La escritura fiscal", "Cuando el dueño no paga. El último aviso, cómo recibe su escritura fiscal (tax deed) y lo que es, y no es, esa escritura."),
+               ("Parte 5: Cuando ya tiene la escritura", "Sus primeros pasos, y cómo limpiar el título con un juicio para aclararlo (quiet title)."),
+               ("Parte 6: Cómo ponerle precio para vender", "Lo que define el precio de un terreno de subasta, y los papeles que los compradores van a querer ver."),
+           ],
+           "small": "La guía explica el proceso en palabras sencillas. No es asesoría legal.",
+           "alt": "Portada de la guía Subastas por impuestos en Greenville y Spartanburg, de principio a fin"},
+}
+
+def page_tax_guide(T):
+    lang = T["lang"]; G = TAX_GUIDE[lang]
+    up = "../" if lang == "es" else ""
+    cover = ""
+    if (SRC / G["cover"]).exists():
+        cover = f'<img src="{up}{G["cover"]}" alt="{esc(G["alt"])}" width="400" height="518">'
+    fields = ('<input type="hidden" name="guide" value="tax-sale">'
+              + '<div class="two">' + field("name", G["name"], req=True) + field("email", G["email"], "email", req=True) + '</div>'
+              + f'<p class="fine">{esc(G["fine"])}</p>')
+    form = mail_form(T, lang, G["subject"], fields, G["btn"], "tg-form", ok=G["ok"])
+    p_html = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in G["parts"])
+    top = guide_top(cover, G["kicker"], G["title"], G["line"], form, G["short"], G["label"], who=G["who"])
+    return top + f"""
+<section class="alt"><div class="wrap"><h2>{esc(G['label'])}</h2>
+<p class="glong">{esc(G['intro'])}</p>
+<div class="truths">{p_html}</div>
+<p class="fine">{esc(G['small'])}</p>{again_btn(G['btn'])}</div></section>"""
 
 # ------------------------------------------------------------- REPLY PAGE
 # Opened from the "tap_to_reply" link in each Formspree email. Everything
@@ -2058,6 +2141,7 @@ def build():
         "fsbo-guide-info.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you with the state disclosure form.",
         "fsbo-guide.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you.",
         "sellers-guide.html": "Free 8-page Seller's Guide from J.R. Grimaldo, REALTOR® in Landrum, SC: getting ready to list, showings, and the road from offer to closing. Emailed to you.",
+        "tax-sale-guide.html": "Bought at a Greenville or Spartanburg County tax sale, or thinking about it? A free 8-page guide from J.R. Grimaldo, REALTOR®: from your first bid to selling the property once it's yours. Emailed to you.",
         "privacy.html": "What jrREsales.com collects, why, and how to unsubscribe. J.R. Grimaldo, REALTOR®, NorthGroup Real Estate, Landrum, SC.",
     }
     DE = {
@@ -2071,6 +2155,7 @@ def build():
         "free-books.html": "Guías y libros gratis sobre vender su casa de J.R. Grimaldo, REALTOR® en Landrum, SC: una guía de 8 páginas en español por correo electrónico, y dos libros impresos por correo. Sin costo ni compromiso.",
         "contact.html": "Llame o envíe un texto a J.R. Grimaldo al 864-381-2326. Contesta la mayoría de las llamadas en el momento. Bienes raíces en Landrum y el Upstate.",
         "sellers-guide.html": "Guía gratis de 8 páginas de J.R. Grimaldo, REALTOR® en Landrum, SC: cómo preparar su casa, las visitas y el camino de la oferta al cierre. Se la envía por correo electrónico.",
+        "tax-sale-guide.html": "¿Compró o piensa comprar en una subasta por impuestos de Greenville o Spartanburg? Guía gratis de 8 páginas de J.R. Grimaldo, REALTOR®: desde su primera oferta hasta vender la propiedad. Se la envía por correo. Hablo español.",
         "privacy.html": "Qué recoge jrREsales.com, para qué y cómo cancelar la suscripción. J.R. Grimaldo, REALTOR®, NorthGroup Real Estate, Landrum, SC.",
     }
     # English: (title, body, language switch, Spanish twin or None)
@@ -2090,6 +2175,7 @@ def build():
         "sales-list.html": ("A List of Recent Sales Near You – " + SITE["agent"] + ", REALTOR®", page_sales_list(), "es/index.html", None),
         "buyers-guide.html": ("Free Buyer's Guide: Buying Your Home, Step by Step – " + SITE["agent"], page_buyers_guide(), "es/index.html", None),
         "privacy.html": ("Privacy – " + SITE["agent"] + ", REALTOR®", page_privacy(EN), "es/privacy.html", "privacy.html"),
+        "tax-sale-guide.html": ("Free Tax Sale Guide: " + TAX_GUIDE["en"]["title"] + " – " + SITE["agent"], page_tax_guide(EN), "es/tax-sale-guide.html", "tax-sale-guide.html"),
     }
     for b in BOOKS:
         n = b["slug"] + ".html"
@@ -2120,6 +2206,7 @@ def build():
         "contact.html": ("Contácteme – " + SITE["agent"] + ", REALTOR®", page_contact(ES), "../contact.html"),
         "sellers-guide.html": ("Guía gratis para vendedores: Cómo vender su casa, paso a paso – " + SITE["agent"], page_guide(ES), "../sellers-guide.html"),
         "privacy.html": ("Privacidad – " + SITE["agent"] + ", REALTOR®", page_privacy(ES), "../privacy.html"),
+        "tax-sale-guide.html": ("Guía gratis: " + TAX_GUIDE["es"]["title"] + " – " + SITE["agent"], page_tax_guide(ES), "../tax-sale-guide.html"),
     }
     for b in BOOKS:
         n = b["slug"] + ".html"
