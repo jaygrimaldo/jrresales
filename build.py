@@ -1115,7 +1115,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
 <meta property="og:site_name" content="J.R. Grimaldo, REALTOR®">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc or T['hero_p'])}">
-<meta property="og:image" content="{('https://jrREsales.com/assets/' + OG_IMAGES[(T['lang'], page)]) if (T['lang'], page) in OG_IMAGES else ('https://' + SITE['domain'] + '/assets/share.jpg')}">
+<meta property="og:image" content="{('https://jrREsales.com/assets/' + OG_IMAGES[(T['lang'], page)] + '?v=' + _hl.sha1((SRC / 'assets' / OG_IMAGES[(T['lang'], page)]).read_bytes()).hexdigest()[:8]) if (T['lang'], page) in OG_IMAGES else ('https://' + SITE['domain'] + '/assets/share.jpg')}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="{canon}">
 <link rel="canonical" href="{canon}">{hreflang}
