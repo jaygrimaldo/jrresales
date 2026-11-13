@@ -227,10 +227,10 @@ REVIEWS = [
 EN = {
     "lang": "en", "dir_prefix": "", "other_lang": "es", "other_label": "Español",
     "nav": [("index.html", "Home"), ("home-value.html", "What's My Home Worth"),
-            ("listings.html", "My Listings"), ("sold.html", "Sold Homes"),
-            ("about.html", "About J.R."), ("reviews.html", "Reviews"),
-            ("free-books.html", "Free Guides & Books"), ("newsletter.html", "Newsletter"),
-            ("contact.html", "Contact Me")],
+            ("free-books.html", "Free Guides & Books"), ("sold.html", "Sold Homes"),
+            ("reviews.html", "Reviews"), ("about.html", "About J.R."),
+            ("contact.html", "Contact Me"), ("newsletter.html", "Newsletter"),
+            ("listings.html", "My Listings")],
     "search_label": "Search Homes",
     "hero_h1": "Thinking about selling your Upstate home? Start with a real number.",
     "hero_p": "Tell me the address. Within one business day, I'll prepare your valuation myself. I look at your home and the recent sales around it. Not a computer guess.",
@@ -255,10 +255,13 @@ EN = {
     "listings_btn": "See all my listings",
     "cta_h2": "Ready to talk it through?",
     "cta_p": "Text me at 864-381-2326. It's the fastest way to reach me. If you'd rather call and I don't pick up, please leave a message. No pressure, no script.",
-    "cta_btn": "Contact J.R.",
+    "cta_btn": "Text J.R.",
     "hero_who": "J.R. Grimaldo, Real Estate Professional",
     "hero_where": "Landrum, SC · Hablo español",
     "hero_call": "Text 864-381-2326. Fastest way to reach me.",
+    "text_btn": "Text J.R. at 864-381-2326",
+    "text_fast": "Fastest way to reach me.",
+    "val_btn": "Get my home's value",
     "hm_sold_h2": "Recently sold",
     "hm_sold_p": "A few of the homes I've sold for my clients.",
     "hm_sold_btn": "See all my sales",
@@ -381,10 +384,10 @@ EN = {
 ES = {
     "lang": "es", "dir_prefix": "es/", "other_lang": "en", "other_label": "English",
     "nav": [("index.html", "Inicio"), ("home-value.html", "¿Cuánto vale mi casa?"),
-            ("listings.html", "Mis propiedades"), ("sold.html", "Casas vendidas"),
-            ("about.html", "Sobre J.R."), ("reviews.html", "Opiniones"),
-            ("free-books.html", "Guías y libros gratis"), ("newsletter.html", "Boletín"),
-            ("contact.html", "Contácteme")],
+            ("free-books.html", "Guías y libros gratis"), ("sold.html", "Casas vendidas"),
+            ("reviews.html", "Opiniones"), ("about.html", "Sobre J.R."),
+            ("contact.html", "Contácteme"), ("newsletter.html", "Boletín"),
+            ("listings.html", "Mis propiedades")],
     "search_label": "Buscar casas",
     "hero_h1": "¿Piensa vender su casa en el Upstate? Empiece con un número real.",
     "hero_p": "Deme la dirección. En un día hábil, yo mismo le preparo su valuación. Reviso su casa y las ventas recientes a su alrededor. No es un cálculo de computadora.",
@@ -409,10 +412,13 @@ ES = {
     "listings_btn": "Ver todas mis propiedades",
     "cta_h2": "¿Listo para conversar?",
     "cta_p": "Envíeme un texto al 864-381-2326. Es la forma más rápida de comunicarse conmigo. Si prefiere llamar y no contesto, por favor deje un mensaje. Sin presión.",
-    "cta_btn": "Contactar a J.R.",
+    "cta_btn": "Enviar texto a J.R.",
     "hero_who": "J.R. Grimaldo, Profesional de Bienes Raíces",
     "hero_where": "Landrum, SC · Hablo español",
     "hero_call": "Envíe un texto al 864-381-2326. Es lo más rápido.",
+    "text_btn": "Envíe un texto a J.R. al 864-381-2326",
+    "text_fast": "Es lo más rápido.",
+    "val_btn": "Quiero saber el valor de mi casa",
     "hm_sold_h2": "Vendidas recientemente",
     "hm_sold_p": "Algunas de las casas que he vendido para mis clientes.",
     "hm_sold_btn": "Ver todas mis ventas",
@@ -587,7 +593,7 @@ p{margin:0 0 1em;max-width:62ch}
 .brand{color:#fff;text-decoration:none;font-weight:600;font-size:1.2rem;letter-spacing:.01em;white-space:nowrap}
 .brand small{display:block;font-weight:400;font-size:.8rem;opacity:.8}
 nav.menu{display:none}
-nav.menu a{color:#fff;text-decoration:none;margin-left:14px;font-size:.9rem;white-space:nowrap;border-bottom:2px solid transparent;padding:4px 0}
+nav.menu a{color:#fff;text-decoration:none;margin-left:14px;font-size:1rem;white-space:nowrap;border-bottom:2px solid transparent;padding:4px 0}
 nav.menu a[aria-current]{border-color:var(--gold)}
 nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:3px 10px;margin-left:16px}
 .burger{background:none;border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:6px;padding:8px 10px;font:inherit;font-size:.95rem;cursor:pointer}
@@ -604,7 +610,42 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .hero p{color:#dfe7ec;max-width:52ch;font-size:1.08rem}
 .addr{display:flex;flex-direction:column;gap:10px;margin-top:22px;max-width:560px}
 .contact-grid a.ct-alt,.ct-alt{display:block;font-size:.9rem;font-weight:400;margin-top:6px}
-.hero-call{margin:12px 0 0;font-size:1.05rem}.hero-call a{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* Layout review 11/13/2026 */
+.hero-call{margin:12px 0 0;display:flex;flex-direction:column;gap:6px;max-width:560px}
+.hero-call span{font-size:.95rem;color:#dfe7ec}
+.btn.btn-text{background:transparent;color:#fff;border:2px solid #fff;text-align:center;white-space:normal}
+.btn.btn-text:hover{background:rgba(255,255,255,.12)}
+.btn.btn-text.dark{color:var(--ridge-deep);border-color:var(--ridge-deep)}
+.btn.btn-text.dark:hover{background:var(--haze)}
+@media(min-width:620px){.hero-call{flex-direction:row;align-items:center;gap:14px}}
+@media(max-width:719px){.hero-truths{grid-template-columns:repeat(3,1fr);gap:10px;padding:14px}.hero-truths p{display:none}.hero .hero-truths h3{font-size:.95rem;margin:0}.hero-truths>div{padding-top:8px}}
+.sold-strip.mini{grid-template-columns:repeat(2,1fr);max-width:640px}
+.sold-strip .tag.off{background:#9b1c1c}
+.me-head{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.me-head img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);flex:none}
+.me-head h1{margin:0}
+.me-head .me-by{margin:2px 0 0;color:var(--ink-2);font-size:.98rem}
+.hv-grid{display:grid;gap:28px}
+.hv-side{background:var(--stone);border-radius:12px;padding:20px 22px}
+@media(min-width:960px){.hv-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:48px;align-items:start}.hv-side{position:sticky;top:24px}}
+details.more-boxes{border:1.5px solid var(--line);border-radius:10px;padding:12px 14px}
+details.more-boxes>summary{cursor:pointer;font-weight:600;color:var(--ridge)}
+details.more-boxes[open]>summary{margin-bottom:12px}
+details.more-boxes label{margin-top:10px}
+.stats.top{margin:6px 0 18px;font-size:1.05rem}
+.rv-grid{display:grid;gap:0 24px}
+@media(min-width:900px){.rv-grid{grid-template-columns:1fr 1fr}.rv-grid blockquote{max-width:none}}
+.ct-wrap{display:grid;gap:32px}
+@media(min-width:900px){.ct-wrap{grid-template-columns:1fr 1fr;gap:56px;align-items:start}}
+.ct-btns{display:grid;gap:12px;max-width:440px;margin-top:8px}
+.btn.btn-big{font-size:1.15rem;padding:18px 22px;text-align:center;white-space:normal}
+.ct-small{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ct-small .btn{text-align:center}
+@media(max-width:719px){.shelf{grid-template-columns:1fr 1fr;gap:12px}.shelf a{padding:12px;gap:8px}.shelf img{width:100%;max-width:120px}.shelf b{font-size:.95rem}.shelf span:not(.go){font-size:.85rem}}
+.shelf .go.btn{display:block;text-decoration:none;font-size:.95rem;padding:10px 12px;white-space:normal;margin-top:4px}
+.f-contact{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:10px}
+.f-contact a{font-size:1rem}
+.f-towns{line-height:1.9}
 .hv-law{margin:16px 0 0;max-width:70ch}
 .addr input{font:inherit;font-size:1.05rem;padding:14px 16px;border:1px solid #fff;border-radius:8px;width:100%}
 @media(min-width:620px){.addr{flex-direction:row}.addr input{flex:1}}
@@ -617,7 +658,7 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
    (unsplash.com/photos/mmVBTYA45ok). Unsplash License: free for business use, no credit required. */
 .hero{position:relative;overflow:hidden;padding:64px 0 48px;
   background:linear-gradient(180deg,rgba(12,24,36,.55) 0%,rgba(12,24,36,.42) 35%,rgba(12,24,36,.30) 65%,rgba(12,24,36,.35) 100%),
-             url(hero-mountains.jpg) 40% 100%/auto 150% no-repeat #21384c}
+             url(hero-mountains-1200.jpg) 40% 100%/auto 150% no-repeat #21384c}
 @media(min-width:900px){.hero{padding:96px 0 72px;
   background:linear-gradient(90deg,rgba(12,24,36,.86) 0%,rgba(12,24,36,.62) 42%,rgba(12,24,36,.18) 78%,rgba(12,24,36,.10) 100%),
              url(hero-mountains.jpg) center 65%/cover no-repeat #21384c}}
@@ -892,7 +933,7 @@ document.addEventListener('DOMContentLoaded',function(){
       var bot=!touched||(Date.now()-opened<2000)||((form.querySelector('input[name=_gotcha]')||{}).value)||((form.querySelector('input[name=company_website]')||{}).value);
       if(bot){
         // Looks like a robot: show the normal thank-you, send nothing, count nothing.
-        form.querySelectorAll('label,.two,.three,.pair,.fine,.row,button').forEach(function(el){el.hidden=true;});
+        form.querySelectorAll('label,.two,.three,.pair,.fine,.row,details,button').forEach(function(el){el.hidden=true;});
         msg.className='form-msg ok';msg.textContent=form.dataset.ok;msg.hidden=false;return;
       }
       if(form.dataset.need&&!form.querySelector('input[name=books]:checked')){
@@ -1093,7 +1134,28 @@ def footer_signup(T):
             f'<button type="submit">{esc(btn)}</button></div>'
             '<p class="form-msg" role="status" aria-live="polite" hidden></p></form>')
 
+# Layout review 11/13/2026: smaller photo copies for phones (name-600.jpg) and photos far down the page
+# load only when the visitor scrolls near them. No visible change.
+import re as _re
+def _img_opt(html_s):
+    def fix(m):
+        tag = m.group(0)
+        src = _re.search(r'src="([^"]+)"', tag)
+        if not src: return tag
+        u = src.group(1)
+        if "headshot" not in u and "loading=" not in tag:
+            tag = tag.replace("<img ", '<img loading="lazy" ', 1)
+        base = u.rsplit("/", 1)[-1]
+        if base.endswith(".jpg") and "-600" not in base and "headshot" not in base:
+            small = base[:-4] + "-600.jpg"
+            if (SRC / "assets" / small).exists() and "srcset=" not in tag:
+                su = u[:-len(base)] + small
+                tag = tag.replace('<img ', f'<img srcset="{su} 600w, {u} 1200w" sizes="(max-width: 899px) 50vw, 600px" ', 1)
+        return tag
+    return _re.sub(r'<img [^>]*>', fix, html_s)
+
 def layout(T, page, title, body, lang_switch, desc=None, alt=None):
+    body = _img_opt(body)
     p = T["dir_prefix"]
     up = "../" if p else ""
     nav_links = ""
@@ -1161,8 +1223,12 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
       <p>{esc(BRAND['office'])}</p>
     </div>
     <div>
-      <p><a href="sms:{SITE['phone_tel']}">{'Envíe un texto al 864-381-2326. Es lo más rápido.' if T['lang'] == 'es' else 'Text 864-381-2326. Fastest way to reach me.'}</a> · <a href="tel:{SITE['phone_tel']}">{'Llamar' if T['lang'] == 'es' else 'Call'}</a> · <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
-      <p>{esc(towns_label)}: {towns_links}</p>
+      <ul class="f-contact">
+        <li><a href="sms:{SITE['phone_tel']}">{'Envíe un texto al 864-381-2326. Es lo más rápido.' if T['lang'] == 'es' else 'Text 864-381-2326. Fastest way to reach me.'}</a></li>
+        <li><a href="tel:{SITE['phone_tel']}">{'Llamar al' if T['lang'] == 'es' else 'Call'} {SITE['phone']}</a></li>
+        <li><a href="mailto:{SITE['email']}">{SITE['email']}</a></li>
+      </ul>
+      <p class="f-towns">{esc(towns_label)}:<br>{towns_links}</p>
       <p>{esc(T['footer_eho'])} © 2026 {esc(SITE['agent'])}. {esc(T['footer_rights'])} · <a href="{'privacy.html' if p in ('', 'es/') else '../privacy.html'}">{'Privacidad' if T['lang'] == 'es' else 'Privacy'}</a></p>
     </div>
     {footer_signup(T)}
@@ -1232,6 +1298,13 @@ def page_home(T):
     es = T["lang"] == "es"
     truths = "".join(f'<div><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in T["truths"])
     bullets = "".join(f'<li>{esc(x)}</li>' for x in T["why_bullets"])
+    def mini(it):
+        street = it["address"].split(",")[0]; town = it["address"].split(",")[1].strip()
+        tag = ("Temporalmente fuera del mercado" if es else "Temporarily off the market") if it.get("off_market") else ("En venta" if es else "For sale")
+        return (f'<figure><div class="im"><img src="{up}assets/{it["photo"]}" alt="{esc(it["address"])}" loading="lazy">'
+                f'<span class="tag{" off" if it.get("off_market") else ""}">{tag}</span></div>'
+                f'<figcaption><b>{esc(it["price"])}</b>{esc(street)}, {esc(town)}</figcaption></figure>')
+    minis = "".join(mini(x) for x in LISTINGS[:2] if x.get("photo"))
     cards = "".join(card(x, T) for x in LISTINGS[:2]) if LISTINGS else f'<div class="empty"><p>{esc(EN["li_empty"] if T["lang"]=="en" else "Por ahora no tengo propiedades en venta. Las nuevas aparecen aquí primero.")}</p></div>'
     listings_href = "listings.html"
     figs = ""
@@ -1260,7 +1333,7 @@ def page_home(T):
     qt = q["quote_es"] if es else q["quote"]
     return f"""
 <section class="hero"><div class="wrap"><div class="hero-grid"><div>
-  <div class="hero-me-m"><img src="{up}assets/jr-headshot.jpg" alt="" width="64" height="64"><div><b>{esc(T['hero_who'])}</b>{esc(T['hero_where'])}</div></div>
+  <div class="hero-me-m"><img src="{up}assets/jr-headshot-400.jpg" alt="" width="64" height="64"><div><b>{esc(T['hero_who'])}</b>{esc(T['hero_where'])}</div></div>
   <h1>{esc(T['hero_h1'])}</h1>
   <p>{esc(T['hero_p'])}</p>
   <form class="addr" id="hero-addr" data-to="home-value.html">
@@ -1268,49 +1341,58 @@ def page_home(T):
     <input id="hero-input" type="text" placeholder="{esc(T['hero_addr'])}" autocomplete="street-address">
     <button class="btn" type="submit">{esc(T['hero_btn'])}</button>
   </form>
-  <p class="hero-call"><a href="sms:{SITE['phone_tel']}">{esc(T['hero_call'])}</a></p></div>
-  <div class="hero-me"><img src="{up}assets/jr-headshot.jpg" alt="{esc(SITE['agent'])}" width="280" height="280"><b>{esc(T['hero_who'])}</b><span>{esc(T['hero_where'])}</span></div>
+  <p class="hero-call"><a class="btn btn-text" href="sms:{SITE['phone_tel']}">{esc(T['text_btn'])}</a><span>{esc(T['text_fast'])}</span></p></div>
+  <div class="hero-me"><img src="{up}assets/jr-headshot-600.jpg" alt="{esc(SITE['agent'])}" width="280" height="280"><b>{esc(T['hero_who'])}</b><span>{esc(T['hero_where'])}</span></div>
 </div>
 <div class="truths hero-truths">{truths}</div></div></section>
-{towns_band}
-<section><div class="wrap why-one">
+<section class="alt quote-band"><div class="wrap"><blockquote><span class="mark">“</span><p>{esc(qt)}</p><footer>{esc(q['name'])}{", " + ("opinión en Google" if es else "Google review")}</footer></blockquote></div></section>
+<section><div class="wrap"><h2>{esc(T['hm_sold_h2'])}</h2><p>{esc(T['hm_sold_p'])}</p>
+<div class="sold-strip">{figs}</div>
+<p style="margin-top:22px"><a class="btn quiet" href="sold.html">{esc(T['hm_sold_btn'])}</a></p></div></section>
+<section class="alt"><div class="wrap why-one">
   <h2>{esc(T['why_h2'])}</h2><p>{esc(T['why_p'])}</p><ul class="plain">{bullets}</ul>
   <a class="btn quiet" href="about.html">{esc(T['why_btn'])}</a>
 </div></section>
-<section class="alt"><div class="wrap"><h2>{esc(T['hm_sold_h2'])}</h2><p>{esc(T['hm_sold_p'])}</p>
-<div class="sold-strip">{figs}</div>
-<p style="margin-top:22px"><a class="btn quiet" href="sold.html">{esc(T['hm_sold_btn'])}</a></p></div></section>
 <section class="books-band"><div class="wrap">
   <div><h2>{esc(T['hm_books_h2'])}</h2><p>{esc(T['hm_books_p'])}</p><a class="btn" href="free-books.html">{esc(T['hm_books_btn'])}</a></div>
   <div class="books-row">{covers}</div>
 </div></section>
-<section><div class="wrap"><h2>{esc(T['listings_h2'])}</h2><div class="cards">{cards}</div>
+{towns_band}
+<section><div class="wrap"><h2>{esc(T['listings_h2'])}</h2>{('<div class="sold-strip mini">' + minis + '</div>') if minis else ('<div class="cards">' + cards + '</div>')}
 <p style="margin-top:22px"><a class="btn quiet" href="{listings_href}">{esc(T['listings_btn'])}</a></p></div></section>
-<section class="alt quote-band"><div class="wrap"><blockquote><span class="mark">“</span><p>{esc(qt)}</p><footer>{esc(q['name'])}{", " + ("opinión en Google" if es else "Google review")}</footer></blockquote></div></section>
-<section><div class="wrap"><h2>{esc(T['cta_h2'])}</h2><p>{esc(T['cta_p'])}</p>
-<a class="btn" href="contact.html">{esc(T['cta_btn'])}</a></div></section>"""
+<section class="alt"><div class="wrap"><h2>{esc(T['cta_h2'])}</h2><p>{esc(T['cta_p'])}</p>
+<a class="btn btn-text dark" href="sms:{SITE['phone_tel']}">{esc(T['cta_btn'])}</a></div></section>"""
 
 def page_home_value(T):
     F = T["hv_fields"]
+    # Layout review 11/13/2026: four boxes first; the 8 optional ones stay, behind one line.
+    more_lbl = "Agregar detalles de su casa (opcional)" if T["lang"] == "es" else "Add details about your home (optional)"
     fields = (
         '<div class="two">' + field("name", F["name"], req=True) + field("email", F["email"], "email", req=True) + '</div>'
-        + field("phone", F["phone"], "tel")
         + field("address", F["address"], req=True, fid="addr-field")
-        + '<div class="two">' + field("city", F["city"], req=True) + field("zip", F["zip"]) + '</div>'
+        + field("city", F["city"], req=True)
+        + f'<details class="more-boxes"><summary>{esc(more_lbl)}</summary>'
+        + field("phone", F["phone"], "tel")
+        + field("zip", F["zip"])
         + '<div class="three">' + field("bedrooms", F["beds"]) + field("bathrooms", F["baths"]) + field("square_feet", F["sqft"]) + '</div>'
         + field("year_built", F["year"])
         + field("updates", F["updates"], textarea=True)
         + field("timing", F["timing"], opts=F["timing_opts"])
+        + '</details>'
         + f'<p class="fine">{esc(F["fine"])}</p>'
     )
     subj = "Home valuation request from " + SITE["domain"] if T["lang"] == "en" else "Solicitud de valuación desde " + SITE["domain"]
     form = mail_form(T, T["lang"], subj, fields, F["submit"], "hv-form")
     steps = "".join(f'<li>{esc(x)}</li>' for x in T["hv_after"])
+    up = "../" if T["dir_prefix"] else ""
+    me = "Preparada por mí, J.R. Grimaldo" if T["lang"] == "es" else "Prepared by me, J.R. Grimaldo"
     return f"""
-<section><div class="wrap"><h1>{esc(T['hv_h1'])}</h1><p>{esc(T['hv_p'])}</p>{form}</div></section>
-<section class="alt"><div class="wrap"><h2>{esc(T['hv_after_h2'])}</h2><ol class="steps">{steps}</ol>
+<section><div class="wrap hv-grid"><div>
+<div class="me-head"><img src="{up}assets/jr-headshot-400.jpg" alt="" width="72" height="72"><div><h1>{esc(T['hv_h1'])}</h1><p class="me-by">{esc(me)}</p></div></div>
+<p>{esc(T['hv_p'])}</p>{form}</div>
+<aside class="hv-side"><h2>{esc(T['hv_after_h2'])}</h2><ol class="steps">{steps}</ol>
 <p class="fine hv-law">{T['hv_law']}</p>
-<div class="note"><p style="margin:0">{esc(T['hv_note'])}</p></div></div></section>"""
+<div class="note"><p style="margin:0">{esc(T['hv_note'])}</p></div></aside></div></section>"""
 
 def _book_form(T, checked_key=None):
     F = T["bk_fields"]
@@ -1342,15 +1424,15 @@ def page_books(T):
     guide = (f'<a href="sellers-guide.html"><img src="{up}{GUIDE_ES["cover"] if es else GUIDE["cover"]}" alt="" width="400" height="518">'
              f'<b>{esc(GUIDE_ES["title"] if es else "Selling Your Home, Step by Step")}</b>'
              f'<span>{esc("Una guía de 8 páginas para vender su casa, desde prepararla hasta el día del cierre. En español. Se la envío por correo electrónico." if es else "My 8-page guide to selling your home, from getting ready to closing day. Emailed to you.")}</span>'
-             f'<span class="go">{esc("Sobre esta guía" if es else "About this guide")}</span></a>')
+             f'<span class="go btn quiet">{esc("Obtener esta guía" if es else "Get this guide")}</span></a>')
     fsbo = (f'<a href="{up}fsbo-guide-info.html"><img src="{up}{FSBO_GUIDE["cover"]}" alt="" width="400" height="518">'
             f'<b>Selling Your Home on Your Own, Step by Step</b>'
             f'<span>{esc("Para dueños que venden su casa por su cuenta. Una guía gratis de 8 páginas, con el formulario de divulgación de Carolina del Sur, por correo electrónico. La guía está en inglés." if es else "For owners selling their home on their own. A free 8-page guide, plus the South Carolina disclosure form, emailed to you.")}</span>'
-            f'<span class="go">{esc("Sobre esta guía" if es else "About this guide")}</span></a>')
+            f'<span class="go btn quiet">{esc("Obtener esta guía" if es else "Get this guide")}</span></a>')
     shelf = guide + fsbo + "".join(
         f'<a href="{b["slug"]}.html"><img src="{up}assets/{b["photo"]}" alt="" width="396" height="601">'
         f'<b>{esc(b["title"])}</b><span>{esc(b["line_es"] if es else b["line"])}</span>'
-        f'<span class="go">{esc(T["bk_more"])}</span></a>' for b in BOOKS)
+        f'<span class="go btn quiet">{esc("Obtener este libro" if es else "Get this book")}</span></a>' for b in BOOKS)
     return f"""
 <section><div class="wrap"><h1>{esc(T['bk_h1'])}</h1><p>{esc(T['bk_p_over'])}</p>
 <div class="shelf">{shelf}</div></div></section>"""
@@ -1510,6 +1592,10 @@ def page_list(T, h1, items, empty, intro=""):
 
 def page_sold(T=EN):
     base = page_list(T, T["so_h1"], SOLD, T["so_empty"], T["so_intro"])
+    n_all = len(SOLD) + len(SOLD_MORE)
+    stats_top = (f'<p class="stats top"><b>{n_all}</b> {esc(T["so_stats1"])}<br>'
+                 f'<b>{REPEAT_FAMILIES}</b> {esc(T["so_stats2"])}</p>')
+    base = base.replace('</h1>', '</h1>' + stats_top, 1)
     story = (f'<div class="note story"><h2>{esc(T["so_story_h2"])}</h2>'
              f'<p>{esc(T["so_story"])}</p></div>')
     # Chris Roberts and Kerri Hogan. J.R., 10/23/2026: husband's initial first; the
@@ -1528,11 +1614,10 @@ def page_sold(T=EN):
     rows = "".join(row(r) for r in SOLD_MORE)
     n = len(SOLD) + len(SOLD_MORE)
     more = (f'<div class="more-sold"><h2>{esc(T["so_more_h2"])}</h2>'
-            f'<p class="stats"><b>{n}</b> {esc(T["so_stats1"])}<br>'
-            f'<b>{REPEAT_FAMILIES}</b> {esc(T["so_stats2"])}</p>'
             f'<details class="all-sales"><summary>{esc(T["so_see_all"].format(n=n))}</summary>'
             f'<p class="fine">{esc(T["so_fine"])}</p>'
-            f'<ul class="sold-list">{rows}</ul></details></div>')
+            f'<ul class="sold-list">{rows}</ul></details>'
+            f'<p style="margin-top:28px"><a class="btn" href="home-value.html">{esc(T["val_btn"])}</a></p></div>')
     i = base.rfind("</div></section>")
     return base[:i] + more + base[i:]
 
@@ -1599,8 +1684,9 @@ def page_about(T):
 <section><div class="wrap split">
   <img class="portrait" src="{up}assets/jr-headshot.jpg" alt="{esc(SITE['agent'])}">
   <div><h1>{esc(T['ab_h1'])}</h1>
-  <p>{esc(T['ab_p1'])}</p><p>{esc(T['ab_p2'])}</p><p>{esc(T['ab_p3'])}</p><p>{esc(T['ab_p4'])}</p><p>{esc(T['ab_p5'])}</p>
-  <a class="btn" href="home-value.html">{esc(T['hero_btn'])}</a></div>
+  <p>{esc(T['ab_p1'])}</p><p>{esc(T['ab_p2'])}</p><p>{esc(T['ab_p4'])}</p>
+  <p><a class="btn" href="home-value.html">{esc(T['hero_btn'])}</a></p>
+  <p>{esc(T['ab_p3'])}</p><p>{esc(T['ab_p5'])}</p></div>
 </div></section>
 <section class="alt"><div class="wrap"><h2>{esc(T['ab_why_h2'])}</h2>{"".join(f"<p>{esc(x)}</p>" for x in T["ab_why"])}</div></section>
 <section><div class="wrap"><h2>{esc(T['ab_facts_h2'])}</h2><div class="facts">{facts}</div></div></section>"""
@@ -1613,7 +1699,9 @@ def _where(w, T):
 def page_reviews(T):
     if REVIEWS:
         note = f'<p class="fine">{esc(T["rv_note"])}</p>' if T.get("rv_note") else ""
-        body = note + "".join(f'<blockquote><p>{esc(r["quote_es"] if T["lang"] == "es" and r.get("quote_es") else r["quote"])}</p><footer>{esc(r["name"])}{(", "+esc(_where(r["where"], T))) if r.get("where") else ""}</footer></blockquote>' for r in REVIEWS)
+        order = sorted(REVIEWS, key=lambda r: len(r["quote"]))  # shortest first (layout review 11/13); words unchanged
+        body = note + '<div class="rv-grid">' + "".join(f'<blockquote><p>{esc(r["quote_es"] if T["lang"] == "es" and r.get("quote_es") else r["quote"])}</p><footer>{esc(r["name"])}{(", "+esc(_where(r["where"], T))) if r.get("where") else ""}</footer></blockquote>' for r in order) + '</div>'
+        body += f'<p style="margin:8px 0 26px"><a class="btn" href="home-value.html">{esc(T["val_btn"])}</a></p>'
         body += f'<p>{esc(T["rv_ask"])} <a class="btn quiet" href="{SITE["review_page"]}">{esc(T["rv_btn"])}</a></p>'
     else:
         body = f'<div class="empty"><p>{esc(T["rv_empty"])}</p><a class="btn quiet" href="{SITE["review_page"]}">{esc(T["rv_btn"])}</a></div>'
@@ -1721,13 +1809,13 @@ def page_town(key):
     how = "".join(f"<li>{esc(x)}</li>" for x in TOWN_HOW)
     others = " · ".join(f'<a href="{k}.html">{esc(TOWNS[k]["name"])}</a>' for k in TOWN_ORDER if k != key)
     return f"""
-<section><div class="wrap"><h1>Selling your home in {esc(name)}</h1>{intro}
+<section><div class="wrap"><div class="me-head"><img src="assets/jr-headshot-400.jpg" alt="" width="72" height="72"><div><h1>Selling your home in {esc(name)}</h1><p class="me-by">J.R. Grimaldo, Landrum, SC</p></div></div>{intro}
 <p><a class="btn" href="home-value.html">Get my free valuation</a></p></div></section>
 {lst_html}
 {sales_html}
 <section><div class="wrap"><h2>What you get when you sell with me</h2><ul class="plain">{how}</ul></div></section>
 <section class="alt"><div class="wrap"><h2>What's your {esc(name)} home worth?</h2>
-<p>Tell me the address. I'll look at your home and the recent sales around it, and send you a written valuation within one business day.</p>
+<p>A free written valuation, within one business day.</p>
 <a class="btn" href="home-value.html">Get my free valuation</a>
 <p class="fine" style="margin-top:22px">Other towns I work in: {others}</p></div></section>"""
 
@@ -1739,13 +1827,14 @@ def page_contact(T):
     subj = "Message from " + SITE["domain"] if T["lang"] == "en" else "Mensaje desde " + SITE["domain"]
     form = mail_form(T, T["lang"], subj, fields, F["submit"], "ct-form")
     return f"""
-<section><div class="wrap"><h1>{esc(T['ct_h1'])}</h1><p>{esc(T['ct_p'])}</p>
-<div class="contact-grid">
-  <div><small>{esc(T['ct_call'])}</small><a href="sms:{SITE['phone_tel']}">{SITE['phone']}</a><a class="ct-alt" href="tel:{SITE['phone_tel']}">{'O llame y deje un mensaje' if T['lang'] == 'es' else 'Or call and leave a message'}</a></div>
-  <div><small>{esc(T['ct_email'])}</small><a href="mailto:{SITE['email']}">{SITE['email']}</a></div>
-  <div><small>{esc(T['ct_office'])}</small><span>{esc(BRAND['office'])}</span></div>
-</div></div></section>
-<section class="alt"><div class="wrap"><h2>{esc(T['ct_form_h2'])}</h2>{form}</div></section>"""
+<section><div class="wrap ct-wrap"><div>
+<h1>{esc(T['ct_h1'])}</h1><p>{esc(T['ct_p'])}</p>
+<div class="ct-btns">
+  <a class="btn btn-big" href="sms:{SITE['phone_tel']}">{esc(T['text_btn'])}</a>
+  <div class="ct-small"><a class="btn quiet" href="tel:{SITE['phone_tel']}">{'Llamar' if T['lang'] == 'es' else 'Call'}</a><a class="btn quiet" href="mailto:{SITE['email']}">{'Correo' if T['lang'] == 'es' else 'Email'}</a></div>
+  <p class="fine">{esc(SITE['email'])}<br>{esc(T['ct_office'])}: {esc(BRAND['office'])}</p>
+</div></div>
+<div class="ct-form"><h2>{esc(T['ct_form_h2'])}</h2>{form}</div></div></section>"""
 
 
 # ------------------------------------------------------------- SELLER'S GUIDE
