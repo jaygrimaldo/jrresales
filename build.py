@@ -244,7 +244,7 @@ EN = {
     "why_h2": "Quality over quantity.",
     "why_p": "I'd rather do a great job for each client than juggle as many as I can. Most of my clients are sellers. When you list with me, you're not one file in a stack.",
     "why_bullets": [
-        "I answer most calls live, and texts right away or very soon after.",
+        "Text me at 864-381-2326. It's the fastest way to reach me. If you'd rather call and I don't pick up, please leave a message.",
         "Honest pricing, even when it isn't what you hoped to hear.",
         "A negotiator on your side from the first offer to the closing table.",
         "Drone photos and a neighbor mailing on every listing.",
@@ -254,11 +254,11 @@ EN = {
     "listings_h2": "On the market now",
     "listings_btn": "See all my listings",
     "cta_h2": "Ready to talk it through?",
-    "cta_p": "Call, text, or send a note. No pressure, no script.",
+    "cta_p": "Text me at 864-381-2326. It's the fastest way to reach me. If you'd rather call and I don't pick up, please leave a message. No pressure, no script.",
     "cta_btn": "Contact J.R.",
     "hero_who": "J.R. Grimaldo, Real Estate Professional",
     "hero_where": "Landrum, SC · Hablo español",
-    "hero_call": "Call or text 864-381-2326.",
+    "hero_call": "Text 864-381-2326. Fastest way to reach me.",
     "hm_sold_h2": "Recently sold",
     "hm_sold_p": "A few of the homes I've sold for my clients.",
     "hm_sold_btn": "See all my sales",
@@ -308,14 +308,14 @@ EN = {
     "ab_h1": "Principles Before Profits",
     "ab_p1": "Honesty and integrity are what you can expect when you hire me. I help people sell and buy homes across the Upstate, and I'm based in Landrum.",
     "ab_p2": "I give you a clear read on your situation, guide you through each step, and deal with problems before they grow. I negotiate for you from the first offer to closing.",
-    "ab_p3": "Here's how I work. I'm genuinely concerned with my clients' best interest, and I don't let up on whatever comes up between the signed contract and closing day.",
+    "ab_p3": "Here's how I work. I'm genuinely concerned with my clients' best interest, and I don't let up on whatever comes up between the signed contract and closing day. My clients tend to stay friends long after the keys change hands. Ten families have come back to buy or sell with me again, and others have sent their friends and family my way.",
     "ab_p4": "If you plan to sell your home and buy another one in the area, ask me how I can save you real money.",
     "ab_p5": "I am fluent in English and Spanish.",
     "ab_why_h2": "Here's why my clients keep coming back",
     "ab_why": [
         "I believe in quality over quantity. Every client gets my full attention, from the first call to the closing table. Most of them are sellers.",
         "Most of the buyers I work with are past clients, or friends and family they send my way.",
-        "I'm the only one who answers my phone. I answer most calls when they come in. Texts get a reply right away, or very soon after.",
+        "Text me at 864-381-2326. It's the fastest way to reach me. If you'd rather call and I don't pick up, please leave a message.",
     ],
     "ab_facts_h2": "The details",
     "ab_facts": [
@@ -334,8 +334,8 @@ EN = {
     "rv_note": "",
     # contact
     "ct_h1": "Get in touch",
-    "ct_p": "Call or text me directly. I answer most calls live. Texts get a reply right away, or very soon after. You won't be passed to an assistant or a call center.",
-    "ct_call": "Call or text",
+    "ct_p": "Text me at 864-381-2326. It's the fastest way to reach me. If you'd rather call and I don't pick up, please leave a message. You won't be passed to an assistant or a call center.",
+    "ct_call": "Text me (fastest)",
     "ct_email": "Email",
     "ct_office": "Mailing address",
     "ct_fine": "You'll also get my monthly newsletter. I never sell your information. I use it only to answer you and to send what you asked for.",
@@ -372,7 +372,7 @@ EN = {
     "bk_after": [
         "Your request lands in my inbox.",
         "I put your books in the mail, usually within a few days.",
-        "That's it. If you ever want to talk about your home, call or text me. If not, enjoy the books.",
+        "That's it. If you ever want to talk about your home, text me at 864-381-2326. If not, enjoy the books.",
     ],
     "footer_rights": "All rights reserved.",
     "footer_eho": "Equal Housing Opportunity.",
@@ -398,7 +398,7 @@ ES = {
     "why_h2": "Calidad antes que cantidad.",
     "why_p": "Prefiero hacer un gran trabajo para cada cliente que atender a todos los que pueda. La mayoría de mis clientes son vendedores. Cuando me contrata para vender, usted no es un expediente más en la pila.",
     "why_bullets": [
-        "Contesto la mayoría de las llamadas en el momento, y los mensajes de texto de inmediato o muy poco después.",
+        "Envíeme un texto al 864-381-2326. Es la forma más rápida de comunicarse conmigo. Si prefiere llamar y no contesto, por favor deje un mensaje.",
         "Precios honestos, aunque no sea lo que esperaba oír.",
         "Un negociador de su lado desde la primera oferta hasta el cierre.",
         "Fotos con dron y envío postal a los vecinos en cada propiedad.",
@@ -408,11 +408,11 @@ ES = {
     "listings_h2": "En venta ahora",
     "listings_btn": "Ver todas mis propiedades",
     "cta_h2": "¿Listo para conversar?",
-    "cta_p": "Llame, envíe un texto o un mensaje. Sin presión.",
+    "cta_p": "Envíeme un texto al 864-381-2326. Es la forma más rápida de comunicarse conmigo. Si prefiere llamar y no contesto, por favor deje un mensaje. Sin presión.",
     "cta_btn": "Contactar a J.R.",
     "hero_who": "J.R. Grimaldo, Profesional de Bienes Raíces",
     "hero_where": "Landrum, SC · Hablo español",
-    "hero_call": "Llame o envíe un mensaje de texto al 864-381-2326.",
+    "hero_call": "Envíe un texto al 864-381-2326. Es lo más rápido.",
     "hm_sold_h2": "Vendidas recientemente",
     "hm_sold_p": "Algunas de las casas que he vendido para mis clientes.",
     "hm_sold_btn": "Ver todas mis ventas",
@@ -458,14 +458,14 @@ ES = {
     "ab_h1": "Principios Antes De Ganancias",
     "ab_p1": "Honestidad e integridad es lo que puede esperar cuando me contrata. Ayudo a vender y comprar casas en todo el Upstate, y vivo en Landrum.",
     "ab_p2": "Le doy una idea clara de su situación, lo guío en cada paso y me ocupo de los problemas antes de que crezcan. Negocio por usted desde la primera oferta hasta el cierre.",
-    "ab_p3": "Así trabajo yo. Me importa de verdad el interés de mis clientes, y no me detengo ante nada de lo que surja entre la firma del contrato y el día del cierre.",
+    "ab_p3": "Así trabajo yo. Me importa de verdad el interés de mis clientes, y no me detengo ante nada de lo que surja entre la firma del contrato y el día del cierre. Mis clientes suelen seguir siendo amigos mucho después de recibir las llaves. Diez familias han vuelto a comprar o vender conmigo, y otros me han recomendado a sus amigos y familiares.",
     "ab_p4": "Si piensa vender su casa y comprar otra en la zona, pregúnteme cómo puedo ahorrarle dinero de verdad.",
     "ab_p5": "Hablo inglés y español con fluidez.",
     "ab_why_h2": "Por qué mis clientes regresan",
     "ab_why": [
         "Creo en la calidad antes que la cantidad. Cada cliente recibe toda mi atención, desde la primera llamada hasta el cierre. La mayoría son vendedores.",
         "La mayoría de los compradores con quienes trabajo son clientes anteriores, o amigos y familiares que ellos me recomiendan.",
-        "Soy el único que contesta mi teléfono. Contesto la mayoría de las llamadas en el momento. Los mensajes de texto reciben respuesta de inmediato, o muy poco después.",
+        "Envíeme un texto al 864-381-2326. Es la forma más rápida de comunicarse conmigo. Si prefiere llamar y no contesto, por favor deje un mensaje.",
     ],
     "ab_facts_h2": "Los datos",
     "ab_facts": [
@@ -482,9 +482,9 @@ ES = {
     "rv_btn": "Dejar una opinión",
     "rv_ask": "¿Trabajó conmigo?",
     "ct_h1": "Contacto",
-    "ct_p": "Llámeme o envíeme un texto directamente. Contesto la mayoría de las llamadas en el momento. Los mensajes de texto reciben respuesta de inmediato, o muy poco después. No lo pasarán a un asistente ni a un centro de llamadas.",
+    "ct_p": "Envíeme un texto al 864-381-2326. Es la forma más rápida de comunicarse conmigo. Si prefiere llamar y no contesto, por favor deje un mensaje. No lo pasarán a un asistente ni a un centro de llamadas.",
     "ct_fine": "También recibirá mi boletín mensual. Nunca vendo su información. La uso solo para contestarle y enviarle lo que pidió.",
-    "ct_call": "Llamar o texto", "ct_email": "Correo", "ct_office": "Dirección postal",
+    "ct_call": "Mensaje de texto (lo más rápido)", "ct_email": "Correo", "ct_office": "Dirección postal",
     "ct_form_h2": "O envíe un mensaje",
     "ct_fields": {"name": "Su nombre", "email": "Correo electrónico", "phone": "Teléfono (opcional)",
                   "message": "¿En qué puedo ayudarle?", "submit": "Enviar"},
@@ -516,7 +516,7 @@ ES = {
     "bk_after": [
         "Su solicitud llega a mi correo.",
         "Pongo sus libros en el correo, normalmente en unos días.",
-        "Eso es todo. Si algún día quiere hablar de su casa, llámeme o envíeme un texto. Si no, disfrute los libros.",
+        "Eso es todo. Si algún día quiere hablar de su casa, envíeme un texto al 864-381-2326. Si no, disfrute los libros.",
     ],
     "footer_rights": "Todos los derechos reservados.",
     "footer_eho": "Igualdad de oportunidades de vivienda.",
@@ -603,6 +603,7 @@ nav.menu a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;paddin
 .hero h1{max-width:18ch}
 .hero p{color:#dfe7ec;max-width:52ch;font-size:1.08rem}
 .addr{display:flex;flex-direction:column;gap:10px;margin-top:22px;max-width:560px}
+.contact-grid a.ct-alt,.ct-alt{display:block;font-size:.9rem;font-weight:400;margin-top:6px}
 .hero-call{margin:12px 0 0;font-size:1.05rem}.hero-call a{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .hv-law{margin:16px 0 0;max-width:70ch}
 .addr input{font:inherit;font-size:1.05rem;padding:14px 16px;border:1px solid #fff;border-radius:8px;width:100%}
@@ -979,11 +980,11 @@ def mail_form(T, lang, subject, fields_html, submit_label, form_id="", ok=None):
                   '<div style="display:none" aria-hidden="true"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" value=""></div>')
         if lang == "es":
             ok = "Gracias. Su solicitud llegó a J.R. Recibirá respuesta en un día hábil."
-            bad = "No se pudo enviar. Por favor llame o envíe un texto a J.R. al " + SITE["phone"] + "."
+            bad = "No se pudo enviar. Por favor envíe un texto a J.R. al " + SITE["phone"] + "."
             sending = "Enviando…"
         else:
             ok = "Thank you. Your request reached J.R. You'll hear back within one business day."
-            bad = "That didn't go through. Please call or text J.R. at " + SITE["phone"] + "."
+            bad = "That didn't go through. Please text J.R. at " + SITE["phone"] + "."
             sending = "Sending…"
         if ok_custom:
             ok = ok_custom
@@ -1073,13 +1074,13 @@ def footer_signup(T):
         line = ("Front Porch Notes", ": una nota mensual breve sobre lo que se vendieron las casas en nuestros pueblos. Solo su correo.")
         btn, lab, ph = "Suscribirme", "Su correo electrónico", "Su correo"
         ok = T["nl_fields"]["ok"]
-        bad = "No se pudo enviar. Por favor llame o envíe un texto a J.R. al " + SITE["phone"] + "."
+        bad = "No se pudo enviar. Por favor envíe un texto a J.R. al " + SITE["phone"] + "."
         sending = "Enviando…"
     else:
         line = ("Front Porch Notes", ": a short monthly note on what homes in our towns sold for. Your email, nothing else.")
         btn, lab, ph = "Sign me up", "Your email", "Your email"
         ok = T["nl_fields"]["ok"]
-        bad = "That didn't go through. Please call or text J.R. at " + SITE["phone"] + "."
+        bad = "That didn't go through. Please text J.R. at " + SITE["phone"] + "."
         sending = "Sending…"
     return (f'<form class="nl-foot js-fs" id="nl-foot" data-fs="https://formspree.io/f/{SITE["formspree_id"]}" method="POST" '
             f'data-ok="{esc(ok)}" data-bad="{esc(bad)}" data-sending="{esc(sending)}">'
@@ -1160,7 +1161,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
       <p>{esc(BRAND['office'])}</p>
     </div>
     <div>
-      <p><a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a> · <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
+      <p><a href="sms:{SITE['phone_tel']}">{'Envíe un texto al 864-381-2326. Es lo más rápido.' if T['lang'] == 'es' else 'Text 864-381-2326. Fastest way to reach me.'}</a> · <a href="tel:{SITE['phone_tel']}">{'Llamar' if T['lang'] == 'es' else 'Call'}</a> · <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
       <p>{esc(towns_label)}: {towns_links}</p>
       <p>{esc(T['footer_eho'])} © 2026 {esc(SITE['agent'])}. {esc(T['footer_rights'])} · <a href="{'privacy.html' if p in ('', 'es/') else '../privacy.html'}">{'Privacidad' if T['lang'] == 'es' else 'Privacy'}</a></p>
     </div>
@@ -1267,7 +1268,7 @@ def page_home(T):
     <input id="hero-input" type="text" placeholder="{esc(T['hero_addr'])}" autocomplete="street-address">
     <button class="btn" type="submit">{esc(T['hero_btn'])}</button>
   </form>
-  <p class="hero-call"><a href="tel:{SITE['phone_tel']}">{esc(T['hero_call'])}</a></p></div>
+  <p class="hero-call"><a href="sms:{SITE['phone_tel']}">{esc(T['hero_call'])}</a></p></div>
   <div class="hero-me"><img src="{up}assets/jr-headshot.jpg" alt="{esc(SITE['agent'])}" width="280" height="280"><b>{esc(T['hero_who'])}</b><span>{esc(T['hero_where'])}</span></div>
 </div>
 <div class="truths hero-truths">{truths}</div></div></section>
@@ -1446,7 +1447,7 @@ def page_issue1():
 <p>That same month, I helped Joe buy his next home.</p>
 <p>Joe and I still work together.</p>
 <p><b>The lesson for sellers:</b> if anything about how you got your home is unusual, talk to an agent before you list. Problems with the deed can be fixed, but they take time. It's much easier to start early than to explain a delay to a buyer who's waiting.</p>
-<p>Have a question like that about your own home? Call or text me at <a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a>.</p>
+<p>Have a question like that about your own home? Text me at <a href="sms:{SITE['phone_tel']}">{SITE['phone']}</a>. It's the fastest way to reach me.</p>
 </div></section>
 
 <section id="tip"><div class="wrap nl-body">
@@ -1458,7 +1459,7 @@ def page_issue1():
 <p><b>Hold off on updates that are a matter of taste.</b> Paint colors, new carpet, new flooring. You might paint the rooms when your buyer would rather have new carpet. You might pick yellow when your buyer loves blue. Wait and see what your buyer actually wants.</p>
 <p>If a buyer asks for one of those updates, we can handle it in the deal. Usually that's a credit toward the buyer's closing costs, or a lower price, so the buyer can make the change their own way. If the buyer has a mortgage, the lender sets limits on credits, and I'll walk you through them.</p>
 <p>That way, you spend money only where it matters.</p>
-<p>Not sure which list something in your home belongs on? Call or text me at <a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a>.</p>
+<p>Not sure which list something in your home belongs on? Text me at <a href="sms:{SITE['phone_tel']}">{SITE['phone']}</a>. It's the fastest way to reach me.</p>
 </div></section>
 
 <section id="rates"><div class="wrap nl-body">
@@ -1471,7 +1472,7 @@ def page_issue1():
 <h2>What's your home worth today?</h2>
 <p>Tell me the address. I'll look at your home and the recent sales around it, and send you a written valuation within one business day. Free, no obligation.</p>
 <p><a class="btn" href="../home-value.html">What's your home worth today?</a></p>
-<p class="nl-sign">Principles Before Profits · J.R. Grimaldo, Real Estate Professional, SC License #95641 · NorthGroup Real Estate, P.O. Box 106, Landrum, SC 29356 · Call or text <a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a> · Hablo español</p>
+<p class="nl-sign">Principles Before Profits · J.R. Grimaldo, Real Estate Professional, SC License #95641 · NorthGroup Real Estate, P.O. Box 106, Landrum, SC 29356 · Text <a href="sms:{SITE['phone_tel']}">{SITE['phone']}</a> · Hablo español</p>
 <p class="fine">Got this from a friend? <a href="../newsletter.html">Sign up to get Front Porch Notes by email.</a></p>
 </div></section>"""
 
@@ -1581,7 +1582,7 @@ def page_privacy(T):
     secs = "".join(f'<h2>{esc(h)}</h2>' + "".join(f'<p>{esc(x)}</p>' for x in ps) for h, ps in P["sections"])
     contact = (f'<p>J.R. Grimaldo<br>{esc(BRAND["brokerage"])}<br>{esc(BRAND["office"])}<br>'
                f'<a href="mailto:{SITE["email"]}">jr@jrREsales.com</a><br>'
-               f'<a href="tel:{SITE["phone_tel"]}">{SITE["phone"]}</a></p>')
+               f'<a href="sms:{SITE["phone_tel"]}">{"Texto" if T["lang"] == "es" else "Text"}: {SITE["phone"]}</a></p>')
     return f"""
 <section><div class="wrap privacy">
   <h1>{esc(P['h1'])}</h1>
@@ -1652,7 +1653,7 @@ TOWN_HOW = [
     "A written valuation within one business day, prepared by me, not a computer.",
     "Drone photos and a mailing to your neighbors on every listing.",
     "Honest pricing, even when it isn't what you hoped to hear.",
-    "I answer most calls live, and texts right away or very soon after.",
+    "Text me at 864-381-2326. It's the fastest way to reach me. If you'd rather call and I don't pick up, please leave a message.",
 ]
 _SIDES = {"S": "Sold for the seller", "B": "Represented the buyer", "SB": "Helped both buyer and seller"}
 _TAGS = {"repeat": "Repeat client", "referral": "Referred by a past client"}
@@ -1702,7 +1703,7 @@ def page_town(key):
         else:
             first = f"I live close by in Landrum, and {name} is part of the area I focus on. I'd be glad to help you sell your home here."
         intro_l = [first,
-                   "I believe in quality over quantity. Every client gets my full attention, and I'm the only one who answers my phone."]
+                   "I believe in quality over quantity. Every client gets my full attention."]
     intro = "".join(f"<p>{esc(x)}</p>" for x in intro_l)
     def row(r):
         a, side, pr, tag = r
@@ -1740,7 +1741,7 @@ def page_contact(T):
     return f"""
 <section><div class="wrap"><h1>{esc(T['ct_h1'])}</h1><p>{esc(T['ct_p'])}</p>
 <div class="contact-grid">
-  <div><small>{esc(T['ct_call'])}</small><a href="tel:{SITE['phone_tel']}">{SITE['phone']}</a></div>
+  <div><small>{esc(T['ct_call'])}</small><a href="sms:{SITE['phone_tel']}">{SITE['phone']}</a><a class="ct-alt" href="tel:{SITE['phone_tel']}">{'O llame y deje un mensaje' if T['lang'] == 'es' else 'Or call and leave a message'}</a></div>
   <div><small>{esc(T['ct_email'])}</small><a href="mailto:{SITE['email']}">{SITE['email']}</a></div>
   <div><small>{esc(T['ct_office'])}</small><span>{esc(BRAND['office'])}</span></div>
 </div></div></section>
@@ -2052,7 +2053,7 @@ META_EN = {
  "newsletter.html": ("Monthly Newsletter, Front Porch Notes – J.R. Grimaldo",
    "Free monthly email: what homes sold for in Landrum and nearby Upstate SC towns, whether sales are up or down, and where mortgage rates stand."),
  "contact.html": ("Contact J.R. Grimaldo, Real Estate Professional",
-   "Call or text J.R. Grimaldo at 864-381-2326. He answers most calls live and replies to texts right away. Landrum and Upstate SC Real Estate."),
+   "Text J.R. Grimaldo at 864-381-2326. It's the fastest way to reach him. If you call and he doesn't pick up, leave a message. Landrum and Upstate SC Real Estate."),
  "sellers-guide.html": ("Free Seller's Guide: Sell Your Home Step by Step",
    "Free 8-page Seller's Guide from J.R. Grimaldo in Landrum, SC: getting ready to list, showings, and the road from offer to closing. Emailed to you."),
  "fsbo-guide.html": ("Free FSBO Guide: Sell Your Home on Your Own – J.R. Grimaldo",
@@ -2088,7 +2089,7 @@ META_ES = {
  "newsletter.html": ("Boletín mensual, Front Porch Notes – J.R. Grimaldo",
    "El boletín mensual gratis de J.R. Grimaldo sobre las casas en Landrum y el Upstate de Carolina del Sur. Inscríbase por correo."),
  "contact.html": ("Contácteme – J.R. Grimaldo",
-   "Llame o envíe un mensaje de texto a J.R. Grimaldo al 864-381-2326. Contesta la mayoría de las llamadas en el momento. Bienes raíces en Landrum y el Upstate."),
+   "Envíe un texto a J.R. Grimaldo al 864-381-2326. Es la forma más rápida de comunicarse con él. Bienes raíces en Landrum y el Upstate."),
  "sellers-guide.html": ("Guía gratis para vendedores, paso a paso – J.R. Grimaldo",
    "Guía gratis de 8 páginas de J.R. Grimaldo en Landrum, SC: cómo preparar su casa, las visitas y el camino de la oferta al cierre. Se la envío por correo."),
  "privacy.html": ("Privacidad – J.R. Grimaldo",
@@ -2144,7 +2145,7 @@ def build():
         "reviews.html": "What clients say about buying and selling with J.R. Grimaldo, REALTOR®, in the Upstate SC.",
         "newsletter.html": "J.R. Grimaldo's free monthly newsletter: what homes are selling for in Landrum and nearby Upstate SC towns, whether sales are up or down, and where mortgage rates stand. Sign up by email.",
         "free-books.html": "Free guides and books on selling your home from J.R. Grimaldo, REALTOR® in Landrum, SC: an 8-page Seller's Guide by email, and two printed books by mail. No cost, no obligation.",
-        "contact.html": "Call or text J.R. Grimaldo at 864-381-2326. He answers most calls live and replies to texts right away. Landrum and Upstate SC Real Estate.",
+        "contact.html": "Text J.R. Grimaldo at 864-381-2326. It's the fastest way to reach him. If you call and he doesn't pick up, leave a message. Landrum and Upstate SC Real Estate.",
         "buyers-guide.html": "A free 8-page guide to buying a home in the Upstate SC, from J.R. Grimaldo, REALTOR®. Emailed to you.",
         "sales-list.html": "Get a free one-page list of similar homes that sold near you, with the real sold prices, from J.R. Grimaldo, REALTOR®. No estimate, no pressure, no cost.",
         "fsbo-guide-info.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you with the state disclosure form.",
@@ -2161,7 +2162,7 @@ def build():
         "reviews.html": "Lo que dicen los clientes de comprar y vender con J.R. Grimaldo, REALTOR®, en el Upstate de Carolina del Sur.",
         "newsletter.html": "El boletín mensual gratis de J.R. Grimaldo sobre las casas en Landrum y el Upstate de Carolina del Sur. Inscríbase por correo.",
         "free-books.html": "Guías y libros gratis sobre vender su casa de J.R. Grimaldo, REALTOR® en Landrum, SC: una guía de 8 páginas en español por correo electrónico, y dos libros impresos por correo. Sin costo ni compromiso.",
-        "contact.html": "Llame o envíe un texto a J.R. Grimaldo al 864-381-2326. Contesta la mayoría de las llamadas en el momento. Bienes raíces en Landrum y el Upstate.",
+        "contact.html": "Envíe un texto a J.R. Grimaldo al 864-381-2326. Es la forma más rápida de comunicarse con él. Bienes raíces en Landrum y el Upstate.",
         "sellers-guide.html": "Guía gratis de 8 páginas de J.R. Grimaldo, REALTOR® en Landrum, SC: cómo preparar su casa, las visitas y el camino de la oferta al cierre. Se la envía por correo electrónico.",
         "privacy.html": "Qué recoge jrREsales.com, para qué y cómo cancelar la suscripción. J.R. Grimaldo, REALTOR®, NorthGroup Real Estate, Landrum, SC.",
     }
