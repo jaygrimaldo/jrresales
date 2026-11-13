@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded',function(){
       var bot=!touched||(Date.now()-opened<2000)||((form.querySelector('input[name=_gotcha]')||{}).value)||((form.querySelector('input[name=company_website]')||{}).value);
       if(bot){
         // Looks like a robot: show the normal thank-you, send nothing, count nothing.
-        form.querySelectorAll('label,.two,.three,.pair,.fine,.row,button').forEach(function(el){el.hidden=true;});
+        form.querySelectorAll('label,.two,.three,.pair,.fine,.row,details,button').forEach(function(el){el.hidden=true;});
         msg.className='form-msg ok';msg.textContent=form.dataset.ok;msg.hidden=false;return;
       }
       if(form.dataset.need&&!form.querySelector('input[name=books]:checked')){
