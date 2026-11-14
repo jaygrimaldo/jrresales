@@ -789,6 +789,7 @@ form.sheet textarea{min-height:120px}
 .two{display:grid;gap:14px}
 @media(min-width:560px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr 1fr 1fr}}
 .three{display:grid;gap:14px}
+.three.nums{grid-template-columns:1fr 1fr 1.3fr;gap:10px}
 .fine{font-size:.9rem;color:var(--ink-2)}
 .nl-list{list-style:none;padding:0;margin:0;max-width:720px}
 .nl-list li{padding:14px 0;border-top:1px solid var(--line)}
@@ -948,7 +949,7 @@ document.addEventListener('DOMContentLoaded',function(){
       var src=new FormData(form),base=[],errs=[];
       try{
         var g=function(k){return (src.get(k)||'').toString().trim();};
-        var r={t:form.id==='hv-form'?'v':(form.id==='bk-form'?'b':(form.id.indexOf('nl-')===0?'n':(form.id==='sg-form'?'g':(form.id==='fg-form'?'f':(form.id==='sl-form'?'s':(form.id==='bg-form'?'y':'c')))))),l:document.documentElement.lang==='es'?'es':'en',
+        var r={t:form.id==='hv-form'?'v':(form.id==='bk-form'?'b':(form.id.indexOf('nl-')===0?'n':(form.id==='sg-form'?'g':(form.id==='fg-form'?'f':(form.id==='sl-form'?'s':(form.id==='bg-form'?'y':(form.id==='fp-form'?'p':'c'))))))),l:document.documentElement.lang==='es'?'es':'en',
                n:g('name'),p:g('phone'),e:g('email'),a:[g('address')||g('street'),g('city')].filter(Boolean).join(', ')};
         base.push(['tap_to_reply',location.origin+'/reply.html#'+new URLSearchParams(r).toString()]);
       }catch(err){}
@@ -1927,6 +1928,10 @@ def page_guide(T=None):
 # Request page for J.R.'s 8-page guide for owners selling on their own (J.R., 11/5/2026).
 # Emailed by J.R. with three attachments (claude/FSBO_Guide_Reply_Email.md). The QR code on
 # the FSBO letter points to this page, so keep the address fsbo-guide.html.
+POST_HOME_BOX = """
+<section><div class="wrap"><h2>Post your home on my website, free</h2>
+<p class="glong">I'll post your home on jrREsales.com for free, with your photos and your phone number, so buyers contact you directly.</p>
+<p><a class="btn quiet" href="post-your-home.html">Ask for your free page</a></p></div></section>"""
 FSBO_GUIDE = {"title": "Selling Your Home on Your Own, Step by Step", "cover": "assets/fsbo-guide-cover.jpg"}
 
 def page_fsbo_guide(info=False):
@@ -1958,7 +1963,7 @@ def page_fsbo_guide(info=False):
 <section class="alt"><div class="wrap"><h2>What's inside</h2>
 <p class="glong">Selling your home yourself? That's your call, and I respect it. This 8-page guide walks you through it in order: pricing, showings, and closing in South Carolina. It's honest about the parts that usually trip owners up.</p>
 <p class="glong">It comes with the South Carolina disclosure form and a one-page showing checklist.</p>
-<div class="truths">{p_html}</div>{again_btn("Email me the guide")}</div></section>"""
+<div class="truths">{p_html}</div>{again_btn("Email me the guide")}</div></section>""" + (POST_HOME_BOX if info else "")
 
 
 # ------------------------------------------------------------- SALES LIST
@@ -1974,6 +1979,36 @@ def page_sales_list():
     return guide_top("", "Free, from J.R. Grimaldo", "A list of recent sales near you",
                      "Similar homes that sold near you, with the real sold prices. I'll email it to you myself, usually within a day.", form) + """
 <section class="alt"><div class="wrap"><p class="glong">I'll send you a one-page list of similar homes that sold near you, with the real sold prices. No estimate, no pressure, no cost.</p>""" + again_btn("Send me the list") + """</div></section>"""
+
+
+# ------------------------------------------------------------- POST YOUR HOME (FSBO PAGE REQUEST)
+# J.R., 11/14/2026: the FSBO Guide offers owners selling on their own a free page for their home on
+# jrREsales.com, with THEIR photos, price and phone number. This is the request form. English only.
+# Linked from fsbo-guide-info.html; not in the menu. File name is fixed: post-your-home.html.
+# The weekly sign-up check expects the subject "FSBO page request from jrREsales.com".
+def page_post_home():
+    fields = ('<input type="hidden" name="request" value="fsbopage">'
+              + '<div class="two">' + field("name", "Your name", req=True) + field("phone", "Cell phone (for texts)", "tel", req=True) + '</div>'
+              + field("email", "Email", "email", req=True)
+              + '<div class="pair">' + field("street", "Home address (street)", req=True) + field("city", "Town", req=True) + '</div>'
+              + field("price", "Asking price", req=True)
+              + '<div class="three nums">' + field("beds", "Beds") + field("baths", "Baths") + field("sqft", "Square feet") + '</div>'
+              + field("description", "A short description of your home", textarea=True)
+              + '<p class="fine">Photos: after you send this, I\'ll text you to collect them.</p>'
+              + '<p class="fine">You\'ll also get my monthly newsletter, Front Porch Notes. You can stop it any time. I never sell your information. I use it only to answer you and to send what you asked for.</p>')
+    form = mail_form(EN, "en", "FSBO page request from jrREsales.com", fields, "Post my home", "fp-form",
+                     ok="Thank you. I got your request. I'll text you myself, usually within a day, to collect your photos.")
+    gets = ["A page for your home on jrREsales.com, with your photos and your price.",
+            "Your phone number on the page, not mine. Buyers contact you directly.",
+            "It's free. No strings.",
+            "Want it taken down? Text me, and I'll take it down."]
+    return guide_top("", "Free, for owners selling on their own", "Post your home on my website",
+                     "Fill this in. I'll text you to collect your photos.", form,
+                     gets, "What you get") + f"""
+<section class="alt"><div class="wrap"><h2>How it works</h2>
+<p class="glong">Send the form. I'll text you to collect your photos. I'll show you the page before it goes up.</p>
+<p class="glong">Questions? Text me at {SITE["phone"]}. It's the fastest way to reach me. If you'd rather call and I don't pick up, please leave a message.</p>
+<p class="glong">J.R. Grimaldo, Real Estate Professional, NorthGroup Real Estate.</p>{again_btn("Post my home")}</div></section>"""
 
 
 # ------------------------------------------------------------- BUYER'S GUIDE (UNLISTED)
@@ -2069,6 +2104,10 @@ var NOTES={
   y:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I just emailed you the guide you asked for. - J.R.",
      subj:"The guide you asked for",
      mail:"Hi {first},\n\nHere's the guide you asked for: Buying Your Home, Step by Step.\nhttps://jrREsales.com/assets/buyers-guide.pdf\n\nYou'll also get my monthly newsletter, Front Porch Notes. If you'd rather not, just reply and let me know.\n\nIf you have a question, or you're ready to start looking, text me at 864-381-2326. It's the fastest way to reach me. If you'd rather call and I don't pick up, please leave a message."},
+  p:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I got your request to post your home on my website. Please text me your photos here, as many as you like. - J.R.",
+     subj:"Your free page on jrREsales.com",
+     tip:"Before you send: open the Formspree email. Check the price, beds, baths, square feet and description.",
+     mail:"Hi {first},\n\nThank you for asking me to post your home at {addr} on my website. I got your request.\n\nNext step: text me your photos at 864-381-2326, as many as you like. I'll make the page with your photos, your price and your phone number, so buyers contact you directly. I'll show it to you before it goes up.\n\nIt's free, with no strings. If you ever want it taken down, just text me.\n\nYou'll also get my monthly newsletter, Front Porch Notes. If you'd rather not, just reply and let me know.\n\nIf you have a question, text me at 864-381-2326. It's the fastest way to reach me. If you'd rather call and I don't pick up, please leave a message."},
   s:{text:"Hi {first}, this is J.R. Grimaldo with NorthGroup Real Estate. I just emailed you the list of recent sales near {addr}. - J.R.",
      subj:"Recent sales near {addr}",
      tip:"Before you send: attach the one-page sales list for this address.",
@@ -2104,14 +2143,14 @@ var NOTES={
      mail:"Hola {first}:\n\nGracias por su mensaje. Lo recibí y quería avisarle de inmediato.\n\nTambién recibirá mi boletín mensual, Front Porch Notes, que está en inglés. Si prefiere no recibirlo, solo responda a este correo y dígamelo.\n\n¿A qué hora le queda bien que hablemos? Envíeme un texto al 864-381-2326. Es la forma más rápida de comunicarse conmigo. Si prefiere llamar y no contesto, por favor deje un mensaje. También puede simplemente responder a este correo."}}
 };
 var q=new URLSearchParams(location.hash.slice(1));
-var d={t:['c','b','n','g','f','s','y'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
+var d={t:['c','b','n','g','f','s','y','p'].indexOf(q.get('t'))>=0?q.get('t'):'v',l:q.get('l')==='es'?'es':'en',n:q.get('n')||'',p:(q.get('p')||'').replace(/[^0-9+]/g,''),e:q.get('e')||'',a:q.get('a')||''};
 var first=(d.n.split(/\s+/)[0]||'').replace(/^./,function(c){return c.toUpperCase();});
 function fill(s){return s.replace(/\{first\}/g,first||(d.l==='es'?'':'there')).replace(/\{addr\}/g,d.a||(d.l==='es'?'su casa':'your home')).replace(/^Hola :/,'Hola:').replace(/^Hola ,/,'Hola,');}
 function show(){
   var N=NOTES[d.l][d.t]||NOTES.en[d.t],tx=fill(N.text),sj=fill(N.subj),bd=fill(N.mail);
   document.documentElement.lang=d.l;
   document.getElementById('h').textContent=(d.l==='es'?'Responder a ':'Reply to ')+(d.n||'?');
-  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):d.t==='g'?(d.l==='es'?'Guía del vendedor':"Seller's Guide request"):d.t==='f'?'FSBO Guide request':d.t==='s'?'Sales list request':d.t==='y'?"Buyer's Guide request":(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
+  document.getElementById('who').textContent=[d.t==='v'?(d.l==='es'?'Solicitud de valuación':'Home value request'):d.t==='b'?(d.l==='es'?'Solicitud de libros':'Book request'):d.t==='n'?(d.l==='es'?'Inscripción al boletín':'Newsletter sign-up'):d.t==='g'?(d.l==='es'?'Guía del vendedor':"Seller's Guide request"):d.t==='f'?'FSBO Guide request':d.t==='s'?'Sales list request':d.t==='y'?"Buyer's Guide request":d.t==='p'?'FSBO page request':(d.l==='es'?'Mensaje':'Message'),d.a,d.p,d.e].filter(Boolean).join(' · ');
   var tp=document.getElementById('tip');if(N.tip){tp.textContent=N.tip;tp.hidden=false;}else{tp.hidden=true;}
   document.getElementById('tx').textContent=tx;
   document.getElementById('em').textContent='Subject: '+sj+'\n\n'+bd;
@@ -2159,6 +2198,8 @@ META_EN = {
    "Selling your home yourself in SC? A free 8-page guide: pricing, showings, the disclosure form, and closing. Emailed to you with the state disclosure form."),
  "sales-list.html": ("Recent Sales Near You, Free List – J.R. Grimaldo",
    "Get a free one-page list of similar homes that sold near you, with the real sold prices, from J.R. Grimaldo. No estimate, no pressure, no cost."),
+ "post-your-home.html": ("Selling on Your Own? Post Your Home Free – J.R. Grimaldo",
+   "Selling your home yourself in the Upstate SC? J.R. Grimaldo will post it free on jrREsales.com, with your photos, price and phone number. Buyers contact you."),
  "buyers-guide.html": ("Free Buyer's Guide: Buy Your Home Step by Step",
    "A free 8-page guide to buying a home in the Upstate SC, from J.R. Grimaldo, Real Estate Professional. Emailed to you."),
  "privacy.html": ("Privacy – J.R. Grimaldo, Real Estate Professional",
@@ -2220,7 +2261,7 @@ def build():
     (OUT / "CNAME").write_text(SITE["domain"] + "\n")
     # Search engines: list of public pages, and where to find it.
     base = "https://" + SITE["domain"] + "/"
-    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html", "sellers-guide.html", "fsbo-guide-info.html", "sales-list.html",
+    urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html", "sellers-guide.html", "fsbo-guide-info.html", "sales-list.html", "post-your-home.html",
             "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/newsletter.html", "es/contact.html", "es/sellers-guide.html", "privacy.html", "es/privacy.html"]
     urls += [n["path"] for n in NEWSLETTERS]
     urls += [b["slug"] + ".html" for b in BOOKS] + ["es/" + b["slug"] + ".html" for b in BOOKS] + [k + ".html" for k in TOWN_PAGES if k not in ("greenville", "simpsonville", "fountain-inn")]
@@ -2244,6 +2285,7 @@ def build():
         "free-books.html": "Free guides and books on selling your home from J.R. Grimaldo, REALTOR® in Landrum, SC: an 8-page Seller's Guide by email, and two printed books by mail. No cost, no obligation.",
         "contact.html": "Text J.R. Grimaldo at 864-381-2326. It's the fastest way to reach him. If you call and he doesn't pick up, leave a message. Landrum and Upstate SC Real Estate.",
         "buyers-guide.html": "A free 8-page guide to buying a home in the Upstate SC, from J.R. Grimaldo, REALTOR®. Emailed to you.",
+        "post-your-home.html": "Selling your home yourself in the Upstate SC? J.R. Grimaldo will post it free on jrREsales.com, with your photos, price and phone number.",
         "sales-list.html": "Get a free one-page list of similar homes that sold near you, with the real sold prices, from J.R. Grimaldo, REALTOR®. No estimate, no pressure, no cost.",
         "fsbo-guide-info.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you with the state disclosure form.",
         "fsbo-guide.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you.",
@@ -2278,6 +2320,7 @@ def build():
         "fsbo-guide.html": ("Free Guide: Selling Your Home on Your Own, Step by Step – " + SITE["agent"], page_fsbo_guide(), "es/index.html", None),
         "fsbo-guide-info.html": ("Free Guide: Selling Your Home on Your Own, Step by Step – " + SITE["agent"], page_fsbo_guide(info=True), "es/free-books.html", None),
         "sales-list.html": ("A List of Recent Sales Near You – " + SITE["agent"] + ", REALTOR®", page_sales_list(), "es/index.html", None),
+        "post-your-home.html": ("Post Your Home Free – " + SITE["agent"], page_post_home(), "es/index.html", None),
         "buyers-guide.html": ("Free Buyer's Guide: Buying Your Home, Step by Step – " + SITE["agent"], page_buyers_guide(), "es/index.html", None),
         "privacy.html": ("Privacy – " + SITE["agent"] + ", REALTOR®", page_privacy(EN), "es/privacy.html", "privacy.html"),
     }
