@@ -220,6 +220,18 @@ form.sheet textarea{min-height:120px}
 @media(min-width:560px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr 1fr 1fr}}
 .three{display:grid;gap:14px}
 .three.nums{grid-template-columns:1fr 1fr 1.3fr;gap:10px}
+form.sheet label.consent{display:flex;gap:12px;align-items:flex-start;font-weight:600;background:#f4f7f9;border:1px solid #9aa7b0;border-radius:8px;padding:12px 14px;line-height:1.45}
+form.sheet label.consent input{width:24px;height:24px;flex:0 0 24px;margin:2px 0 0;padding:0;accent-color:var(--gold-ink)}
+.oh-price{font-size:1.9rem;font-weight:600;margin:.2em 0}
+.oh-facts{font-size:1.1rem;margin:0 0 1em}
+.oh-photos{display:grid;gap:10px;grid-template-columns:1fr}
+.oh-photos img{width:100%;height:auto;border-radius:8px;display:block}
+@media(min-width:720px){.oh-photos{grid-template-columns:1fr 1fr}.oh-photos img:first-child{grid-column:1/-1}}
+.oh-owner{border:2px solid var(--gold-ink);border-radius:10px;padding:16px;margin:18px 0}
+.oh-owner .oh-phone{font-size:2rem;font-weight:600;margin:.1em 0 .4em}
+.oh-owner .btn{margin:4px 8px 4px 0}
+.oh-disc{border:1px solid #9aa7b0;background:#f4f7f9;border-radius:10px;padding:16px 18px;font-size:1.02rem;line-height:1.55;margin-top:24px}
+.oh-disc p{margin:0 0 .6em}.oh-disc p:last-child{margin:0;font-weight:600}
 .fine{font-size:.9rem;color:var(--ink-2)}
 .nl-list{list-style:none;padding:0;margin:0;max-width:720px}
 .nl-list li{padding:14px 0;border-top:1px solid var(--line)}

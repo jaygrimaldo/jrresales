@@ -790,6 +790,18 @@ form.sheet textarea{min-height:120px}
 @media(min-width:560px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr 1fr 1fr}}
 .three{display:grid;gap:14px}
 .three.nums{grid-template-columns:1fr 1fr 1.3fr;gap:10px}
+form.sheet label.consent{display:flex;gap:12px;align-items:flex-start;font-weight:600;background:#f4f7f9;border:1px solid #9aa7b0;border-radius:8px;padding:12px 14px;line-height:1.45}
+form.sheet label.consent input{width:24px;height:24px;flex:0 0 24px;margin:2px 0 0;padding:0;accent-color:var(--gold-ink)}
+.oh-price{font-size:1.9rem;font-weight:600;margin:.2em 0}
+.oh-facts{font-size:1.1rem;margin:0 0 1em}
+.oh-photos{display:grid;gap:10px;grid-template-columns:1fr}
+.oh-photos img{width:100%;height:auto;border-radius:8px;display:block}
+@media(min-width:720px){.oh-photos{grid-template-columns:1fr 1fr}.oh-photos img:first-child{grid-column:1/-1}}
+.oh-owner{border:2px solid var(--gold-ink);border-radius:10px;padding:16px;margin:18px 0}
+.oh-owner .oh-phone{font-size:2rem;font-weight:600;margin:.1em 0 .4em}
+.oh-owner .btn{margin:4px 8px 4px 0}
+.oh-disc{border:1px solid #9aa7b0;background:#f4f7f9;border-radius:10px;padding:16px 18px;font-size:1.02rem;line-height:1.55;margin-top:24px}
+.oh-disc p{margin:0 0 .6em}.oh-disc p:last-child{margin:0;font-weight:600}
 .fine{font-size:.9rem;color:var(--ink-2)}
 .nl-list{list-style:none;padding:0;margin:0;max-width:720px}
 .nl-list li{padding:14px 0;border-top:1px solid var(--line)}
@@ -1986,6 +1998,11 @@ def page_sales_list():
 # jrREsales.com, with THEIR photos, price and phone number. This is the request form. English only.
 # Linked from fsbo-guide-info.html; not in the menu. File name is fixed: post-your-home.html.
 # The weekly sign-up check expects the subject "FSBO page request from jrREsales.com".
+# Required checkbox on the request form. The Formspree email (permission = yes) is the owner's
+# written permission; J.R. keeps it. Brokerage name comes from BRAND, so it changes on 1/1/2027.
+POST_HOME_PERMISSION = ("I give J.R. Grimaldo and " + BRAND["brokerage"] + " permission to post my home on jrREsales.com "
+                        "as a courtesy. I understand he does not represent me.")
+
 def page_post_home():
     fields = ('<input type="hidden" name="request" value="fsbopage">'
               + '<div class="two">' + field("name", "Your name", req=True) + field("phone", "Cell phone (for texts)", "tel", req=True) + '</div>'
@@ -1995,6 +2012,8 @@ def page_post_home():
               + '<div class="three nums">' + field("beds", "Beds") + field("baths", "Baths") + field("sqft", "Square feet") + '</div>'
               + field("description", "A short description of your home", textarea=True)
               + '<p class="fine">Photos: after you send this, I\'ll text you to collect them.</p>'
+              + '<label class="consent"><input type="checkbox" name="permission" value="yes" required>'
+              + '<span>' + esc(POST_HOME_PERMISSION) + '</span></label>'
               + '<p class="fine">You\'ll also get my monthly newsletter, Front Porch Notes. You can stop it any time. I never sell your information. I use it only to answer you and to send what you asked for.</p>')
     form = mail_form(EN, "en", "FSBO page request from jrREsales.com", fields, "Post my home", "fp-form",
                      ok="Thank you. I got your request. I'll text you myself, usually within a day, to collect your photos.")
@@ -2008,7 +2027,62 @@ def page_post_home():
 <section class="alt"><div class="wrap"><h2>How it works</h2>
 <p class="glong">Send the form. I'll text you to collect your photos. I'll show you the page before it goes up.</p>
 <p class="glong">Questions? Text me at {SITE["phone"]}. It's the fastest way to reach me. If you'd rather call and I don't pick up, please leave a message.</p>
-<p class="glong">J.R. Grimaldo, Real Estate Professional, NorthGroup Real Estate.</p>{again_btn("Post my home")}</div></section>"""
+<p class="glong">J.R. Grimaldo, Real Estate Professional, {esc(BRAND["brokerage"])}.</p>{again_btn("Post my home")}</div></section>"""
+
+
+# ------------------------------------------------------------- OWNER HOME PAGES (fsbo/<slug>.html)
+# Courtesy pages for owners selling on their own (J.R., 11/16/2026; Rick Markowski OK'd as a courtesy
+# advertisement). Rules: the OWNER's phone (Text and Call), never J.R.'s phone; no forms; no valuation link;
+# describe the house, never the buyer or neighbors (fair housing). Live only after the owner approves the
+# preview; remove the entry when the home sells, lists with an agent, or the owner asks.
+# Each entry: slug, street, town, price, beds, baths, sqft, desc, owner_name, owner_phone (10 digits),
+# photos (file names in src/assets/fsbo/<slug>/), permission_on (date of the Formspree email with permission = yes).
+OWNER_HOMES = []
+
+OWNER_DISCLAIMER = ("Posted as a courtesy. This home is for sale by its owner. I don't represent the seller, I'm not the "
+                    "listing agent, and I'm not paid for this page. Please contact the owner directly with any questions "
+                    "or offers. The owner provided the details and photos, and I haven't verified them. Posted with the "
+                    "owner's written permission.")
+
+def page_owner_home(h, photo_prefix="../assets/fsbo/"):
+    ph = h["owner_phone"]
+    pretty = f"{ph[0:3]}-{ph[3:6]}-{ph[6:10]}"
+    facts = " · ".join(x for x in [
+        f'{h["beds"]} beds' if h.get("beds") else "", f'{h["baths"]} baths' if h.get("baths") else "",
+        f'{h["sqft"]} square feet' if h.get("sqft") else ""] if x)
+    photos = "".join(f'<img src="{photo_prefix}{h["slug"]}/{esc(f)}" alt="Photo {i + 1} of {esc(h["street"])}" width="1200" height="800">'
+                     for i, f in enumerate(h.get("photos", [])))
+    desc = "".join(f"<p>{esc(x)}</p>" for x in h.get("desc", "").split("\n") if x.strip())
+    first = h["owner_name"].split()[0]
+    return f"""
+<section><div class="wrap">
+<p class="kick">For sale by owner</p>
+<h1>{esc(h["street"])}, {esc(h["town"])}, SC</h1>
+<p class="oh-price">{esc(h["price"])}</p>
+<p class="oh-facts">{esc(facts)}</p>
+<div class="oh-photos">{photos}</div>
+{desc}
+<div class="oh-owner"><p class="kick">Contact the owner</p>
+<p><b>{esc(h["owner_name"])}</b></p>
+<p class="oh-phone">{pretty}</p>
+<a class="btn" href="sms:+1{ph}">Text {esc(first)}</a><a class="btn quiet" href="tel:+1{ph}">Call {esc(first)}</a></div>
+<div class="oh-disc"><p>{esc(OWNER_DISCLAIMER)}</p><p>J.R. Grimaldo, Real Estate Professional · {esc(BRAND["brokerage"])}</p></div>
+</div></section>"""
+
+def owner_layout(h, photo_prefix="../assets/fsbo/"):
+    """Full owner page: the usual layout, minus J.R.'s phone/email links and the footer sign-up form."""
+    OT = dict(EN, dir_prefix="fsbo/", nav=[("../" + x, l) for x, l in EN["nav"]])
+    title = f'{h["street"]}, {h["town"]}, SC – For Sale by Owner'
+    desc = f'For sale by owner: {h["street"]}, {h["town"]}, SC. {h["price"]}. Contact the owner directly.'
+    html = layout(OT, h["slug"] + ".html", title, page_owner_home(h, photo_prefix), "../es/index.html", desc)
+    import re as _re
+    html = _re.sub(r'<ul class="f-contact">.*?</ul>', "", html, flags=_re.S)
+    # No hidden business card for Google either: it carries J.R.'s phone.
+    html = _re.sub(r'<script type="application/ld\+json">.*?</script>\n?', "", html, flags=_re.S)
+    fs = footer_signup(OT)
+    if fs:
+        html = html.replace(fs, "")
+    return html
 
 
 # ------------------------------------------------------------- BUYER'S GUIDE (UNLISTED)
@@ -2264,6 +2338,7 @@ def build():
     urls = ["", "home-value.html", "listings.html", "sold.html", "about.html", "reviews.html", "free-books.html", "newsletter.html", "contact.html", "sellers-guide.html", "fsbo-guide-info.html", "sales-list.html", "post-your-home.html",
             "es/", "es/home-value.html", "es/listings.html", "es/sold.html", "es/about.html", "es/reviews.html", "es/free-books.html", "es/newsletter.html", "es/contact.html", "es/sellers-guide.html", "privacy.html", "es/privacy.html"]
     urls += [n["path"] for n in NEWSLETTERS]
+    urls += ["fsbo/" + h["slug"] + ".html" for h in OWNER_HOMES]
     urls += [b["slug"] + ".html" for b in BOOKS] + ["es/" + b["slug"] + ".html" for b in BOOKS] + [k + ".html" for k in TOWN_PAGES if k not in ("greenville", "simpsonville", "fountain-inn")]
     import datetime as _dt
     today = _dt.date.today().isoformat()
@@ -2338,6 +2413,10 @@ def build():
     for name, (title, body, sw, alt) in pages.items():
         title, desc = _meta(META_EN, name, title, D[name], n_sales, REPEAT_FAMILIES)
         (OUT / name).write_text(layout(EN, name, title, body, sw, desc, alt))
+    if OWNER_HOMES:
+        (OUT / "fsbo").mkdir(exist_ok=True)
+        for h in OWNER_HOMES:
+            (OUT / "fsbo" / (h["slug"] + ".html")).write_text(owner_layout(h))
     for k in TOWN_PAGES:
         title, desc = town_meta(k)
         (OUT / (k + ".html")).write_text(layout(EN, k + ".html", title, page_town(k), "es/index.html", desc))
