@@ -1202,7 +1202,7 @@ def layout(T, page, title, body, lang_switch, desc=None, alt=None):
 <meta property="og:site_name" content="J.R. Grimaldo, Real Estate Professional">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc or T['hero_p'])}">
-<meta property="og:image" content="{('https://jrREsales.com/assets/' + OG_IMAGES[(T['lang'], page)] + '?v=' + _hl.sha1((SRC / 'assets' / OG_IMAGES[(T['lang'], page)]).read_bytes()).hexdigest()[:8]) if (T['lang'], page) in OG_IMAGES else ('https://' + SITE['domain'] + '/assets/share.jpg')}">
+<meta property="og:image" content="{('https://jrREsales.com/assets/' + OG_IMAGES[(T['lang'], page)] + '?v=' + _hl.sha1((SRC / 'assets' / OG_IMAGES[(T['lang'], page)]).read_bytes()).hexdigest()[:8]) if (T['lang'], page) in OG_IMAGES else ('https://' + SITE['domain'] + '/assets/share.jpg?v=' + _hl.sha1((SRC / 'assets' / 'share.jpg').read_bytes()).hexdigest()[:8])}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="{canon}">
 <link rel="canonical" href="{canon}">{hreflang}
@@ -2347,62 +2347,62 @@ def build():
     (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /reply.html\nDisallow: /defaultsite/\nDisallow: /assets/*.pdf\nSitemap: " + base + "sitemap.xml\n")
     (OUT / ".nojekyll").write_text("")
 
-    t = "J.R. Grimaldo, REALTOR® – Sell Your Home in Landrum & the Upstate SC"
+    t = "J.R. Grimaldo, Real Estate Professional – Sell Your Home in Landrum & the Upstate SC"
     n_sales = len(SOLD) + len(SOLD_MORE)
     D = {
-        "index.html": "Thinking of selling in the Upstate? J.R. Grimaldo, a Landrum REALTOR® since 2016, prepares a free written home valuation himself within one business day.",
+        "index.html": "Thinking of selling in the Upstate? J.R. Grimaldo, a Landrum Real Estate Professional since 2016, prepares a free written home valuation himself within one business day.",
         "home-value.html": "Find out what your Upstate SC home is worth. J.R. Grimaldo prepares a free written valuation himself, from the recent sales near you, within one business day.",
-        "listings.html": "Homes for sale now with J.R. Grimaldo, REALTOR®, in the Upstate SC.",
+        "listings.html": "Homes for sale now with J.R. Grimaldo, Real Estate Professional, in the Upstate SC.",
         "sold.html": f"{n_sales} homes sold and bought since 2016 in Greer, Taylors, Greenville, Simpsonville, Inman, Landrum, and across the Upstate SC. {REPEAT_FAMILIES} families have come back to work with J.R. again.",
-        "about.html": "Meet J.R. Grimaldo, a Landrum-based South Carolina REALTOR® since 2016. Quality over quantity, quick replies, and clients who come back. Hablo español.",
-        "reviews.html": "What clients say about buying and selling with J.R. Grimaldo, REALTOR®, in the Upstate SC.",
+        "about.html": "Meet J.R. Grimaldo, a Landrum-based South Carolina Real Estate Professional since 2016. Quality over quantity, quick replies, and clients who come back. Hablo español.",
+        "reviews.html": "What clients say about buying and selling with J.R. Grimaldo, Real Estate Professional, in the Upstate SC.",
         "newsletter.html": "J.R. Grimaldo's free monthly newsletter: what homes are selling for in Landrum and nearby Upstate SC towns, whether sales are up or down, and where mortgage rates stand. Sign up by email.",
-        "free-books.html": "Free guides and books on selling your home from J.R. Grimaldo, REALTOR® in Landrum, SC: an 8-page Seller's Guide by email, and two printed books by mail. No cost, no obligation.",
+        "free-books.html": "Free guides and books on selling your home from J.R. Grimaldo, Real Estate Professional in Landrum, SC: an 8-page Seller's Guide by email, and two printed books by mail. No cost, no obligation.",
         "contact.html": "Text J.R. Grimaldo at 864-381-2326. It's the fastest way to reach him. If you call and he doesn't pick up, leave a message. Landrum and Upstate SC Real Estate.",
-        "buyers-guide.html": "A free 8-page guide to buying a home in the Upstate SC, from J.R. Grimaldo, REALTOR®. Emailed to you.",
+        "buyers-guide.html": "A free 8-page guide to buying a home in the Upstate SC, from J.R. Grimaldo, Real Estate Professional. Emailed to you.",
         "post-your-home.html": "Selling your home yourself in the Upstate SC? J.R. Grimaldo will post it free on jrREsales.com, with your photos, price and phone number.",
-        "sales-list.html": "Get a free one-page list of similar homes that sold near you, with the real sold prices, from J.R. Grimaldo, REALTOR®. No estimate, no pressure, no cost.",
-        "fsbo-guide-info.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you with the state disclosure form.",
-        "fsbo-guide.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, REALTOR®: pricing, showings, the disclosure form, and closing. Emailed to you.",
-        "sellers-guide.html": "Free 8-page Seller's Guide from J.R. Grimaldo, REALTOR® in Landrum, SC: getting ready to list, showings, and the road from offer to closing. Emailed to you.",
-        "privacy.html": "What jrREsales.com collects, why, and how to unsubscribe. J.R. Grimaldo, REALTOR®, NorthGroup Real Estate, Landrum, SC.",
+        "sales-list.html": "Get a free one-page list of similar homes that sold near you, with the real sold prices, from J.R. Grimaldo, Real Estate Professional. No estimate, no pressure, no cost.",
+        "fsbo-guide-info.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, Real Estate Professional: pricing, showings, the disclosure form, and closing. Emailed to you with the state disclosure form.",
+        "fsbo-guide.html": "Selling your home yourself in South Carolina? A free 8-page guide from J.R. Grimaldo, Real Estate Professional: pricing, showings, the disclosure form, and closing. Emailed to you.",
+        "sellers-guide.html": "Free 8-page Seller's Guide from J.R. Grimaldo, Real Estate Professional in Landrum, SC: getting ready to list, showings, and the road from offer to closing. Emailed to you.",
+        "privacy.html": "What jrREsales.com collects, why, and how to unsubscribe. J.R. Grimaldo, Real Estate Professional, NorthGroup Real Estate, Landrum, SC.",
     }
     DE = {
-        "index.html": "¿Piensa vender en el Upstate? J.R. Grimaldo, REALTOR® desde 2016, le prepara una valuación gratis por escrito en un día hábil. Hablo español.",
+        "index.html": "¿Piensa vender en el Upstate? J.R. Grimaldo, Profesional de Bienes Raíces desde 2016, le prepara una valuación gratis por escrito en un día hábil. Hablo español.",
         "home-value.html": "¿Cuánto vale su casa en el Upstate de Carolina del Sur? J.R. Grimaldo le prepara una valuación gratis por escrito, con las ventas recientes cerca de usted, en un día hábil.",
-        "listings.html": "Casas en venta ahora con J.R. Grimaldo, REALTOR®, en el Upstate de Carolina del Sur. Hablo español.",
+        "listings.html": "Casas en venta ahora con J.R. Grimaldo, Profesional de Bienes Raíces, en el Upstate de Carolina del Sur. Hablo español.",
         "sold.html": f"{n_sales} casas vendidas y compradas desde 2016 en Greer, Taylors, Greenville, Simpsonville, Inman, Landrum y todo el Upstate de Carolina del Sur. {REPEAT_FAMILIES} familias han vuelto a trabajar con J.R.",
-        "about.html": "Conozca a J.R. Grimaldo, REALTOR® de Carolina del Sur desde 2016, con base en Landrum. Calidad antes que cantidad y respuestas rápidas. Hablo español.",
-        "reviews.html": "Lo que dicen los clientes de comprar y vender con J.R. Grimaldo, REALTOR®, en el Upstate de Carolina del Sur.",
+        "about.html": "Conozca a J.R. Grimaldo, Profesional de Bienes Raíces de Carolina del Sur desde 2016, con base en Landrum. Calidad antes que cantidad y respuestas rápidas. Hablo español.",
+        "reviews.html": "Lo que dicen los clientes de comprar y vender con J.R. Grimaldo, Profesional de Bienes Raíces, en el Upstate de Carolina del Sur.",
         "newsletter.html": "El boletín mensual gratis de J.R. Grimaldo sobre las casas en Landrum y el Upstate de Carolina del Sur. Inscríbase por correo.",
-        "free-books.html": "Guías y libros gratis sobre vender su casa de J.R. Grimaldo, REALTOR® en Landrum, SC: una guía de 8 páginas en español por correo electrónico, y dos libros impresos por correo. Sin costo ni compromiso.",
+        "free-books.html": "Guías y libros gratis sobre vender su casa de J.R. Grimaldo, Profesional de Bienes Raíces en Landrum, SC: una guía de 8 páginas en español por correo electrónico, y dos libros impresos por correo. Sin costo ni compromiso.",
         "contact.html": "Envíe un texto a J.R. Grimaldo al 864-381-2326. Es la forma más rápida de comunicarse con él. Bienes raíces en Landrum y el Upstate.",
-        "sellers-guide.html": "Guía gratis de 8 páginas de J.R. Grimaldo, REALTOR® en Landrum, SC: cómo preparar su casa, las visitas y el camino de la oferta al cierre. Se la envía por correo electrónico.",
-        "privacy.html": "Qué recoge jrREsales.com, para qué y cómo cancelar la suscripción. J.R. Grimaldo, REALTOR®, NorthGroup Real Estate, Landrum, SC.",
+        "sellers-guide.html": "Guía gratis de 8 páginas de J.R. Grimaldo, Profesional de Bienes Raíces en Landrum, SC: cómo preparar su casa, las visitas y el camino de la oferta al cierre. Se la envía por correo electrónico.",
+        "privacy.html": "Qué recoge jrREsales.com, para qué y cómo cancelar la suscripción. J.R. Grimaldo, Profesional de Bienes Raíces, NorthGroup Real Estate, Landrum, SC.",
     }
     # English: (title, body, language switch, Spanish twin or None)
     pages = {
         "index.html": (t, page_home(EN), "es/index.html", "index.html"),
         "home-value.html": ("What's My Home Worth? Free Home Valuation – " + SITE["agent"], page_home_value(EN), "es/home-value.html", "home-value.html"),
-        "listings.html": ("My Listings – " + SITE["agent"] + ", REALTOR®", page_list(EN, EN["li_h1"], LISTINGS, EN["li_empty"]), "es/listings.html", "listings.html"),
-        "sold.html": ("Sold Homes – " + SITE["agent"] + ", REALTOR®", page_sold(EN), "es/sold.html", "sold.html"),
-        "about.html": ("About J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(EN), "es/about.html", "about.html"),
-        "reviews.html": ("Client Reviews – " + SITE["agent"] + ", REALTOR®", page_reviews(EN), "es/reviews.html", "reviews.html"),
+        "listings.html": ("My Listings – " + SITE["agent"] + ", Real Estate Professional", page_list(EN, EN["li_h1"], LISTINGS, EN["li_empty"]), "es/listings.html", "listings.html"),
+        "sold.html": ("Sold Homes – " + SITE["agent"] + ", Real Estate Professional", page_sold(EN), "es/sold.html", "sold.html"),
+        "about.html": ("About J.R. Grimaldo, Real Estate Professional – Landrum, SC", page_about(EN), "es/about.html", "about.html"),
+        "reviews.html": ("Client Reviews – " + SITE["agent"] + ", Real Estate Professional", page_reviews(EN), "es/reviews.html", "reviews.html"),
         "free-books.html": ("Free Guides & Books on Selling Your Home – " + SITE["agent"], page_books(EN), "es/free-books.html", "free-books.html"),
-        "newsletter.html": ("Monthly Newsletter – " + SITE["agent"] + ", REALTOR®", page_newsletter(EN), "es/newsletter.html", "newsletter.html"),
-        "contact.html": ("Contact J.R. Grimaldo, REALTOR®", page_contact(EN), "es/contact.html", "contact.html"),
+        "newsletter.html": ("Monthly Newsletter – " + SITE["agent"] + ", Real Estate Professional", page_newsletter(EN), "es/newsletter.html", "newsletter.html"),
+        "contact.html": ("Contact J.R. Grimaldo, Real Estate Professional", page_contact(EN), "es/contact.html", "contact.html"),
         "sellers-guide.html": ("Free Seller's Guide: Selling Your Home, Step by Step – " + SITE["agent"], page_guide(EN), "es/sellers-guide.html", "sellers-guide.html"),
         "fsbo-guide.html": ("Free Guide: Selling Your Home on Your Own, Step by Step – " + SITE["agent"], page_fsbo_guide(), "es/index.html", None),
         "fsbo-guide-info.html": ("Free Guide: Selling Your Home on Your Own, Step by Step – " + SITE["agent"], page_fsbo_guide(info=True), "es/free-books.html", None),
-        "sales-list.html": ("A List of Recent Sales Near You – " + SITE["agent"] + ", REALTOR®", page_sales_list(), "es/index.html", None),
+        "sales-list.html": ("A List of Recent Sales Near You – " + SITE["agent"] + ", Real Estate Professional", page_sales_list(), "es/index.html", None),
         "post-your-home.html": ("Post Your Home Free – " + SITE["agent"], page_post_home(), "es/index.html", None),
         "buyers-guide.html": ("Free Buyer's Guide: Buying Your Home, Step by Step – " + SITE["agent"], page_buyers_guide(), "es/index.html", None),
-        "privacy.html": ("Privacy – " + SITE["agent"] + ", REALTOR®", page_privacy(EN), "es/privacy.html", "privacy.html"),
+        "privacy.html": ("Privacy – " + SITE["agent"] + ", Real Estate Professional", page_privacy(EN), "es/privacy.html", "privacy.html"),
     }
     for b in BOOKS:
         n = b["slug"] + ".html"
         pages[n] = ("Free Book: " + b["title"] + " – " + SITE["agent"], page_book(EN, b), "es/" + n, n)
-        D[n] = b["line"] + " Free, mailed to you by J.R. Grimaldo, REALTOR® in Landrum, SC."
+        D[n] = b["line"] + " Free, mailed to you by J.R. Grimaldo, Real Estate Professional in Landrum, SC."
     if NEWSLETTERS:
         (OUT / "newsletter").mkdir(exist_ok=True)
         NLT = dict(EN, dir_prefix="newsletter/", nav=[("../" + h, l) for h, l in EN["nav"]])
@@ -2422,22 +2422,22 @@ def build():
         (OUT / (k + ".html")).write_text(layout(EN, k + ".html", title, page_town(k), "es/index.html", desc))
     # Spanish
     es_pages = {
-        "index.html": ("J.R. Grimaldo, REALTOR® – Venda su casa en el Upstate de Carolina del Sur", page_home(ES), "../index.html"),
+        "index.html": ("J.R. Grimaldo, Profesional de Bienes Raíces – Venda su casa en el Upstate de Carolina del Sur", page_home(ES), "../index.html"),
         "home-value.html": ("¿Cuánto vale mi casa? Valuación gratis – " + SITE["agent"], page_home_value(ES), "../home-value.html"),
-        "listings.html": ("Mis propiedades – " + SITE["agent"] + ", REALTOR®", page_list(ES, ES["li_h1"], LISTINGS, ES["li_empty"]), "../listings.html"),
-        "sold.html": ("Casas vendidas – " + SITE["agent"] + ", REALTOR®", page_sold(ES), "../sold.html"),
-        "about.html": ("Sobre J.R. Grimaldo, REALTOR® – Landrum, SC", page_about(ES), "../about.html"),
-        "reviews.html": ("Opiniones de clientes – " + SITE["agent"] + ", REALTOR®", page_reviews(ES), "../reviews.html"),
+        "listings.html": ("Mis propiedades – " + SITE["agent"] + ", Profesional de Bienes Raíces", page_list(ES, ES["li_h1"], LISTINGS, ES["li_empty"]), "../listings.html"),
+        "sold.html": ("Casas vendidas – " + SITE["agent"] + ", Profesional de Bienes Raíces", page_sold(ES), "../sold.html"),
+        "about.html": ("Sobre J.R. Grimaldo, Profesional de Bienes Raíces – Landrum, SC", page_about(ES), "../about.html"),
+        "reviews.html": ("Opiniones de clientes – " + SITE["agent"] + ", Profesional de Bienes Raíces", page_reviews(ES), "../reviews.html"),
         "free-books.html": ("Guías y libros gratis sobre vender su casa – " + SITE["agent"], page_books(ES), "../free-books.html"),
-        "newsletter.html": ("Boletín mensual – " + SITE["agent"] + ", REALTOR®", page_newsletter(ES), "../newsletter.html"),
-        "contact.html": ("Contácteme – " + SITE["agent"] + ", REALTOR®", page_contact(ES), "../contact.html"),
+        "newsletter.html": ("Boletín mensual – " + SITE["agent"] + ", Profesional de Bienes Raíces", page_newsletter(ES), "../newsletter.html"),
+        "contact.html": ("Contácteme – " + SITE["agent"] + ", Profesional de Bienes Raíces", page_contact(ES), "../contact.html"),
         "sellers-guide.html": ("Guía gratis para vendedores: Cómo vender su casa, paso a paso – " + SITE["agent"], page_guide(ES), "../sellers-guide.html"),
-        "privacy.html": ("Privacidad – " + SITE["agent"] + ", REALTOR®", page_privacy(ES), "../privacy.html"),
+        "privacy.html": ("Privacidad – " + SITE["agent"] + ", Profesional de Bienes Raíces", page_privacy(ES), "../privacy.html"),
     }
     for b in BOOKS:
         n = b["slug"] + ".html"
         es_pages[n] = ("Libro gratis: " + b["title"] + " – " + SITE["agent"], page_book(ES, b), "../" + n)
-        DE[n] = b["line_es"] + " Gratis, enviado por correo por J.R. Grimaldo, REALTOR® en Landrum, SC."
+        DE[n] = b["line_es"] + " Gratis, enviado por correo por J.R. Grimaldo, Profesional de Bienes Raíces en Landrum, SC."
     for name, (title, body, sw) in es_pages.items():
         title, desc = _meta(META_ES, name, title, DE[name], n_sales, REPEAT_FAMILIES)
         (OUT / "es" / name).write_text(layout(ES, name, title, body, sw, desc, name))
