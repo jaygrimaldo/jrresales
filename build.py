@@ -1167,8 +1167,17 @@ def _img_opt(html_s):
         return tag
     return _re.sub(r'<img [^>]*>', fix, html_s)
 
+def _cover_v(html):
+    """Guide covers get a version tag from their contents, so browsers and Facebook fetch a new cover
+    after it changes. File names stay the same (11/16/2026)."""
+    import re as _re
+    def f(m):
+        fp = SRC / "assets" / m.group(2)
+        return m.group(1) + m.group(2) + ("?v=" + _hl.sha1(fp.read_bytes()).hexdigest()[:8] if fp.exists() else "")
+    return _re.sub(r'(assets/)([a-z-]+-cover\.jpg)(?![?\w-])', f, html)
+
 def layout(T, page, title, body, lang_switch, desc=None, alt=None):
-    body = _img_opt(body)
+    body = _cover_v(_img_opt(body))
     p = T["dir_prefix"]
     up = "../" if p else ""
     nav_links = ""
