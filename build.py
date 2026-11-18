@@ -1576,7 +1576,7 @@ def page_issue1():
 <h2>What's your home worth today?</h2>
 <p>Tell me the address. I'll look at your home and the recent sales around it, and send you a written valuation within one business day. Free, no obligation.</p>
 <p><a class="btn" href="../home-value.html">What's your home worth today?</a></p>
-<p class="nl-sign">Principles Before Profits · J.R. Grimaldo, Real Estate Professional, SC License #95641 · NorthGroup Real Estate, P.O. Box 106, Landrum, SC 29356 · Text <a href="sms:{SITE['phone_tel']}">{SITE['phone']}</a> · Hablo español</p>
+<p class="nl-sign">Principles Before Profits. · J.R. Grimaldo, Real Estate Professional · SC License #95641 · {esc(BRAND['brokerage'])} · {esc(BRAND['office'])} · Text me at <a href="sms:{SITE['phone_tel']}">{SITE['phone']}</a>. It's the fastest way to reach me. · <a href="mailto:{SITE['email']}">jr@jrREsales.com</a> · <a href="../index.html">jrREsales.com</a> · Hablo español.</p>
 <p class="fine">Got this from a friend? <a href="../newsletter.html">Sign up to get Front Porch Notes by email.</a></p>
 </div></section>"""
 
