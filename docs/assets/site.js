@@ -30,8 +30,9 @@ document.addEventListener('DOMContentLoaded',function(){
     // 1) a second hidden "honeypot" box that people never see; robots that fill every box fill it;
     // 2) the form only sends after a real person typed, tapped or clicked in it (robots' fake events don't count);
     // 3) a send less than 2 seconds after the page opened is treated as a robot.
-    var hp=document.createElement('div');hp.className='hp';hp.setAttribute('aria-hidden','true');
-    hp.innerHTML='<label>Leave this empty<input type="text" name="company_website" tabindex="-1" autocomplete="off" value=""></label>';
+    // Trap box (J.R., 11/20/2026): truly hidden (display:none) and a name autofill doesn't recognize.
+    var hp=document.createElement('div');hp.className='hp';hp.style.display='none';hp.setAttribute('aria-hidden','true');
+    hp.innerHTML='<input type="text" name="jr_hp_x7" tabindex="-1" autocomplete="off" value="">';
     form.appendChild(hp);
     var touched=false,opened=Date.now();
     ['input','keydown','pointerdown','touchstart','change'].forEach(function(ev){form.addEventListener(ev,function(x){if(x.isTrusted)touched=true;},true);});
@@ -44,12 +45,12 @@ document.addEventListener('DOMContentLoaded',function(){
         if(e.isTrusted&&form.reportValidity)form.reportValidity();
         return;
       }
-      var bot=!touched||(Date.now()-opened<2000)||((form.querySelector('input[name=_gotcha]')||{}).value)||((form.querySelector('input[name=company_website]')||{}).value);
-      if(bot){
-        // Looks like a robot: show the normal thank-you, send nothing, count nothing.
-        form.querySelectorAll('label,.two,.three,.pair,.fine,.row,details,button').forEach(function(el){el.hidden=true;});
-        msg.className='form-msg ok';msg.textContent=form.dataset.ok;msg.hidden=false;return;
-      }
+      // Robot checks (J.R., 11/20/2026): never throw a request away quietly. If a check trips, the request
+      // still goes to J.R., marked "suspected_robot: yes" with the reason(s); the Monday check lists these separately.
+      var why=[];
+      if(((form.querySelector('input[name=jr_hp_x7]')||{}).value)||((form.querySelector('input[name=_gotcha]')||{}).value))why.push('trap box filled');
+      if(Date.now()-opened<2000)why.push('sent too fast');
+      if(!touched)why.push('no real tap');
       if(form.dataset.need&&!form.querySelector('input[name=books]:checked')){
         msg.className='form-msg bad';msg.textContent=form.dataset.need;msg.hidden=false;
         form.querySelector('.books').scrollIntoView({block:'center'});return;
@@ -68,14 +69,21 @@ document.addEventListener('DOMContentLoaded',function(){
       }catch(err){}
       if(!src.get('_subject'))src.set('_subject','Website form ('+fname+') from jrREsales.com');
       src.set('form',fname);
-      src.delete('company_website');
+      src.delete('jr_hp_x7');
+      // Formspree silently drops anything with _gotcha filled, so it never leaves the page filled.
+      src.delete('_gotcha');
+      if(why.length){
+        src.set('_subject','[Suspected robot] '+src.get('_subject'));
+        src.set('suspected_robot','yes');
+        src.set('suspected_robot_reason',why.join(', '));
+      }
       src.forEach(function(v,k){base.push([k,v]);});
       if(tag&&sf.dataset.base!==tag)base.push(['source_without_tag',sf.dataset.base]);
       base.push(['request_id',form.dataset.rid]);
       function done(){
         // Meta Pixel 'Lead' for sign-up forms (not the contact form). Only the form's name goes to Facebook.
         try{
-          if(window.fbq&&form.id!=='ct-form'){
+          if(window.fbq&&form.id!=='ct-form'&&!why.length){
             fbq('track','Lead',{content_name:fname});
           }
         }catch(err){}
