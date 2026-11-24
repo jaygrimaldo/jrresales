@@ -2116,9 +2116,9 @@ def owner_layout(h, photo_prefix="../assets/fsbo/"):
 # J.R. sends this link himself to friends, family, past clients and their referrals (11/6/2026).
 # Not in the menu, home page, Free Guides & Books, or sitemap; noindex. PDF: /assets/buyers-guide.pdf
 # (fixed name; later versions replace the file).
-BUYERS_GUIDE_INTRO = "Thinking about buying? This short guide walks you through it in order, from getting pre-qualified to the day you get the keys."
+BUYERS_GUIDE_INTRO = "Thinking about buying a home? This short guide walks you through every step, from the first showing to the day you get the keys."
 BUYERS_GUIDE_PARTS = [
-    ("Part 1: Getting Ready to Buy", "Getting pre-qualified, then pre-approved. Talk to a lender. The costs to plan for besides the down payment. The buyer agreement, my fee, and your wish list."),
+    ("Part 1: Getting Ready to Buy", "How you'll pay: a loan or cash. Talking to a lender. The costs to plan for besides the down payment. The buyer agreement, how I'm compensated, and your wish list."),
     ("Part 2: Finding Your Home", "Getting new listings by email, sending me the homes you like, keeping notes as we tour, and what to look at on a showing."),
     ("Part 3: From Offer to Closing", "Deciding what to offer, the seller's disclosure form, earnest money, due diligence, inspections and repairs, the appraisal, why to hold off on new credit, and closing day."),
 ]
