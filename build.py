@@ -1671,6 +1671,9 @@ PRIVACY = {
                 "Every newsletter has an unsubscribe link. You can also email me at jr@jrREsales.com, and I'll take you off the list."]),
             ("Facebook", [
                 "This site uses the Meta Pixel, a tool from Facebook, to count visits and to measure how well our Facebook ads work. It does not send your name, email or phone number to Facebook."]),
+            # Added 11/20/2026 for the lead ad (first made directly in docs/, commit d25329b); kept here so builds keep it.
+            ("Facebook sign-up forms", [
+                "If you sign up through one of my ads on Facebook or Instagram, Facebook sends me what you put in that form: your name, email and town. I use it the same way: to send you what you asked for and my monthly newsletter."]),
             ("Forms", [
                 "The forms on this site are handled by Formspree. Formspree is the service that delivers what you send to my email."]),
         ],
@@ -1690,6 +1693,8 @@ PRIVACY = {
                 "Cada boletín trae un enlace para cancelar la suscripción. También puede escribirme a jr@jrREsales.com y lo quito de la lista."]),
             ("Facebook", [
                 "Este sitio usa el Meta Pixel, una herramienta de Facebook, para contar las visitas y medir qué tan bien funcionan nuestros anuncios en Facebook. No envía su nombre, correo electrónico ni número de teléfono a Facebook."]),
+            ("Formularios de registro en Facebook", [
+                "Si se registra mediante uno de mis anuncios en Facebook o Instagram, Facebook me envía lo que usted puso en ese formulario: su nombre, correo electrónico y ciudad. Lo uso de la misma manera: para enviarle lo que pidió y mi boletín mensual."]),
             ("Formularios", [
                 "Los formularios de este sitio los maneja Formspree. Formspree es el servicio que me entrega por correo electrónico lo que usted envía."]),
         ],
