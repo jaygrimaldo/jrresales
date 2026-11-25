@@ -914,6 +914,8 @@ document.addEventListener('DOMContentLoaded',function(){
   var tag='';
   try{
     var qs=new URLSearchParams(location.search).get('src');
+    // Nextdoor strips "src=" and leaves "?nextdoor" (J.R., 11/25/2026): a bare ?nextdoor counts as src=nextdoor.
+    if(qs===null&&/^\?nextdoor(?:[&=]|$)/i.test(location.search))qs='nextdoor';
     if(qs!==null){qs=qs.trim().slice(0,60);if(qs){try{sessionStorage.setItem('jr_src',qs);}catch(e){}tag=qs;}}
     if(!tag){try{tag=sessionStorage.getItem('jr_src')||'';}catch(e){}}
   }catch(e){}
@@ -2357,6 +2359,23 @@ def build():
     # IONOS used to forward jrresales.com to /defaultsite. Browsers that saved
     # that forwarding land here; send them to /index.html (not /, which those
     # browsers would bounce back here).
+    # Short address for Nextdoor posts (J.R., 11/25/2026): jrREsales.com/nextdoor and /nextdoor/ go straight to the
+    # Seller's Guide request page with source = nextdoor. Nextdoor strips "?src=..." from links, so posts use this.
+    # The share tags copy the Seller's Guide page, so a link preview looks the same. Not in the sitemap; noindex.
+    (OUT / "nextdoor").mkdir(exist_ok=True)
+    _sg_t, _sg_d = META_EN["sellers-guide.html"]
+    _sg_img = "https://jrREsales.com/assets/share-sellers-guide.jpg?v=" + _hl.sha1((SRC / "assets" / "share-sellers-guide.jpg").read_bytes()).hexdigest()[:8]
+    (OUT / "nextdoor" / "index.html").write_text(
+        '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<meta name="robots" content="noindex">'
+        f'<title>{esc(_sg_t)}</title><meta name="description" content="{esc(_sg_d)}">'
+        f'<meta property="og:type" content="website"><meta property="og:title" content="{esc(_sg_t)}">'
+        f'<meta property="og:description" content="{esc(_sg_d)}"><meta property="og:image" content="{_sg_img}">'
+        '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+        '<meta property="og:url" content="https://jrresales.com/sellers-guide.html"><link rel="canonical" href="https://jrresales.com/sellers-guide.html">'
+        '<meta http-equiv="refresh" content="0; url=/sellers-guide.html?src=nextdoor">'
+        '<script>location.replace("/sellers-guide.html?src=nextdoor")</script></head>'
+        '<body><a href="/sellers-guide.html?src=nextdoor">Get the free Seller\'s Guide</a></body></html>')
     (OUT / "defaultsite").mkdir(exist_ok=True)
     (OUT / "defaultsite" / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/index.html"><link rel="canonical" href="https://jrresales.com/"><title>J.R. Grimaldo</title><a href="/index.html">Go to jrREsales.com</a><script>location.replace("/index.html")</script>')
     (OUT / "CNAME").write_text(SITE["domain"] + "\n")

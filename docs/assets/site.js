@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded',function(){
   var tag='';
   try{
     var qs=new URLSearchParams(location.search).get('src');
+    // Nextdoor strips "src=" and leaves "?nextdoor" (J.R., 11/25/2026): a bare ?nextdoor counts as src=nextdoor.
+    if(qs===null&&/^\?nextdoor(?:[&=]|$)/i.test(location.search))qs='nextdoor';
     if(qs!==null){qs=qs.trim().slice(0,60);if(qs){try{sessionStorage.setItem('jr_src',qs);}catch(e){}tag=qs;}}
     if(!tag){try{tag=sessionStorage.getItem('jr_src')||'';}catch(e){}}
   }catch(e){}
