@@ -188,7 +188,7 @@ SOLD_MORE = [
     ("210 Legacy Dr", "Inman", "S", "$183,800"),                   # 03/2018
     ("248 Page Creek Blvd", "Landrum", "B", "$234,000"),           # 2018 contract price
     ("115 James Rd", "Campobello", "B", "$178,400"),               # 12/2017
-    ("215 Ashley Danielle Dr", "Duncan", "B", "$128,000"),         # 12/2017
+    ("221 Ashley Danielle Dr", "Duncan", "B", "$128,000"),         # 12/2017 (county renumbered from 215; deed fix 7/2021)
     ("501 Thorington Ct", "Greer", "B", "$308,000", "repeat"),     # 09/2017
     ("407 Jewelwood Dr", "Lyman", "S", "$200,000", "repeat"),      # 2017
     ("318 Tearose Ln", "Simpsonville", "B", "$188,000", "referral"),  # 03/2017
